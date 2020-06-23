@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Mmmyes[.] it is quite an exquisite\nevening, wouldn't you say?

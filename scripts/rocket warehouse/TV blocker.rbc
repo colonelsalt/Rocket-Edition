@@ -1,0 +1,27 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define RONNIE 0x1E
+
+#org @main
+lock
+applymovement RONNIE @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Ronnie: Hey, dude!\nI can't see!\pHow about you find some other\nplace to watch that isn't right in\lfront of my face?
+
+#org @movePlayer
+#raw STEP_L
+#raw 0xFE

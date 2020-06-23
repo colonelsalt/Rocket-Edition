@@ -1,0 +1,242 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define RONNIE 0xD
+
+#org @main
+lock
+spriteface RONNIE FACE_RIGHT
+spriteface 0xFF FACE_LEFT
+textcolor 0x0
+msgbox @ronTalk 0x6
+applymovement RONNIE @stepR
+waitmovement 0x0
+msgbox @ronTalk2 0x6
+pause 0x20
+spriteface RONNIE FACE_DOWN
+pause 0x30
+spriteface RONNIE FACE_RIGHT
+pause 0x15
+msgbox @ronTalk3 0x6
+applymovement RONNIE @walkDown
+applymovement 0xFF @playerWalkDown
+pause 0x25
+fadeout 0x0
+waitmovement 0x0
+pause 0x10
+sound 0x15 // exclamation
+applymovement RONNIE @exclamation
+waitmovement 0x0
+spriteface RONNIE FACE_RIGHT
+pause 0x20
+sound 0xA
+applymovement RONNIE @jump
+waitmovement 0x0
+sound 0xA
+applymovement RONNIE @jump
+waitmovement 0x0
+pause 0x25
+spriteface RONNIE FACE_UP
+msgbox @ronYell 0x6
+playsong 0x11D 0x0
+applymovement RONNIE @ronRun
+applymovement 0xFF @playerRun
+pause 0x77
+sound 0xA
+pause 0x8
+sound 0xA
+waitmovement 0x0
+spriteface RONNIE FACE_RIGHT
+fadeout 0x0
+msgbox @ronTalk4 0x6
+pause 0x20
+spriteface RONNIE FACE_UP
+pause 0x25
+spriteface RONNIE FACE_RIGHT
+pause 0x15
+msgbox @ronTalk5 0x6
+applymovement RONNIE @ronLeave1
+waitmovement 0x0
+sound 0xA
+applymovement RONNIE @ronLeave2
+waitmovement 0x0
+sound 0x9
+hidesprite RONNIE
+setflag 0x213
+setvar 0x401D 0x4
+setvar 0x4016 0x3 // re-activates level script in Rocket Warehouse
+pause 0x20
+playsong 0x134 0x0
+release
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @ronTalk
+= Ronnie: Hey, [player], I was just\nlooking for you!\pDude. That was the most badass\nburglary I have EVER seen, no\lquestion.\pWell[.] you know, it was the only\nburglary I've ever seen so far,\lbut you get idea: RAD.\pWe just kind of dug our way in\nthere and SCHWOOP! No more TM\lfor you, old man!\pHaha! [.]Oh lord, you should've\nbeen there, [player].
+
+#org @ronTalk2
+= So[.] anyway, what have you been\nup to?\p[.]\pHuh, what?\pYou maybe fought the spiky-haired\nkid from Mt. Moon just now?\pDude, what have you been smoking?\p[.]\pHmm[.] no, really?\nWell then, go figure!\pSee, I told you that kid\nwas probably nothing but a wimpy\ltwerp, didn't I?\pWell, good thing we got that\nsettled, eh?\pI only wish I could have been\nthere to whoop his ass too,\lthough, you know?
+
+#org @ronTalk3
+= Anyway, enough chit-chat.\pWe probably want to head back to\nthe hideout now.\pThe others should be back there\nby now-- I just stuck around\lback to see if you'd finished with\lyour other mission yet.\pWell, we've sure done ourselves a\ngood dishonest day's work, haven't\lwe, [player]?\pArcher will have reason to be\nproud! Let's get going!
+
+#org @walkDown
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @playerWalkDown
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @jump
+#raw 0x55
+#raw 0xFE
+
+#org @ronYell
+= HOLY MOTHER OF MEW!\pRun, [player]-- run!
+
+#org @ronRun
+#raw 0x1C
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0x14 // jump2 down
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @playerRun
+#raw 0x1C
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0x14 // jump2 down
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @ronTalk4
+= (Pant),\c\h08Û (Pant)\c\h08Û\nPhew!\pWhat in Giratina's bloody--\n\c\h08ÛThe cops! How did they find us?!\pGeez, [player], what is going on?\pH-how could this happen? I swear,\nI did everything right!
+
+#org @ronTalk5
+= Do you think they saw us? Naw, we\ngot away in time, didn't we..?\pOh man[.] We have to get back to\nthe hideout RIGHT NOW, [player]--\lno time for messing about!
+
+#org @ronLeave1
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @ronLeave2
+#raw 0x14 // jump2 down
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE

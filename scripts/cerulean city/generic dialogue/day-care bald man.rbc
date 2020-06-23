@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= My Pokémon seemed really tired\nafter coming back from the Day-\lCare Center.\pThat ungrateful little thing[.]\nIt cost me a lot of money, too!

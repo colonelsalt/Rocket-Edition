@@ -1,0 +1,20 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x8F 0x0 @challenge @defeat POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9716
+msgbox @after MSG_NORMAL
+end
+
+
+#org @challenge
+= Wait[.]\pWas the guy at the end of the\nbridge a Rocket all along?
+
+#org @defeat
+= I'm scared!
+
+#org @after
+= I should have just stayed in my\nsafe spot here in the grass[.]

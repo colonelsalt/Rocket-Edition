@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= Better not get greedy[.]\nHonor among thieves and all that[.]

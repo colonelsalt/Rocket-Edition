@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x12C 0x0 0x8185955 @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @defeat
+= Uh[.] actually, maybe not!
+
+#org @postBattle
+= I should look more carefully at\nwhom I challenge to battle.\pStay away from me and my birds,\ncriminal!

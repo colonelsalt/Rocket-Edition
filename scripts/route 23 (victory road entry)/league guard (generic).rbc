@@ -1,0 +1,284 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+// 0x8000: num. steps to move right
+// 0x8002: 1 if player has badge
+// 0x8003: value to set 0x405F to when passed
+// 0x8004: person ID of guard
+// 0x8005: 1 if player should walk down if battle turned down
+
+#org @main
+lock
+applymovement 0x8004 @facePlayer
+textcolor 0x0
+comparevars 0x405F 0x8003
+if _GREATER_EQ goto @alreadyPassed
+checkflag 0x2AE
+if 0x0 goto @preBoss
+checkitem 0x172 0x1
+compare LASTRESULT 0x0
+if 0x1 call @startMusic
+msgbox @talk MSG_KEEPOPEN
+compare 0x8005 0x1
+if 0x1 call @faceRight
+closeonkeypress
+compare 0x8000 0x1
+if 0x1 call @oneStep
+compare 0x8000 0x2
+if 0x1 call @twoSteps
+pause 0x10
+compare LASTRESULT 0x1
+if 0x1 goto @hasCard
+compare 0x8003 0x2
+if 0x1 call @text1
+compare 0x8003 0x3
+if 0x1 call @text2
+compare 0x8003 0x4
+if 0x1 call @text3
+compare 0x8003 0x5
+if 0x1 call @text4
+compare 0x8003 0x6
+if 0x1 call @text5
+compare 0x8003 0x7
+if 0x1 call @text6
+compare 0x8003 0x8
+if 0x1 call @text7
+goto @battle
+
+
+#org @hasCard
+msgbox @withCardTalk 0x6
+compare 0x8002 0x1
+if 0x1 goto @hasBadge
+msgbox @noBadgeTalk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @noBattle
+call @startMusic
+msgbox @battleTalk 0x6
+goto @battle
+
+#org @preBoss
+msgbox @withCardTalk 0x6
+compare 0x8002 0x1
+if 0x1 goto @hasBadge
+msgbox @preBossTalk 0x6
+compare 0x8005 0x1
+if 0x1 call @moveDown
+release
+end
+
+#org @hasBadge
+preparemsg @hasBadgeTalk
+waitmsg
+fanfare 0x101
+waitfanfare
+waitkeypress
+copyvar 0x405F 0x8003
+releaseall
+end 
+
+#org @battle
+compare 0x8003 0x2
+if 0x1 call @firstBattle
+compare 0x8003 0x3
+if 0x1 call @secondBattle
+compare 0x8003 0x4
+if 0x1 call @thirdBattle
+compare 0x8003 0x5
+if 0x1 call @fourthBattle
+compare 0x8003 0x6
+if 0x1 call @fifthBattle
+compare 0x8003 0x7
+if 0x1 call @sixthBattle
+compare 0x8003 0x8
+if 0x1 call @seventhBattle
+copyvar 0x405F 0x8003
+call POKESTEAL
+release
+end
+
+#org @noBattle
+msgbox @noBattleTalk 0x6
+compare 0x8005 0x1
+if 0x1 call @moveDown
+release
+end
+
+
+#org @alreadyPassed
+compare 0x8002 0x1
+if 0x1 goto @passedWithBadge
+msgbox @postBattleTalk 0x6
+release
+end
+
+#org @passedWithBadge
+msgbox @postBadgeTalk 0x6
+release
+end
+
+#org @startMusic
+playsong 0x156 0x0
+return
+
+#org @oneStep
+applymovement 0xFF @walkOne
+waitmovement 0x0
+return
+
+#org @twoSteps
+applymovement 0xFF @walkTwo
+waitmovement 0x0
+return
+
+#org @moveDown
+applymovement 0xFF @playerMove
+waitmovement 0x0
+return
+
+#org @faceRight
+spriteface 0xFF FACE_RIGHT
+return
+
+#org @firstBattle
+trainerbattle 0x3 0x2B 0x0 @firstGuardDefeat
+return
+
+#org @secondBattle
+trainerbattle 0x3 0x2C 0x0 @secondGuardDefeat
+return
+
+#org @thirdBattle
+trainerbattle 0x3 0x2D 0x0 @thirdGuardDefeat
+return
+
+#org @fourthBattle
+trainerbattle 0x3 0x2E 0x0 @fourthGuardDefeat
+return
+
+#org @fifthBattle
+trainerbattle 0x3 0x2F 0x0 @fifthGuardDefeat
+return
+
+#org @sixthBattle
+trainerbattle 0x3 0x30 0x0 @sixthGuardDefeat
+return
+
+#org @seventhBattle
+trainerbattle 0x3 0x31 0x0 @seventhGuardDefeat
+return
+
+#org @text1
+msgbox @firstGuardBattle 0x6
+return
+
+#org @text2
+msgbox @secondGuardBattle 0x6
+return
+
+#org @text3
+msgbox @thirdGuardBattle 0x6
+return
+
+#org @text4
+msgbox @fourthGuardBattle 0x6
+return
+
+#org @text5
+msgbox @fifthGuardBattle 0x6
+return
+
+#org @text6
+msgbox @sixthGuardBattle 0x6
+return
+
+#org @text7
+msgbox @seventhGuardBattle 0x6
+return
+
+
+#org @talk
+= Halt!
+
+#org @withCardTalk
+= You can pass here only if you have\nthe [buffer1].
+
+#org @noBadgeTalk
+= You don't have the [buffer1]\nyet.\p[.]\c\h08ó\nHey..! Rules are rules, Trainer!\pYou will go get the [buffer1]\nby legitimate means, won't you..?
+
+#org @hasBadgeTalk
+= Oh! That is the [buffer1]!\nGo right ahead.
+
+#org @battleTalk
+= Then I'm afraid this is as far as\nyou go!
+
+#org @noBattleTalk
+= Very well! I'll see you when you've\nearned your Badge, Mr. Smith.
+
+#org @firstGuardBattle
+= Only licensed Pokémon Trainers can\nchallenge the Pokémon League!\pThis is as far as you go!
+
+#org @secondGuardBattle
+= We guard the League against the\nstrongest Trainers in Kanto-Johto!\pDealing with fraudsters like you\nis an insult!
+
+#org @thirdGuardBattle
+= The influx of travelling Trainers\nto see the new Champion does not\lmean we're slacking off!\pThe League is no place for types\nlike you!
+
+#org @fourthGuardBattle
+= The Pokémon Gym challenge was made\nto be fair for all, you crook[.]\pWho do you think you are, that the\nrules don't apply to you?!
+
+#org @fifthGuardBattle
+= I was trained especially to deal\nwith mobsters like you[.]\pHow I miss the kids who just walk\naway when I tell them no..!
+
+#org @sixthGuardBattle
+= I don't mind you Rockets that much,\nfrankly, but keep it low[.]\pAhem!\c\h08ó\nStand back, criminal!
+
+#org @seventhGuardBattle
+= Ha! Even if you could bully\nyourself all this way[.]\pYou're walking straight into the\njaws of the Elite Four, Rocket!\pMark my words[.]\nYou'll be in jail by sundown!
+
+#org @firstGuardDefeat
+= Unacceptable!
+
+#org @secondGuardDefeat
+= I've done my part!
+
+#org @thirdGuardDefeat
+= It's a disgrace!
+
+#org @fourthGuardDefeat
+= What a way to live!
+
+#org @fifthGuardDefeat
+= Where's the sense in being polite?
+
+#org @sixthGuardDefeat
+= Um, and[.]\nShame on you!
+
+#org @seventhGuardDefeat
+= And you'll be toast on Victory\nRoad, besides!
+
+#org @postBattleTalk
+= The Elite Four will teach you a\nlesson[.] just you wait!
+
+#org @postBadgeTalk
+= Go right ahead, Mr. Smith.\nThe Pokémon League awaits.
+
+#org @preBossTalk
+= Rules are rules, Trainer!
+
+#org @facePlayer
+#raw 0x4A
+#raw 0xFE
+
+#org @walkOne
+#raw STEP_R
+#raw 0xFE
+
+#org @walkTwo
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_D
+#raw 0xFE

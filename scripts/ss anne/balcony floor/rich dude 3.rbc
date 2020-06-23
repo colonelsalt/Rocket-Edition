@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= This party is moderately\nentertaining, but[.]\pThe parties on my own yacht are\ninfinitely grander.

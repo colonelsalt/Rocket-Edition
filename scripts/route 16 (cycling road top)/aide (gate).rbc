@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= My friends from school asked me\nwhat I'm doing with my life now.\pI told them: I'm one of Prof.\nOak's AIDES!\p[.]\pThey couldn't stop laughing, not a\nsingle one of them[.]\lTalk about humiliating!

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define M_AIDE_2 0x6
+
+#org @main
+applymovement M_AIDE_2 @lookRight
+setvar 0x4016 0x13
+end
+
+#org @lookRight
+#raw FACE_R
+#raw 0xFE

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x132 0x0 0x81866D1 0x8186707 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= My birds were shivering with fear\nat your evil!

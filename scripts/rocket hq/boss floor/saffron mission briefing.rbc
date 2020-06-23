@@ -1,0 +1,179 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x1
+
+#org @main
+lock
+textcolor 0x0
+msgbox @bossTalk 0x6
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto @mainScript
+
+#org @mainScript
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk2 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+spriteface _GIOVANNI FACE_DOWN
+pause 0x20
+msgbox @bossTalk2.5 0x6
+pause 0x10
+applymovement _GIOVANNI @paceR
+waitmovement 0x0
+pause 0x25
+spriteface _GIOVANNI FACE_DOWN
+pause 0x10
+msgbox @bossTalk3 0x6
+pause 0x10
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk3.5 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+msgbox @bossTalk4 0x6
+pause 0x10
+applymovement _GIOVANNI @paceL
+waitmovement 0x0
+spriteface _GIOVANNI FACE_DOWN
+pause 0x15
+msgbox @bossTalk5 0x6
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk6 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_UP
+pause 0x20
+msgbox @bossTalk6.5 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_DOWN
+pause 0x10
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk7 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+msgbox @bossTalk8 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+applymovement _GIOVANNI @paceD
+waitmovement 0x0
+pause 0x15
+msgbox @bossTalk8.5 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+msgbox @bossTalk9 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_DOWN
+pause 0x10
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk10 0x6
+pause 0x20
+applymovement _GIOVANNI @paceU
+waitmovement 0x0
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk11 0x6
+setflag 0xA6
+setflag 0x29D
+clearflag 0xA7
+setvar 0x4014 0x9
+setvar 0x401D 0x8 // sets Silph Co. map back to default ominous music
+release
+end
+
+#org @bosstalk
+= Giovanni: There you are, [player].\nLet's get on with it.
+
+#org @bossTalk2
+= I assume all went well in your\nrecent mission, [player]?\pWe can expect Blaine to promptly\ndo as he's told from now on?\p[.]\c\h08ó\nSplendid work.
+
+#org @bossTalk2.5
+= Now, gentlemen.\pI've called you in here because\nwe're about to start Team Rocket's\lmost large-scale operation yet.\pListen very carefully.
+
+#org @bossTalk3
+= Thanks to the efforts of Archer\nhere in detaining Mr. Fuji[.]\pThe old man has actually given us\nmuch more than we bargained for.
+
+#org @bossTalk3.5
+= Fuji let slip that Silph Co. is in\nthe process of beta testing a\ltop-secret new invention that has\lbeen in development for years.
+
+#org @bossTalk4
+= This new device, dubbed a "Master\nBall", is a Pokémon capture tool\lalleged to be orders of magnitude\lstronger than any other Poké Ball.\pThe primary use case of such a\ndevice should go without saying:\lCapturing Legendary Pokémon.
+
+#org @bossTalk5
+= Whoever wields this Master Ball\ncould easily get the Legendary\lBirds under his solitary control[.]\pAnd, far more importantly[.]\c\h08ó\nPerhaps even[.] Mewtwo.
+
+#org @bossTalk6
+= Knowing Silph's predilections, we\ncan already guess that the\lgovernment will be the first and\lmost active Master Ball customer.\pLance doesn't seem to care much\nabout the Kanto Birds, but[.]\pHe would jump at the chance to\ncapture Mewtwo once and for all.
+
+#org @bossTalk6.5
+= [.]\pMewtwo[.]\c\h08ó under Lance's control[.]\c\h08ó\nIt would be a grotesque disaster.
+
+#org @bossTalk7
+= Were it back in Team Rocket's\nhands, where it rightfully\lbelongs, however[.]\pWe would be a real force to be\nreckoned with in Kanto.\pWe need to get ahold of this\nMaster Ball, and ensure that\lnobody else can do the same!
+
+#org @bossTalk8
+= Our Silph Co. spies have been of\nmuch help acquiring information[.]\pBut this situation calls for much\nmore drastic measures.
+
+#org @bossTalk8.5
+= That's why we will lead Team\nRocket towards a complete\loccuption of Silph headquarters\land of Saffron City at large!
+
+#org @bossTalk9
+= Station every grunt available to\nSilph's offices.\pLocate the company's highest-\nranked scientists and engineers,\land take them hostage.\pIf you find any information or\nmaterials pertaining to Master\lBall, seize them at once.
+
+#org @bossTalk10
+= Once we've established complete\ncontrol of the premises[.]\pI'll come to personally make my\ndemands to the company president.\pWe will have that Master Ball!
+
+#org @bossTalk11
+= Do I make myself completely clear?\pThen make your way to Saffron City\nright this second, Rockets!\pWe'll update you on your specific\ntask in this operation on-site.\pThis is a big moment for Team\nRocket! Show no mercy!
+
+#org @playerApproach
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @paceR
+#raw STEP_R
+#raw 0xFE
+
+#org @paceL
+#raw STEP_L
+#raw 0xFE
+
+#org @paceD
+#raw STEP_D
+#raw 0xFE
+
+#org @paceU
+#raw STEP_U
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE

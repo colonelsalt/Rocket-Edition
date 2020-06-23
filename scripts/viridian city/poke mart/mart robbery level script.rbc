@@ -1,0 +1,92 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LEADER 0x4
+#define _GRUNT 0x5
+#define _POKE_BALL1 0x6
+#define _POKE_BALL2 0x7
+#define _RATICATE 0x8
+#define _KOFFING 0x9
+#define _BOY 0x2
+#define _GIRL 0x3
+#define _SELLER 0x1
+
+#org @main
+lockall
+applymovement 0xFF @stepForward
+waitmovement 0x0
+applymovement _LEADER @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk MSG_KEEPOPEN
+fadeout 0x0
+sound 0x46 // "wooden smash"
+msgbox @talk2 0x6
+playsong 0x11D 0x0
+sound 0x36 // throw Poké ball sound
+showsprite _POKE_BALL1
+showsprite _POKE_BALL2
+checksound
+pause 0x7
+sound 0xF // Poké ball open
+fadescreen 0x2
+hidesprite _POKE_BALL1
+hidesprite _POKE_BALL2
+showsprite _RATICATE
+showsprite _KOFFING
+checksound
+pause 0x5
+sound 0x15 // exclamation
+applymovement _BOY @exclamation
+applymovement _GIRL @exclamation
+applymovement _SELLER @exclamation
+waitmovement 0x0
+spriteface _BOY FACE_LEFT
+spriteface _GIRL FACE_RIGHT
+pause 0x10
+spriteface _BOY FACE_DOWN
+pause 0xA
+spriteface _GIRL FACE_LEFT
+pause 0x10
+applymovement _LEADER @stepR
+waitmovement 0x0
+spriteface _BOY FACE_DOWN
+spriteface _GIRL FACE_UP
+msgbox @talk3 0x6
+pause 0x20
+spriteface _LEADER FACE_DOWN
+pause 0x10
+msgbox @talk4 0x6
+setvar 0x403B 0x2
+setvar 0x403D 0x1
+releaseall
+end
+
+#org @talk
+= All right[.]\nLadies, gentlemen[.]
+
+#org @talk2
+= Everybody down on the floor!\c\h08ó\nThis is a robbery!
+
+#org @talk3
+= If y'all would just stay cool, and\nrefrain from any rash moves,\lnobody has to suffer any harm!\pHehehe[.]\c\h08ó\n(Well, nothing too bad, anyway[.])
+
+#org @talk4
+= [player]! You run up to the counter\nand get the goods!\pWe'll make sure nobody tries any\nfunny business in the meantime!
+
+#org @stepForward
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

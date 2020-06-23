@@ -1,0 +1,45 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x220
+if 0x1 goto @postVermilion
+checkflag 0x208
+if 0x1 goto @postTV
+msgbox @talk 0x6
+spriteface 0xA FACE_LEFT
+release
+end
+
+#org @postTV
+msgbox @talk2 0x6
+spriteface 0xA FACE_LEFT
+release
+end
+
+#org @postVermilion
+msgbox @talk3 0x6
+spriteface 0xA FACE_LEFT
+release
+end
+
+#org @postRed
+msgbox @talk4 0x6
+spriteface 0xA FACE_LEFT
+release
+end
+
+#org @talk
+= Ariana: Yes, grunt?\nDo I look like Bill to you?
+
+#org @talk2
+= Ariana: Yes, grunt?\nDid you want something?
+
+#org @talk3
+= Ariana: Hope you're not all\nspineless, grunt. Haha.\pUs Rockets aren't too popular in\nLavender.
+
+#org @talk4
+= Ariana: It's a complete disaster[.]

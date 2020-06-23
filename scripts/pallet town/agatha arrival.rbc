@@ -1,0 +1,92 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _AGATHA 0x3
+
+#org @main
+lockall
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+goto @continue // 8418EB
+
+#org @continue
+pause 0x15
+cry 0x2A 0x0
+waitcry
+pause 0x10
+spriteface 0xFF FACE_RIGHT
+doanimation 0x1E
+pause 0x10
+showsprite _AGATHA
+checkanimation 0x1E
+pause 0x25
+spriteface _AGATHA FACE_RIGHT
+pause 0x30
+spriteface _AGATHA FACE_LEFT
+pause 0x20
+sound 0x15 // exclamation
+applymovement _AGATHA @exclamation
+waitmovement 0x0
+textcolor 0x1
+msgbox @talk 0x6
+pause 0x25
+spriteface _AGATHA FACE_RIGHT
+pause 0x30
+spriteface _AGATHA FACE_LEFT
+pause 0x25
+msgbox @talk2 0x6
+pause 0x25
+spriteface _AGATHA FACE_UP
+pause 0x20
+applymovement _AGATHA @stepU
+waitmovement 0x0
+msgbox @talk3 0x6
+pause 0x30
+spriteface _AGATHA FACE_UP
+pause 0x10
+setdooropened 0xF 0x7
+doorchange
+applymovement _AGATHA @stepInside
+waitmovement 0x0
+hidesprite _AGATHA
+setdoorclosed 0xF 0x7
+doorchange
+special 0x114
+warp 0x4 0x2 0xFF 0x5 0x5
+waitstate
+releaseall
+end
+
+#org @talk
+= Agatha: Oh, my[.]\c\h08ó\nNow isn't this a surprise[.]\pIn all my visits to Pallet over\nthe years, I never thought I'd\lsee a fellow like yourself in\la peaceful place like this.
+
+#org @talk2
+= You're here for Oak, aren't you?\p[.]\pHm? Oh, no. I have no intention\nof stopping you.\pWe have[.]\c\h08ó much more in common\nthan you probably think, Rocket.
+
+#org @talk3
+= Say[.] it's not often we see a\nnew face around these parts.\pCome in for a cup of tea if\nyou're not too busy.\pPallet is such a wasteland for\ninteresting tea conversation.
+
+#org @cameraPan
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @stepInside
+#raw STEP_U
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE

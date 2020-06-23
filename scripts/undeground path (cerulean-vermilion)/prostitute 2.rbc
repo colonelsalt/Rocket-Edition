@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x1
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I'm good, you know.

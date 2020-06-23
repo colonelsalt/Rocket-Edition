@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= The receptionist here is so nice!\pA different story from that\nscowling girl I hear they've got\lin the Pewter Center!

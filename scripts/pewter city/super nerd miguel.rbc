@@ -1,0 +1,147 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _MIGUEL 0x5
+#define _MANAGER 0x1
+
+#org @main
+lock
+checkflag 0x2B2
+if 0x1 goto @afterwards
+msgbox @ellipses 0x6
+faceplayer
+msgbox @talk 0x6
+trainerbattle 0x3 0xAA 0x0 @defeatText
+call EXEC_STEAL
+textcolor 0x0
+msgbox @talk2 0x6
+sound 0x7C
+movesprite2 _MANAGER 0x11 0x4
+showsprite _MANAGER
+checksound
+spriteface _MIGUEL FACE_LEFT
+applymovement _MANAGER @managerApproach
+waitmovement 0x0
+msgbox @managerTalk 0x6
+pause 0x15
+applymovement _MANAGER @managerLeave
+waitmovement 0x0
+pause 0x15
+movesprite _MANAGER 0x10 0x5
+movesprite2 _MANAGER 0x10 0x5
+showsprite _MANAGER
+applymovement _MIGUEL @playerFace
+pause 0x10
+msgbox @talk3 0x6
+pause 0x20
+textcolor 0x2
+preparemsg @takeWhich
+pause 0x20
+multichoice 0x0 0x0 0x19 0x1
+setflag 0x2B2
+pause 0x15
+compare LASTRESULT 0x0
+if 0x1 goto @domeFossil
+compare LASTRESULT 0x1
+if 0x1 goto @helixFossil
+compare LASTRESULT 0x2
+if 0x1 goto @oldAmber
+end
+
+#org @domeFossil
+additem 0x166 0x1
+fanfare 0x10D
+loadpointer 0x0 @domeGet
+giveitem2 0x166 0x1 0x10D
+waitfanfare
+pause 0x10
+setflag 0x272
+closeonkeypress
+release
+end
+
+#org @helixFossil
+additem 0x165 0x1
+fanfare 0x10D
+loadpointer 0x0 @helixGet
+giveitem2 0x165 0x1 0x10D
+waitfanfare
+pause 0x10
+setflag 0x273
+closeonkeypress
+release
+end
+
+#org @oldAmber
+additem 0x162 0x1
+fanfare 0x10D
+loadpointer 0x0 @amberGet
+giveitem2 0x162 0x1 0x10D
+waitfanfare
+pause 0x10
+setflag 0x25E
+closeonkeypress
+release
+end
+
+#org @afterwards
+faceplayer
+msgbox @talk4 0x6
+release
+end
+
+
+#org @ellipses
+= [.]\c\h08ó\n[.]\p[.][.]\c\h08ó\n[.][.][.]
+
+#org @talk
+= Gah!\pAll right, I admit it, please stop\nstaring at me like that!\pI-it's me, okay?!\c\h08ó Yes, the Super\nNerd who helped you at Mt. Moon!\pI-I didn't go AWOL on Team Rocket,\nI promise..!\pI'm just[.]\c\h08ó temporarily recharging\nfrom all the stress of gang life,\lyou know..?\p[.]\pWhat do you want with me, anyway?\c\h08ó\nD-don't tell me it's about[.]\p[.]\pWah!\pE-easy now! That kid ran off with\nboth the fossils, I promise!\pI think you must have been hearing\nthings..!\p[.]\pLook, you can't do this to me..!\c\h08ó\nNot at my work[.]\c\h08ó please!
+
+#org @defeatText
+= Why does nothing ever go my way..?
+
+#org @talk2
+= Ahh!\c\h08ó\nYou bandit!\pY-you have to be quiet now\nbefore[.]
+
+#org @managerTalk
+= Miguel!\nYou good-for-nothing slacker!\pHow many times do I have to tell\nyou?!\pNo Pokémon battles on the job!\pIf you don't apologize to this\nguest here and get back to what\lyou should be doing, post-haste[.]\pI'll have you fired before you can\nsay Aerodactyl!
+
+#org @talk3
+= (Oh, my days[.])\pD-do you promise to leave me alone\nif I[.]\p[.]\pN-no!\c\h08ó I have nothing there in that\nbag, really, nothing..!
+
+#org @takeWhich
+= Take which fossil?
+
+#org @domeGet
+= [player] stole the Dome Fossil\nfrom Super Nerd Miguel!
+
+#org @helixGet
+= [player] stole the Helix Fossil\nfrom Super Nerd Miguel!
+
+#org @amberGet
+= [player] stole the Old Amber from\nSuper Nerd Miguel!
+
+#org @talk4
+= (Sob[.])\pAnd it was such a rare collection,\ntoo[.]\pI guess my mom was always right\nwhen she told me not to mess with\lcriminals[.]
+
+#org @managerApproach
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @managerLeave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw FACE_L
+#raw 0xFE
+
+#org @playerFace
+#raw 0x4A
+#raw 0xFE

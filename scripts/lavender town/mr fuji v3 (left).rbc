@@ -1,0 +1,60 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define FUJI 0x1
+#define BLUE 0x2
+#define MAINSCRIPT 0x8256AD
+
+#org @main
+lock
+spriteface BLUE FACE_UP
+spriteface FUJI FACE_LEFT
+textcolor 0x0
+msgbox @eh 0x6
+applymovement 0xFF @playerMove
+waitmovement 0x0
+spriteface FUJI FACE_DOWN
+pause 0x15
+msgbox @fuTalk 0x6
+trainerbattle 0x3 0x7 0x0 @defeat
+copyvar 0x8000 0x401F
+call 0x81FCA7 // POKESTEAL
+applymovement FUJI @stepD
+waitmovement 0x0
+comparevars 0x401F 0x8000
+if 0x5 goto @stolen
+textcolor 0x0
+msgbox @innocentTalk 0x6
+goto MAINSCRIPT
+end
+
+#org @stolen
+textcolor 0x0
+msgbox @stealTalk 0x6
+goto MAINSCRIPT
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @eh
+= Mr. Fuji: Eh?\c\h08ó\nWho are you? Why have you come?
+
+#org @playerMove
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @fuTalk
+= [.]\c\h08ó\nNo! That uniform..!\pGah!\nYou filthy Rockets!\pWhy can't you leave me and my poor\nlittle town alone?!\pI refuse to leave this tower, and\nyou can't make me, scoundrel!
+
+#org @defeat
+= Argh!\nI will not stand for this!
+
+#org @stealTalk
+= Mr. Fuji: You disgusting hooligan!\nHave you no shame?\pNot only do you have the nerve--\nthe audacity, to come in here and\lstop me on my noble mission to\lcalm the spirit of a murdered\lPokémon[.]\pBut your incessant greed even\nprompts you to snatch my innocent\lPokémon from right under my nose!
+
+#org @innocentTalk
+= Mr. Fuji: [.]\pDefeated at the hands of a bandit\nwhose Pokémon were stolen from the\lhands of innocent young Trainers[.]\pSo this is what it's come to[.]

@@ -1,0 +1,38 @@
+#dynamic 0x800000
+
+#org @main
+setworldmapflag 0x897
+checkflag 0x28D // if Fishing Guru quest undertaken
+if 0x1 call @shouldActivateScript
+checkflag 0x272
+if 0x1 call 0x8166D91
+checkflag 0x272
+if 0x0 call 0x8166D97
+end
+
+#org @shouldActivateScript
+compare 0x4032 0x0
+if 0x1 call @xCheck
+compare 0x4032 0x2
+if 0x1 call @showFisherman
+return
+
+#org @xCheck
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x27
+if 0x1 call @yCheck
+return
+
+#org @yCheck
+compare 0x8001 0x1C
+if 0x1 call @activateScript
+return
+
+#org @activateScript
+setvar 0x4032 0x1
+clearflag 0xAC
+return
+
+#org @showFisherman
+clearflag 0x28D
+return

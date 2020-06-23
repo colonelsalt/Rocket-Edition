@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Bill: [.]\c\h08ó\nThey've all been beaten.\pDamn it, [player]!\nYou know what that means..!

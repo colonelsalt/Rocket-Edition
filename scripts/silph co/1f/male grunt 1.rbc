@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= This is the moment my criminal\ncareer has boiled down to.\pI mean, holy crap!\nWe're taking this building down!

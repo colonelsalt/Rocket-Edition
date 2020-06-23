@@ -1,0 +1,62 @@
+#dynamic 0x800000
+// person event 0x10 (16)
+
+#org @main
+lock
+faceplayer
+checkflag 0x292
+if 0x1 goto @preCinnabar
+checkflag 0x21E
+if 0x1 goto @postPromotion
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x205
+if 0x1 goto @postMtMoon
+msgbox @talk 0x6
+release
+end
+
+#org @postMtMoon
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+release
+end
+
+#org @postRed
+msgbox @talk4 0x6
+release
+end
+
+#org @postPromotion
+msgbox @talk5 0x6
+release
+end
+
+#org @preCinnabar
+msgbox @talk6 0x6
+release
+end
+
+#org @talk
+= How'd your first little robbery\ngo? Thrilling, wasn't it?\pWell, there's more where that came\nfrom.
+
+#org @talk2
+= So did we find any fossils, then?\p[.]\pWhat?\nWe lost them?\pYou telling me I got molested by\nall those random Zubat for\lnothing?\pGee, what a waste.
+
+#org @talk3
+= Ever since Lance's TV announcement\nI've just started being nice to\leveryone I see so they won't judge\lme for being a Rocket.
+
+#org @talk4
+= Wow.\pSo that kid just like, broke his\nway into our hideout and beat all\lof us flat out?\p[.]\p(Huh, I guess I was right to hide\nout by the Pokémon Center that one\ltime at Mt. Moon[.])
+
+#org @talk5
+= Freaking hell[.]\pI still can't get over that crazy\nlittle Red kid[.]
+
+#org @talk6
+= Heading south, are you?\pI'd stay away from those gangs on\nCycling Road if I were you.\pThey'll see you're a Rocket and\nrush to entangle you in whatever\lpetty scuffle they've got going.\pNot worth the time, I say!

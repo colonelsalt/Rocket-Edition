@@ -1,0 +1,40 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+applymovement 0x1 @stepL
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0x1 @leave
+waitmovement 0x0
+sound 0x9
+hidesprite 0x1
+setflag 0x210
+setvar 0x401C 0x1
+checksound
+release
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= That's it, man! I've had it!\pAll day I've been standing around,\nwaiting for some half-decent\lTrainer to come along so I can\loffer him a place in Team Rocket,\lonly to find that half of them\lcan't even beat the first couple\lof twerps on this damn bridge!\pLook, it's been twelve god-\nforsaken hours, and I can't feel\lmy legs.\pTell Archer I went for a long\noverdue coffee break, all right?\lJesus.
+
+#org @leave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE

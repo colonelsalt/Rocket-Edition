@@ -1,0 +1,128 @@
+#dynamic 0x800000
+#define PIMP 0x1
+
+#org @main
+lock
+compare 0x4035 0x4 // if Miss Hoenn ran away to Pewter
+if 0x4 goto @postRunaway
+checkflag 0x280
+if 0x1 goto @missionComplete
+checkflag 0x27D
+if 0x1 goto @midway
+msgbox @talk 0x6
+pause 0x10
+faceplayer
+msgbox @talk2 MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @yes
+msgbox @noTalk 0x6
+release
+end
+
+#org @yes
+pause 0x5
+msgbox @yesTalk 0x6
+setflag 0x27D
+spriteface PIMP FACE_LEFT
+release
+end
+
+#org @midway
+faceplayer
+msgbox @midTalk 0x6
+checkflag 0x27E
+if 0x1 goto @postBribe
+spriteface PIMP FACE_LEFT
+release
+end
+
+#org @postBribe
+msgbox @postBribeTalk 0x6
+pause 0x15
+fadescreen 0x1
+pause 0x5
+sound 0x9
+checksound
+pause 0x10
+hidesprite PIMP
+hidesprite 0x3
+hidesprite 0x5
+hidesprite 0x4
+setflag 0x281
+setflag 0x2AF
+fadescreen 0x0
+textcolor 0x1
+release
+end
+
+#org @missionComplete
+faceplayer
+checkflag 0x282
+if 0x0 call @reward
+textcolor 0x0
+msgbox @postRewardTalk 0x6
+release
+end
+
+#org @reward
+msgbox @rewardTalk 0x6
+checkitemroom 0xBD 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+fanfare 0x101
+textcolor 0x2
+preparemsg @amuletGet
+waitmsg
+waitfanfare
+additem 0xBD 0x1
+setflag 0x282
+msgbox @putAway MSG_KEEPOPEN
+closeonkeypress
+return
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @postRunaway
+msgbox @postRunawayTalk 0x6
+release
+end
+
+#org @talk
+= Hey-hey! Take it easy, folks.\nWe all know miss Hoenn's popular\laround here.\pAh[.] see, but fame is a burden,\nyou know what I'm saying?\pShe's just off on vacation for a\nlittle bit, is all.\pShe'll be back in no time at all,\ngentlemen. You hear?
+
+#org @talk2
+= Hey, you. You're not a Rocket, are\nyou? Listen for a sec.\pHelp me out with something, okay?\nI'll make it worth your while.
+
+#org @yesTalk
+= The best girl I got, man.\nShe ran off without a word.\pLured away by the this young\nhotshot nobody who runs the joint\lin the other Underground Path over\lon Route 5.\pThat rookie don't know nothing\nabout the game except charming\laway older folks' profit-makers!\pIt ain't right, man!\pGet over there and get her back\nfor me, would ya?\pAnd give that wannabe-kid a good\nround for me too if you can!
+
+#org @noTalk
+= Fine. Whatever, buddy.\nDo as you please.
+
+#org @midTalk
+= Well, how's it going?\nFound miss Hoenn for me yet?
+
+#org @postBribeTalk
+= Wait, what?!\nYou let the kid go with it?\pArgh!\nWhy did I ever trust you?\pDamn it all! Do you know what\nyou've done, Rocket?\pI can't keep this place going\nwithout her[.]
+\pThis game ain't no joke, ya hear?\pYou mess with the wrong people,\nand you're done.\pYou've chosen which side you're on\nnow, buddy, and I won't forget it!
+
+#org @rewardTalk
+= Ah, there you are, Rocket!\pThanks for teaching the riffraff a\nlesson, and for returning me to\lprofitability!\pI am a man of my word, you know.\nTake this for a job well done.
+
+#org @amuletGet
+= [player] received the Amulet Coin!
+
+#org @putAway
+= [player] put the Amulet Coin in the\nItems pocket.
+
+#org @noRoomTalk
+= Oh, you haven't got room for it?\nMake some!
+
+#org @postRewardTalk
+= You're cool, Rocket.\pIf you ever need anything from me,\nman[.] don't hesitate to ask.
+
+#org @postRunawayTalk
+= [.]\pYou know[.] maybe I'm just gettin'\ntoo old for the game.\pI ain't as cold[.] as unattached as\nI once was anymore.\pWell, what can you do?

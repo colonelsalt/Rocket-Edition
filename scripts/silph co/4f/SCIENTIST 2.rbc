@@ -1,0 +1,72 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SCIENTIST 0x3
+
+#org @main
+lock
+msgbox @talk 0x6
+pause 0x15
+faceplayer
+sound 0x15 // exclamation
+applymovement _SCIENTIST @exclamation
+waitmovement 0x0
+msgbox @talk2 0x6 
+trainerbattle 0x3 0x13 0x0 @defeatText
+msgbox @talk3 0x6
+fadescreen 0x1
+// moves characters and camera to new position
+special 0x113
+setvar 0x8002 0xE
+setvar 0x8003 0xD
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0xE 0xD
+movesprite _SCIENTIST 0xE 0xA
+spriteface 0xFF FACE_UP
+spriteface _SCIENTIST FACE_DOWN
+special 0x114
+fadescreen 0x0
+textcolor 0x2
+msgbox @swipe 0x4
+lockall
+sound 0x19
+checksound
+pause 0x10
+closeonkeypress
+lockall
+pause 0x10
+sound 0x26
+setmaptile 0xE 0xB 0x3B0 0x1
+setmaptile 0xF 0xB 0x3B1 0x1
+setmaptile 0xE 0xC 0x3B8 0x1
+setmaptile 0xF 0xC 0x3B9 0x1
+setmaptile 0xF 0xD 0x335 0x0
+special 0x8E
+checksound
+setflag 0x29F
+subvar 0x402E 0x1
+release
+end
+
+#org @talk
+= (Could it be that the derivative\nof the exponential function is[.])\p[.]\c\h08ó\n(No way[.])
+
+#org @talk2
+= Huh?! Who are you?\nAre you from management?\pYes, I'm one of Silph's senior\nengineers, but why[.]\pThat wasn't Calculus 1 I was\nstudying, by the way!\pI[.]\c\h08ó I'll show you I'm better than\nthat, come on!
+
+#org @defeatText
+= It's true, I suck at math!\nPlease don't demote me!
+
+#org @talk3
+= Wait[.]\c\h08ó\nHuh..?\p[.]\pYou're not from management?\pYou-- Team Rocket?\c\h08ó\nAnd[.] what..?\pYou're here to[.]\c\h08ó\nTake me[.] hostage..?\pHey! Wait, no-- stop!
+
+#org @swipe
+= [player] swiped the Card Key.
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

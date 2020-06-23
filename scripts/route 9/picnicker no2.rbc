@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9B 0x0 0x81848FF 0x818491C POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9ED6
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= You're obviously talented.\pI shudder to think what could have\ntempted you to the dark side[.]

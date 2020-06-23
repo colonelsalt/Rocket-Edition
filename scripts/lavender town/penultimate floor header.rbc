@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define BLUE 0x6
+
+#org @main
+checkflag 0x225
+if 0x1 call @bluMover
+end
+
+#org @bluMover
+movesprite2 BLUE 0xC 0xF
+spritebehave BLUE 0x8
+return

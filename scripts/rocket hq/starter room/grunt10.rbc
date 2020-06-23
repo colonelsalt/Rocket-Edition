@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @start
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Oh, they're going to make us steal\nother people's Pokémon?\pI-I'm not so sure I'm all that\ncomfortable about that[.]

@@ -1,0 +1,35 @@
+#dynamic 0x800000
+
+#org @start
+lock
+faceplayer
+checkflag 0x21E
+if 0x1 goto @postPromotion
+checkflag 0x227
+if 0x1 goto @postRed
+msgbox @talk 0x6
+spriteface 0xB FACE_UP
+release
+end
+
+#org @postRed
+msgbox @talk2 0x6
+release
+end
+
+#org @postPromotion
+msgbox @talk3 0x6
+spriteface 0xB FACE_UP
+release
+end
+
+#org @talk
+= What are you looking at, grunt?\pDon't go making us look suspicious\nnow!
+
+#org @talk2
+= [.]\pI-I[.]\c\h08ó I tried to guard the\nposter[.]\c\h08ó I swear I did!
+
+#org @talk3
+= All right, look[.]\pI may not always do an amazing job\nguarding the entrance to HQ[.]\pBut[.] if only you knew what a\ntough job it was, man!\pI'm sure you'd drop that superior\nattitude right quick!
+
+

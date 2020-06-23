@@ -1,0 +1,23 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x22E
+if 0x1 goto @postKo
+msgbox @talk 0x6
+release
+end
+
+#org @postKo
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Daisy: Yes, how can I help you?\pYou're dressed way too bizarre to\nbe from around here[.]\p[.]\nI'm Blue's sister, that's right.\pHe's a nice boy, and he's growing\nto be a strong Trainer.\pBut[.] I don't see why it matters\nto you?
+
+#org @talk2
+= Daisy: [.]you!\pLeave this innocent town this\nminute or I'll call the police!\pThe scratches from your companion's\nugly rat still haven't healed,\lI'll have you know!
+
+

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= C'mon, man[.]\nIf you had a Gardevoir like mine[.]\pYou'd have done it too!

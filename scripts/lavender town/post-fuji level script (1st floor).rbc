@@ -1,0 +1,82 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x1
+
+#org @main
+lock
+applymovement BLUE @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x25
+spriteface BLUE FACE_LEFT
+pause 0x30
+spriteface BLUE FACE_UP
+pause 0x25
+msgbox @talk2 0x6
+applymovement BLUE @wander
+waitmovement 0x0
+msgbox @talk3 0x6
+applymovement BLUE @wander2
+waitmovement 0x0
+msgbox @talk4 0x6
+pause 0x25
+spriteface BLUE FACE_DOWN
+pause 0x15
+applymovement BLUE @stepD
+waitmovement 0x0
+msgbox @talk5 0x6
+spritebehave BLUE 0x8 // look down
+setvar 0x4016 0x7
+setflag 0x226
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Blue: [.]\c\h08ó\nWow, Mr. Rocket[.]\pI never knew I'd get to see\nsomething like that[.]
+
+#org @talk2
+= You Rockets[.]\c\h08ó you're bad, but[.]\pYou're fighting for something\ntoo, aren't you?\pYou're not just all evil.
+
+#org @wander
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @talk3
+= I know why the other guy called\ngrandpa a traitor, you know.\pI don't know what I should think\nabout anything anymore[.]
+
+#org @wander2
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk4
+= But[.]\pWhen I become Champion, I will be\na fair and honorable one!\pYou can count on it!
+
+#org @talk5
+= [.]\pI'm gonna stay behind here with\nRaticate for a little while\llonger.\pThanks for tagging along with me,\nMr. Rocket.\pI hope I'll see you again\nsometime.

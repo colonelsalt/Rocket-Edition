@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9 0x0 @challenge @defeat POKESTEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= (Snivel)\n(Sob)\pWhat have I left to do with my\nlife now that my dearest Pokémon\lfriends have passed away?
+
+#org @defeat
+= My life is truly futile!
+
+#org @after
+= You! This is all your handiwork,\nisn't it, Rocket?\pWell, are you satisfied with\nyourself? (Sob[.])

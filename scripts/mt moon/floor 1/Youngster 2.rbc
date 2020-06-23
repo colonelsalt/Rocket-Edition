@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x2 0x5B 0x0 @challenge @defeat 0x8022EC
+msgbox @after 0x6
+end
+
+#org @challenge
+= I came all the way down here to\nshow off to girls.
+
+#org @defeat
+= Losing stinks!\nIt's so uncool.
+
+#org @after
+= All I wanted was for girls to like\nme[.]

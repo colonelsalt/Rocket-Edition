@@ -1,0 +1,41 @@
+#dynamic 0x800000
+#define SELLER 0x3
+#define ASSISTANT 0x8
+#define GRUNT1 0x4
+#define GRUNT2 0x6
+#define FGRUNT 0x5
+#define MERCHANT 0x7
+
+#org @main
+checkflag 0x204 // Pkmn stealing tutorial complete
+if 0x1 call @moveGrunts
+checkflag 0x20B // Mt. Moon mission complete
+if 0x1 call @moveMart
+checkflag 0x208 // Lance TV broadcast complete
+if 0x1 call @movePair
+end
+
+#org @moveGrunts
+movesprite2 ASSISTANT 0x2 0x9
+spritebehave ASSISTANT 0x8 // look down
+movesprite2 SELLER 0x2 0xA
+movesprite2 GRUNT1 0x6 0x8
+spritebehave GRUNT1 0x2 // walk around
+movesprite2 GRUNT2 0x9 0x10
+spritebehave GRUNT2 0x5 // walk left and right
+movesprite2 FGRUNT 0x10 0x8
+spritebehave FGRUNT 0x2 // walk around
+movesprite2 MERCHANT 0xA 0x4
+return
+
+#org @moveMart
+movesprite2 MERCHANT 0xC 0x3
+spritebehave MERCHANT 0x8 // look down
+return
+
+#org @movePair
+movesprite2 ASSISTANT 0x0 0xA
+spritebehave ASSISTANT 0xA // look right
+movesprite2 SELLER 0x0 0xC
+spritebehave SELLER 0xA // look right
+return

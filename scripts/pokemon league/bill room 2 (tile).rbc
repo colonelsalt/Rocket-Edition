@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x2
+
+#org @main
+lock
+pause 0x10
+spriteface _BILL FACE_UP
+pause 0x10
+applymovement _BILL @moveUp
+waitmovement 0x0
+sound 0x9
+hidesprite _BILL
+setflag 0x2D5
+setvar 0x404F 0x1
+release
+end
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE

@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x182 0x0 @challenge @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Who does your boss think he is?
+
+#org @defeat
+= I'm stunned!
+
+#org @postBattle
+= As long as it profits you, you\ndon't care what happens to this\lplace, do you?

@@ -1,0 +1,430 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LEADER 0x4
+#define _GRUNT 0x5
+#define _POKE_BALL1 0x6
+#define _POKE_BALL2 0x7
+#define _RATICATE 0x9
+#define _KOFFING 0x8
+#define _BOY 0x2
+#define _GIRL 0x3
+#define _SELLER 0x1
+
+#org @main
+lock
+faceplayer
+compare 0x403B 0x6
+if 0x1 goto @postRobbery
+compare 0x403B 0x4
+if 0x1 goto @secondSteal
+compare 0x403B 0x3
+if 0x1 goto @firstSteal
+compare 0x403B 0x2
+if 0x1 goto @robbery
+checkflag 0x2F0
+if 0x0 call @bountyCheck
+special 0x187
+compare LASTRESULT 0x2
+if 0x1 goto 0x81A7AE0
+preparemsg 0x81A6211
+waitmsg
+pokemart 0x816A298
+msgbox 0x81A5190 MSG_KEEPOPEN
+release
+end
+
+#org @postRobbery
+msgbox @postRobberyTalk 0x6
+release
+end
+
+#org @bountyCheck
+compare 0x401F 0x78
+if 0x4 goto 0x88324E9
+return
+
+#org @robbery
+msgbox @robberyTalk 0x6
+trainerbattle 0x3 0x23 0x0 @defeatTalk
+call EXEC_STEAL
+setvar 0x403B 0x3
+textcolor 0x0
+spriteface _LEADER FACE_LEFT
+spriteface _RATICATE FACE_LEFT
+pause 0x10
+applymovement _LEADER @stepL
+waitmovement 0x0
+msgbox @leaderTalk 0x6
+cry 0x14 0x0
+pause 0x10
+applymovement _RATICATE @raticateMove
+waitmovement 0x0
+spriteface _SELLER FACE_DOWN
+pause 0x10
+applymovement _SELLER @stepD
+waitmovement 0x0
+msgbox @robberyTalk2 0x6
+pause 0x10
+applymovement _LEADER @runToCounter
+waitmovement 0x0
+msgbox @leaderTalk2 0x6
+sound 0xA
+applymovement _SELLER @jumpR
+waitmovement 0x0
+checksound
+applymovement _SELLER @runToCounter
+waitmovement 0x0
+pause 0x10
+spriteface _LEADER FACE_UP
+spriteface 0xFF FACE_DOWN
+pause 0x10
+applymovement _LEADER @stepU
+waitmovement 0x0
+msgbox @leaderTalk3 0x6
+applymovement _SELLER @runBack
+waitmovement 0x0
+spriteface _LEADER FACE_LEFT
+spriteface 0xFF FACE_LEFT
+applymovement _SELLER @stepR
+waitmovement 0x0
+goto @firstSteal
+
+#org @firstSteal
+msgbox @robberyTalk3 0x6
+pause 0x15
+textcolor 0x2
+preparemsg @steal1
+pause 0x20
+showmoney 0x10 0x0 0x0
+multichoice 0x0 0x0 0x3D 0x1
+waitmsg
+closeonkeypress
+copyvar 0x8003 LASTRESULT
+compare 0x8003 0x0
+if 0x1 call @thunderStone
+compare 0x8003 0x1
+if 0x1 call @waterStone
+compare 0x8003 0x2
+if 0x1 call @fireStone
+compare 0x8003 0x3
+if 0x1 call @ultraBalls
+compare 0x8003 0x4
+if 0x1 call @fullRestores
+compare 0x8003 0x5
+if 0x1 call @cash
+setvar 0x403B 0x4
+pause 0x10
+goto @secondSteal
+
+#org @secondSteal
+preparemsg @steal2
+pause 0x15
+showmoney 0x10 0x0 0x0
+multichoice 0x0 0x0 0x3D 0x1
+waitmsg
+closeonkeypress
+copyvar 0x8003 LASTRESULT
+compare 0x8003 0x0
+if 0x1 call @thunderStone
+compare 0x8003 0x1
+if 0x1 call @waterStone
+compare 0x8003 0x2
+if 0x1 call @fireStone
+compare 0x8003 0x3
+if 0x1 call @ultraBalls
+compare 0x8003 0x4
+if 0x1 call @fullRestores
+compare 0x8003 0x5
+if 0x1 call @cash
+setvar 0x403B 0x5
+closeonkeypress
+pause 0x15
+spriteface _LEADER FACE_RIGHT
+pause 0x10
+applymovement _LEADER @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @leaderTalk4 0x6
+pause 0x10
+spriteface _GRUNT FACE_LEFT
+spriteface _LEADER FACE_LEFT
+pause 0x10
+applymovement _GRUNT @runToHelp
+cry 0x6D 0x0
+spriteface _KOFFING FACE_LEFT
+pause 0x15
+applymovement _KOFFING @koffingRun
+waitmovement 0x0
+waitcry
+pause 0x30
+fadescreen 0x1
+pause 0x30
+fadescreen 0x0
+applymovement _LEADER @stepL
+waitmovement 0x0
+msgbox @leaderTalk5 0x6
+pause 0x15
+spriteface _LEADER FACE_DOWN
+pause 0x15
+msgbox @leaderTalk6 0x6
+pause 0x10
+spriteface _LEADER FACE_RIGHT
+spriteface _GRUNT FACE_LEFT
+pause 0x15
+sound 0xF
+pause 0x5
+fadescreen 0x2
+hidesprite _RATICATE
+hidesprite _KOFFING
+movesprite2 _POKE_BALL1 0x5 0x4
+movesprite2 _POKE_BALL2 0x2 0x5
+pause 0x5
+showsprite _POKE_BALL1
+showsprite _POKE_BALL2
+sound 0x10
+pause 0x10
+hidesprite _POKE_BALL1
+hidesprite _POKE_BALL2
+applymovement _LEADER @leaderLeave1
+waitmovement 0x0
+applymovement _GRUNT @gruntLeave1
+applymovement _LEADER @leaderLeave2
+waitmovement 0x0
+sound 0x9
+hidesprite _LEADER
+applymovement _GRUNT @gruntLeave2
+waitmovement 0x0
+sound 0x9
+hidesprite _GRUNT
+setflag 0x37
+setvar 0x403B 0x6
+setvar 0x403D 0x2
+addvar 0x401F 0xA // increase bounty by $10,000 for robbery
+checksound
+release
+end
+
+#org @thunderStone
+hidemoney 0x0 0x0
+checkitemroom 0x60 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom 
+additem 0x60 0x1
+fanfare 0x10D
+loadpointer 0x0 @thunderStoneText
+giveitem2 0x60 0x1 0x10D
+waitfanfare
+return
+
+#org @waterStone
+hidemoney 0x0 0x0
+checkitemroom 0x61 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom 
+additem 0x61 0x1
+fanfare 0x10D
+loadpointer 0x0 @waterStoneText
+giveitem2 0x61 0x1 0x10D
+waitfanfare
+return
+
+#org @fireStone
+hidemoney 0x0 0x0
+checkitemroom 0x5F 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom 
+additem 0x5F 0x1
+fanfare 0x10D
+loadpointer 0x0 @fireStoneText
+giveitem2 0x5F 0x1 0x10D
+waitfanfare
+return
+
+#org @ultraBalls
+hidemoney 0x0 0x0
+checkitemroom 0x2 0x14
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom 
+additem 0x2 0x14
+fanfare 0x10D
+loadpointer 0x0 @ultraBallText
+giveitem2 0x2 0x14 0x10D
+waitfanfare
+return
+
+#org @fullRestores
+hidemoney 0x0 0x0
+checkitemroom 0x13 0xF
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+additem 0x13 0xF
+fanfare 0x10D
+loadpointer 0x0 @fullRestoreText
+giveitem2 0x13 0xF 0x10D
+waitfanfare
+return
+
+#org @cash
+sound 0x41
+givemoney 0x2710 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+fanfare 0x10D
+msgbox @cashText 0x4
+waitfanfare
+closeonkeypress
+return
+
+#org @noRoom
+textcolor 0x0
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @robberyTalk
+= I-I can't believe this is\nhappening!\pMy manager trained me for this\nsituation, you know!\pAll right, Bob[.]\c\h08ó\nDo as they taught you[.]\pGotta quell that fear[.]\c\h08ó\nReach into the emergency drawer[.]\pGet those earmarked Poké Balls[.]\c\h08ó\nAnd[.]\c\h08ó and[.]\p[.]\pWahh!\c\h08ó\nI'm scared!
+
+#org @defeatTalk
+= I wasn't prepared for this!
+
+#org @leaderTalk
+= Well, you got a lot of guts,\nhaven't you, pal?\pLet's teach this guy a lesson,\nRaticate!
+
+#org @robberyTalk2
+= Aaaah!\nP-please don't hurt me!\pLook, we don't have much in\nstorage, but I can get you some of\lthe premium items we keep for the\lstrongest Trainers[.]
+
+#org @leaderTalk2
+= Well, hurry it the hell up, then!\pAnd don't forget to empty that\ncash register too!
+
+#org @leaderTalk3
+= Hey, [player][.]\pSince you handled that little\nfunnyman over there, I'll let you\lhave your share first.\pTake any two items you want, man.\nWe'll sort out the rest.
+
+#org @robberyTalk3
+= All right[.]\pTh-this is all the premiums we\nhave, okay?
+
+#org @steal1
+= Steal which Item first?
+
+#org @steal2
+= Steal which Item next?
+
+#org @noRoomTalk
+= Er[.] Y-you've no room for that,\nyou know!\pYou'll have to toss something\naway before you can take it..!
+
+#org @thunderStoneText
+= [player] stole a Thunderstone\nfrom the Poké Mart!
+
+#org @waterStoneText
+= [player] stole a Water Stone from\nthe Poké Mart!
+
+#org @fireStoneText
+= [player] stole a Fire Stone from\nthe Poké Mart!
+
+#org @ultraBallText
+= [player] stole 20 Ultra Balls\nfrom the Poké Mart!
+
+#org @fullRestoreText
+= [player] stole 15 Full Restores\nfrom the Poké Mart!
+
+#org @cashText
+= [player] stole [$]10,000 from\nthe Poké Mart!
+
+#org @leaderTalk4
+= Joey!\pGet your fat ass over here and\nhelp me with the rest!
+
+#org @leaderTalk5
+= Well, then!\pPleasure doing business with you,\nlittle sissy-face.\pYou make sure to write your\nmanager a report so he knows just\lhow much your emergency training\lhelped you today, won't you?
+
+#org @leaderTalk6
+= [.]\c\h08ó\nAdios!
+
+#org @postRobberyTalk
+= And here I always thought rob-\nberies were the kind of thing that\lonly happened to other people[.]
+
+#org @raticateMove
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_U
+#raw 0xFE
+
+#org @runToCounter
+#raw STEP_L2
+#raw 0xFE
+
+#org @runBack
+#raw STEP_R2
+#raw 0xFE
+
+#org @jumpR
+#raw 0x55
+#raw 0xFE
+
+#org @runToHelp
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_U
+#raw 0xFE
+
+#org @koffingRun
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw FACE_L
+#raw 0xFE
+
+#org @leaderLeave1
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @leaderLeave2
+#raw STEP_D2
+#raw 0xFE
+
+#org @gruntLeave1
+#raw STEP_D2
+#raw 0xFE
+
+#org @gruntLeave2
+#raw STEP_D2
+#raw STEP_R2
+#raw FACE_D
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

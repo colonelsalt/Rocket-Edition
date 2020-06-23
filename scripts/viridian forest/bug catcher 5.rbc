@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x66 0x0 0x81722C7 @defeat POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @defeat
+= Oh, no! But you're not just some\ninnocent kid Trainer, are you..?
+
+#org @postBattle
+= Get away from me, Rocket!\nY-you're scaring the bugs away!

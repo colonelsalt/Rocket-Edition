@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Did you hear about the famous man\nfrom Hoenn who's aboard with us?\pA handsome lad, but so picky with\nhis palate!

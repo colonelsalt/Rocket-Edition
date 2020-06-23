@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x5F 0x0 0x81892A9 0x81892D9 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A980E
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= I'm a bit of a masochist, you see.

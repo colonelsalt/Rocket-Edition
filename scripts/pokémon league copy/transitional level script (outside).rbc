@@ -1,0 +1,73 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x1
+
+#org @main
+lockall
+pause 0x20
+compare 0x402D 0x12
+if 0x1 goto @flashBackSequence2
+checkflag 0x228
+if 0x1 goto @flashBackSequence
+textcolor 0x1
+msgbox @talk 0x6
+pause 0x25
+warpmuted 0x3 0x10 0xFF 0x6 0xE
+end
+
+#org @flashBackSequence
+textcolor 0x0
+msgbox @bossTalk 0x6
+pause 0x20
+setvar 0x401D 0x7
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @flashBackSequence2
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+textcolor 0x0
+pause 0x20
+msgbox @bossTalk2 0x6
+pause 0x35
+spriteface _GIOVANNI FACE_DOWN
+pause 0x35
+msgbox @bossTalk3 0x6
+pause 0x25
+applymovement _GIOVANNI @bossLeave
+waitmovement 0x0
+setvar 0x401D 0x7
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @talk
+= Announcer: In light of this and\nother reported crimes by this\lcriminal organization, we reached\lout to Champion Lance for comment.
+
+#org @bossTalk
+= Kanto's war effort was going\nbadly.\pIt was clear that we could not win\nby force alone.
+
+#org @bossTalk2
+= I knew it wasn't right; I knew\nthat I-- that Kanto at large[.]\pHad been cheated of a battle we\ncould've won.
+
+#org @bossTalk3
+= And I vowed then that if Lance\ncould not be taken down through\llegitimate means[.]
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @bossLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE

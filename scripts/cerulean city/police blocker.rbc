@@ -1,0 +1,17 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+msgbox @talk 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Ronnie's words echoed:\pDude, what the hell are you\nthinking?\pDon't let the cops catch us!\nGet away from there!
+
+#org @movePlayer
+#raw STEP_L
+#raw 0xFE

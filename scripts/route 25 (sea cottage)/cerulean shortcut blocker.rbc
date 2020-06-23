@@ -1,0 +1,79 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define DAN 0xD
+#define MARY 0xC
+
+#org @main
+lock
+checkflag 0x212
+if 0x1 goto @postBlue
+compare 0x4013 0x2
+if 0x1 goto @2script
+applymovement MARY @stepR
+waitmovement 0x0
+textcolor 0x1
+msgbox @Mtalk 0x6
+applymovement DAN @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @Dtalk 0x6
+sound 0x15 // exclamation
+applymovement DAN @exclamation
+waitmovement 0x0
+faceplayer
+msgbox @Dtalk2 0x6
+pause 0x20
+spriteface DAN FACE_LEFT
+pause 0x20
+msgbox @Dtalk3 0x6
+setvar 0x4013 0x2
+release
+end
+
+#org @2script
+msgbox @Dtalk4 0x6
+release
+end
+
+#org @postBlue
+msgbox @Dtalk5 0x6
+release
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @Mtalk
+= Oh, Dan!\pI think we've finally found a\nsecluded area all to ourselves!\pI-I'm a little scared, but I\nthink[.] I think I'm ready.
+
+#org @Dtalk
+= There's no need to worry, love.\nI will be with you all the way.\pMary, I[.] I've been waiting for\nthis moment since I first saw you\lrunning around in the grass with\lyour Jigglypuff all that time ago.\pI knew in my heart that one day I\nwould take you here and make--
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @Dtalk2
+= But for the love of--!\pIs it just not possible to get\noneself a few moments' privacy in\lthis day and age?!\pMy goodness, the nerve[.]
+
+#org @Dtalk3
+= [.]\pAnyway[.] where were we, honey..?
+
+#org @Dtalk4
+= Anyway[.] where were we, honey..?
+
+#org @Dtalk5
+= [.] Yes, honey.\nVery[.] romantic.\pI-I like standing by the cape with\nyou too[.]

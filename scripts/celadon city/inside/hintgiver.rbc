@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface 0x5 FACE_LEFT
+release
+end
+
+#org @talk
+= Psst! I heard there's a basement\nunder the Game Corne--\c\h08ó oh, shoot!\pYou're one of them, aren't you?\nNever mind me, I'm just eating[.]\lTra-la-la-la-la[.]

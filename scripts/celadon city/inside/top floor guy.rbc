@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I used to think I had it all\nfigured out, man, but[.]\pNowadays I'm just so confused!\pI mean, how can you play a Pokémon\ngame[.] on a computer?!\p[.]\pThis is too much for me, man.\nI think I'll retire.\pJust take my Eevee.\nSee if I care.

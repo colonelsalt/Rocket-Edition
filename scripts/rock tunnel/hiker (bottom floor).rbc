@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @after
+= I'll raise my Pokémon to beat\nyours, Rocket!

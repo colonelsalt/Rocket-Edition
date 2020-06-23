@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x22E
+if 0x1 call @removeChair
+end
+
+#org @removeChair
+setmaptile 0x5 0x4 0x45 0x0
+return

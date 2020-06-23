@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define _SCIENTIST 0x7
+
+#org @main
+checkflag 0x2A0
+if 0x1 call @moveScientist
+end
+
+#org @moveScientist
+movesprite2 _SCIENTIST 0x4 0x7
+spritebehave _SCIENTIST 0xA // look right
+return

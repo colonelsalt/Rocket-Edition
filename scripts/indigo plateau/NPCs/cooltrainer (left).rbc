@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Damn it! I came all this way to be\na challenger.\pBut how can anyone compete with\nchild prodigies like these?\pThe world just isn't fair[.]

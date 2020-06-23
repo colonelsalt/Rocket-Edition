@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#define _OAK 0x6
+
+#org @main
+checkflag 0x200
+if 0x0 call @moveOak
+compare 0x4016 0x21
+if 0x1 call @showOak
+end
+
+#org @showOak
+clearflag 0x200
+return
+
+#org @moveOak
+movesprite2 _OAK 0x16 0x5
+setflag 0x1ED
+return

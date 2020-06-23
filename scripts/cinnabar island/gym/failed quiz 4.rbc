@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4001 0x0
+if 0x1 call 0x816DF40
+compare 0x4001 0x1
+if 0x1 call 0x816DF52
+textcolor 0x0
+spriteface 0xFF FACE_RIGHT
+msgbox 0x81999B7 MSG_KEEPOPEN '"I know why Blaine became a\nTraine..."
+trainerbattle 0x3 0xB3 0x0 0x81999DB
+call EXEC_STEAL
+checkflag 0x269
+if 0x1 goto 0x816DC68
+call 0x816DEE6
+releaseall
+end

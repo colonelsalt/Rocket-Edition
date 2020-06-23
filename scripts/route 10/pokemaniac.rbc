@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @challenge
+= Hey, man!\nWant to see my Pokémon?

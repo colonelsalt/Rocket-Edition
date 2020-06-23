@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#define _PHOTOGRAPHER 0xC
+#define _MODEL 0xD
+
+#org @main
+compare 0x4016 0x2E
+if 0x1 call @blocker
+end
+
+#org @blocker
+movesprite2 _PHOTOGRAPHER 0xB 0x4E
+movesprite2 _MODEL 0x7 0x4E
+return

@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= The lady behind the counter at the\nPokémon Center is so scary!\pWhenever I go to heal my Pokémon\nshe gives me this angry look[.]

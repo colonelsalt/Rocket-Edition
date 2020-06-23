@@ -1,0 +1,5 @@
+#dynamic 0x800000
+
+#org @main
+setworldmapflag 0x894
+end

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x15A 0x0 @challenge 0x8177643 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= My mentor once lived here.\pNow he moved to Lavender to care\nfor orphaned Pokémon.\lTalk about a waste!
+
+#org @postBattle
+= So, you're stuck?\nTry jumping off over there!\pEither that, or jump off a bridge.\pFor thugs like you[.] I'm\nindifferent to which you choose.

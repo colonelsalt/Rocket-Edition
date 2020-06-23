@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x175 0x0 @challenge 0x817564A EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Give up this silly operation while\nyou still can, Rocket!
+
+#org @postBattle
+= Once police backup gets in here[.]\nYou'll be in deep trouble!

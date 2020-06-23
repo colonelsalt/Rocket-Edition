@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @start
+lock
+faceplayer
+msgbox @talk 0x6
+end
+
+#org @talk
+= Gee, I never fancied myself\nrobbing someone with a Rattata,\ldid you?\pOh yeah, the scientist dude is\ndown there by the computers on the\lleft.

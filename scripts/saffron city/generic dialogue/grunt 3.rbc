@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= All these locals fled like flies\nwhen they realized we were coming.\pI never realized I looked that\nscary, you know?

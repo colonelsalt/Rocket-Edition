@@ -1,0 +1,60 @@
+#dynamic 0x800000
+#define ARCHER 0x17
+#define RONNIE 0x1E
+#define GRUNT1 0x15 // 21 --> 0x10 0xE
+#define GRUNT2 0x19 // 25 --> 0x12 0xE
+#define GRUNT3 0x18 // 24 --> 0xF 0xD
+#define GRUNT4 0x1D // 29 --> 0x11 0xE
+#define SCIENTIST 0xE
+
+#org @main
+checkflag 0x211 // if Bill talked to
+if 0x1 call @hideRon
+checkflag 0x213 // if Ronnie police scene done
+if 0x1 call @showRon
+checkflag 0x21B // if Steroids picked up
+if 0x1 call @hideRon
+compare 0x401D 0x4 // checks if Ronnie police scene finished
+if 0x1 call @moveGrunts
+compare 0x401D 0x5 // checks if 2nd level script performed
+if 0x1 call @moveToTV
+end
+
+#org @hideRon
+setflag 0x28C
+return
+
+#org @showRon
+clearflag 0x28C
+return
+
+#org @moveGrunts
+movesprite2 ARCHER 0x6 0xC
+spritebehave ARCHER 0x8
+movesprite2 RONNIE 0x4 0xD
+movesprite2 GRUNT1 0x4 0xF
+spritebehave GRUNT1 0xA
+movesprite2 GRUNT2 0x5 0x10
+spritebehave GRUNT2 0x7
+movesprite2 GRUNT3 0x7 0x10
+spritebehave GRUNT3 0x7
+movesprite2 GRUNT4 0x8 0xF
+spritebehave GRUNT4 0x9
+movesprite2 SCIENTIST 0x10 0xD
+return
+
+#org @moveToTV
+movesprite2 SCIENTIST 0x10 0xD
+movesprite2 RONNIE 0xF 0xC
+movesprite2 ARCHER 0x11 0xC
+movesprite2 GRUNT3 0xF 0xD
+movesprite2 GRUNT1 0x10 0xE
+movesprite2 GRUNT4 0x11 0xE
+movesprite2 GRUNT2 0x12 0xE
+spritebehave RONNIE 0x7
+spritebehave ARCHER 0x7
+spritebehave GRUNT3 0x7
+spritebehave GRUNT1 0x7
+spritebehave GRUNT4 0x7
+spritebehave GRUNT2 0x7
+return

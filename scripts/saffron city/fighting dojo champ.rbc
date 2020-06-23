@@ -1,0 +1,81 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define CHAMP 0x4
+
+#org @main
+lock
+faceplayer
+checkflag 0x285
+if 0x1 goto @intermediary
+msgbox @talk 0x6
+pause 0x20
+spriteface CHAMP FACE_DOWN
+pause 0x25
+faceplayer
+pause 0x20
+msgbox @talk2 0x6
+pause 0x20
+spriteface CHAMP FACE_DOWN
+pause 0x25
+faceplayer
+pause 0x20
+msgbox @talk3 0x6
+setflag 0x285
+spriteface CHAMP FACE_DOWN
+release
+end
+
+#org @intermediary
+msgbox @talk4 0x6
+checkflag 0x287
+if 0x1 goto @postBeatUp
+checkflag 0x286
+if 0x1 goto @missionAborted
+spriteface CHAMP FACE_DOWN
+release
+end
+
+#org @postBeatUp
+msgbox @postBeatUpTalk 0x6
+setvar 0x402C 0x1
+goto @masterLeave
+end
+
+#org @missionAborted
+msgbox @abortionTalk 0x6
+goto @masterLeave
+end
+
+#org @masterLeave
+spriteface CHAMP FACE_UP
+pause 0x10
+applymovement CHAMP @leave
+waitmovement 0x0
+sound 0x9
+hidesprite CHAMP
+setflag 0x288
+checksound
+release
+end
+
+#org @talk
+= Hooah!\nRocket! Talk to me!\p[.]\pSorry about kicking you out\nearlier! Very sorry!\pIt's Pokémon League policy!\pThey would not let us keep our\nDojo if we didn't comply! Hyaah!\pBut! Perhaps we could make an\nexception! Perhaps! Maybe! Hah!\pListen up!
+
+#org @talk2
+= In a house in this city! Hoo-ah!\nDown south! By the Pokémon Center!\pThere lives an old bald man!\pCalls himself Mr. Psychic!\nHoo-yah! Stupid name! Yes!\pThis man! He is very bad for our\nDojo! Yes-yes! Very bad!\pHe sits in his house! Gives out\nthe TM for Psychic!\pTo all and every passerby\nTrainers! Argh!\pWith this move! Grrr!\pThey knock out all our Fighting-\ntype Pokémon! In one hit! Hah!
+
+#org @talk3
+= You! Rocket!\nGo beat up Mr. Psychic! Ha-yah!\pTell him, Rocket! No more TM\nPsychic for Trainers! Mmmmmyah!\pIf you do this! Chaaaah!\pI will give to you! A special\nreward! And[.] my respect! Ho!
+
+#org @talk4
+= Ah! Rocket! Hooohah!\nHow is it going?\pDid you teach Mr. Psychic a\nlesson? Heeyah!
+
+#org @postBeatUpTalk
+= Huzzah!\nYou did? Ha-ha! Yes!\pMany thanks, Rocket!\pCome inside! Inside my Dojo!\nAnd you will have your reward! Ha!
+
+#org @abortionTalk
+= Hooo[.] huuh..?\nYou refused? To beat him up?\pHe gave you? A TM?\nYou let him? Let him go?\pArgh! Haaaah!\nYou double-crossing fiend!\pYou will not be allowed!\nTo enter my Dojo! Ever!\pGood-bye! Hooo-yaah!
+
+#org @leave
+#raw STEP_U
+#raw 0xFE

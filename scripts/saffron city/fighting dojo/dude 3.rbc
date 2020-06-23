@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Psychic and Flying-type Pokémon\nare the bane of my existence!\pThank you for taking out that\lannoying Mr. Psychic.

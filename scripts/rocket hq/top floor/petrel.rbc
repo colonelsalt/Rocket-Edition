@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= There you are, [player].\nBoss would like to see you\lpersonally in his office down-\lstairs.\pYou had better take the elevator.\pI expect you to be on your best\nbehavior now-- no messing about!

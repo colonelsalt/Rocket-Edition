@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Holy Miltank!\pWhat do they feed their kids down\nthere in Pallet Town?

@@ -1,0 +1,48 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BRUNO 0x1
+
+#org @main
+lock
+faceplayer
+compare 0x404D 0x1
+if 0x1 goto @secondtime
+getplayerpos 0x8000 0x8001
+msgbox @talk 0x6
+pause 0x20
+compare 0x8000 0x5
+if 0x1 call @faceDown
+compare 0x8000 0x6
+if 0x1 call @faceRight
+compare 0x8000 0x7
+if 0x1 call @faceDown
+pause 0x25
+msgbox @talk2 0x6
+pause 0x25
+faceplayer
+pause 0x15
+setvar 0x404D 0x1
+goto @secondTime
+
+#org @secondTime
+msgbox @talk3 0x6
+spriteface _BRUNO FACE_DOWN
+release
+end
+
+#org @faceDown
+spriteface _BRUNO FACE_DOWN
+return
+
+#org @faceRight
+spriteface _BRUNO FACE_RIGHT
+return
+
+#org @talk
+= Bruno: This is crazy, my friend.\pThese powerful children[.]\c\h08ó\nWhere do they come from?\pThat child with the spiky hair[.]\nI thought I had a chance.
+
+#org @talk2
+= Not so with the one called Red.\nTotal destruction.\p[.]\pI admire his power and his\ndiscipline.\pBut I sense there is something[.]\c\h08ó\nNot right about him.
+
+#org @talk3
+= Ah!\nNonsense!\pI must train harder.\nIt's the only explanation.

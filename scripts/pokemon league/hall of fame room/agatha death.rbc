@@ -1,0 +1,42 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _AGATHA 0x2
+#define _FRAME_1 0x3
+#define _FRAME_2 0x4
+#define _FRAME_3 0x5
+#define _FRAME_4 0x6
+
+
+
+#org @main
+lock
+hidesprite _AGATHA
+showsprite _FRAME_2
+applymovement _FRAME_2 @moveRight
+waitmovement 0x0
+hidesprite _FRAME_2
+showsprite _FRAME_3
+applymovement _FRAME_3 @moveRight
+waitmovement 0x0
+hidesprite _FRAME_3
+showsprite _FRAME_4
+pause 0x7
+spriteface _FRAME_4 FACE_UP
+pause 0x7
+spriteface _FRAME_4 FACE_LEFT
+release
+end
+
+
+#org @moveRight
+#raw STEP_R2
+#raw 0xFE
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,203 @@
+#dynamic 0x800000
+#define _IMPOSTOR 0x1
+#define _LEFT_GUARD 0x2
+#define _BOSS 0x3
+#define _BOTTOM_GUY 0x4
+#define _LEFT_GUY 0x5
+#define _REAL 0x6
+#include stdmoves.rbh
+
+#org @main
+lockall
+faceplayer
+msgbox @talk 0x6
+lockall
+compare 0x4033 0x9
+if 0x1 goto @unMasking
+compare 0x4033 0x6
+if 0x1 call @varSetter
+release
+end
+
+#org @varSetter
+setvar 0x4033 0x9
+return
+
+#org @unMasking
+msgbox @talk2 0x6
+lockall
+trainerbattle 0x3 0xCA 0x0 @defeatText
+lockall
+call EXEC_STEAL
+textcolor 0x0
+msgbox @talk3 0x6
+lockall
+applymovement _IMPOSTOR @twirl
+waitmovement 0x0
+hidesprite _IMPOSTOR
+showsprite _REAL
+applymovement _REAL @twirl2
+waitmovement 0x0
+spriteface _LEFT_GUARD FACE_LEFT
+spriteface _LEFT_GUY FACE_UP
+spriteface _BOTTOM_GUY FACE_UP
+spriteface _BOSS FACE_LEFT
+sound 0x15 // exclamation
+applymovement _BOSS @exclamation
+waitmovement 0x0
+pause 0x10
+spriteface _REAL FACE_DOWN
+pause 0x25
+applymovement _REAL @playerFace
+msgbox @talk4 0x6
+lockall
+fadescreen 0x1
+pause 0x10
+sound 0x9
+hidesprite _REAL
+setflag 0x2AB
+setvar 0x4033 0xA
+checksound
+fadescreen 0x0
+release
+end
+
+#org @talk
+= W-we're the Tops, man!\pThe most badass group of riders\nyou ever did see!
+
+#org @talk2
+= [.]\p[.]\pW-what do you want, man?\nI don't got no beef with you..!\p[.]\pArgh[.] You're picking on me just\nbecause I'm new, aren't you?\pI-I[.]\c\h08ó I think you oughtta show me\nsome respect!
+
+#org @defeatText
+= Aw, man..!\nBlew it!
+
+#org @talk3
+= [.]\pWell, I guess the game's up, then,\nis it?
+
+#org @talk4
+= [.]\pL-look, guys..!\c\h08ó\nMy boss made me do it, 'kay?\pI only messed with you all 'cause\nI had to, you know, and[.]\p[.]\pAnd, and[.]\p[.]\pWaaaaah!\nPlease don't hurt me!
+
+#org @twirl
+#raw FACE_U
+#raw 0x1B
+#raw FACE_R
+#raw 0x1B
+#raw FACE_D
+#raw 0x1B
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw 0xFE
+
+#org @twirl2
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x4A
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @playerFace
+#raw 0x4A
+#raw 0xFE

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= What do we do in the Tops, you\naskin'?\pWell, we ride our bikes!\nWe hang around here on Route 16[.]\pMake sure there ain't no trouble;\nno disrespect goin' around!

@@ -1,0 +1,79 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RIGHT_GHOST 0xA
+#define _MIDDLE_GHOST 0xB
+#define _LEFT_GHOST 0xC
+#define _LEFT_HAUNTER 0x10
+#define _GENGAR 0x12
+#define _RIGHT_HAUNTER 0x11
+
+#org @main
+comparefarbytetobyte 0x0203F3A8 0x1 // if we are in bank 1
+if 0x1 goto @mapCheck
+goto @notNow
+end
+
+#org @mapCheck
+comparefarbytetobyte 0x0203F3A9 0x4F // if we are in map 79
+if 0x1 goto @success
+goto @notNow
+end
+
+#org @success
+checkflag 0x2D6
+if 0x1 goto @notNow
+msgbox @successText MSG_KEEPOPEN
+sound 0x54
+checksound
+pause 0x15
+fadescreen 0x3
+sound 0x11
+// hide ghosts and show pokemon
+setflag 0x2D6
+clearflag 0x2D7
+hidesprite _LEFT_GHOST
+hidesprite _MIDDLE_GHOST
+hidesprite _RIGHT_GHOST
+movesprite2 _LEFT_HAUNTER 0x3 0x9
+movesprite _LEFT_HAUNTER 0x3 0x9
+movesprite2 _GENGAR 0x6 0xA
+movesprite _GENGAR 0x6 0xA
+movesprite2 _RIGHT_HAUNTER 0x9 0x9
+movesprite _RIGHT_HAUNTER 0x9 0x9
+showsprite _LEFT_HAUNTER
+showsprite _GENGAR
+showsprite _RIGHT_HAUNTER
+setmaptile 0x6 0xB 0x3BE 0x0
+setmaptile 0x6 0xA 0x3E6 0x0
+release
+checksound
+pause 0xA
+fadescreen 0x2
+msgbox @successText2 0x6
+movesprite2 _LEFT_HAUNTER 0x3 0x9
+movesprite2 _GENGAR 0x6 0xA
+movesprite2 _RIGHT_HAUNTER 0x9 0x9
+showsprite _LEFT_HAUNTER
+showsprite _GENGAR
+showsprite _RIGHT_HAUNTER
+setmaptile 0x6 0xC 0x3BE 0x0
+special 0x8E
+end
+
+#org @notNow
+msgbox @notNowText MSG_KEEPOPEN
+closeonkeypress
+end
+
+
+#org @successText
+= [player] put on the\nSilph Scope.
+
+#org @successText2
+= It unveiled the ghosts' identities!
+
+#org @notNowText
+= [player] tried on the\nSilph Scope.\c\h08ó.\c\h08ó.\c\h08ó\p[.]this would look great for a\ncyberpunk cosplay!
+
+
+

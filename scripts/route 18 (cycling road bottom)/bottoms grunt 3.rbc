@@ -1,0 +1,33 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4033 0x8
+if 0x1 goto @postJulien
+compare 0x4033 0x7
+if 0x1 goto @postJulien
+compare 0x4033 0x5
+if 0x4 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @postBossTalk 0x6
+release
+end
+
+#org @postJulien
+msgbox @postJulienTalk 0x6
+release
+end
+
+#org @talk
+= We Bottoms have more important\nstuff to do than waste our time\lwith Rockets!
+
+#org @postBossTalk
+= Hmph! I bet you cheated in the\nbattle against boss, too!
+
+#org @postJulienTalk
+= No jokes[.]\nNever thought I'd see Julien beat.

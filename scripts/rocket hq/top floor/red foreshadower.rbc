@@ -1,0 +1,32 @@
+#dynamic 0x800000
+// person event 0x11
+
+#org @main
+lock
+faceplayer
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+msgbox @talk 0x6
+release
+end
+
+#org @postTV
+msgbox @talk2 0x6
+release
+end
+
+#org @postRed
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Dude, that Red kid was something\nelse, man!\pMade the spiky-haired kid look\nlike a whimp, I say!\pMan, if I was that strong as a\nlittle kid[.]\pHell, I'd be Champion by now[.]
+
+#org @talk2
+= I wonder what goes on in the\nRocket Laboratory.\pThey never let me go in there, and\nit's bugging me.\pDo you think they're making\nnuclear bombs? That would be cool.
+
+#org @talk3
+= Hahahaha!\nKnocked out by some little kid.\pMan[.] this is not how I imagined\ngangster life would be.

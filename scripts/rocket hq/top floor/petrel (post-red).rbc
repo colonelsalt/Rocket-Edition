@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Petrel: Well[.]\nWhat can I say, [player]?\pHe beat me.\nHe beat all of us.\p[.]\pYou going to see Boss?\pHeh. Be warned: He's in a bit of a\nfrenzy right now.

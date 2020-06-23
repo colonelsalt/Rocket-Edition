@@ -1,0 +1,147 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LEADER 0xF
+#define _GRUNT1 0x10
+#define _GRUNT2 0x11
+#define _GRUNT3 0xE
+
+#org @main
+lock
+faceplayer
+compare 0x403B 0x6
+if 0x4 goto @postRobbery
+compare 0x401F 0x78 // if no. steals > 40
+if 0x4 goto @startQuestMaybe
+msgbox @notBadEnoughTalk 0x6
+release
+end
+
+#org @startQuestMaybe
+buffernumber 0x0 0x401F
+msgbox @startQuestTalk 0x5
+closeonkeypress
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox @noTalk 0x6
+release
+end
+
+#org @saidYes
+setvar 0x403B 0x1
+clearflag 0x37 // Poké Mart grunt IDs
+spriteface _LEADER FACE_RIGHT
+pause 0x10
+applymovement _LEADER @stepR
+waitmovement 0x0
+msgbox @saidYesTalk 0x6
+getplayerpos 0x8000 0x8001
+compare 0x8001 0x1B
+if 0x1 call @walkAround
+applymovement _LEADER @leave1
+pause 0x10
+applymovement _GRUNT1 @leave2
+applymovement _GRUNT2 @leave3
+pause 0x10
+applymovement _GRUNT3 @leave4
+waitmovement 0x0
+movesprite _GRUNT2 0x23 0x14
+movesprite2 _GRUNT2 0x23 0x14
+spritebehave _GRUNT2 0xE // look left and right
+spriteface _GRUNT2 FACE_LEFT
+showsprite _GRUNT2
+movesprite _GRUNT3 0x25 0x14
+movesprite2 _GRUNT3 0x25 0x14
+spritebehave _GRUNT3 0x16 // look down, left, right
+spriteface _GRUNT3 FACE_DOWN
+showsprite _GRUNT3
+movesprite _LEADER 0x0 0x27
+movesprite2 _LEADER 0x0 0x27
+hidesprite _LEADER
+movesprite _GRUNT1 0x1 0x27
+movesprite2 _GRUNT1 0x1 0x27
+hidesprite _GRUNT1
+release
+end
+
+#org @walkAround
+applymovement _LEADER @stepLeft
+waitmovement 0x0
+return
+
+#org @postRobbery
+msgbox @postRobberyTalk 0x6
+release
+end
+
+#org @notBadEnoughTalk
+= Hey, do you know what sucks about\nbeing a real badass criminal?\p[.]\pAll these Poké Marts just flat re-\nfuse to sell me Balls and Potions!\pAnd don't get me started on not\ngetting my evolutionary stones!\pI got Growlithe; I got Poliwhirl\ntoo, you know what I'm saying?\pI'm gettin' together a pack of the\nmost notorious Rockets we got and\lwe'll do something about it!\p[.]\pHmm[.]\c\h08ó\n[player]?\pYeah, you're not quite bad enough,\nI'm thinking.\pGet yourself a bounty of at least\n[$]120,000 and come see me again.
+
+#org @startQuestTalk
+= Hey, you're the infamous\n[player], ain't ya?\pThe Rocket with a bounty on him\nfor [$][buffer1],000?\pDude, rock on.\pLook, you must be as tired as we\nare of not gettin' to buy items\lfrom the Poké Marts anymore.\pI dunno about you, but we've had\nenough of that crap!\pWe're robbing the Viridian City\nPoké Mart, man!\c\h08ó [.]Are you in?
+
+#org @saidYesTalk
+= Wooo-hooo!\nLet's get 'em, boys!\lFollow me!
+
+#org @noTalk
+= Oh, you little sissy[.]\pWell, suit yourself.\nMore goodies for the rest of us.
+
+#org @postRobberyTalk
+= How's it going, my man?\pRobbin' and thievin' like a real\nRocket should? Haha!
+
+#org @stepLeft
+#raw STEP_L2
+#raw 0xFE
+
+#org @leave1
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @leave2
+#raw STEP_L2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @leave3
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @leave4
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

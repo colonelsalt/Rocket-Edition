@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= When we've taken over Silph, do\nyou think we'll finally get some\lPoké Balls to use?

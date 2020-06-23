@@ -1,0 +1,73 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+textcolor 0x0
+msgbox @yell 0x6
+sound 0x15
+applymovement 0x11 @exclamation1
+applymovement 0x12 @exclamation2
+waitmovement 0x0
+applymovement 0x12 @move
+waitmovement 0x0
+msgbox @talk 0x6
+applymovement 0x12 @exit1
+applymovement 0x11 @halfexit
+waitmovement 0x0
+sound 0x9
+hidesprite 0x12
+applymovement 0x11 @fullexit
+waitmovement 0x0
+sound 0x9
+hidesprite 0x11
+setflag 0x203
+setvar 0x4019 0x1
+release
+end
+
+#org @yell
+= GUYS, OVER HERE, I THINK I FOUND\nSOMETHING!
+
+#org @exclamation1
+#raw 0x3
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @exclamation2
+#raw 0x2
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @move
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_L2
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0xFE
+
+#org @talk
+= I think it came from down here!\nBetter check it out!
+
+#org @exit1
+#raw STEP_L
+#raw 0xFE
+
+#org @halfexit
+#raw STEP_R2
+#raw 0xFE
+
+#org @fullexit
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE

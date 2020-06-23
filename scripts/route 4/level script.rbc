@@ -1,0 +1,140 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+setvar 0x4017 0x1
+pause 0x15
+spriteface 0x8 FACE_LEFT
+applymovement 0x8 @stepL
+waitmovement 0x0
+playsong 0x112 0x0
+textcolor 0x0
+msgbox @petrel1 0x6
+applymovement 0xFF @playermove
+waitmovement 0x0
+special 0x113
+applymovement 0x7F @camerapan
+waitmovement 0x0
+spriteface 0x8 FACE_DOWN
+applymovement 0x8 @stepD
+waitmovement 0x0
+msgbox @petrel2 0x6
+spriteface 0x8 FACE_UP
+pause 0x20
+msgbox @petrel3 0x6
+applymovement 0x8 @stepU
+waitmovement 0x0
+msgbox @petrel4 0x6
+pause 0x10
+spriteface 0x8 FACE_DOWN
+pause 0x10
+msgbox @petrel5 0x6
+applymovement 0x8 @stepD
+waitmovement 0x0
+msgbox @petrel6 0x6
+applymovement 0x8 @stepD
+waitmovement 0x0
+msgbox @petrel7 0x6
+pause 0x15
+spriteface 0x8 FACE_RIGHT
+pause 0x20
+spriteface 0x8 FACE_DOWN
+pause 0x15
+msgbox @petrel8 0x6
+pause 0x15
+applymovement 0xA @gruntmove1
+waitmovement 0x0
+applymovement 0xC @gruntmove2
+applymovement 0xA @gruntmove2
+waitmovement 0x0
+sound 0x9
+hidesprite 0xA
+applymovement 0xC @gruntmove3
+waitmovement 0x0
+sound 0x9
+hidesprite 0xC
+spriteface 0x8 FACE_LEFT
+applymovement 0x7F @cameraback
+waitmovement 0x0
+special 0x114
+setflag 0x209
+end
+
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @petrel1
+= Petrel: Hey, you!\nOver here and listen up, grunt.
+
+#org @playermove
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @camerapan
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @petrel2
+= Er-hem! Well, it's time for your\nfirst mission, grunts!
+
+#org @petrel3
+= We have been informed by a well-\ntrusted source at the Pewter City\lMuseum that some particularly rare\lPokémon fossils have been spotted\linside this here cave.\pWe believe that these fossils,\nonce acquired, will be of great\lhelp to Team Rocket.
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @petrel4
+= Why? Well, that's none of your\nconcern, really.
+
+#org @petrel5
+= Now, we have hired a particular\nSuper Nerd to help find and\lidentify these fossils.\pHe is currently making his way\nthrough the cave along with some\lof the other new recruits that\lweren't as slow in getting here as\lyou lot.
+
+#org @petrel6
+= Your mission today is to assist in\nthe search in any way you can.\pThat means: Scavenging every nook\nand cranny of this hole, fending\loff any Trainers who may have\lgotten a big idea about collecting\lsome fossils of their own, and\lreporting any and all sightings to\lme.
+
+#org @petrel7
+= Do I make myself clear?
+
+#org @petrel8
+= Of course I do. Now get moving,\nkids!
+
+#org @gruntmove1
+#raw STEP_L
+#raw STEP_U
+#raw 0xFE
+
+#org @gruntmove2
+#raw STEP_U
+#raw 0xFE
+
+#org @gruntmove3
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @cameraback
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE

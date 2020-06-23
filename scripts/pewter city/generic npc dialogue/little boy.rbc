@@ -1,0 +1,9 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE 
+end
+
+
+#org @talk
+= A Pokémon becomes easier to \ncatch if it has a status problem.\pBut catching Pokémon is never\na sure thing!\pThat's why I want to steal Pokémon\nlike you, Rocket!\p[.]\nDon't tell grandpa!

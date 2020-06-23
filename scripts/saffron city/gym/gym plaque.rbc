@@ -1,0 +1,54 @@
+#dynamic 0x800000
+
+#org @main
+lockall
+checkflag 0x2E0 // if poke chip picked up
+if 0x1 goto @redBeat
+checkflag 0x825
+if 0x1 goto @youBeat
+checkflag 0x29D // if saffron mission received
+if 0x1 goto @blueBeat
+msgbox @sign MSG_KEEPOPEN
+releaseall
+end
+
+#org @blueBeat
+msgbox @sign2 MSG_KEEPOPEN
+releaseall
+end
+
+#org @youBeat
+msgbox @sign3 MSG_KEEPOPEN
+releaseall
+end
+
+#org @redBeat
+checkflag 0x825
+if 0x1 goto @allBeat
+msgbox @sign4 MSG_KEEPOPEN
+releaseall
+end
+
+#org @allBeat
+msgbox @sign5 MSG_KEEPOPEN
+releaseall
+end
+
+
+
+#org @sign
+= Saffron Pokémon Gym\nLeader: Sabrina\pWinning Trainers:
+
+#org @sign2
+= Saffron Pokémon Gym\nLeader: Sabrina\pWinning Trainers:\nBlue
+
+#org @sign3
+= Saffron Pokémon Gym\nLeader: Sabrina\pWinning Trainers:\nBlue, Mohammed Smith
+
+#org @sign4
+= Saffron Pokémon Gym\nLeader: Sabrina\pWinning Trainers:\nBlue, Red
+
+#org @sign5
+= Saffron Pokémon Gym\nLeader: Sabrina\pWinning Trainers:\nBlue, Red, Mohammed Smith
+
+

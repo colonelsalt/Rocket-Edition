@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Everything appears to be going\naccording to plan[.]\pThe owner is still away, and\nnobody has seen us--\pOh, goodness! Who's this little\npink-haired creep?!\p[.]\pOh, you're just another grunt.\nGeez, don't scare me like that.

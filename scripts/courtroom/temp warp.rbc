@@ -1,0 +1,7 @@
+#dynamic 0x800000
+
+#org @main
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+warpmuted 0x1 0x77 0xFF 0x7 0xA
+waitstate
+end

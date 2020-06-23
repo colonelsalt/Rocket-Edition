@@ -1,0 +1,425 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _DAISY 0x6
+#define _AGATHA 0x2
+#define _RONNIE 0x3
+#define _POKE_BALL 0x4
+#define _RATICATE 0x5
+#define _DAISY_KOD 0x1
+
+#org @main
+lock
+pause 0x25
+applymovement _AGATHA @stepL
+waitmovement 0x0
+textcolor 0x1
+msgbox @agathaTalk1 0x6
+pause 0x25
+spriteface _AGATHA FACE_DOWN
+pause 0x15
+applymovement _AGATHA @stepD
+waitmovement 0x0
+msgbox @agathaTalk2 0x6
+pause 0x20
+spriteface _AGATHA FACE_RIGHT
+applymovement _AGATHA @pace1
+waitmovement 0x0
+pause 0x20
+applymovement _AGATHA @stepR
+waitmovement 0x0
+msgbox @agathaTalk3 0x6
+pause 0x30
+spriteface _AGATHA FACE_LEFT
+pause 0x25
+msgbox @agathaTalk4 0x6
+pause 0x25
+spriteface _AGATHA FACE_DOWN
+pause 0x20
+applymovement _AGATHA @pace2
+waitmovement 0x0
+fadeout 0x0
+msgbox @agathaTalk5 0x6
+pause 0x25
+spriteface _AGATHA FACE_UP
+pause 0x30
+msgbox @agathaTalk6 0x6
+pause 0x25
+applymovement _AGATHA @pace3
+waitmovement 0x0
+applymovement _AGATHA @stepL
+waitmovement 0x0
+msgbox @agathaTalk7 0x6
+pause 0x25
+spriteface _AGATHA FACE_UP
+pause 0x30
+msgbox @agathaTalk8 0x6
+pause 0x15
+applymovement _AGATHA @stepU
+waitmovement 0x0
+msgbox @agathaTalk9 0x6
+pause 0x15
+spriteface _AGATHA FACE_LEFT
+pause 0x10
+applymovement _AGATHA @stepL
+waitmovement 0x0
+msgbox @agathaTalk10 0x6
+pause 0x10
+sound 0x15 // exclamation
+applymovement _DAISY @exclamation
+waitmovement 0x0
+msgbox @daisyTalk 0x6
+pause 0x20
+spriteface _AGATHA FACE_UP
+pause 0x25
+msgbox @ellipses 0x6
+pause 0x15
+applymovement _AGATHA @pace4
+waitmovement 0x0
+spriteface _AGATHA FACE_LEFT
+pause 0x20
+msgbox @agathaTalk11 0x6
+pause 0x15
+applymovement _AGATHA @stepL
+waitmovement 0x0
+msgbox @agathaTalk12 0x6
+pause 0x20
+applymovement _AGATHA @agathaLeave1
+waitmovement 0x0
+pause 0x35
+spriteface _AGATHA FACE_UP
+pause 0x25
+spriteface 0xFF FACE_DOWN
+msgbox @agathaTalk13 0x6
+pause 0x20
+applymovement _AGATHA @agathaLeave2
+waitmovement 0x0
+sound 0x9
+hidesprite _AGATHA
+pause 0x40
+applymovement _DAISY @stepR
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+msgbox @daisyTalk2 0x6
+pause 0x30
+spriteface _DAISY FACE_DOWN
+pause 0x30
+msgbox @daisyTalk3 0x6
+pause 0x35
+sound 0x26
+checksound
+spriteface 0xFF FACE_DOWN
+pause 0x15
+textcolor 0x0
+msgbox @ronnieTalk1 0x6
+pause 0x10
+sound 0x9
+showsprite _RONNIE
+checksound
+playsong 0x112 0x0
+pause 0x10
+applymovement _RONNIE @stepU
+waitmovement 0x0
+msgbox @ronnieTalk2 0x6
+pause 0x10
+sound 0x15 // exclamation
+applymovement _DAISY @exclamation
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+textcolor 0x1
+msgbox @daisyTalk4 0x6
+pause 0x10
+applymovement _RONNIE @ronnieApproach
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+pause 0x15
+textcolor 0x0
+msgbox @ronnieTalk3 0x6
+pause 0x15
+applymovement _DAISY @stepD
+waitmovement 0x0
+spriteface _RONNIE FACE_UP
+spriteface 0xFF FACE_UP
+textcolor 0x1
+msgbox @daisyTalk5 0x6
+trainerbattle 0x3 0x10 0x0 @defeatText 
+call POKESTEAL
+spriteface _RONNIE FACE_RIGHT
+pause 0x15
+applymovement _RONNIE @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @ronnieTalk6 0x6
+pause 0x15
+spriteface _RONNIE FACE_UP
+pause 0x25
+sound 0x36 // throw Poké ball sound
+showsprite _POKE_BALL
+checksound
+pause 0x7
+sound 0xF // Poké ball open
+fadescreen 0x2
+spriteface _DAISY FACE_LEFT
+hidesprite _POKE_BALL
+showsprite _RATICATE
+checksound
+pause 0x10
+cry 0x14 0x0
+applymovement _RATICATE @spin
+waitmovement 0x0
+waitcry
+pause 0x25
+msgbox @ronnieTalk7 0x6
+pause 0x20
+cry 0x14 0x0
+pause 0x10
+applymovement _RATICATE @attack
+pause 0x40
+sound 0x79 // slash sound
+pause 0x9
+fadescreen 0x2
+setmaptile 0x5 0x4 0x45 0x0
+special 0x8E // screen refresh
+hidesprite _DAISY
+showsprite _DAISY_KOD
+clearflag 0x21F
+setflag 0x22E
+setflag 0x2F1
+waitmovement 0x0
+pause 0x10
+applymovement _RATICATE @retreat
+waitmovement 0x0
+pause 0x15
+applymovement _RONNIE @stepU
+waitmovement 0x0
+msgbox @ronnieTalk8 0x6
+pause 0x15
+cry 0x14 0x0
+applymovement _RATICATE @lootWalk
+waitmovement 0x0
+pause 0x20
+spriteface _RONNIE FACE_RIGHT
+msgbox @ronnieTalk8.5 0x6
+spriteface 0xFF FACE_LEFT
+pause 0x15
+applymovement _RONNIE @stepR
+waitmovement 0x0
+msgbox @ronnieTalk9 0x6
+pause 0x25
+spriteface _RONNIE FACE_UP
+pause 0x30
+spriteface _RONNIE FACE_RIGHT
+pause 0x25
+msgbox @ronnieTalk10 0x6
+spriteface _RONNIE FACE_RIGHT
+setflag 0x220
+setflag 0x222
+setflag 0x225
+setvar 0x4014 0x5
+end
+
+#org @agathaTalk1
+= Agatha: Well, well[.]\c\h08ó Your tea is\nexcellent as always, Daisy.\pAnd the weather is so lovely.\c\h08ó\nOh, I do miss Pallet sometimes[.]
+
+#org @agathaTalk2
+= [.]\pDaisy here is my granddaughter,\n[player].\pIn fact, with her brother\naway on some Pokémon quest[.]\pI'm part of the only semblance of\nfamily she has left.\pWell, me and[.]\c\h08ó "Professor" Oak,\nwhen he bothers to show his face.
+
+#org @agathaTalk3
+= A long time ago, we were a tight-\nknit couple, Oak and I.\pSamuel was a man of honor[.]\nback in those days.\pHe valued strength, vigilance and\npurpose, and he embodied it.
+
+#org @agathaTalk4
+= We raised a son together, in the\nimage of those principles.\pHe turned out a great man, and\nblessed us with two grandchildren\lto carry our values forward.
+
+#org @agathaTalk5
+= But no sooner than Blue, their\nyoungest, had been born[.]\pThe war struck our family.\pDaisy and Blue both survived\nunscathed, but[.]\pOur son and his wife both perished\nin the madness.
+
+#org @agathaTalk6
+= [.]\pAnd Samuel and I, we swore[.]\c\h08ó\nThat we would avenge them.\pWe would bring down Lance and\nmake him pay for taking away our\linnocent children.
+
+#org @agathaTalk7
+= Hahahaha!\c\h08ó\nWould you believe it?\pHe swore it to me!\nHe gave his word, [player].\p[.]\pAnd then[.] Why, just a little\nwhile later[.]\pHe committed the most heinous,\ncowardly, shameful act I ever saw.
+
+#org @agathaTalk8
+= He was Champion.\nGeneral of the army.\pThe most powerful man in Kanto.\c\h08ó\nAnd he gave it up.\pAll just to save his worthless\nskin!
+
+#org @agathaTalk9
+= The soft, spineless fool that\nsurrendered to Lance is not the\lman I loved.\pEven if he didn't stand a chance[.]\pEven if sticking it out, fighting\nfor something he believed in,\lwould have ultimately meant his\ldeath[.]
+
+#org @agathaTalk10
+= At least it would have been an\nhonorable one!
+
+#org @daisyTalk
+= Daisy: Grandma, please..!
+
+#org @ellipses
+= Agatha: [.]
+
+#org @agathaTalk11
+= I'm sorry, Daisy.\c\h08ó\nFor going there again.\pYou know how I can I get\nsometimes.
+
+#org @agathaTalk12
+= I had better get going, darling.\nAlways work to be done.\pDo take care of yourself and send\nregards to your brother.\pYou're such lovely kids.
+
+#org @agathaTalk13
+= I can't say I approve of what you\nand your boss are doing around\lKanto, [player].\pBut I can't say I[.]\c\h08ó don't\nsympathize with your frustration.\pNot quite respect, but[.]\c\h08ó\nunderstanding.\pUntil we meet again.
+
+#org @daisyTalk2
+= Daisy: [.]\c\h08ó\nYou know, I[.]\pDon't think grandpa is really a\nbad person.\pHe's really very cheerful and\nfriendly-- the way they show him\lin the papers.\pHe gave me and Blue a happy\nchildhood, and I'm grateful.
+
+#org @daisyTalk3
+= But[.]\c\h08ó\nYou know[.]\pThere's just this one thing that\nalways bothered me[.]
+
+#org @ronnieTalk1
+= Geez!\c\h08ó There you are, [player]!\nWhat's the holdup, dude?
+
+#org @ronnieTalk2
+= Ronnie: Why, I've been looking all\nover for you!\pSorry to interrupt the friendly\ntea party and all, but yo!\pWe got a Pokémon Professor to\ninterrogate!\pLet's go hand it to that old man\nOak-- you got me tired waiting!
+
+#org @daisyTalk4
+= Daisy: Oh, no!\c\h08ó Is it true?\nYou disgusting thug!\pGrandma was wrong to trust a\nRocket for company-- I knew I\lshould never have allowed it!
+
+#org @ronnieTalk3
+= Ronnie: Gee, [player], you sure\nfixed yourself a feisty date, huh?\pWell, no time for that now! We\ngotta hit up this lab, pronto!
+
+#org @daisyTalk5
+= Daisy: In all my days..!\c\h08ó\nYou're not going anywhere!\pI won't let any low-life thugs\ntrespass on our home and family!
+
+#org @defeatText
+= I[.] I won't accept it!\nGet out of our house!
+
+#org @ronnieTalk6
+= Ronnie: Phew! Well done, [player].\nQuite the energy in this one, eh?\pLeave it to me now-- stand back.
+
+#org @ronnieTalk7
+= Ronnie: Raticate!\c\h08ó\nHyper Fang, go!
+
+#org @ronnieTalk8
+= Well, good riddance!\pPokémon that strong on an\nunassuming girl like that[.]\pShe's got some rich family or\nother, I'll bet my kidney!\pRaticate, see if you can't find\nany valuables around here to loot!
+
+#org @ronnieTalk8.5
+= [.]\p[.]huh?\c\h08ó\nWhat's the matter, [player]?\pWhy, you look like you ain't\never seen a Rocket in action!\pHaha!\c\h08ó\nYou little sissy, you!\pI bet a good interrogation should\nwake you right up again, eh?
+
+#org @ronnieTalk9
+= [.]\c\h08ó\nHuh, what, now?\pYou checked the lab, and[.]\c\h08ó\nThe old guy's not even here?\pWell, gee, talk about a big fat\nwaste if I ever saw one!
+
+#org @ronnieTalk10
+= Well, it's a good thing we got in\na bit of action just now, then!\pIt's not a good day without\nat least one robbery, am I right?\p(Sigh[.])\c\h08ó I guess we might as well\njust head back to HQ.
+
+#org @pace1
+#raw STEP_R
+#raw 0xFE
+
+#org @pace2
+#raw STEP_D
+#raw 0xFE
+
+#org @pace3
+#raw STEP_L
+#raw 0xFE
+
+#org @pace4
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @agathaLeave1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @agathaLeave2
+#raw STEP_L
+#raw STEP_D
+#raw 0xFE
+
+#org @ronnieApproach
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw FACE_R
+#raw 0xFE
+
+#org @spin
+#raw 0x1B
+#raw FACE_L
+#raw 0x1B
+#raw FACE_U
+#raw 0x1B
+#raw FACE_R
+#raw 0x1B
+#raw 0xFE
+
+#org @attack
+#raw 0x2C
+#raw 0x2C
+#raw 0x2C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x51
+#raw 0xFE
+
+#org @retreat
+#raw STEP_L2
+#raw FACE_D
+#raw 0xFE
+
+#org @lootWalk
+#raw 0x29
+#raw 0x29
+#raw 0x29
+#raw FACE_U
+#raw 0x1C
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw STEP_L2
+#raw STEP_L2
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw FACE_U
+#raw 0x1B
+#raw 0x2A
+#raw 0x2A
+#raw 0x2A
+#raw FACE_L
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

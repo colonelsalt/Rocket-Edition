@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ronnie: D-dude[.]\pI don't even know how to tell you\nwhat just went down here[.]\pHe[.] he knocked us out.\nAll of us.\pYeah, dude. Even Boss.\nHell-- even me!\pThat little Red kid from Mt. Moon!\pLike, I totally want to tell you\nit was a close match, but[.]\pNo, not even close.\nThat kid is superhuman, man[.]

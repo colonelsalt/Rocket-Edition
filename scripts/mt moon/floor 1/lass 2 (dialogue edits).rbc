@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= Erm[.] I don't think I want to ask\nfor directions from a guy like you.

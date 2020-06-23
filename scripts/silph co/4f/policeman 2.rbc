@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x178 0x0 @challenge 0x8175A5B EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= The Silph President will never\nagree to your demands! Give up!
+
+#org @postBattle
+= It doesn't seem like our security\nforce is halting your progess[.]

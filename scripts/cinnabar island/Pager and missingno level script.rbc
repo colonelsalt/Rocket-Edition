@@ -1,0 +1,432 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x3
+#define _FUJI 0x5
+#define _BLUE 0x6
+#define _BLAINE 0x7
+
+#org @main
+compare 0x4018 0x7
+if 0x1 goto @postMissingno
+compare 0x4016 0xF
+if 0x1 goto @warpToGlitch
+// else: pager beep post-Blaine battle
+lock
+fadeout 0x0
+cry 0x199 0x0
+waitcry
+pause 0x5
+cry 0x199 0x0
+waitcry
+pause 0x5
+cry 0x199 0x0
+waitcry
+pause 0x15
+msgbox @msg 0x6
+fadein 0x0
+setvar 0x4014 0x8
+release
+end
+
+#org @warpToGlitch
+lockall
+sethealingplace 0x10 // set healing place to glitch map
+pause 0x10
+sound 0x15 // exclamation
+applymovement 0xFF @exclamation
+waitmovement 0x0
+pause 0x15
+warpmuted 0x3 0x3A 0xFF 0x0E 0x22
+waitstate
+end
+
+#org @postMissingno
+pause 0x50
+movesprite2 0x1 0x5 0x5
+movesprite 0x1 0x5 0x5
+spritebehave 0x1 0x9 // stand still, bitch, you're distracting
+sound 0x9
+checksound
+pause 0x20
+textcolor 0x0
+msgbox @billTalk1 0x6
+pause 0x15
+movesprite2 _BILL 0x12 0xE
+movesprite _BILL 0x12 0xE
+showsprite _BILL
+clearflag 0x200 // temp
+movesprite2 _FUJI 0x16 0xE
+movesprite _FUJI 0x16 0xE
+showsprite _FUJI
+applymovement _BILL @billWalk1
+playsong 0x117 0x0
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+pause 0x8
+msgbox @billTalk2 0x6
+applymovement _FUJI @fujiWalk1
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+pause 0x8
+msgbox @fujiTalk1 0x6
+pause 0x20
+spriteface _FUJI FACE_LEFT
+pause 0x25
+msgbox @fujiTalk2 0x6
+pause 0x25
+spriteface _FUJI FACE_UP
+pause 0x20
+msgbox @fujiTalk3 0x6
+pause 0x20
+applymovement _BILL @billWalk2
+waitmovement 0x0
+pause 0x20
+msgbox @billTalk3 0x6
+pause 0x20
+applymovement _BILL @billWalk3
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+pause 0x20
+msgbox @billTalk4 0x6
+pause 0x25
+spriteface _BILL FACE_DOWN
+pause 0x20
+msgbox @billTalk5 0x6
+pause 0x20
+applymovement _FUJI @stepU
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+msgbox @fujiTalk4 0x6
+pause 0x25
+spriteface _FUJI FACE_DOWN
+pause 0x27
+msgbox @fujiTalk5 0x6
+pause 0x20
+cry 0x53 0x0 // farfetch'd
+applymovement _FUJI @flyStep
+waitmovement 0x0
+pause 0x40
+setanimation 0x0 0x1
+doanimation 0x1E
+pause 0xF
+movesprite2 _FUJI 0x12 0x1
+hidesprite _FUJI
+checkanimation 0x1E
+pause 0x30
+applymovement _BILL @oneDown
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+pause 0x25
+msgbox @billTalk6 0x6
+pause 0x30
+spriteface _BILL FACE_LEFT
+pause 0x30
+msgbox @billTalk7 0x6
+pause 0x40
+setdooropened 0x14 0x4
+doorchange
+movesprite2 _BLUE 0x14 0x4
+movesprite _BLUE 0x14 0x4
+showsprite _BLUE
+sound 0x9
+applymovement _BLUE @oneDown
+waitmovement 0x0
+pause 0x25
+msgbox @blueTalk1 0x6
+pause 0x20
+sound 0x15 // exclamation
+applymovement _BLUE @exclamation
+waitmovement 0x0
+pause 0x10
+msgbox @blueTalk2 0x6
+pause 0x25
+applymovement _BLUE @blueWalk1
+pause 0x28
+spriteface 0xFF FACE_UP
+sound 0x9
+movesprite2 _BLAINE 0x14 0x4
+movesprite _BLAINE 0x14 0x4
+showsprite _BLAINE
+applymovement _BLAINE @blaineWalk1
+pause 0x15
+setdoorclosed 0x14 0x4
+doorchange
+waitmovement 0x0
+spriteface _BILL FACE_UP
+applymovement _BLUE @stepD
+waitmovement 0x0
+msgbox @blueTalk3 0x6
+pause 0x20
+msgbox @blueTalk4 0x6
+fadeout 0x0
+pause 0x15
+cry 0x198 0x2
+waitcry
+pause 0x20
+sound 0x15 // exclamation
+applymovement _BLUE @exclamation
+waitmovement 0x0
+pause 0x10
+msgbox @blueTalk5 0x6
+pause 0x10
+sound 0x15 // exclamation
+spriteface _BLAINE FACE_RIGHT
+applymovement _BILL @exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+applymovement _BLAINE @stepR
+waitmovement 0x0
+msgbox @blaineTalk1 0x6
+applymovement _BILL @stepU
+waitmovement 0x0
+msgbox @billTalk8 0x6
+pause 0x20
+spriteface _BLUE FACE_LEFT
+pause 0x25
+spriteface _BLUE FACE_DOWN
+pause 0x25
+msgbox @blueTalk6 0x6
+sound 0x15 // exclamation
+applymovement _BILL @exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+sound 0xA
+applymovement _BILL @jump
+waitmovement 0x0
+sound 0xA
+applymovement _BILL @jump
+waitmovement 0x0
+pause 0x20
+spriteface _BLAINE FACE_DOWN
+pause 0x25
+spriteface _BLAINE FACE_RIGHT
+pause 0x25
+msgbox @blaineTalk2 0x6
+pause 0x27
+applymovement _BLUE @blueWalk2
+waitmovement 0x0
+pause 0x27
+msgbox @blueTalk7 0x6
+pause 0x25
+spriteface _BLUE FACE_RIGHT
+pause 0x30
+msgbox @blueTalk8 0x6
+pause 0x20
+spriteface _BLUE FACE_DOWN
+pause 0x27
+msgbox @blueTalk9 0x6
+pause 0x15
+spriteface _BILL FACE_RIGHT
+applymovement _BILL @stepR
+waitmovement 0x0
+msgbox @billTalk9 0x6
+pause 0x25
+spriteface _BILL FACE_UP
+spriteface _BLAINE FACE_DOWN
+pause 0x25
+msgbox @billTalk10 0x6
+applymovement _BILL @billWalk4
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+pause 0x20
+msgbox @billTalk11 0x6
+fadein 0x0
+movesprite2 _BILL 0x16 0x9
+spritebehave _BILL 0x7
+movesprite2 _BLAINE 0x15 0x7
+movesprite2 _BLUE 0x16 0x6
+setflag 0x200 // temp
+setvar 0x8006 0x0 // re-enable runaway
+setvar 0x4016 0x10
+setvar 0x4014 0xC
+setvar 0x4018 0x8
+setflag 0xAA // hide Bill+Blaine+Fuji in Pokémon Lab
+clearflag 0x2A3 // show regular scientists in testing room
+checkflag 0x2EA
+if 0x0 call @lockDoor
+end
+
+#org @lockDoor
+setmaptile 0x14 0x4 0x22B 0x1
+special 0x8E // screen refresh
+return
+
+
+#org @msg
+= The Rocket Pager is beeping!\c\h08ó\c\h08ó\nBetter report to HQ in Celadon!\c\h08ó
+
+#org @billTalk1
+= Terrific, terrific, [player]!\c\h08ó\nI knew we could count on you!
+
+#org @billTalk2
+= Bill: Oh ho ho!\c\h08ó\nThat MissingNo.!\pTo think it was actually right\nhere all along[.]\pTruly terrific..!
+
+#org @fujiTalk1
+= Fuji: Now!\c\h08ó Have we played with our\nlives long enough, you juveniles?
+
+#org @fujiTalk2
+= [.]\c\h08ó\nGod..!\pWhen I saw the island change shape\nearlier, I thought for sure we\lwere all done for[.]
+
+#org @fujiTalk3
+= Now let's end this madness and\nhave that beast destroyed once and\lfor all, eh?
+
+#org @billTalk3
+= Bill: You're off your rocker, old\nman. What a waste that would be!\pWhy, just imagine the power that\nlies in [player]'s hands right now!
+
+#org @billTalk4
+= He could dominate his way to the\ntop of Team Rocket[.]\pHe'd have a chance against the\nElite Four, even!\pWho in the world can stop us now?!\c\h08ó\nHahahaha!
+
+#org @billTalk5
+= It's a shame Blaine had to go to\nhis Gym to face some challenger.\pJust wait till he sees this..!
+
+#org @fujiTalk4
+= Fuji: That's enough of that!\pIf all of you are going to keep\nthat beast around, I'll stay as\lfar away as I can!\pI'm done with you all, and you\nnever saw me come here!\p[.]\c\h08ó\nGod[.]
+
+#org @fujiTalk5
+= You say you have no care for\npolitics, Bill[.]\pBut you're as rotten as the rest\nof them!
+
+#org @billTalk6
+= Bill: Oh Fuji[.]\nWhen did you grow so naive?\pYou were such a bold, sharp\nscientist once[.]
+
+#org @billTalk7
+= Team Rocket, the Elite Four[.]\pDon't you realize there are bigger\npowers at play here..?
+
+#org @blueTalk1
+= Blue: Say, what's all this\ncommotion?
+
+#org @blueTalk2
+= Hey!\c\h08ó You're that Rocket from the\nPokémon Tower! My, you've changed[.]
+
+#org @blueTalk3
+= Blue: I just heard all these\nstrange sounds coming from outside.\pSee, I was busy wiping the floor\nwith the old Gym Leader here.\pI thought for sure it must have\nbeen some legendary Pokémon or\lother, so I rushed to come see[.]
+
+#org @blueTalk4
+= [.]\c\h08ó\nSay what?\pYou[.]\c\h08ó you captured it, Rocket?\c\h08ó\nThat's too bad for me, then.\p[.]\pCould you[.]\c\h08ó show me what it looks\nlike, at least?
+
+#org @blueTalk5
+= No[.]\c\h08ó\nIt can't be..!\pI've seen that Pokémon before[.]\c\h08ó\nBut that was a long time ago[.]
+
+#org @blaineTalk1
+= Blaine: You?!\c\h08ó\nYou've seen a MissingNo.?\pThat's impossible..!
+
+#org @billTalk8
+= Bill: Where? Where did you see it?\nSpeak up, kid!
+
+#org @blueTalk6
+= Blue: Oh geez[.]\c\h08ó I don't remember\nit very clearly, I was just a kid.\pI was in the large basement area\nunder grandpa's Lab, where he was\ldoing all these experiments[.]\pOf all the strange Pokémon I saw[.]\c\h08ó\nI remember that one-- freaky[.]
+
+#org @blaineTalk2
+= Blaine: What basement area..?!\pIn all my years collaborating with\nProfessor Oak in his research[.]\pI never heard about this section\nof his lab!\pCould it be..?\pThe[.]\c\h08ó the "secret lab" he talked\nabout all those years ago..?
+
+#org @blueTalk7
+= Blue: Well, gee, I don't know\nanything about this stuff.\pCome to think of it, I haven't\nbeen down there in many years.
+
+#org @blueTalk8
+= Grandpa used to never leave that\nplace when I was a little kid[.]\pI think he used to press a button\non his bookshelf and the way to\lthe basement would open up[.]
+
+#org @blueTalk9
+= Say, is there something dodgy\ngoing on here I should know about?
+
+#org @billTalk9
+= Bill: That's it, there's no\nquestion.\pOh, why didn't you say all this\nearlier, you stupid kid..!
+
+#org @billTalk10
+= We need to go to Oak's Lab in\nPallet Town, post-haste.\pThis could be the key to\neverything..!
+
+#org @billTalk11
+= [player]!\nYou lead the way!\pUntil we've got something real to\npin on Oak, we'll have to rely on\lsome petty burglary.\pHeal up if you like, but get moving!\nTo Pallet Town!
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @flyStep
+#raw 0x25
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @billWalk1
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw FACE_R
+#raw 0xFE
+
+#org @fujiWalk1
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @billWalk2
+#raw STEP_D2
+#raw FACE_R
+#raw 0xFE
+
+#org @billWalk3
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @oneDown
+#raw STEP_D
+#raw 0xFE
+
+#org @blueWalk1
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_D2
+#raw 0xFE
+
+#org @blaineWalk1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @jump
+#raw 0x53
+#raw 0xFE
+
+#org @blueWalk2
+#raw STEP_U
+#raw 0xFE
+
+#org @billWalk4
+#raw STEP_D2
+#raw STEP_R2
+#raw FACE_U
+#raw 0xFE
+

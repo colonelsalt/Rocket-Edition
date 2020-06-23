@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @talk1
+= Hello, there!\nI've seen you about[.]\pYou're one of those Rockets!\pWell[.] I hate getting my Pokémon\nstolen as much as the next guy[.]\pBut I have to say I respect what\nyou folks stand for!\pSo let me teach you one egg-\ncellent move, if you would.
+
+#org @talk2
+= Y-you prefer them boiled hard,\nthen, do you..?
+
+#org @talk3
+= So long!\p[.]\pAnd thanks for not stealing my\nPokémon!

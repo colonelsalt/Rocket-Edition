@@ -1,0 +1,23 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0x10
+if _GREATER_EQ goto @postApricorn
+msgbox @talk 0x6
+release
+end
+
+#org @postApricorn
+msgbox @talk2 0x6
+release
+end
+
+
+#org @talk
+= Ugh[.] You came from Celadon,\ndidn't you, Rocket?\pThat crime-infested gambling-\nfueled hole[.]\pSaffron is clean and straight!\nWe'll never accept your kind here.
+
+#org @talk2
+= I hope you Rockets have learned\nyour lesson now!\pThere's no place for you in Saffron!\nGo back to where you came from!

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9A 0x0 0x81847B7 0x81847DF POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9E98
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= The tunnel coming up is\npitch-black inside.\pBut Flash sucks! I don't want to\nteach it to my Pokémon.\pThere has to be some better way[.]

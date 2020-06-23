@@ -1,0 +1,183 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BILL 0x1
+
+#org @main
+lock
+textcolor 0x0
+applymovement BILL @stepU
+waitmovement 0x0
+checkflag 0x211
+if 0x1 goto @cellPhone
+msgbox @sigh 0x6
+pause 0x20
+spriteface BILL FACE_RIGHT
+msgbox @talk 0x6
+pause 0x10
+applymovement 0xFF @playermove
+waitmovement 0x0
+pause 0x15
+applymovement BILL @stepR
+waitmovement 0x0
+msgbox @talk2 0x6
+checkitem 0x15D 0x1
+compare LASTRESULT 0x0
+if 0x1 goto NOPARCEL // go here if no parcel
+goto HASPARCEL // go here if Player has parcel
+end
+
+#org @cellPhone
+msgbox @2talk1 0x6
+applymovement BILL @moveToCenter
+waitmovement 0x0
+pause 0x20
+spriteface 0xFF FACE_UP
+msgbox @2talk2 0x6
+applymovement BILL @moveToBox
+waitmovement 0x0
+msgbox @2talk3 0x6
+pause 0x15
+applymovement BILL @moveToPlayer
+waitmovement 0x0
+pause 0x20
+additem 0x160 0x1
+loadpointer 0x0 @phoneGet
+giveitem2 0x160 0x1 0x13E
+closeonkeypress
+applymovement BILL @stepD
+waitmovement 0x0
+msgbox @2talk4 0x6
+pause 0x20
+spriteface BILL FACE_LEFT
+pause 0x25
+spriteface BILL FACE_DOWN
+pause 0x25
+msgbox @2talk5 0x6
+pause 0x15
+applymovement BILL @fakeLeave1
+waitmovement 0x0
+fadeout 0x1
+applymovement BILL @fakeLeave2
+waitmovement 0x0
+msgbox @2talk6 0x6
+fadein 0x1     
+applymovement BILL @trueLeave
+waitmovement 0x0
+setvar 0x401D 0x0
+setmaptile 0x7 0x9 0x29E 0x0
+special 0x8E
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @sigh
+= Bill: [.]\c\h08ó\n(Sigh)\c\h08ó
+
+#org @talk
+= All right, what's it about?\nThe job.
+
+#org @playermove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @talk2
+= Oh, Porygon, is it? Figures.\p[.]\nHmm?\pYeah, of course I know how to make\nthe things-- who do you take me\lfor?\pJust show me the stuff they gave\nyou to tempt me with already.
+
+#org @2talk1
+= Bill: [.]\c\h08ó\c\h08ó\nTell you what.
+
+#org @moveToCenter
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @2talk2
+= What's your name?\p[.]\p[player]?\pYou know, I admire your\npersistence, [player].\pI want you to have something.
+
+#org @moveToBox
+#raw STEP_U
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @2talk3
+= There we go.
+
+#org @moveToPlayer
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @phoneGet
+= [player] received the Cell Phone\nfrom Bill.
+
+#org @2talk4
+= Bill: I want you to be my Team\nRocket contact, [player].\pYes, that is equally a condition\nof my taking the Porygon job, but\lone that'll be just between you\land me, do you understand?
+
+#org @2talk5
+= That's a cellular telephone.\pQuite a little marvel of\ntechnology, I know.\pI'll be calling you on there once\nin a while to check in on you and\lhave you tell me if you Rocket\lguys have done or discovered\lanything that might interest me\llately.\pIs that all right with you?\c\h08ó\nSplendid.
+
+#org @fakeLeave1
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @fakeLeave2
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @2talk6
+= In fact, come to think of it,\nthere's one particularly rare\lPokémon that I have long been on\lthe lookout for-- one that I think\lyou guys could help me locate.\pIf you don't mind me asking.\c\h08ó.\c\h08ó.\c\h08ó\pAre you at all familiar with the\nMewtwo Project?\p[.]\pNo?\c\h08ó\nOh, I see.\pWell, I guess Giovanni's not one\nto reveal his secrets all too\leasily.\pI suppose that's reasonable[.]\c\h08ó\nNever mind, then.
+
+#org @trueLeave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

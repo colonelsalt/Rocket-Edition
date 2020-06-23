@@ -1,0 +1,151 @@
+#dynamic 0x800000
+
+#org @main
+special 0x187
+compare LASTRESULT 0x2
+if 0x1 goto @end
+special 0x188
+lock
+faceplayer
+clearflag 0x2
+clearflag 0x3
+clearflag 0x4
+checkflag 0x1
+if 0x1 goto 0x817164F
+msgbox 0x81A2B88 MSG_KEEPOPEN '"I'm the Pokémon Move Maniac.\pI kn..."
+setflag 0x1
+goto @mushroomCheck
+
+#org @end
+release
+end
+
+#org @mushroomCheck
+checkflag 0x2 // 1 bigmushroom
+if 0x1 goto @oneBig
+checkflag 0x3 // 2 tinymushrooms
+if 0x1 goto @twoTiny
+goto @noShrooms
+
+#org @oneBig
+checkflag 0x3
+if 0x1 call @bigAndSmall
+goto @hasShrooms
+
+#org @twoTiny
+checkflag 0x2
+if 0x1 call @bigAndSmall
+goto @hasShrooms
+
+#org @noShrooms
+msgbox 0x81A2DE0 MSG_KEEPOPEN '"If your Pokémon need to learn a\nm..."
+release
+end
+
+#org @bigAndSmall
+setflag 0x4
+return
+
+#org @hasShrooms
+msgbox 0x81A2C63 MSG_YESNO '"Sniff, sniff[.]\nHm! You smell of ..."
+compare LASTRESULT 0x0
+if 0x1 goto @noShrooms
+goto @pokemonSelect
+
+#org @pokemonSelect
+msgbox 0x81A2CC3 MSG_KEEPOPEN '"Which Pokémon needs tutoring?"
+special 0xDB
+waitstate
+compare 0x8004 0x6
+if 0x4 goto @noShrooms
+special 0x148
+compare LASTRESULT 0x1
+if 0x1 goto @egg
+compare 0x8005 0x0
+if 0x1 goto @noMoves
+goto @teachMove
+
+#org @egg
+msgbox 0x81A2E20 MSG_KEEPOPEN '"Hunh? There isn't a single move\nt..."
+goto @pokemonSelect
+
+#org @noMoves
+msgbox 0x81A2CFC MSG_KEEPOPEN '"Sorry[.]\pIt doesn't appear as if ..."
+goto @pokemonSelect
+
+#org @teachMove
+msgbox 0x81A2CE1 MSG_KEEPOPEN '"Which move should I teach?"
+special 0xE0
+waitstate
+compare 0x8004 0x0
+if 0x1 goto @pokemonSelect
+checkflag 0x4
+if 0x1 goto @selectMushrooms
+checkflag 0x2
+if 0x1 goto @giveOneBig
+checkflag 0x3
+if 0x1 goto @giveTwoTinies
+end
+
+#org @selectMushrooms
+preparemsg 0x81A2D43 '"Then, I'll need a MUSHROOM or two...."
+waitmsg
+multichoice 0x0 0x0 0x33 0x1
+copyvar 0x8000 LASTRESULT
+compare 0x8000 0x0
+if 0x1 goto @giveTwoTinies
+compare 0x8000 0x1
+if 0x1 goto @giveOneBig
+end
+
+#org @giveOneBig
+removeitem 0x68 0x1
+textcolor 0x3
+msgbox 0x81A2DB3 MSG_KEEPOPEN '"[player] handed over one\nBIG MUSH..."
+call @copyVars
+goto @noShrooms
+
+#org @giveTwoTinies
+removeitem 0x67 0x2
+textcolor 0x3
+msgbox 0x81A2D85 MSG_KEEPOPEN '"[player] handed over two\nTINYMUSH..."
+call @copyVars
+goto @noShrooms
+
+#org @copyVars
+copyvar 0x8012 0x8013
+return
+
+
+'---------
+' Strings
+'---------
+#org 0x1A2B88
+= I'm the Pokémon Move Maniac.\pI know every single move that\nPokémon learn growing up.\pI'm also a mushroom maniac.\pBring me two Tinymushrooms,\nor one Big Mushroom.\pIf you do that for me, I'll teach\na move to one Pokémon.
+
+#org 0x1A2DE0
+= If your Pokémon need to learn a\nmove, I need a MUSHROOM or two.
+
+#org 0x1A2C63
+= Sniff, sniff[.]\nHm! You smell of MUSHROOMS!\pDo you want me to teach a move\nto a Pokémon of yours?
+
+#org 0x1A2CC3
+= Which Pokémon needs tutoring?
+
+#org 0x1A2E20
+= Hunh? There isn't a single move\nthat I can teach an Egg.
+
+#org 0x1A2CFC
+= Sorry[.]\pIt doesn't appear as if I have a\nmove I can teach that Pokémon.
+
+#org 0x1A2CE1
+= Which move should I teach?
+
+#org 0x1A2D43
+= Then, I'll need a MUSHROOM or two.\nWhat are you going to give me?
+
+#org 0x1A2DB3
+= [player] handed over one\nBIG MUSHROOM in exchange.
+
+#org 0x1A2D85
+= [player] handed over two\nTINYMUSHROOMS in exchange.

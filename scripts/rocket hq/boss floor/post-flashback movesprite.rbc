@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define _GIOVANNI 0x1
+
+#org @main
+checkflag 0x21E
+if 0x1 call @moveGio
+end
+
+#org @moveGio
+movesprite2 _GIOVANNI 0x12 0x7
+spritebehave _GIOVANNI 0xA // look right
+return

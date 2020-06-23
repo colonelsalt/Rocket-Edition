@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+compare 0x4011 0x3
+if _GREATER_EQ goto @postBattle
+msgbox @talk 0x6
+release
+end
+
+#org @postBattle
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Bill: I-it's\c\h08ó u-u-p to \c\h08óy-you now,\n[player][.]\pG-g-go on!\c\h08ó\nS-s-stop them!
+
+#org @talk2
+= Bill: [player], g-go on[.]\c\h08ó\nF-f-follow Oak[.]\pAhh!\pY-y-you've\c\h08ó g-g-got\c\h08ó s-something\nf-for b-breaking through\c\h08ó l-locked\ld-d-doors, haven't y-you?!

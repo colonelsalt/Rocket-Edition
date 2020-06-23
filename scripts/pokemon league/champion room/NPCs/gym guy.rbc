@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Th-this isn't the\c\h08ó Ch-ch-champion\c\h08ó\nc-c-ceremony I was\c\h08ó exp-p-pecting[.]\pWaaaah!\c\h08ó\nC-c-can I g-g-go\c\h08ó home sooooooon?!

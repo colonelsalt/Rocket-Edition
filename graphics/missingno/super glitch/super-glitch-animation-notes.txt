@@ -1,0 +1,28 @@
+! inserting animation at 0x87B54A
+
+Glitch city battle background:
+* image at 0x0970000 --> 00 00 97 08
+* palette at 0x087B600 --> 00 B6 87 08
+* tilemap at 0x87B98C --> 8C B9 87 08
+(battle bg index 0x26)
+
+FINAL VERSION:
+14 26 16 03 2D B8 0B 08 05 04 00 02 00 00 00 00 FF FF
+0A 03
+0C 0C 08
+19 EC 00 3F
+04 15
+03 6D 61 07 08 05 05 00 00 BA 00 0C 00 01 00 03 00
+05
+04 1A
+03 79 3C 0B 08 05 01 00 00
+03 B5 94 0B 08 05 03 05 00 0A 00 32 00
+1C FF 00 C9 13 08
+03 B5 94 0B 08 05 03 01 00 0A 00 32 00
+05
+04 10
+0D 0B 03
+0E C7 59 1D 08
+08
+
+(0x66 bytes)

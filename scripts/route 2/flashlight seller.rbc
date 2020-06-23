@@ -1,0 +1,70 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkitem 0x164 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @postBuy
+msgbox @talk 0x6
+lock
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+release
+end
+
+#org @moneyCheck
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @accept
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+release
+end
+
+#org @accept
+lock
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+msgbox @yesTalk 0x6
+lock
+additem 0x164 0x1
+loadpointer 0x0 @itemGet
+giveitem2 0x164 0x1 0x13E
+closeonkeypress
+release
+end
+
+#org @postBuy
+msgbox @postBuyTalk 0x6
+release
+end
+
+#org @talk
+= Hey there, good fellow! Nice\nweather we're having, ain't it?\pNow, I got this hunch, see[.]\pI think you came here because\nyou're looking for a certain HM\lthat lights up caves[.] hmm?\p[.]\pHaha! How did I know?\pWell, let's just call it a\nbusinessman's intuition!\pAnyhow, my dear friend, I good\ngood news for ya!\pWhat with my ingenuity and\nentrepreneurial drive, there\lain't no need for space-taking,\ldamage-less moves any longer!\pWith our very own meticulously\ncrafted Flashlight, you can light\leven the darkest of caves!
+
+#org @yesOrNo
+= [.]\pFor a mere [$]1,000 it can be\nyours! What say you, dear friend?
+
+#org @noTalk
+= No?\nHmph! Well, have it your way.\p(These stingy Kantoneans wouldn't\nknow a good deal if it tapped them\lupside the head, dammit[.])\p(How's a man to make a living\naround here?)
+
+#org @notEnoughTalk
+= Eh?\pBut you haven't even got that kind\nof money, chum!\pThis is business. Commerce, man.\nThere's no free lunch, you get me?
+
+#org @yesTalk
+= Hey!\nThat's the spirit!\pExplore those caves, my friend!\pWith the power of electricity,\ntamed at your very fingertips, to\lguide the way!
+
+#org @itemGet
+= [player] received the Flashlight!
+
+#org @postBuyTalk
+= Hehe[.]\pYou might wonder how I get away\nwith selling what is basically\l19th century technology at such\loutrageous prices.\pSimple-- because nobody else in\nthis wacky region are selling it!\pHaha!

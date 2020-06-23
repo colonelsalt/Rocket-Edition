@@ -1,0 +1,37 @@
+#dynamic 0x800000
+#define ARCHER 0x17
+#define RONNIE 0x1E
+#define NERD 0xE
+#define GRUNT1 0x18
+#define GRUNT2 0x1C
+#define GRUNT3 0x19
+#define FGRUNT 0x1D
+
+#org @main
+compare 0x8001 0xD
+if 0x1 call @moveFakePlayerRight
+checkflag 0x214
+if 0x1 call @movePeeps
+end
+
+#org @moveFakePlayerRight
+movesprite2 0x1F 0x11 0xD
+return
+
+#org @movePeeps
+spriteface 0xFF FACE_RIGHT
+movesprite2 ARCHER 0x4 0xD
+movesprite2 GRUNT1 0xB 0xB
+movesprite2 NERD 0x1 0x14
+movesprite2 GRUNT2 0x8 0xD
+movesprite2 FGRUNT 0xA 0x11
+movesprite2 GRUNT3 0x10 0xD
+movesprite2 RONNIE 0x5 0xB
+spritebehave ARCHER 0x9 // look left
+spritebehave GRUNT1 0x5 // walk left and right
+spritebehave NERD 0x7 // look up
+spritebehave GRUNT2 0xA // look right
+spritebehave FGRUNT 0x9 // look left
+spritebehave GRUNT3 0x2 // walk around
+spritebehave RONNIE 0x11 // look down and left
+return

@@ -1,0 +1,27 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define PETREL 0xB
+
+#org @main
+lock
+applymovement PETREL @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveaway
+waitmovement 0x0
+release
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Petrel: Not so fast, [player].\pBoss would like to see you\npersonally in his office down-\lstairs.\pYou had better take the elevator.\pI expect you to be on your best\nbehavior now-- no messing about!
+
+#org @moveaway
+#raw STEP_R
+#raw 0xFE

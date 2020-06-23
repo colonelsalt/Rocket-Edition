@@ -1,0 +1,39 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SILVER 0xD
+
+#org @main
+spriteface _SILVER FACE_LEFT
+sound 0x15
+applymovement _SILVER @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x10
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+pause 0x10
+msgbox @talk2 0x6
+goto 0x84B2E0
+
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Silver: Hey, you..!
+
+#org @movePlayer
+#raw STEP_D
+#raw FACE_R
+#raw 0xFE
+
+#org @talk2
+= You're that goon of my dad's from\nbefore, aren't you?\pHmph!\pHe dedicates all his time to it,\nyour little gang.\pAnd now...\c\h08ó\nIt's all falling apart.
+
+

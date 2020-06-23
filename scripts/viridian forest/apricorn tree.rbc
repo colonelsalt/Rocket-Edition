@@ -1,0 +1,91 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _TREE 0xC
+
+#org @main
+textcolor 0x2
+compare 0x402E 0x10
+if 0x4 goto @postPluck
+msgbox @sign 0x4
+closeonkeypress
+pause 0x10
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x2A
+if 0x1 goto @fromLeft
+compare 0x8000 0x2C
+if 0x1 goto @fromRight
+applymovement 0xFF @stepU
+waitmovement 0x0
+goto @itemGet
+
+#org @fromLeft
+applymovement 0xFF @stepR
+waitmovement 0x0
+goto @itemGet
+
+#org @fromRight
+applymovement 0xFF @stepL
+waitmovement 0x0
+goto @itemGet
+
+#org @itemGet
+pause 0x10
+sound 0x43
+pause 0x10
+spriteface _TREE FACE_UP
+spritebehave _TREE 0x7
+special 0x8E // screen refresh
+fadescreen 0x2
+pause 0x25
+additem 0x16F 0x1
+loadpointer 0x0 @apricornGet
+giveitem2 0x16F 0x1 0x13E
+closeonkeypress
+fadeout 0x0
+cry 0x199 0x0
+waitcry
+pause 0x5
+cry 0x199 0x0
+waitcry
+pause 0x5
+cry 0x199 0x0
+waitcry
+pause 0x15
+msgbox @msg 0x6
+fadein 0x0
+setvar 0x402E 0x10
+setflag 0xA7
+release
+end
+
+#org @postPluck
+msgbox @sign 0x6
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @sign
+= It's an Apricorn tree.
+
+#org @apricornGet
+= [player] plucked the\nPRPL Apricorn.
+
+#org @msg
+= The Rocket Pager is beeping!\c\h08ó\c\h08ó\nBetter report to HQ in Celadon!\c\h08ó

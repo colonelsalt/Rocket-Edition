@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I chair the Pokémon Fan Club!\pI raise more than a hundred\nPokémon!\pI'm very fussy when it comes to\nPokémon! I surely am!\p[.]Hmm?\nWhat's that "R" stand for?\pHahaha!\nI bet it's "Rapidash", isn't it?\pAh[.] you have good taste.

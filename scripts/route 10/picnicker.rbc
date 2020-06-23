@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9C 0x0 0x8184CF1 0x8184D31 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9FCE
+msgbox @after MSG_NORMAL '"I noticed some Pokémaniacs\nprowli..."
+end
+
+#org @after
+= What in the world is a Rocket\ndoing up in the mountains?\pThere's no money to be made here!

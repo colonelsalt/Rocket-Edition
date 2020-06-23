@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1DB 0x0 0x81795E5 0x8179604 POKESTEAL
+msgbox 0x8179613 MSG_NORMAL '"Whew!\nI'm all sweaty now."
+end

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+#define _GIOVANNI 0x1
+
+#org @main
+compare 0x402D 0x12
+if 0x1 call @moveBoss
+end
+
+#org @moveBoss
+movesprite2 _GIOVANNI 0xB 0x7
+return

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Hmmm[.] yes[.] the exponential\nfunction[.] with the product of[.]\lthe square root of negative one[.]\land pi[.] as input, and[.] oh..!

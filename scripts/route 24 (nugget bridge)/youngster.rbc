@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x5C 0x0 0x8188F76 0x8188F95 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A961E
+msgbox 0x8188FA7 MSG_NORMAL '"I did my best. I have no regrets!"
+end

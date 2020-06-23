@@ -1,0 +1,408 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x3
+#define _RONNIE 0xB
+#define _POKEBALL 0x4
+#define _NIDOKING 0x6
+
+#org @main
+lock
+spriteface 0xFF FACE_DOWN
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+pause 0x25
+textcolor 0x0
+msgbox @bossTalk1 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_UP
+pause 0x30
+applymovement _GIOVANNI @bossWalk1
+waitmovement 0x0
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk2 0x6
+pause 0x25
+applymovement _GIOVANNI @bossWalk1.5
+pause 0x20
+spriteface _GIOVANNI FACE_LEFT
+pause 0x30
+msgbox @bossTalk3 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_DOWN
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk4 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_LEFT
+pause 0x15
+applymovement _GIOVANNI @bossWalk2
+waitmovement 0x0
+pause 0x25
+msgbox @bossTalk5 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x20
+applymovement _GIOVANNI @bossWalk3
+waitmovement 0x0
+applymovement _GIOVANNI @bossWalk1.5
+waitmovement 0x0
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk6 0x6
+pause 0x15
+applymovement _RONNIE @stepL
+waitmovement 0x0
+msgbox @ronnieTalk1 0x6
+fadeout 0x0
+applymovement _GIOVANNI @stepRightFast
+sound 0x46 // "wooden smash"
+msgbox @bossTalk7 0x6
+waitmovement 0x0
+pause 0x30
+msgbox @bossTalk8 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x35
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x30
+msgbox @bossTalk9 0x6
+pause 0x25
+applymovement _GIOVANNI @bossWalk2
+waitmovement 0x0
+pause 0x25
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x15
+msgbox @bossTalk10 0x6
+pause 0x10
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+msgbox @bossTalk11 0x6
+pause 0x15
+applymovement _RONNIE @stepL
+waitmovement 0x0
+msgbox @ronnieTalk2 0x6
+applymovement _GIOVANNI @stepRFast
+sound 0x46 // "wooden smash"
+msgbox @bossTalk12 0x6
+waitmovement 0x0
+pause 0x15
+msgbox @bossTalk12.5 0x6
+waitmovement 0x0
+sound 0x36 // throw Poké ball sound
+movesprite2 _POKEBALL 0xD 0x6
+showsprite _POKEBALL
+pause 0x5
+sound 0xF // Poké ball open
+fadescreen 0x2
+movesprite _POKEBALL 0x11 0x18
+showsprite _NIDOKING
+checksound
+pause 0x10
+cry 0x22 0x0
+applymovement _NIDOKING @nidoEntry
+waitmovement 0x0
+pause 0x25
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+msgbox @bossTalk13 0x6
+pause 0x20
+cry 0x22 0x0
+pause 0x25
+sound 0x80
+pause 0x15
+sound 0x79
+applymovement _NIDOKING @nidoStep
+applymovement _RONNIE @ronnieStep
+waitmovement 0x0
+pause 0x30
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+msgbox @bossTalk14 0x6
+pause 0x35
+applymovement _RONNIE @ronnieLeave1
+waitmovement 0x0
+pause 0x10
+applymovement 0xFF @playerMove
+applymovement _RONNIE @ronnieLeave2
+waitmovement 0x0
+pause 0x25
+spriteface _RONNIE FACE_DOWN
+pause 0x30
+msgbox @ronnieTalk3 0x6
+pause 0x30
+applymovement _RONNIE @ronnieLeave3
+waitmovement 0x0
+sound 0x9
+hidesprite _RONNIE
+checksound
+pause 0x35
+spriteface 0xFF FACE_DOWN
+pause 0x15
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x15
+applymovement _GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bossTalk15 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x15
+applymovement _GIOVANNI @bossWalk4
+waitmovement 0x0
+pause 0x15
+sound 0xF
+pause 0x5
+fadescreen 0x2
+hidesprite _NIDOKING
+pause 0x5
+movesprite _POKEBALL 0xF 0x6
+showsprite _POKEBALL
+sound 0x10
+pause 0x10
+movesprite2 _POKEBALL 0x11 0x18
+movesprite _POKEBALL 0x11 0x18
+pause 0x25
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+msgbox @bossTalk16 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_LEFT
+pause 0x35
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+msgbox @bossTalk17 0x6
+playsong 0x112 0x0
+pause 0x20
+applymovement _GIOVANNI @bossWalk1
+waitmovement 0x0
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+msgbox @bossTalk18 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+applymovement _GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bossTalk19 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+applymovement _GIOVANNI @bossWalk1.5
+waitmovement 0x0
+pause 0x15
+msgbox @bossTalk20 0x6
+pause 0x20
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk21 0x6
+pause 0x20
+fadescreen 0x1
+hidesprite _GIOVANNI
+hidesprite 0x1 // nerd
+hidesprite 0x2 // rightmost grunt
+hidesprite 0xA // grunt to left of prev.
+hidesprite 0x7 // Petrel
+hidesprite 0xE // bottom left grunt
+hidesprite 0x10 // bottom middle female
+hidesprite 0x8 // leftmost female
+hidesprite 0xF // Archer
+hidesprite 0x12 // Proton
+applymovement 0x7F @cameraBack
+waitmovement 0x0
+special 0x114
+setflag 0x201
+setflag 0x202
+setflag 0x29D
+setflag 0x228
+setflag 0x21E
+setflag 0x82F
+setflag 0x2DF // Rockets in HQ IDs
+setvar 0x402E 0x11
+setvar 0x405A 0x1
+fadescreen 0x0
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @bossTalk1
+= Giovanni: [.]
+
+#org @bossWalk1
+#raw STEP_U
+#raw 0xFE
+
+#org @bossWalk1.5
+#raw STEP_D
+#raw 0xFE
+
+#org @bossTalk2
+= You bunch of incompetent fools!\nGiratina take you all!
+
+#org @bossTalk3
+= This[.]\c\h08ó child[.]\pHe wiped out every single one of\nyou, found his way to the\lPresident's room[.]\pAnd ran off with the Master Ball\nprototype.
+
+#org @bossTalk4
+= In front of your eyes, ladies\nand gentlemen!\pWhat do you have to say for\nyourselves?\lWhat?!
+
+#org @bossWalk2
+#raw STEP_L
+#raw 0xFE
+
+#org @bossTalk5
+= A public humiliation of this\nscale[.]\pCan anyone ever look at Team\nRocket the same way again..?
+
+#org @bossWalk3
+#raw STEP_R
+#raw 0xFE
+
+#org @bossTalk6
+= Tell me, you morons!\pAre we the mightiest gang of\nmobsters in this region?\pOr a bunch of little girls?!
+
+#org @ronnieTalk1
+= Ronnie: The mightiest gangsters\nin Kanto, that's what we are!\pAye, aye, Boss!\pWe'll show that little kid\nnext time, you betcha!
+
+#org @stepRightFast
+#raw STEP_R2
+#raw 0xFE
+
+#org @bossTalk7
+= Giovanni: SILENCE!
+
+#org @bossTalk8
+= Giovanni: [.]\c\h08ó\nYou.
+
+#org @bossTalk9
+= You worthless, simple-minded\nlittle Bad Egg[.]\pI've given you more warning\nthan you deserve, Grunt[.]\pYet you seem to be relentless\nin your incompetence[.]
+
+#org @bossTalk10
+= To take a Card Key that wasn't\neven yours to use[.]\pThen drop it right in front of\nthe child so he could ruin our\lplans as thoroughly as possible!
+
+#org @bossTalk11
+= Imbecile, moron!\pWere it not for you, that twerp\nmight have never reached us, and\lthe Master Ball would be in our\lhands right now!\pDo you understand?!
+
+#org @ronnieTalk2
+= Ronnie: N-no Boss[.]\c\h08ó\nIt wasn't like that, see--
+
+#org @stepRFast
+#raw 0x2C
+#raw 0xFE
+
+#org @bossTalk12
+= Giovanni: ENOUGH!
+
+#org @bossTalk12.5
+= That's enough!\p[.]\pI have had[.]\c\h08ó\nENOUGH!
+
+#org @nidoEntry
+#raw 0x28
+#raw 0x28
+#raw 0x28
+#raw 0x28
+#raw 0x28
+#raw 0xFE
+
+#org @bossTalk13
+= Giovanni: Nidoking!\c\h08ó\nPrepare for attack!
+
+#org @nidoStep
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @ronnieStep
+#raw 0x1C
+#raw STEP_R2
+#raw FACE_L
+#raw 0XFE
+
+#org @bossTalk14
+= Giovanni: Leave us!\c\h08ó\nLeave us, you worthless scum!\pYou're not worthy of the 'R'\nthat's printed on your chest!\pIf I ever see your face again,\nI'll grind it into Berry Powder!\pMark my words, I will!\pBegone!
+
+#org @ronnieTalk3
+= Ronnie: [.]
+
+#org @ronnieLeave1
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_L2
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_D
+#raw FACE_U
+#raw 0xFE
+
+#org @ronnieLeave2
+#raw 0x19
+#raw STEP_L2
+#raw 0xFE
+
+#org @ronnieLeave3
+#raw STEP_L2
+#raw 0xFE
+
+#org @bossTalk15
+= Giovanni: [.]\c\h08ó\nHahahaha[.]
+
+#org @bossWalk4
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @bossTalk16
+= Giovanni: [.]\c\h08ó\nHahahahaha!
+
+#org @bossTalk17
+= No matter.\c\h08ó\nNo matter, boys and girls.\pBecause[.]\c\h08ó\nOne thing is for sure[.]\pThis Red twerp[.]\pHe has messed with us for the very\nlast time!
+
+#org @bossTalk18
+= Hear me!\pWe will relocate Team Rocket's\nheadquarters to the Viridian Gym!\pEvacuate this building\nimmediately.
+
+#org @bossTalk19
+= Admins, Executives[.]\pThat means the next time your\nRocket Pager beeps[.]\pYou will report to Virdian Gym,\npronto!
+
+#org @bossTalk20
+= When this child comes to seek his\nfinal Gym Badge[.]\pWe will be ready[.]\c\h08ó\nAll of us!\p[.]\pAnd by God[.]\c\h08ó\nWe will have our revenge!
+
+#org @bossTalk21
+= Do I make myself clear?\c\h08ó\nThen move, Team Rocket!
+
+#org @cameraBack
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE

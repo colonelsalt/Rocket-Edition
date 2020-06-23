@@ -1,0 +1,39 @@
+No. of Pokémon (byte):
+	823EAE8 + (TrainerID * 0x28)
+
+Pokémon info:
+
+[Relative to above pos.]: Previouspos. + 0x4
+
+[From nothing]:	Pointer @0x0823EAEC + (0x28 * TrainerID)
+
+
+Pokémon info structure:
+	[AI value] 00 [level] 00 [species] 00 [held item] 00
+
+Getting to next Pokémon's species:
+	PrevPkmsSpecies + 0x8
+
+Variables:
+	
+	0x8000: Level of Pkm1
+	0x8001: Species of Pkm1
+	0x8002: Level of Pkm2
+	0x8003: Species of Pkm2
+	0x8004: Level of Pkm3
+	0x8005: Species of Pkm3
+	0x8006: Level of Pkm4
+	0x8007: Species of Pkm4
+	0x8008: Level of Pkm5
+	0x8009: Species of Pkm5
+	0x800A: Level of Pkm6
+	0x800B: Species of Pkm6
+	0x800C: Is Pokémon stolen? (0x69 signifies yes)
+	0x800F: No. of Pokémon
+
+
+r3 = No. of Pkm
+r0 = freespace
+r2 moves along Pokémon info
+r1 = species of Pkm
+r4 = Pokémon string table

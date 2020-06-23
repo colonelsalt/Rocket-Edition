@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x6F 0x0 0x8183E9F 0x8183EC0 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A99C0
+msgbox 0x8183ED4 MSG_NORMAL
+end

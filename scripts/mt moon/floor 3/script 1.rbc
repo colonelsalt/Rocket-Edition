@@ -1,0 +1,119 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+pause 0x10
+sound 0xA
+applymovement 0xD @jump
+waitmovement 0x0
+sound 0xA
+applymovement 0xD @jump
+waitmovement 0x0
+textcolor 0x0
+msgbox @eagergrunt 0x6
+applymovement 0xC @stepR
+waitmovement 0x0
+msgbox @dude 0x6
+applymovement 0xC @stepR
+waitmovement 0x0
+msgbox @talkie 0x6
+applymovement 0xC @halfleave1
+waitmovement 0x0
+applymovement 0xFF @playermove
+waitmovement 0x0
+applymovement 0xC @halfleave2
+waitmovement 0x0
+applymovement 0xC @fullleave
+applymovement 0x7 @grunt2leave
+waitmovement 0x0
+sound 0x9
+movesprite2 0xC 0x1 0x11
+hidesprite 0xC
+movesprite2 0x7 0x1 0x12
+hidesprite 0x7
+setvar 0x4019 0x3
+setvar 0x4016 0x3 // to remedy the level script glitch
+setvar 0x401A 0x1
+setflag 0x20A
+clearflag 0x203
+release
+end
+
+
+#org @jump
+#raw 0x54
+#raw 0xFE
+
+#org @eagergrunt
+= So what do you think?\pLook at me and tell me this isn't\nthe rarest-looking fossil you've\lever seen!\pI can't wait to see the look on\nPetrel's face when he sees--
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @dude
+= Dude, this is what you got us all\nworked up about?\pIt's a freaking Moon Stone, for\ncrying out loud.\pYeah, one of those things you use\nto evolve gay little Pokémon like\lJigglypuff.\pThe thing's not even rare, man.
+
+#org @talkie
+= Oh, well; so much for leaving\nearly, I guess.
+
+#org @halfleave1
+#raw 0x0
+#raw 0x1C
+#raw STEP_D
+#raw 0x1C
+#raw 0xFE
+
+#org @halfleave2
+#raw STEP_D
+#raw 0xFE
+
+#org @playermove
+#raw STEP_R
+#raw 0x2
+#raw 0xFE
+
+#org @grunt2leave
+#raw STEP_L
+#raw STEP_D
+#raw 0x1C
+#raw 0x3
+#raw 0x1C
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @fullleave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE

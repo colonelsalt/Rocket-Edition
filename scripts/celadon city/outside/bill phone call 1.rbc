@@ -1,0 +1,28 @@
+#dynamic 0x800000
+
+#org @main
+lock
+fadeout 0x0
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x8
+cry 0x19A 0x0
+waitcry
+pause 0x14
+textcolor 0x0
+msgbox @talk 0x6
+sound 0x19
+checksound
+setvar 0x4018 0x4
+fadein 0x0
+release
+end
+
+#org @talk
+= Bill: Hey, [player], it's me.\nHaven't heard from you in a while.\pNo major new Rocket events to\nreport? No Silph Co. scoop?\c\h08ó\Fine.\pI'm just calling to tell you I\npassed on one of the gifts you\lgave me from before.\pJust a little while ago some young\nhotshot Trainer kid stopped by my\lhouse and helped me with some\lexperimental hiccups.\pThe kid was borderline mute\nand probably lightly autistic, but\lhe was more intense and focused\lthan any kid Trainer I've ever\lseen-- it was funny.\pEleven years old, and he had\nalready got two Gym Badges!\pSo I gave him my ticket to board\nthe S.S. Anne.\pJust thought you might like to\nknow. Talk to you later.

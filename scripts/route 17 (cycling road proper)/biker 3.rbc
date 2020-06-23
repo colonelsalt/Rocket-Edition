@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xFC 0x0 @challenge 0x81871AE EXEC_STEAL
+msgbox 0x81871BA 0x6
+end
+
+#org @challenge
+= There's no getting rich quick in\nbattling stingy criminals like\lyou, is there?

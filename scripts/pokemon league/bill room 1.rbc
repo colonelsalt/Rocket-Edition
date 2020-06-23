@@ -1,0 +1,23 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x2
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+applymovement _BILL @moveUp
+waitmovement 0x0
+sound 0x9
+hidesprite _BILL
+setflag 0x244
+release
+end
+
+
+#org @talk
+= Bill: Seems Red rounded her up\nquickly[.]\pNot suprising.\c\h08ó\nOnwards, quick!
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE

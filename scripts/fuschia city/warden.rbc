@@ -1,0 +1,90 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _WARDEN 0x1
+#define _BOULDER 0x2
+#define _GOLD_TEETH 0x3
+
+#org @main
+compare 0x402F 0x2 // if teeth already knocked out
+if 0x1 goto @noTeeth
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x3
+if 0x5 goto @caught
+compare 0x8001 0x4
+if 0x5 goto @caught
+compare 0x402F 0x0
+if 0x5 goto @caught
+fadeout 0x0
+sound 0x15 // exclamation
+applymovement _WARDEN @exclamation
+waitmovement 0x0
+sound 0xA
+applymovement _WARDEN @jumpD
+waitmovement 0x0
+checksound
+pause 0x15
+sound 0x46
+fadescreen 0x2
+movesprite _BOULDER 0x2 0x6
+showsprite _GOLD_TEETH
+clearflag 0xAB
+checksound
+textcolor 0x2
+pause 0x20
+msgbox @pop 0x4
+pause 0x15
+closeonkeypress
+pause 0x10
+spriteface _WARDEN FACE_UP
+pause 0x7
+sound 0xA
+applymovement _WARDEN @jumpU
+waitmovement 0x0
+checksound
+sound 0xA
+applymovement _WARDEN @jumpU
+waitmovement 0x0
+checksound
+textcolor 0x0
+msgbox 0x198DF9 0x6
+setvar 0x402F 0x2
+fadein 0x0
+release
+end
+
+#org @caught
+lock
+faceplayer
+setvar 0x402F 0x1
+msgbox @caughtTalk 0x6
+release
+end
+
+#org @noTeeth
+lock
+faceplayer
+msgbox 0x198DF9 0x6
+release
+end
+
+#org @pop
+= The Warden's teeth popped out of\nhis mouth!
+
+#org @caughtTalk
+= Warden: What do you want, kid?\p[.]\pHey, you're one of those Rocket\npunks from the TV!\pScram! I want no association\nbetween you and my Safari game!
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @jumpD
+#raw 0x52
+#raw 0xFE
+
+#org @jumpU
+#raw 0x53
+#raw 0xFE

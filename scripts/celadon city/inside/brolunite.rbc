@@ -1,0 +1,17 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+applymovement LASTTALKED @faceUp
+release
+end
+
+#org @talk
+= What's up?\nName's Brolunite, I'm a spriter.\pIf the Rocket higher-ups look as\ngood as they do now, it's thanks\lto me!\pSpeaking of which, not stealing\nPokémon from Trainers can still be\la fun experience[.] I recommend it!
+
+#org @faceUp
+#raw FACE_U
+#raw 0xFE

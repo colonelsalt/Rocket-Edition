@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Let me go, let me go!\pI just work in marketing, okay?\nNothing to do with Master Ball!

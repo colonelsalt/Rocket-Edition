@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I tried stealing a Fearow from\nthis Biker guy.\pHe gave me a black eye. I think\nI'll stick to kids for now.

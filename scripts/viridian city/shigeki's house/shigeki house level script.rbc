@@ -1,0 +1,232 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SHIGEKI 0x3
+#define MISSINGNORELEASE 0x83F75E
+
+#org @main
+checkflag 0x2E6
+if 0x1 goto @presentScript
+pause 0x25
+msgbox @flashbackTalk 0x6
+pause 0x30
+setflag 0x200
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @flashbackTalk
+= For a quiet, secluded life with\nhis granddaughter[.]\pHoping the demons of his misdeeds\nwould never haunt him again.
+
+// ----------------------------------------------------------------------------------------------------------------------------
+
+#org @presentScript
+lock
+spriteface 0xFF FACE_RIGHT
+compare 0x4014 0xB // if Shigeki flashback already done
+if 0x1 goto @postFlashback
+pause 0x15
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x20
+spriteface _SHIGEKI FACE_RIGHT
+pause 0x20
+msgbox @talk2 0x6
+pause 0x20
+applymovement _SHIGEKI @walkRight
+waitmovement 0x0
+pause 0x15
+spriteface _SHIGEKI FACE_LEFT
+fadeout 0x1
+msgbox @talk3 0x6
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+msgbox @ask 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+goto @saidNo
+
+#org @saidNo
+msgbox @noTalk 0x6
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+msgbox @ask2 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+goto @saidNo
+
+
+#org @saidYes
+pause 0x15
+msgbox @yesTalk 0x6
+pause 0x20
+applymovement _SHIGEKI @walkUp
+waitmovement 0x0
+pause 0x15
+playsong 0x121 0x0
+msgbox @talk4 0x6
+pause 0x20
+spriteface _SHIGEKI FACE_LEFT
+pause 0x20
+msgbox @talk5 0x6
+pause 0x10
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+msgbox @talk6 0x6
+pause 0x20
+applymovement _SHIGEKI @walkDownWFace
+waitmovement 0x0
+pause 0x15
+msgbox @talk7 0x6
+pause 0x20
+spriteface _SHIGEKI FACE_LEFT
+pause 0x20
+msgbox @talk8 0x6
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+writebytetooffset 0x1 0x02036E28 // Activate greyscale tint effect
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @postFlashback
+setvar 0x4016 0xE
+setvar 0x402E 0x19
+pause 0x15
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk9 0x6
+pause 0x20
+spriteface _SHIGEKI FACE_RIGHT
+pause 0x20
+msgbox @talk10 0x6
+pause 0x25
+spriteface _SHIGEKI FACE_LEFT
+pause 0x25
+msgbox @talk11 0x6
+pause 0x15
+spriteface _SHIGEKI FACE_UP
+pause 0x20
+applymovement _SHIGEKI @wander1
+waitmovement 0x0
+pause 0x10
+msgbox @talk12 0x6
+pause 0x20
+spriteface _SHIGEKI FACE_DOWN
+pause 0x25
+msgbox @talk13 0x6
+pause 0x25
+spriteface _SHIGEKI FACE_UP
+pause 0x25
+msgbox @talk14 0x6
+pause 0x15
+spriteface _SHIGEKI FACE_DOWN
+pause 0x15
+applymovement _SHIGEKI @stepD
+waitmovement 0x0
+msgbox @talk15 0x6
+pause 0x20
+applymovement _SHIGEKI @walkToPlayer
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+pause 0x20
+goto MISSINGNORELEASE
+release
+end
+
+
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @walkRight
+#raw STEP_R
+#raw 0xFE
+
+#org @walkUp
+#raw STEP_U
+#raw 0xFE
+
+#org @walkDownWFace
+#raw STEP_D
+#raw FACE_R
+#raw 0xFE
+
+#org @wander1
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @walkToPlayer
+#raw STEP_L
+#raw STEP_D
+#raw 0xFE
+
+
+#org @talk
+= Shigeki: Well, well, well[.]\c\h08ó\nAfter all these years[.]\pConfronted not by Lance but by\n"Team Rocket"[.]
+
+#org @talk2
+= So Bill sent you?\nI should have seen it coming.
+
+#org @talk3
+= [.]\c\h08ó\nMy dear Rocket, I[.]\pI will give you the information\nyou're seeking.\pBut please[.]\c\h08ó\nKeep my whereabouts to yourself.\pI[.]\c\h08ó have a family to protect.
+
+#org @ask
+= Do you promise me that?
+
+#org @noTalk
+= Agh!\pThen I will flee the region before\nI tell you anything!
+
+#org @ask2
+= [.]\pPlease, Rocket.\nKeep my hiding place secret.\pDo I have your word?
+
+#org @yesTalk
+= Thank you, young man.\nI will not forget your kindness.
+
+#org @talk4
+= So[.] I suppose it's time for me to\ncome clean.\pYou know the story, I suppose.\c\h08ó\nOf the Mewtwo Project[.]
+
+#org @talk5
+= Well[.] somewhere amidst all our\nfailed attempts to clone Mew[.]\pA brilliant idea occured to me one\nday[.]\pTo rearrange samples of Mew's\ngenes into a computer program.
+
+#org @talk6
+= I convinced the others to create a\nsoftware Pokémon akin to Porygon[.]\pOne we could program to do exactly\nwhat we wanted[.]\pIt would be our ultimate war\nmachine.
+
+#org @talk7
+= [.]\c\h08ó\n(Sigh[.])\pBut a project that size[.]\nWith only the five of us[.]\pThere were bound to be bugs in the\nprogram.
+
+#org @talk8
+= I knew as much, but[.]\pI didn't realize the magnitude of\nthese glitches[.]
+
+#org @talk9
+= [.]\pIt was a stupid, reckless thing to\ncreate[.]\pIt traumatized us all to have\nbeen so close to unleashing[.]\pSuch an uncontrollable monster\nupon the world.\pAnd nobody would trust me to do\nanything by myself after that[.]
+
+#org @talk10
+= But[.]\nThat's all in the past.
+
+#org @talk11
+= For the present, young man.\pIf it's really the other\nscientists' intention to finally\llay the matter to rest[.]
+
+#org @talk12
+= Then I will deactivate the safety\nmechanisms that are keeping it\ldormant[.]
+
+#org @talk13
+= And leave you free to capture\nthe monster!
+
+#org @talk14
+= It would clear my conscience\ntremendously to know it's been\ldealt with.\p[.]\c\h08ó\nBut if you fail[.]
+
+#org @talk15
+= I don't know what havoc that\ncreature could wreak on the\lregion.\pThere will be no turning back.

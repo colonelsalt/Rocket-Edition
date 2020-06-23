@@ -1,0 +1,13 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+cry 0x23 0x0
+msgbox @talk 0x6
+waitcry
+release
+end
+
+#org @talk
+= Clefairy: Pi pippippi!\c\h08ó\p[.]\p(This Pokémon appears to be\ncowering in terror[.])

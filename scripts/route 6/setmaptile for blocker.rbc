@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x21B
+if 0x0 call @crate
+end
+
+#org @crate
+setmaptile 0x5 0x5 0x9A 0x1
+return

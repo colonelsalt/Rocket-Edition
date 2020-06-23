@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Damn it, I ran into a Clefairy,\nbut it got away.\pIf only I had money to buy me some\nPoké Balls[.]

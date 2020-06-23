@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x102 0x0 0x8184F01 0x8184F15 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9CA8
+msgbox 0x8184F2E MSG_NORMAL '"Pokémon is life!\nAnd to live is t..."
+end

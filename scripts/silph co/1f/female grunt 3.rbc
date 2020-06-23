@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= You know, I never liked Silph's\nPoké Balls anyway.\pLet's get 'em!

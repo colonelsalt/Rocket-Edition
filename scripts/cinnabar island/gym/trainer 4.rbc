@@ -1,0 +1,15 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+call EXEC_STEAL
+checkflag 0x268
+if 0x0 call 0x816DB79
+release
+end
+
+#org @preBattle
+= Do you like this quiz?\pHee hee[.]\pWe made it extra tough just for\nyou!
+
+#org @postBattle
+= I wish there were a thief Pokémon.\nI'd use that!\p[.]\pSomething tells me you would too,\ntough guy!

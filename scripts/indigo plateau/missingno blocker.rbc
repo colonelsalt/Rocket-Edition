@@ -1,0 +1,24 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+setvar 0x8004 0x198
+special2 LASTRESULT 0x17C
+compare LASTRESULT 0x1
+if _NOT_EQ goto @missingnoBlock
+setvar 0x4014 0x20
+end
+
+#org @missingnoBlock
+msgbox @text MSG_KEEPOPEN
+closeonkeypress
+applymovement 0xFF @moveDown
+waitmovement 0x0
+end
+
+#org @text
+= Bill's words echoed[.]\p"I would strongly urge you to\nbring MissingNo. along as well.\pYou're going to need it."
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE

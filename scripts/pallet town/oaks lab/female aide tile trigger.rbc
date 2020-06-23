@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define F_AIDE 0x5
+#include stdmoves.rbh
+
+#org @main
+applymovement F_AIDE @lookUp
+setvar 0x4016 0x12
+end
+
+#org @lookUp
+#raw FACE_U
+#raw 0xFE

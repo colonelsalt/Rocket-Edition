@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#define _SHIGEKI 0x3
+
+#org @main
+compare 0x4016 0xE
+if 0x1 call @moveShigeki
+compare 0x4016 0xF
+if 0x1 call @moveShigeki2
+end
+
+// if waiting to release MissingNo, move Shigeki to left side
+#org @moveShigeki
+movesprite2 _SHIGEKI 0x4 0x4
+spritebehave _SHIGEKI 0x8
+return
+
+// if MissingNo released (but not caught), move Shigeki to TV
+#org @moveShigeki2
+movesprite2 _SHIGEKI 0x5 0x2
+spritebehave _SHIGEKI 0x8
+return

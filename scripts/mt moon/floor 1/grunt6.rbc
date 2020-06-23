@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4019 0x4
+if 0x0 goto @preBlue
+msgbox @talk 0x6
+release
+end
+
+#org @preBlue
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= I don't really know what to make\nof all this.\pThat kid was pretty badass,\nthough.
+
+#org @talk2
+= Geez with the yelling, people.\nThey're just fossils, is all.

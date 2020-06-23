@@ -1,0 +1,22 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x2
+preparemsg @stealwhich
+pause 0x20
+multichoice 0x0 0x0 0x27 0x1
+sound 0xFF
+textcolor 0x0
+msgbox @talk 0x6
+movesprite 0x3 0x8 0xE
+movesprite2 0x3 0x8 0xE
+release
+end
+
+#org @stealwhich
+= Steal which Pokémon?
+
+#org @talk
+= NO PLS

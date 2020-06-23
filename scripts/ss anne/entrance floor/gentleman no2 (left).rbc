@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1A6 0x0 0x8173BD1 0x8173BFA POKESTEAL
+msgbox 0x8173C30 MSG_NORMAL '"I wish to be left alone!\nGet out!"
+end

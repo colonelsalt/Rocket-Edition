@@ -1,0 +1,43 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+setworldmapflag 0x89A
+checkflag 0x208
+if 0x1 call @postCerulean
+end
+
+#org @postCerulean
+checkflag 0x29D // if Saffron mission not received
+if 0x0 call @moveCop
+checkflag 0x29D
+if 0x1 call @hidePeopleMaybe
+compare 0x402E 0x10 // if Apricorn collected in Viridian Forest
+if _GREATER_EQ call @moveCop
+checkflag 0x284 // if Player thrown out of Fighting Dojo
+if 0x1 call @moveChamp
+return
+
+#org @moveCop
+movesprite2 0x1 0x15 0x27
+return
+
+#org @moveChamp
+movesprite2 0x4 0x28 0xD
+return
+
+#org @hidePeopleMaybe
+compare 0x402E 0x10
+if _LESS call @hidePeople
+return
+
+#org @hidePeople
+movesprite2 0x9 0x0 0x0
+movesprite2 0xA 0x0 0x0
+movesprite2 0xB 0x0 0x0
+movesprite2 0xC 0x0 0x0
+movesprite2 0xD 0x0 0x0
+movesprite2 0xE 0x0 0x0
+movesprite2 0xF 0x0 0x0
+return
+

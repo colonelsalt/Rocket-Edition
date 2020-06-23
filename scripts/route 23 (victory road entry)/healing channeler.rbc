@@ -1,0 +1,63 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @heal
+msgbox @saidNo 0x6
+release
+end
+
+
+#org @heal
+sound 0xCC
+pause 0x10
+preparemsg @saidYes
+pause 0x10
+applymovement LASTTALKED @dance
+waitmovement 0x0
+waitmsg
+pause 0x5
+sound 0xC3
+fadescreen 0x3
+special 0x0
+release
+checksound
+fadescreen 0x2
+msgbox @postTalk 0x6
+release
+end
+
+
+#org @talk
+= Greetings, tamer of the monsters\nof the pocket.\pSpirits warn me great nuisance\nlies ahead for your kind.\pWith white magic I shall heal you!\c\h08ó\n[.]and a few potions, too. Eh?
+
+#org @saidYes
+= HARE MUSHNA!\c\h08ó\nMUSHNA MUSHNA!
+
+#org @saidNo
+= CURSE YOU!\nSuch negative vibrations!
+
+#org @postTalk
+= The spirits' premonitions about\npeople and the world never fail me.\pSo go on with your kindhearted\nquest to spread love, o Trainer!
+
+#org @dance
+#raw FACE_L
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x4A
+#raw 0xFE
+
+

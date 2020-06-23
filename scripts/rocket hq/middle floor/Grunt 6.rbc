@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Dude, I swear to God!\pI stole this Rapidash from a\nCooltrainer just the other day!\pI beat him, then I snatched it\nright from under his nose!

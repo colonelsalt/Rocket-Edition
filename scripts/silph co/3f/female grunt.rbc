@@ -1,0 +1,31 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0x1
+if 0x1 goto @lastOne
+compare 0x402E 0x7
+if 0x4 goto @post
+msgbox @talk 0x6
+release
+end
+
+#org @lastOne
+msgbox @talk2 0x6
+release
+end
+
+#org @post
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Between the four of us, we've got\nthis room well and handled.\lYou can safely move right on!
+
+#org @talk2
+= Well, looks like you've been busy!\pThe guys are almost done with that\nWarp Tile thingy, I just had to\ltake a breather.\pExhausting work, you know?
+
+#org @talk3
+= You're one busy Rocket, aren't\nyou?

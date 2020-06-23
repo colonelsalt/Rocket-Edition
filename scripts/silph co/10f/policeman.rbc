@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x185 0x0 @challenge 0x8176D18 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= So you thugs have made it this far\nalready[.]\pNot another step!
+
+#org @postBattle
+= Maybe there's no way to stop you\nfrom taking over the building\lafter all[.]

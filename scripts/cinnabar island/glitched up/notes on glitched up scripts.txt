@@ -1,0 +1,107 @@
+
+
+UPON RETURN:
+outside of cinnabar-glitched is ready for prod (insert into clean rom)
+
+!!! need some backup gift Pokémon in case Player does not have surf when they arrive in glitched-up Cinnabar
+!! and give Master Ball back to player if they've tossed it
+!! and toggle runaway to prevent fleeing from MissingNo
+
+! block entry to normal cinnabar island via surf
+! to set cinnabar island to have no music after missingno release (in brief interlude before warp to glitch map, paste:
+03 08 00 00 16 40 0F 00 FF FF
+at address 0x81B028
+! sethealingplace to glitched-cinnabar pre-missingno battle (hijacking Three Island's pokecenter (map 34.1; healing place 0x10)
+! sethealingplace outside glitched-cinnabar after MissingNo
+capture to prevent warping back to it after
+! need to clear flag 0x
+
+
+! Glitched-up cinnabar has "map ID" 0xA3
+thus need to change byte at 0x56144
+from 0x61 --> 0xA3 to disable surf music
+
+text offset for second choice in multichoice box 0x27 is 0x08417D86 (and currently has length 9)
+
+
+
+bits and bobs:
+
+old man:
+"i dont know
+wat heppen here
+wat is thissssssssss
+H E L P ! ! ! ! !"
+
+player clone:
+Hello! Sorry to keep you waiting!
+Welcome to the world of Pokémon!
+My name is [player][player][player][player][player]
+This world is inhabitated by creatures
+called Pokémon!
+For some people, Pokémon are pets,
+others use them for gggggggggggggggg
+
+Hi! I like shorts!
+They're comfy and easy to easy
+to !shorts like I !Hi ysea
+ot wear! yfmoc and easy strohs !1111
+
+[multichoice box 0x27]
+Steal which Pokémon?
+
+Groudon
+[B7 20 DF 16 57 28 50 51] (length 8)
+????????
+B1F
+TRADE Center
+COLOSSEUM
+BERRY CRUSH
+
+NO PLS
+
+We, Team Rocket are \h55\h56\h54
+GANGSTERS! \h34999999999999
+Get lost, kid\h2a\h52
+We will earn huge \hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7\hb7
+
+
+pc:
+"We seem to be safe from the
+madness inside the Pokémon Center[.]
+Oh, what are we going to do?"
+
+"The island seemed to suddenly twist
+and transform[.] I can't tell up from
+down anymore!
+And it all seems to be coming from that
+shadow by the eastern shore[.]"
+
+"I don't know what to make of this
+madness, really.
+But if you need a Pokémon with Surf
+to go face that shadow by the shore,
+I'll sell you one for [$]1,000."
+"Hey, much obliged. You go face that
+thing at your own risk, I say."
+"Ah[.] worth a shot, though?
+A crisis is the best time to make money,
+hehehe[.]"
+"Hm[.] you're out of cash?
+Geez, you're unprepared, aren't you?
+Fine-- I'll take what you have and
+leave it at that."
+
+
+
+
+
+"sinabar aylelan"
+"bootiful place !!!!!!!!!!"
+
+
+"zis iss en gymmmm"
+"trainn an be srtong"
+
+
+"pokeyman laboratoriforium"

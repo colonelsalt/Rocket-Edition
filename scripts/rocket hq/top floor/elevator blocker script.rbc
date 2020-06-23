@@ -1,0 +1,20 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+spriteface 0x5 FACE_UP
+spriteface 0xFF FACE_DOWN
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveaway
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Hey, grunt! Don't you have a\nmission to do right about now?\pQuit screwing around the hideout,\nthen!\pYou don't want to get on Petrel's\nbad side[.]
+
+#org @moveaway
+#raw STEP_L
+#raw 0xFE

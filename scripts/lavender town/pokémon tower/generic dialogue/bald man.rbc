@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= You! You are the reason for all of\nthe misery in this town!\pEverything for the sake of profit,\nisn't it? You should be ashamed!

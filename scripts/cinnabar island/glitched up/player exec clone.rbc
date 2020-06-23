@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Hello! Sorry to keep you waiting!\nWelcome to the world of Pokémon!\pMy name is [player][player][player][player][player][player][player][player][player][player][player][player][player][player][player][player][player]\pThis world is inhabited by\ncreatures called Pokémon!\pFor some people, Pokémon are pets,\nothers use them for ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg

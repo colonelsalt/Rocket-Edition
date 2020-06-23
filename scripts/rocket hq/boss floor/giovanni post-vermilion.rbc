@@ -1,0 +1,462 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define GIOVANNI 0x1
+#define ARIANA 0xA
+
+#org @main
+lock
+checkflag 0x227 // checks if Red encounter has happened
+if 0x1 goto @scriptNo2
+textcolor 0x0
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @talk 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+goto @mainScript
+end
+
+#org @mainScript
+pause 0x20
+spriteface GIOVANNI FACE_LEFT
+pause 0x20
+spriteface GIOVANNI FACE_DOWN
+pause 0x15
+msgbox @talk1.5 0x6
+pause 0x15
+applymovement GIOVANNI @walkDown
+waitmovement 0x0
+msgbox @talk2 0x6
+pause 0x20
+spriteface GIOVANNI FACE_UP
+pause 0x25
+spriteface GIOVANNI FACE_DOWN
+pause 0x20
+msgbox @talk2.5 0x6
+pause 0x15
+spriteface GIOVANNI FACE_RIGHT
+pause 0x15
+applymovement GIOVANNI @stepR
+waitmovement 0x0
+msgbox @talk2.75 0x6
+applymovement ARIANA @stepL
+waitmovement 0x0
+textcolor 0x1
+msgbox @ariTalk 0x6
+pause 0x20
+spriteface GIOVANNI FACE_DOWN
+pause 0x20
+textcolor 0x0
+msgbox @talk3 0x6
+applymovement GIOVANNI @wanderLeft
+waitmovement 0x0
+msgbox @talk3.5 0x6
+pause 0x20
+spriteface GIOVANNI FACE_DOWN
+pause 0x20
+msgbox @talk4 0x6
+applymovement GIOVANNI @wander1
+waitmovement 0x0
+msgbox @talk5 0x6
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @talk5.5 0x6
+applymovement GIOVANNI @wander2
+waitmovement 0x0
+msgbox @talk6 0x6
+applymovement GIOVANNI @wander3
+waitmovement 0x0
+msgbox @talk7 0x6
+pause 0x20
+additem 0x167 0x1
+loadpointer 0x0 @scopeGet
+giveitem2 0x167 0x1 0x13E
+closeonkeypress
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @talk8 0x6
+setvar 0x4018 0x5
+setvar 0x4026 0x1 // activates Leto the Cutter (Route 9)
+setflag 0x221
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Giovanni: Ah, if it isn't\n[player]. Well, come on up.
+
+#org @movePlayer
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @talk1.5
+= I've heard you did well in your\nforays in Cerulean and Vermilion.\pWell done. If you keep up this\nperformance we'll have little\lchoice but to promote you before\llong.
+
+#org @talk2
+= Hm..?\p[.]\pMm-hm[.] So you're telling me this\nRed kid has already beaten two Gym\lLeaders and is heading for his\lthird.\pWell[.] we should keep half an eye\non his whereabouts, but we can\lhardly follow him around at all\lhours.
+
+#org @talk2.5
+= Besides, the fact that you managed\nto beat the other kid Trainer from\lMt. Moon shows that we've\lprobably largely overestimated\lthe threat these kids pose anyway.\pWith any luck their little bout\nwith Team Rocket will turn out to\lhave been nothing but a brief,\lone-off accident.
+
+#org @talk2.75
+= Isn't that right, Ariana?
+
+#org @ariTalk
+= Ariana: If you say so, Giovanni.
+
+#org @talk3
+= Giovanni: Be that as it may[.] we\nhave some more pressing matters to\lattend to right now-- listen up:\pApparently Mr. Fuji of Lavender\nTown has gotten so resentful of\lour exploits in the Pokémon Tower\lthat he has decided to take\lmatters into his own hands.
+
+#org @walkDown
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @wanderLeft
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk3.5
+= Fuji's no master Trainer, but he\nhas experience enough-- he has\lmanaged to knock out all of the\lgrunts we have stationed in\lLavender.\pHe has made his way up to the top\nof the Pokémon Tower and vows to\lstay there until "the souls of the\lmurdered Pokémon have departed" or\lsomething of the like.
+
+#org @talk4
+= Anyway, the bottom line is: The\nold man has cut off our supply of\lCubone skulls at a time when\ldemand is at an all-time high!\pWe need to have him thoroughly\ndetained and incapacitated, so\lhe'll learn to stay out of our way\lfor good!\pThis is where you come in,\n[player].
+
+#org @wander1
+#raw 0x1C
+#raw STEP_R
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @talk5
+= Now, I would normally send one of\nmy admins on such a job, but most\lof them are off on other missions,\land the others[.]\pWell[.]\c\h08ó\I suspect they're a little\ntoo scared of ghosts to take the\linitiative.
+
+#org @talk5.5
+= This is a prime opportunity for\nyou to prove your worth, [player].\pI hope I won't be disappointed.
+
+#org @wander2
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @talk6
+= Lavender Town is east of here,\nthrough Saffron or the Underground\lPath.\pGet over there as soon as\npossible.
+
+#org @wander3
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk7
+= You'll also want to carry one of\nthese lest you're really keen on\lbeing scared to death by Pokémon\lghosts.
+
+#org @scopeGet
+= [player] received the Silph Scope\nfrom Giovanni.
+
+#org @talk8
+= Well?\c\h08ó\Get going, [player]!\nNo use standing around.\pGo teach that Fuji a thing or two\nabout messing with Team Rocket!
+
+
+//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
+
+#org @scriptNo2
+applymovement GIOVANNI @pacing
+waitmovement 0x0
+applymovement GIOVANNI @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk 0x6
+applymovement GIOVANNI @bossWander
+waitmovement 0x0
+msgbox @bossTalk2 0x6
+applymovement GIOVANNI @bossWander2
+waitmovement 0x0
+msgbox @bossTalk3 0x6
+pause 0x25
+spriteface GIOVANNI FACE_UP
+pause 0x35
+msgbox @bossTalk4 0x6
+applymovement GIOVANNI @bossWander3
+waitmovement 0x0
+msgbox @bossTalk5 0x6
+pause 0x30
+spriteface GIOVANNI FACE_LEFT
+pause 0x20
+msgbox @bossTalk6 0x6
+pause 0x35
+spriteface GIOVANNI FACE_RIGHT
+pause 0x25
+msgbox @bossTalk7 0x6
+pause 0x10
+applymovement ARIANA @stepL
+waitmovement 0x0
+textcolor 0x1
+msgbox @Atalk 0x6
+pause 0x20
+spriteface ARIANA FACE_UP
+pause 0x20
+msgbox @Atalk2 0x6
+pause 0x10
+spriteface GIOVANNI FACE_DOWN
+pause 0x8
+sound 0x15 // exclamation
+spriteface ARIANA FACE_DOWN
+applymovement GIOVANNI @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk8 0x6
+pause 0x25
+spriteface GIOVANNI FACE_UP
+pause 0x25
+msgbox @bossTalk9 0x6
+pause 0x20
+applymovement GIOVANNI @stepU
+waitmovement 0x0
+msgbox @bossTalk10 0x6
+pause 0x20
+spriteface GIOVANNI FACE_DOWN
+pause 0x20
+msgbox @bossTalk11 0x6
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk12 0x6
+pause 0x15
+fadescreen 0x1
+special 0x113
+setvar 0x8002 0x13
+setvar 0x8003 0x7
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0x13 0x7
+movesprite GIOVANNI 0x13 0x5
+movesprite ARIANA 0x15 0x6
+movesprite 0x6 0x10 0xE // moves guard grunts
+movesprite 0x5 0x13 0xE // back to original position
+movesprite 0xD 0x9 0x9
+spriteface GIOVANNI FACE_DOWN
+spriteface ARIANA FACE_LEFT
+special 0x114
+pause 0x30
+fadescreen 0x0
+applymovement GIOVANNI @bossWander4
+waitmovement 0x0
+msgbox @bossTalk13 0x6
+applymovement GIOVANNI @bossWander5
+waitmovement 0x0
+msgbox @bossTalk14 0x6
+pause 0x30
+spriteface GIOVANNI FACE_DOWN
+pause 0x35
+msgbox @bossTalk15 0x6
+pause 0x20
+spriteface GIOVANNI FACE_LEFT
+pause 0x25
+applymovement GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bossTalk16 0x6
+pause 0x15
+spriteface GIOVANNI FACE_DOWN
+pause 0x15
+setvar 0x4018 0x5 // deactivates tile script for talking to Giovanni
+setflag 0x228
+goto @flashbackStart
+release
+end
+
+#org @flashbackStart
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk17 0x6
+pause 0x20
+setvar 0x401D 0x5 // needed to activate Indigo Plateau level script
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+writebytetooffset 0x1 0x02036E28 // Activate greyscale tint effect
+warpmuted 0x21 0x0 0xFF 0xB 0x7
+end
+
+#org @pacing
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0x1A
+#raw STEP_L
+#raw 0x1C
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw 0x1A
+#raw STEP_R
+#raw 0x1C
+#raw 0x1A
+#raw FACE_U
+#raw 0x1C
+#raw 0x1A
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk
+= Giovanni: Ariana, it's[.]\pPositively the worst humiliation\nwe have ever been through.
+
+#org @bossWander
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+#raw 0xFE
+
+#org @bossTalk2
+= [.]\pIf Lance and the Elite Four had\nstormed in here and busted us out,\lI would have been furious[.]\pIf some petty small-time gang\ndecided to marshall all its\lresources for a successful strike\lagainst us, I would have taken it\las a slight upon my honor[.]
+
+#org @bossWander2
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk3
+= But this, Ariana!\c\h08ó What the devil\ncould have prepared me for this?\pA child!\c\h08ó I mean[.] what in Arceus's\nname am I to make of this?!
+
+#org @bossTalk4
+= The most prestigous, notorious\norganization in all of Kanto[.]\lbrought to its knees at the hands\lof some preadolescent twerp!\pI am disgusted, revulsed,\nashamed[.]\c\h08ó at our incompetence.
+
+#org @bossWander3
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk5
+= [.]\pI've been naive[.] underestimated\nthe kid[.] and look at him now!\pFour Badges and fully evolved\nPokémon in his arsenal[.]
+
+#org @bossTalk6
+= Who knows? Before we know it he'll\nhave earned the right to challenge\lViridian Gym, and will demand that\lits Leader show up and accept his\lchallenge[.]
+
+#org @bossTalk7
+= [.]\pNo, let's not get ahead of\nourselves.\pBut if it happens[.]\c\h08ó we will have\nto be ready, Ariana.
+
+#org @Atalk
+= Ariana: You know I'm always\nprepared for every eventuality,\lGiovanni.\pThere are those of us you can\ncount on to stand by your side\luntil the end and beyond[.]\lif need be.
+
+#org @Atalk2
+= Which, à propos[.]\pIt would seem as if your favorite\nlittle grunt has graced us with\lhis presence.
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk8
+= Giovanni: [player]!\c\h08ó\nSo you've returned[.]
+
+#org @bossTalk9
+= I'll be frank and tell you that\nFuji's antics are the least of my\lconcerns at the moment, but let's\lhear whatever you have to report\lanyway.\pQuickly, you hear?
+
+#org @bossTalk10
+= [.]\pWhat's that?\c\h08ó\nThere's more?
+
+#org @bossTalk11
+= [.]\pOh?\p[.]\c\h08ó\nOh!\c\h08ó Could it be..?
+
+#org @bossTalk12
+= Well, fine-- you've piqued my\ninterest.\pTake it from the start, if you\nwould[.]
+
+#org @bossWander4
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk13
+= Giovanni: [.]\c\h08ó\\n(A Pallet Town native, then?)\p(And licensed for Pokémon\ntraining by the chief traitor\lhimself[.])\p(Well, that explains how the kid\ngot ahold of that freak of a\lCharizard, at least[.])
+
+#org @bossWander5
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk14
+= So Oak is looking for Fuji, is he?\pGod, what is he planning?!\c\h08ó\nDoes he know about us..?\pThis could be bad[.]\c\h08ó\nThis could be very bad indeed[.]
+
+#org @bossTalk15
+= [.]\c\h08ó\n(Sigh[.])\pI think, [player][.]\pI think it's about time you\nlearned the truth.
+
+#org @bossTalk16
+= The things that happened in secret\nin that final year of the war[.]\pI never thought to tell it all to\na mere grunt, but[.]\pI believe you've proven yourself\nworthy of hearing it.\pAnd if you're going to work with\nme to set things straight, it's\lbest you had it clean from me.
+
+#org @bossTalk17
+= I'm going to tell you everything.

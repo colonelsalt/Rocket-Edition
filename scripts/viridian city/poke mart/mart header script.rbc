@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x2F0
+if 0x0 call @bountyCheck
+end
+
+#org @bountyCheck
+compare 0x401F 0x78
+if 0x4 call @sinisterSong
+end
+
+#org @sinisterSong
+playsong2 0x112
+return

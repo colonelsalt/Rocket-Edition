@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4014 0x5
+if 0x4 goto @postMission
+msgbox @talk 0x6
+release
+end
+
+#org @postMission
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Ohhh! You're one of those R-people\nfrom the city my ma told me about!\pYou guys are some real trouble-\nmakers, aren't ya?\pI never thought I'd see one of you\nfor real[.]\p[.]\pCan you commit a crime here maybe?\nOh, it would be so exciting!
+
+#org @talk2
+= Oh, oh, oh!\pAll that commotion from Blue's\nhouse! Was it you, R-man?\pHow exciting! They're going to be\ntalking about this for months!

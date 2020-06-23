@@ -1,0 +1,42 @@
+#dynamic 0x800000
+// person event 0xA
+
+#org @start
+lock
+faceplayer
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x204
+if 0x1 goto @postTutorial
+msgbox @talk 0x6
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+release
+end
+
+#org @postTutorial
+msgbox @talk2 0x6
+release
+end
+
+#org @postRed
+msgbox @talk4 0x6
+release
+end
+
+#org @talk
+= Heh, you going out to steal your\nfirst Pokémon, are you?\pTake note: as a grunt you only\nhave authority enough to steal\lfrom children and old people.\pTry anyone else and they'll just\nblow you off!
+
+#org @talk2
+= What are you looking at, punk?\nWant a piece of me?\p[.]\pHaha[.] what? Just practicing my\ntough-guy demeanor.
+
+#org @talk3
+= Surely I'm not the only one who\nfinds it funny that the cops are\lrewarding me for being nice[.]\pOnly because I was bad before[.]\c\h08ó\n[.]\pLike, I just feel like there's\nsome moral contradiction here, but\lI just can't put my finger on it[.]
+
+#org @talk4
+= Dude, that kid was borderline\nmute. Almost didn't say a word.\lLike a sociopathic killer.\p[.]\pEither that, or he's just\ncompensating for his lack of\lsocial skills by being really good\lat Pokémon.

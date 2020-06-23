@@ -1,0 +1,19 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveaway
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Petrel: Hey, where do you think\nyou're going, grunt?\pCome back here and do as you're\ntold!
+
+#org @moveaway
+#raw STEP_L
+#raw STEP_U
+#raw 0xFE

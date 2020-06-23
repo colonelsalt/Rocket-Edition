@@ -1,0 +1,272 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define LANCE 0x6
+#define STEVEN 0x7
+
+#org @main
+lockall
+pause 0x15
+sound 0x15 // exclamation
+applymovement 0xFF @exclamation
+waitmovement 0x0
+fadeout 0x0
+special 0x113
+applymovement 0xFF @playerHide
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+pause 0x20
+applymovement STEVEN @stepU
+waitmovement 0x0
+playsong 0x121 0x0
+textcolor 0x0
+msgbox @stoneTalk1 0x6
+applymovement LANCE @stepD
+waitmovement 0x0
+msgbox @adminTalk1 0x6
+pause 0x20
+spriteface LANCE FACE_LEFT
+pause 0x25
+spriteface LANCE FACE_DOWN
+pause 0x20
+msgbox @adminTalk2 0x6
+pause 0x25
+spriteface STEVEN FACE_LEFT
+pause 0x30
+spriteface STEVEN FACE_UP
+pause 0x25
+msgbox @stoneTalk2 0x6
+pause 0x15
+spriteface LANCE FACE_RIGHT
+pause 0x25
+msgbox @adminTalk3 0x6
+pause 0x15
+spriteface LANCE FACE_DOWN
+pause 0x20
+msgbox @adminTalk4 0x6
+pause 0x15
+applymovement STEVEN @stoneStroll
+waitmovement 0x0
+msgbox @iSee 0x6
+pause 0x20
+spriteface STEVEN FACE_UP
+pause 0x20
+msgbox @stoneTalk3 0x6
+pause 0x35
+msgbox @ellipsis 0x6
+pause 0x15
+applymovement LANCE @stepD
+waitmovement 0x0
+msgbox @adminTalk5 0x6
+pause 0x20
+spriteface STEVEN FACE_RIGHT
+pause 0x25
+msgbox @stoneTalk4 0x6
+applymovement LANCE @stepD
+waitmovement 0x0
+msgbox @adminTalk6 0x6
+pause 0x20
+spriteface STEVEN FACE_UP
+pause 0x25
+msgbox @stoneTalk5 0x6
+applymovement LANCE @adminStroll
+waitmovement 0x0
+msgbox @adminTalk7 0x6
+pause 0x20
+spriteface LANCE FACE_DOWN
+pause 0x25
+msgbox @adminTalk8 0x6
+applymovement STEVEN @stoneStroll2
+waitmovement 0x0
+msgbox @stoneTalk6 0x6
+applymovement LANCE @adminStroll2
+waitmovement 0x0
+msgbox @adminTalk9 0x6
+pause 0x30
+applymovement LANCE @adminStroll3
+waitmovement 0x0
+spriteface STEVEN FACE_RIGHT
+msgbox @adminTalk10 0x6
+pause 0x25
+applymovement LANCE @adminStroll4
+waitmovement 0x0
+pause 0x8
+cry 0x95 0x0
+applymovement LANCE @flyStep
+waitmovement 0x0
+pause 0x40
+setanimation 0x0 0x1
+doanimation 0x1E
+pause 0xF
+hidesprite LANCE
+checkanimation 0x1E
+setflag 0x218
+pause 0x28
+spriteface STEVEN FACE_LEFT
+pause 0x10
+applymovement 0x7F @cameraBack
+waitmovement 0x0
+special 0x114
+setvar 0x4016 0x5
+fadeout 0x0
+playsong 0x130 0x0
+releaseall
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @playerHide
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw FACE_L
+#raw 0xFE
+
+#org @stoneTalk1
+= Steven: It is a pleasure to\nfinally get to meet you in person,\lLance.\pI have heard much about the state\nof Kanto affairs under your reign\lfrom my advisors, but I've always\lwanted the opportunity to discuss\lit with you personally.\pAre you optimistic about your\nregion's future?
+
+#org @adminTalk1
+= Lance: Oh, let me tell you, Mr.\nStone-- they're calling it the\lgolden age of Kanto, but we're\lonly just beginning!\pNot only have living standards\nincreased dramatically in the\lpostwar decade, but our economy is\lin an unparalleled boom!
+
+#org @adminTalk2
+= To think that Silph Co., once a\nKanto family business, now has a\lnear nationwide monopoly on the\lproduction of Poké Balls!\pFuschia's Safari Zone is also\nattracting an ever-increasing mass\lof tourists.\pAnd that isn't even to mention\nwhat the region's brightest\lentrepeneurs have in store for\lSaffron and Lavender in the coming\lyears!\pYes, Kanto has turned out quite\nthe prosperous region, rest\lassured.
+
+#org @stoneTalk2
+= Steven: Well[.] it sounds like\nprivate enterprise is doing well\lat the very least.\pBut what of the people, Lance?\nDo they approve of you?\pI don't mean to draw unwarranted\ncomparisons to the past, but I'm\lled to understand that your\lpredecessor was quite universally\lrevered, even though times were\ltougher then.\pHow do you compare with him in the\neyes of your citizens?
+
+#org @adminTalk3
+= Lance: Ha!\c\h08ó Yes, my predecessor was\nloved by all[.]\pUp until the moment he surrendered\nfrom the war, that is!\pAnybody with any sense stopped\nadoring a Champion who would give\lup his region's independence and\lhonor just to save his own skin\lpretty quick, I'll tell you!
+
+#org @adminTalk4
+= Look, I know that having conquered\nKanto in war as a Johto general\lnecessarily means that some of my\lcitizens won't take too kindly to\lme right away.\pBut I daresay my entry in the\nhistory books will be more\lfavorable than that old coward's!
+
+#org @stoneStroll
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @iSee
+= Steven: I see[.]
+
+#org @stoneTalk3
+= I hope you'll excuse my lacking\nboth in political experience\land memory, but[.]\pWhat was the name of this\npredecessor of yours again?
+
+#org @cameraBack
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @ellipsis
+= Lance: [.]\c\h08ó
+
+#org @adminTalk5
+= His name[.]\c\h08ó\c\h08ó\was Samuel Oak.\c\h08ó\pI'm certainly not apt to forget\nthat anytime soon.
+
+#org @stoneTalk4
+= Steven: Oh, that's right.\c\h08ó\nAnd this Oak[.]\pHe has now given up battling\naltogether and resigned himself\lcompletely to his Pokémon\lresearch?\pI understand his Pokédex system\nhas become quite renowned in\lacademic circles-- even in Hoenn.\pIt's quite impressive.
+
+#org @adminTalk6
+= Lance: Heh.\pOh, Mr. Stone-- Oak didn't give up\nbattling of his own accord.\pI saw to it that he was banned\nfrom ever taking part in a Pokémon\lbattle again the moment he called\lfor surrender!\pI suppose his research endeavors\nwere all he had left to attend to\lin his postwar life.
+
+#org @stoneTalk5
+= Steven: Is that really so?\pI must say, your region's\npolitical history intrigues me,\lLance.\pIf you don't mind my asking[.]\pWhy in the world do you think such\na powerful and respected Trainer\las this Samuel Oak would surrender\lwithout a fight?\pIt seems so odd. So unlike a\nChampion, wouldn't you say?
+
+#org @adminStroll
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk7
+= Lance: I see no mystery in that\nwhatsoever.\pWe were winning the war, and the\nold man got scared for his life,\lsimple as that.\pSome high-level Kanto scientists\nwere allegedly trying to make\lgenetically engineered warfare\lPokémon around then as a last\lresort, but nothing came of it.\pAnd once we got the Legendary Dogs\nunder our control, victory was more\lor less guaranteed either way.
+
+#org @adminTalk8
+= Some Kanto patriots may like to\ntell the story different, but\lthat's the truth of it, Mr. Stone.
+
+#org @stoneStroll2
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stoneTalk6
+= Steven: Hm[.]\pWell, it was an interesting turn\nof events in any case, I have to\lsay.
+
+#org @adminStroll2
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk9
+= Lance: Well, I'm glad I could keep\nyou entertained.
+
+#org @adminStroll3
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk10
+= Now, if you'll excuse me[.]\pI'm afraid I'll have to leave you\nto attend to some Indigo League\lbusiness.\pI hope you'll keep enjoying the\nKanto air for as long as it lasts,\lMr. Stone.\pVermilion is a beautiful city.
+
+#org @adminStroll4
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @flyStep
+#raw 0x25
+#raw 0xFE

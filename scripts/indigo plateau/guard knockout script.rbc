@@ -1,0 +1,106 @@
+#dynamic 0x800000
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0xE
+#define _GUARD_KOD 0x15
+#define _RATICATE 0x14
+#define _BILL 0x13
+#define _GUARD 0x4
+
+#org @main
+lock
+applymovement _RONNIE @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @ronnieTalk1 0x6
+pause 0x20
+cry 0x14 0x0
+pause 0x10
+applymovement _RATICATE @attack
+pause 0x40
+sound 0x79 // slash sound
+pause 0x9
+fadescreen 0x2
+hidesprite _GUARD
+setflag 0x240
+movesprite2 _GUARD_KOD 0x3 0x2
+movesprite _GUARD_KOD 0x3 0x2
+showsprite _GUARD_KOD
+waitmovement 0x0
+pause 0x10
+applymovement _RATICATE @retreat
+waitmovement 0x0
+pause 0x25
+spriteface _BILL FACE_RIGHT
+pause 0x20
+spriteface _BILL FACE_UP
+pause 0x20
+spriteface _BILL FACE_RIGHT
+pause 0x20
+msgbox @billTalk1 0x6
+pause 0x20
+spriteface _RONNIE FACE_DOWN
+pause 0x15
+applymovement _RONNIE @stepD
+waitmovement 0x0
+msgbox @ronnieTalk2 0x6
+pause 0x10
+cry 0x14 0x0
+applymovement _RATICATE @wiggle
+waitmovement 0x0
+setvar 0x4014 0x17
+setvar 0x4016 0x35
+warpmuted 0xD 0x0 0xFF 0x4 0x3
+waitstate
+end
+
+#org @ronnieTalk1
+= Ronnie: Raticate!\c\h08ó\nGive us a Hyper Fang!
+
+#org @billTalk1
+= Bill: [.]\c\h08ó\nWell[.] that works.
+
+#org @ronnieTalk2
+= Ronnie: Don't worry, [player]!\pMe and Raticate will stand guard\nhere and keep nosy people out.\pYou go do what you've got to do!
+
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @attack
+#raw 0x2B
+#raw 0x2B
+#raw 0x2B
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x50
+#raw 0xFE
+
+#org @retreat
+#raw STEP_R2
+#raw FACE_D
+#raw 0xFE
+
+#org @wiggle
+#raw 0x25
+#raw 0x25
+#raw 0x25
+#raw 0xFE
+
+

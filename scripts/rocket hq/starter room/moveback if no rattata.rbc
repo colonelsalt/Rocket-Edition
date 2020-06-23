@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @start
+lock
+textcolor 0x00
+msgbox @talk 0x6
+applymovement 0xFF @move
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Petrel: Hey!\nGrunt number two!\pGet your ass back here and pick up\nyour Rattata!
+
+#org @move
+#raw STEP_D
+#raw 0xFE

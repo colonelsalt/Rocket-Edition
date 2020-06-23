@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x11E 0x0 @challenge 0x8175CEB EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Silph is giving me a better career\nthan I ever could have dreamed!\pYou're not gonna take it all away!
+
+#org @postBattle
+= We still have plenty of security\nguards to defend us!\pThere's still hope[.]

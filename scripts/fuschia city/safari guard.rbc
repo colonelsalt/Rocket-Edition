@@ -1,0 +1,140 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GUARD 0x1
+
+#org @main
+lock
+textcolor 0x0
+msgbox 0x8197C6B MSG_KEEPOPEN
+spriteface 0xFF FACE_RIGHT
+pause 0x10
+msgbox @guardTalk2 0x6
+checkitem 0x170 0x1 // if has Employee card
+compare LASTRESULT 0x1
+if 0x1 goto @employeeEnter
+msgbox @guardTalk3 0x6
+applymovement 0xFF @moveDown
+waitmovement 0x0
+release
+end
+
+#org @employeeEnter
+msgbox @guardTalk4 0x6
+pause 0x10
+applymovement _GUARD @walkToPhone
+waitmovement 0x0
+fadeout 0x0
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x8
+cry 0x19A 0x0
+waitcry
+pause 0x14
+msgbox @guardTalk5 0x6
+pause 0x15
+sound 0x7C
+checksound
+compare 0x402F 0x2
+if 0x4 goto @teethTaken
+msgbox @wardenTalk 0x6
+sound 0x19
+checksound
+pause 0x20
+spriteface _GUARD FACE_LEFT
+fadein 0x0
+pause 0x20
+msgbox @ellipses 0x6
+pause 0x30
+applymovement _GUARD @walkToPlayer
+waitmovement 0x0
+pause 0x10
+applymovement _GUARD @stepL
+waitmovement 0x0
+msgbox @guardTalk6 0x6
+applymovement 0xFF @moveDown
+waitmovement 0x0
+release
+end
+
+#org @teethTaken
+msgbox 0x198DF9 0x6
+pause 0x15
+applymovement _GUARD @stepR
+waitmovement 0x0
+msgbox @guardTalk7 0x6
+sound 0x19
+checksound
+fadein 0x0
+pause 0x25
+applymovement _GUARD @walkToPlayer
+waitmovement 0x0
+pause 0x10
+applymovement _GUARD @stepL
+waitmovement 0x0
+msgbox @guardTalk8 0x6
+setvar 0x4030 0x1
+release
+end
+
+
+#org @guardTalk2
+= For just [$]500, you can play the\nSafari Ga--\c\h08ó\pHey[.]\c\h08ó I'll be darned if I haven't\nseen that uniform before..!
+
+#org @guardTalk3
+= Warden Slowpoke said loud and\nclear-- "none of those Rocket\lfolks in our Safari Zone"!\pBad for business, you see.\nYou're gonna have to leave, pal.
+
+#org @guardTalk4
+= Wait[.]\c\h08ó What's that you got there?\nOh, it's one of our employee IDs!\p[.]\pSo you're just passing through to\nfeed the Pokémon or something, eh?\p[.]\pYou know, I've[.]\c\h08ó never seen your\nface here before, have I?\lAnd that uniform you've got[.]\pSay, let me just call the Warden\nto make sure nothing fishy's going\lon[.]\pDon't mean to be paranoid, it's\njust procedure. Hang on a sec.
+
+#org @guardTalk5
+= Yeah, Warden, is it?\pNothing much to bother you, sir,\nsee[.]\c\h08ó I was just wondering[.]\pDo we have a[.]\c\h08ó er--\c\h08ó a[.]\pPink-haired young dude with a[.]\c\h08ó\npajama-looking outfit[.]\lRed "R" across his chest[.]\lName of[.]\l"Mohammed Smith"[.]\l..working here at the Safari Zone?
+
+#org @wardenTalk
+= Warden: Argh!\c\h08ó You useless idiot!\nDon't you see?!\pIt's one of those Rocket goons\ntrying to sneak their way in!\pDo not let that thug into my\nSafari Zone for any reason!
+
+#org @ellipses
+= [.]
+
+#org @guardTalk6
+= Thought you could fool me, did\nyou, Rocket?\pHah! I could see you were a\ncriminal from miles away!\pGo bother someone else, why don't\nyou? No place for your sort here!
+
+#org @guardTalk7
+= Er[.]\c\h08ó\nLook, Warden, sir, I[.]\lCan't hear a word you're saying[.]\lCould you[.]\c\h08ó speak a bit clearer..?\p[.]\c\h08ó\n..what?\pI can tell you're getting worked\nup, boss, but[.]\c\h08ó I can't[.]\p[.]\p(Sigh[.])\c\h08ó\nThis isn't working[.]
+
+#org @guardTalk8
+= Look, I can't understand a word\nthat old senile is saying today[.]\pYou know[.]\pYou seem legit enough to me, pal.\c\h08ó\nCome on through.\pMake sure those Chansey stay extra\nfat, eh?\c\h08ó Ha-ha-ha[.]
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE
+
+#org @walkToPhone
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @walkToPlayer
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw FACE_L
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE

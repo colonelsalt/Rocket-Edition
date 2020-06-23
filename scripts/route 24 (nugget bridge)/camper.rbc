@@ -1,0 +1,20 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x90 0x0 @challenge @defeat POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9754
+msgbox @after MSG_NORMAL
+end
+
+
+#org @challenge
+= Okay! I'm No. 5!\nI'll--\pOh, what's the use?\pYou're going to beat me anyway,\naren't you?
+
+#org @defeat
+= What a drag.
+
+#org @after
+= I have every regret in the world[.]

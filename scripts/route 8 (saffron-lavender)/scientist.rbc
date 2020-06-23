@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @after
+= Young man, if you've never solved\na partial differential equation,\lyou've never truly been alive.

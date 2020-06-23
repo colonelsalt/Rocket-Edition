@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @start
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Who's that tough guy calling a\npipsqueak?\pI'll show him a thing or two[.]

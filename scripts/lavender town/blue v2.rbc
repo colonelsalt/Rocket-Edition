@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x1
+
+#org @main
+lock
+spriteface BLUE FACE_RIGHT
+playsong 0x13B 0x0
+textcolor 0x0
+msgbox @heyYou 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+goto 0x8240ED
+end
+
+#org @heyYou
+= Blue: Hey, you!
+
+#org @movePlayer
+#raw STEP_L
+#raw 0xFE

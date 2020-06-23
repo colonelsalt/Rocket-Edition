@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk MSG_KEEPOPEN
+release
+end
+
+#org @talk
+= There aren't many serious Pokémon\nTrainers here.\pThey're all like Bug Catchers,\nyou know, just hobbyists.\pPrime targets for your brand of\nthievery, aren't they, Rocket?\pHahahaha[.]\nPoor bastards.

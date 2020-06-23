@@ -1,0 +1,86 @@
+#dynamic 0x800000
+#define MISSINGNORELEASE 0x83F75E
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x4089 0x1 // if Bag was full when Nugget offered
+if 0x1 goto @getNugget
+checkflag 0x2F0
+if 0x1 goto @postGame
+compare 0x4016 0x10
+if _GREATER_EQ goto @postCapture
+compare 0x4016 0xF // if MissingNo released but not caught
+if 0x1 goto @postRelease
+compare 0x4016 0xE // if MissingNo not released yet, goto release script
+if 0x1 goto MISSINGNORELEASE
+msgbox @shouldNotReach 0x6
+release
+end
+
+#org @postRelease
+msgbox @releaseTalk2 0x6
+release
+end
+
+#org @postCapture
+msgbox @postCaptureTalk 0x6
+release
+end
+
+
+#org @getNugget
+msgbox @nuggetTalk 0x6
+checkitemroom 0x6E 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+setvar 0x4089 0x2
+fanfare 0x101
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+additem 0x6E 0x1
+msgbox @putAway MSG_KEEPOPEN
+setvar 0x4089 0x2
+pause 0x10
+textcolor 0x0
+goto @postGame
+release
+end
+
+#org @postGame
+msgbox @postGameTalk 0x6
+release
+end
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+release
+end
+
+
+#org @shouldNotReach
+= [.]eh?
+
+#org @releaseTalk2
+= Shigeki: Now go, Rocket!\pFly to Cinnabar Island and Surf\nalong its eastern shore!\pCapture that vile creature, and\nlay this matter to rest once and\lfor all!
+
+#org @nuggetTalk
+= Shigeki: Oy then, [player]!\nHere's that Nugget!
+
+#org @noRoomTalk
+= You absolutely useless piece of\ncurdled foreskin!\pMake some room for this Nugget,\nwon't you?!
+
+#org @postCaptureTalk
+= Rocket, I'm eternally grateful!\pNow you caught "the Catastrophe",\nyou've set my mind at ease.\p[.]\pPhew[.]\nIs it time for a drink already?
+
+#org @postGameTalk
+= Shigeki: My, what an adventure\nyou've had, [player]!\pJust let me know if you need me to\nteach you how to catch a Rattata\lsometime, eh?\pFwahahahaha[.]
+
+#org @itemMsg
+= [player] received a Nugget!
+
+#org @putAway
+= [player] put the Nugget in the\nItems pocket.

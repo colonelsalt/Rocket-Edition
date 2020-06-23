@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x13B 0x0 @challenge 0x8185FAE EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= They have TMs on sale at the\nCeladon Dept. Store.\pBut they won't sell 'em to bandits\nlike you!
+
+#org @postBattle
+= Come into the light, Rocket!\pThose policemen in the cities will\ngive you TMs if you stay good!

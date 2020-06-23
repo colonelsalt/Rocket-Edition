@@ -1,0 +1,36 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define F_AIDE 0x5
+
+#org @main
+trainerbattle 0x2 0x26 0x0 @challengeText @defeatText @after
+end
+
+#org @after
+call POKESTEAL
+pause 0x10
+textcolor 0x1
+msgbox @leaveText 0x6
+pause 0x10
+fadescreen 0x1
+pause 0x5
+sound 0x9
+hidesprite F_AIDE
+setflag 0x232
+checksound
+fadescreen 0x0
+setvar 0x4016 0x12
+release
+end
+
+#org @challengeText
+= The professor told us to lock the\ndoor to keep thugs like you out!\pI don't want to fight you, but\nlike my mother used to say[.]\pAlways be safe!
+
+#org @defeatText
+= Did you not feel anything?
+
+#org @leaveText
+= This is outrageous..!\nWe're just[.] doing our job!
+
+
+

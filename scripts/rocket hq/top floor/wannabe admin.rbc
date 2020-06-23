@@ -1,0 +1,12 @@
+#dynamic 0x800000
+// PE C
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk2
+= I wonder what I'll have to do for\nthem to promote me to Rocket\lAdmin.\pI figure taking Pokémon from kids\nand old fogeys has to be the least\lof it. Sigh[.]

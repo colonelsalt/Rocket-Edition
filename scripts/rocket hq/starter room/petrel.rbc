@@ -1,0 +1,24 @@
+#dynamic 0x800000
+
+#org @start
+lock
+faceplayer
+checkflag 0x202
+if 0x0 goto @preRattata
+msgbox @talk 0x6
+spriteface 0x0 FACE_DOWN
+release
+end
+
+#org @talk
+= What's with the dawdling, grunt?\nUp the stairs with you!
+
+#org @preRattata
+textcolor 0x0
+msgbox @talk2 0x6
+spriteface 0x0 FACE_DOWN
+release
+end
+
+#org @talk2
+= Yes? Go get your Rattata, grunt!

@@ -1,0 +1,56 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SCIENTIST 0x1
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+trainerbattle 0x3 0x16 0x0 @defeatText
+msgbox @talk2 0x6
+fadescreen 0x1
+// moves characters and camera to new position
+special 0x113
+setvar 0x8002 0xC
+setvar 0x8003 0xA
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0xC 0xA
+movesprite _SCIENTIST 0xC 0xD
+spriteface 0xFF FACE_DOWN
+spriteface _SCIENTIST FACE_UP
+special 0x114
+fadescreen 0x0
+textcolor 0x2
+msgbox @swipe 0x4
+lockall
+sound 0x19
+checksound
+pause 0x10
+closeonkeypress
+lockall
+pause 0x10
+sound 0x26
+setmaptile 0xC 0xB 0x3B0 0x1
+setmaptile 0xD 0xB 0x3B1 0x1
+setmaptile 0xC 0xC 0x3B8 0x1
+setmaptile 0xD 0xC 0x3B9 0x1
+setmaptile 0xD 0xD 0x335 0x0
+special 0x8E
+checksound
+setflag 0x2A2
+subvar 0x402E 0x1
+release
+end
+
+#org @talk
+= Aaah! Team Rocket!\pB-but what could you possibly want\nwith humble researchers like me?\pI never did anything bad in my\nentire life!\pWaaah!\nOkay, I'll battle!
+
+#org @defeatText
+= (Sniff[.] Sob[.])\nAre you happy now?
+
+#org @talk2
+= Oh[.]\c\h08ó oh!\nYou're locking me up?\p(I-I would have gone in there\nwithout fighting you, you know[.])
+
+#org @swipe
+= [player] swiped the Card Key.

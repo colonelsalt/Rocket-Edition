@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @wall MSG_SIGN
+end
+
+#org @wall
+= Non-existant meeting room

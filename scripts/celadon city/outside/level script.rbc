@@ -1,0 +1,329 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @start
+checkflag 0x20C
+if 0x1 goto @newscript
+lock
+pause 0x08
+textcolor 0x00
+msgbox @talk1 0x6
+applymovement 0xFF @introwalk
+waitmovement 0x0
+applymovement 0x10 @step
+waitmovement 0x0
+msgbox @talk2 0x6
+applymovement 0x10 @step
+waitmovement 0x0
+msgbox @talk3 0x6
+playsong 0x110 0x0
+applymovement 0x10 @walk1
+applymovement 0xFF @playermove1
+waitmovement 0x0
+msgbox @talk4 0x6
+applymovement 0x10 @step2
+waitmovement 0x0
+msgbox @talk5 0x6
+applymovement 0xFF @playermove2
+applymovement 0x10 @walk2
+waitmovement 0x0
+applymovement 0xFF @playermove3
+applymovement 0x10 @walk3
+waitmovement 0x0
+applymovement 0x10 @walk4
+applymovement 0xFF @playermove4
+waitmovement 0x0
+sound 0xA
+applymovement 0x10 @jump
+waitmovement 0x0
+applymovement 0xFF @playermove5
+applymovement 0x10 @walk5
+waitmovement 0x0
+msgbox @talk6 0x6
+applymovement 0x10 @step2
+waitmovement 0x0
+msgbox @talk7 0x6
+spriteface 0x10 FACE_DOWN
+pause 0x30
+msgbox @ellipses 0x6
+pause 0x10
+spriteface 0x10 FACE_RIGHT
+pause 0x10
+msgbox @talk8 0x6
+spriteface 0x10 FACE_DOWN
+movesprite2 0x10 0x0D 0x11
+spritebehave 0x10 0x08
+setflag 0x207
+setvar 0x4015 0x1
+setvar 0x4013 0x1
+special 0x16F // activates National Dex
+sethealingplace 0x7
+release
+end
+
+#org @introwalk
+#raw 0x1C
+#raw 0x13
+#raw 0xFE
+
+#org @talk1
+= Ronnie: There you are!
+
+#org @step
+#raw 0x1A
+#raw 0x23
+#raw 0xFE
+
+#org @talk2
+= Okay, [player], I'm going to teach\nyou all there is to know about\lstealing people's Pokémon!\p[.]\c\h08ó\nWhat's that?\pHow am I an expert in Pokémon\ncrime all of a sudden?\pOkay, look-- yeah, I know I just\njoined Team Rocket, but I'll have\lyou know I came prepared!\pImmorality is my passion, man!
+
+#org @talk3
+= Come with me!
+
+#org @walk1
+#raw 0x1C
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x12
+#raw 0x12
+#raw 0x3
+#raw 0xFE
+
+#org @playermove1
+#raw 0x1C
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x12
+#raw 0x2
+#raw 0xFE
+
+#org @talk4
+= Er-hem! "Pokémon Robbery for\nDummies: Chapter one.\pThe first step to any successful\nPokémon heist is to pick a\lsuitable target."
+
+#org @step2
+#raw 0x1C
+#raw 0x24
+#raw 0x1C
+#raw 0xFE
+
+#org @talk5
+= Now, seeing as we're only grunts,\nwe can only steal from kids and\lold people for the time being,\lwhich sucks.\pBut hey-- I'm sure we'll be rising\nup the ranks in no time flat, so\ldon't worry about it.\pAnyway, point being: we've gotta\nfind ourselves an old fart or a\llittle brat-- give me a shout if\lyou see any.
+
+#org @walk2
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x11
+#raw 0x2
+#raw 0x1C
+#raw 0x3
+#raw 0x1C
+#raw 0xFE
+
+#org @playermove2
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0xFE
+
+#org @walk3
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x1
+#raw 0x1C
+#raw 0x0
+#raw 0x1C
+#raw 0xFE
+
+#org @playermove3
+#raw 0x11
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0xFE
+
+#org @walk4
+#raw 0x10
+#raw 0x10
+#raw 0x12
+#raw 0x12
+#raw 0xFE
+
+#org @playermove4
+#raw 0x12
+#raw 0x10
+#raw 0x10
+#raw 0x12
+#raw 0xFE
+
+#org @jump
+#raw 0x54
+#raw 0xFE
+
+#org @walk5
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @playermove5
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @talk6
+= [player], [player]! Innocent-looking\nschoolgirl six o'clock!\pMan, this is our big chance!\nOkay, okay, okay-- focus, now.\pLet me see what the experts have\nto say next[.]
+
+#org @talk7
+= "Step two: Engage your chosen\ntarget in a Pokémon battle, and\lproceed to defeat them."
+
+#org @ellipses
+= \c\h08ó.\c\h08ó.\c\h08ó.
+
+#org @talk8
+= Well, what are you waiting for?\pGo beat the crap out of the little\ngirl, now! You heard the experts.\p[.]\pWhat?\c\h08ó Who?\c\h08ó\n[.]Me?\pNaw, c'mon, man; that's-- I mean,\nthat'd be far too easy.\pBesides, you're the newbie here,\naren't you?\pYeah, um[.] I-I'll be right behind\nyou, buddy.
+
+
+///////////////////////////////////////////////////
+
+#define RONNIE 0x11
+
+#org @newscript
+lock
+pause 0x7
+spriteface RONNIE FACE_LEFT
+pause 0x7
+textcolor 0x0
+msgbox @ronintro 0x6
+applymovement 0xFF @moveplayer
+waitmovement 0x0
+applymovement RONNIE @stepL
+waitmovement 0x0
+msgbox @rontalk1 0x6
+pause 0x10
+spriteface RONNIE FACE_RIGHT
+pause 0x30
+spriteface RONNIE FACE_LEFT
+pause 0x20
+msgbox @rontalk2 0x6
+applymovement RONNIE @eagerRon
+waitmovement 0x0
+msgbox @rontalk3 0x6
+applymovement RONNIE @stepL
+waitmovement 0x0
+msgbox @rontalk4 0x6
+pause 0x15
+applymovement RONNIE @ronLeave
+waitmovement 0x0
+pause 0x15
+sound 0x9
+checksound
+movesprite2 RONNIE 0x0 0x27
+hidesprite RONNIE
+setvar 0x4015 0x1
+setvar 0x401A 0x6
+release
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @ronintro
+= Ronnie: Ah, [player]!\nGood riddance.
+
+#org @rontalk1
+= Guess who just got a brand new\nbadass mission from Petrel just\lnow?\pThat's right: we're going steal\nthese crazy rare TMs from this old\lcollector guy up in Cerulean!\pIt's going to be sick!
+
+#org @moveplayer
+#raw 0x1C
+#raw STEP_R
+#raw 0xFE
+
+#org @rontalk2
+= Yeah, um[.] sorry I got all worked\nup over the whole fossil thing\learlier[.]\pBut hey, it's all good now!\pWhy should I care about some\nstupid old fossils when I've got a\lreal robbery to take care of now,\lright?\pYeah, my time has come now, I can\nfeel it!\p[.]\p[.]\c\h08ó\nOh, what's that?\pYou've got a mission in Cerulean\ntoo? Damn, right on.\pMaybe you'll even get to see me in\naction as I break into the old\lguy's house, then, eh?
+
+#org @eagerRon
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0xFE
+
+#org @rontalk3
+= Well, I guess we better head on\neast of here through Saffron and\lthen north from there to get to\lCerulean.\pDid you hear, they made a secret\nRocket base in the Day-Care Center\lsouth of the city-- how cool is\lthat?\pHow about I meet you there?
+
+#org @rontalk4
+= Man, am I ready to do me some\nburglarizing! Talk to you later!
+
+#org @ronLeave
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE

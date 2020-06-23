@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I came all the way down here only\nto get whooped by some little kid\lTrainer.\pNow I'm too scared to move in case\nsome Zubat swoops in and attacks\lme.\pI hate my job[.]

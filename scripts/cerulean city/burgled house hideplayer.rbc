@@ -1,0 +1,5 @@
+#dynamic 0x800000
+
+#org @main
+spriteinvisible 0xFF 0x7 0x1
+end

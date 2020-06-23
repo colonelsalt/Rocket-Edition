@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @text MSG_SIGN
+end
+
+#org @text
+= Dear Blaine,\c\h08ó\nYou've positively shocked me.\pBecause of our meaningful past\ntogether, I want least of all to\lmake accusations against you,\lbut you leave me little choice.\pMy recent investigations have led\nme to conclude that you are in\lfact working with Team Rocket.\pI'm disappointed in you, but as\nyour friend, I see no need to\ltaint your near-flawless Gym\lLeader and scientific reputations\lover such a minor slip-up.\pAt least[.]\pI certainly hope you should give\nme no reason to spread my\ldiscovery further?\pI suggest we meet at your earliest\nconvenience to ensure it does not\lcome to that.\pRegards,\c\h08ó\nProf. Oak

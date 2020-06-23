@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xDA 0x0 @challenge 0x8177602 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= You're looking for Leader Blaine,\nare you?\pChill out, Rocket[.]\nLoot some valuables with me!
+
+#org @postBattle
+= All you organized criminals are so\nuptight. Gotta have a little fun.

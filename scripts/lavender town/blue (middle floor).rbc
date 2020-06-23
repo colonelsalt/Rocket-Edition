@@ -1,0 +1,26 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x7
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+applymovement BLUE @leave
+waitmovement 0x0
+sound 0x9
+hidesprite BLUE
+setflag 0x223
+checksound
+release
+end
+
+#org @talk
+= Blue: Are you superstitious at\nall, Mr. Rocket?\pSee, grandpa always told me\neverything in the world has a\lrational explanation.\pBut[.] this place[.] I really don't\nknow what to make of it.\pAll these channelers are acting so\nweird, and[.] well, they've got\lthis "purified protected zone"\lupstairs[.]\pThey tell me it's sealed by white\nmagic, a-and when I stepped on it,\lI could feel my body just[.]\lrelaxing[.] letting go.\pI don't know what to believe\nanymore.\pMaybe the world isn't as clear-cut\nas my grandpa always said[.]
+
+#org @leave
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw STEP_L
+#raw 0xFE

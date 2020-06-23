@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x216 0x0 0x81773C6 @defeat POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @defeat
+= It was worse!
+
+#org @postBattle
+= I think I'd almost rather see a\nghost than a thief like you!

@@ -1,0 +1,85 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @truck 0x6
+checkflag 0x805
+if 0x1 goto @liftTruck
+release
+end
+
+#org @liftTruck
+fadeout 0x0
+msgbox @liftTruckText 0x6
+checkflag 0x2B1
+if 0x0 goto @findMew
+msgbox @nothing 0x6
+fadein 0x0
+release
+end
+
+#org @findMew
+msgbox @ellipses MSG_KEEPOPEN
+preparemsg @foundText
+waitmsg
+cry 0x97 0x0
+pause 0x10
+waitkeypress
+setwildbattle 0x97 0x32 0x0
+preparemsg @pkmnText
+waitmsg
+waitcry
+pause 0x10
+waitkeypress
+setflag 0x807
+special 0x138
+waitstate
+clearflag 0x807
+setflag 0x2B1
+special2 LASTRESULT 0xB4
+compare LASTRESULT 0x1
+if 0x1 goto @didntEscape
+compare LASTRESULT 0x4
+if 0x1 goto @escaped
+compare LASTRESULT 0x5
+if 0x1 goto @escaped
+setflag 0x2EF
+release
+end
+
+#org @didntEscape
+setflag 0x2BF
+goto @fadeBack
+
+#org @escaped
+fadescreen 0x1
+fadescreen 0x0
+msgbox @fledText MSG_KEEPOPEN
+release
+end
+
+#org @fadeBack
+fadescreen 0x1
+fadescreen 0x0
+release
+end
+
+#org @truck
+= It's an old, worn-down truck.
+
+#org @liftTruckText
+= With the power of Strength[.]\c\h08ó\n[player] managed to lift the truck\lvery slightly[.]
+
+#org @nothing
+= [.]\c\h08ó\nThere was nothing underneath.
+
+#org @ellipses
+= [.]\c\h08ó
+
+#org @foundText
+= [.]\c\h08ó\n..huh?
+
+#org @pkmnText
+= There was a Pokémon hiding\nunderneath!
+
+#org @fledText
+= Mew flew away into the distance[.]

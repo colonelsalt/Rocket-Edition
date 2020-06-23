@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4001 0x0
+if 0x1 call 0x816DCB4
+compare 0x4001 0x1
+if 0x1 call 0x816DCC6
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox 0x89C79A MSG_KEEPOPEN '"I was a thief, but I went straight..."
+trainerbattle 0x3 0xD5 0x0 0x8199870
+call EXEC_STEAL
+checkflag 0x265
+if 0x1 goto 0x816DC68
+call 0x816DC58
+releaseall
+end

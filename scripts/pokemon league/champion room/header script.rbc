@@ -1,0 +1,93 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BLUE 0x1
+#define _OAK 0x2
+#define _RED 0x3
+#define _BILL 0x4
+#define _AGATHA 0x5
+#define _BLAINE 0x6
+#define _FUJI 0x7
+#define _RONNIE 0x8
+#define _RIGHT_GHOST 0xA
+#define _MIDDLE_GHOST 0xB
+#define _LEFT_GHOST 0xC
+#define _LEFT_HAUNTER 0x10
+#define _GENGAR 0x12
+#define _RIGHT_HAUNTER 0x11
+
+#org @main
+checkflag 0x39 // if Red has become Champion
+if 0x1 call @showGhostsMaybe
+end
+
+#org @showGhostsMaybe
+compare 0x4011 0x3 // if Agatha not defeated
+if _LESS call @playSong
+call @showGhosts
+compare 0x4011 0x3 // if Agatha defeated
+if _GREATER_EQ call @moveAgatha
+return
+
+#org @playSong
+playsong2 0x118
+return
+
+#org @moveAgatha
+movesprite2 _AGATHA 0x7 0x5
+return
+
+#org @showGhosts
+checkflag 0x2D7
+if 0x1 call @showFakeGhosts
+checkflag 0x2D7
+if 0x0 call @showRealGhosts
+movesprite2 _BLAINE 0x4 0xA
+movesprite2 _FUJI 0x7 0xB
+spritebehave _AGATHA _LOOK_DOWN
+movesprite2 _AGATHA 0x6 0x5
+spritebehave _BILL _LOOK_RIGHT
+movesprite2 _BILL 0x5 0xA
+movesprite2 0x18 0x2 0xA
+spritebehave 0x13 _LOOK_RIGHT
+movesprite2 0x13 0x2 0x9
+spritebehave 0x1C _LOOK_RIGHT
+movesprite2 0x1C 0x2 0x9
+spritebehave 0x14 _LOOK_RIGHT
+movesprite2 0x14 0x8 0x9
+movesprite2 0x15 0xA 0xA
+movesprite2 0x17 0x9 0xA
+spritebehave 0x13 _LOOK_RIGHT
+movesprite2 0x13 0x2 0x9
+spritebehave 0x1B _LOOK_LEFT
+movesprite2 0x1B 0xA 0x9
+movesprite2 _OAK 0x0 0x13
+spritebehave _BLUE _LOOK_RIGHT
+movesprite2 _BLUE 0x8 0x9
+setweather 0x6
+doweather
+return
+
+#org @showFakeGhosts
+spritebehave _LEFT_GHOST _LOOK_LEFT
+spritebehave _RIGHT_GHOST _LOOK_RIGHT
+movesprite2 _LEFT_GHOST 0x3 0x9
+movesprite2 _MIDDLE_GHOST 0x6 0xA
+movesprite2 _RIGHT_GHOST 0x9 0x9
+return
+
+#org @showRealGhosts
+movesprite2 _LEFT_HAUNTER 0x3 0x9
+movesprite2 _GENGAR 0x6 0xA
+movesprite2 _RIGHT_HAUNTER 0x9 0x9
+return
+
+
+
+
+
+
+
+
+
+
+

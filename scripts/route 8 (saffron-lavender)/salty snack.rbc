@@ -1,0 +1,17 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x221
+if 0x0 goto @snackCrate
+msgbox @nothing MSG_SIGN
+end
+
+#org @snackCrate
+msgbox @sign MSG_SIGN
+end
+
+#org @sign
+= A faint nutty aroma emanates from\nthe crate.
+
+#org @nothing
+= There's nothing here[.]

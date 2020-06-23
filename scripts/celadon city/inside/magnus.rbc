@@ -1,0 +1,17 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+applymovement LASTTALKED @faceUp
+release
+end
+
+#org @talk
+= Magnus: Hello!\nI'm the sound guy for this hack!\pI've made some new tracks based on\nmusic from the original game.\pSee if you can find them!\p[.]\pYou play with the sound off,\ndon't you?
+
+#org @faceUp
+#raw FACE_U
+#raw 0xFE

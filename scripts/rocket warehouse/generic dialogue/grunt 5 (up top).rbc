@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= That Machoke there belongs to some\nHiker who hasn't been back for it\lfor like a year.\pHaha!\pWell, he sure can't complain that\nit hasn't gotten enough exercise\lwhen he finally gets it back.

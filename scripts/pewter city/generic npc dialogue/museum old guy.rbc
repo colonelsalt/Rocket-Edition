@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= July 20, 1969!\nBought my first six-string!\pWait, no[.]\nThere was something else too[.]

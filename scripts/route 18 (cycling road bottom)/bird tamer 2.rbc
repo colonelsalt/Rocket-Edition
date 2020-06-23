@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x134 0x0 0x818768C 0x81876B3 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Go bother somebody else's birds,\nyou filthy thug!

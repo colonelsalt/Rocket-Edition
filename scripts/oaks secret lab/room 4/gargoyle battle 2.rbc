@@ -1,0 +1,130 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OFF_ROBOT 0x1
+#define _ON_ROBOT 0x3
+
+#org @main
+lock
+fadeout 0x0
+sound 0x71
+pause 0x5
+spriteface _ON_ROBOT FACE_UP
+checksound
+pause 0x40
+sound 0xA
+getplayerpos 0x8000 0x8001
+compare 0x8001 0x13
+if 0x1 goto @bottom
+compare 0x8001 0x12
+if 0x1 goto @lowerMiddle
+compare 0x8001 0x11
+if 0x1 goto @upperMiddle
+// top
+applymovement _ON_ROBOT @jump2Up
+waitmovement 0x0
+pause 0x15
+sound 0xA
+applymovement _ON_ROBOT @jumpUp
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+goto @common
+
+
+#org @bottom
+applymovement _ON_ROBOT @jumpUp
+waitmovement 0x0
+spriteface _ON_ROBOT FACE_LEFT
+spriteface 0xFF FACE_RIGHT
+goto @common
+
+#org @lowerMiddle
+applymovement _ON_ROBOT @jumpUp
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+goto @common
+
+
+#org @upperMiddle
+applymovement _ON_ROBOT @jump2Up
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+goto @common
+
+#org @common
+pause 0x15
+sound 0x52
+pause 0x7
+msgbox @talk MSG_KEEPOPEN
+pause 0x10
+sound 0x16
+checksound
+pause 0x10
+trainerbattle 0x3 0x29 0x0 @defeat
+call POKESTEAL
+setvar 0x4016 0x2B
+pause 0x20
+sound 0x3
+movesprite _ON_ROBOT 0x1C 0x1
+movesprite2 _ON_ROBOT 0x1C 0x1
+getplayerpos 0x8000 0x8001
+compare 0x8001 0x13
+if 0x1 goto @bottomVar
+compare 0x8001 0x12
+if 0x1 goto @lowerMiddleVar
+compare 0x8001 0x11
+if 0x1 goto @upperMiddleVar
+// top
+setvar 0x4047 0x4
+movesprite _OFF_ROBOT 0x17 0x11
+spriteface _OFF_ROBOT FACE_UP
+movesprite2 _OFF_ROBOT 0x17 0x11
+spritebehave _OFF_ROBOT 0x7
+showsprite _OFF_ROBOT
+release
+end
+
+
+#org @bottomVar
+setvar 0x4047 0x1
+movesprite _OFF_ROBOT 0x17 0x13
+spriteface _OFF_ROBOT FACE_LEFT
+movesprite2 _OFF_ROBOT 0x17 0x13
+spritebehave _OFF_ROBOT 0x9
+showsprite _OFF_ROBOT
+release
+end
+
+
+#org @lowerMiddleVar
+setvar 0x4047 0x2
+movesprite _OFF_ROBOT 0x17 0x13
+spriteface _OFF_ROBOT FACE_UP
+movesprite2 _OFF_ROBOT 0x17 0x13
+spritebehave _OFF_ROBOT 0x7
+showsprite _OFF_ROBOT
+release
+end
+
+#org @upperMiddleVar
+setvar 0x4047 0x3
+movesprite _OFF_ROBOT 0x17 0x12
+spriteface _OFF_ROBOT FACE_UP
+movesprite2 _OFF_ROBOT 0x17 0x12
+spritebehave _OFF_ROBOT 0x7
+showsprite _OFF_ROBOT
+release
+end
+
+#org @talk
+= STATUS 466: UNAUTHORIZED ENTRY!\c\h08ó\c\h08ó\nDISPOSAL IMMINENT!
+
+#org @defeat
+= Loading defeat message[.]\c\h08ó\n"YOU ARE BIG LOSER!"
+
+#org @jumpUp
+#raw 0x4F
+#raw 0xFE
+
+#org @jump2Up
+#raw 0x15
+#raw 0xFE

@@ -1,0 +1,8 @@
+usage:
+	special 0x113
+	setvar 0x8002 0xA
+	setvar 0x8003 0xB
+	callasm 0xLOCATION + 1
+	special 0x114
+
+A and B correspond to the camera's x and y coordinate respectively

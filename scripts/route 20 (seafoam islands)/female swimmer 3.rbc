@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x10E 0x0 0x8187F24 0x8187F5A ADMIN_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Go float away somewhere else, you\nhooligan!

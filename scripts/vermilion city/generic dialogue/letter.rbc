@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @sign
+= Dear Pippi,\nI hope to see you soon.\pI swear I've never been to the\nUnderground Path.\pThat was just a lie Susie said\nbecause she's jealous.\pBest wishes,\nJohn

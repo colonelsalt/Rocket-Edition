@@ -1,0 +1,35 @@
+#dynamic 0x800000
+
+#org @main
+lock
+checkflag 0x208
+if 0x1 goto @postTV
+compare 0x401D 0x5 // checks if Ronnie police scene finished
+if 0x1 goto @postPolice
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @postPolice
+textcolor 0x0
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+faceplayer
+textcolor 0x0
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Ronnie: Oooh yeah!\pYou're missing out, [player]!\nThis burglery is where it's at!
+
+#org @talk2
+= Ronnie: I need to see, I need to\nsee!
+
+#org @talk3
+= Ronnie: Well, [player], what are we\ngoing to do now?\pWe're going to keep being badasses\nas always, right?\p[.]\pYou know, I heard these guys back\nat HQ in Celadon were setting up\lsome kind of rewards program for\lthe most infamous criminals in\lTeam Rocket.\pNice timing, right?\nI say screw taking Lance's bait!\pI'm gonna be as bad as I can\npossible be, dammit!

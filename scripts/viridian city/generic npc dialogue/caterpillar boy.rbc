@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= You don't know the difference\nbetween Caterpie and Weedle?\lWhat are you, ten?

@@ -1,0 +1,35 @@
+#dynamic 0x800000
+#define _MEWTWO 0x3
+#include stdmoves.rbh
+
+#org @main
+lock
+fadeout 0x0
+setvar 0x4016 0xD
+msgbox @talk 0x6
+pause 0x15
+applymovement _MEWTWO @moveDown
+waitmovement 0x0
+pause 0x15
+msgbox @talk2 0x6
+pause 0x20
+cry 0x96 0x0
+waitcry
+msgbox @talk3 0x6
+movesprite2 _MEWTWO 0x7 0xD
+playsong 0x112 0x0
+release
+end
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE
+
+#org @talk
+= Yes, he knows where it is[.]\pThat disgusting failed experiment\nof a Pokémon Bill is after.
+
+#org @talk2
+= If you truly wish to find it[.]\c\h08ó\nTo capture it at last[.]\pSpeak to Shigeki in Viridian City.\nHe will show you the way.
+
+#org @talk3
+= That's all, [player]!\pLeave me now to train for my next\nworthy challenger.\p[.]\pI will see you again when you've\ngrown much stronger than you are.

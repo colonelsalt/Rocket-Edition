@@ -1,0 +1,5 @@
+#dynamic 0x800000
+
+#org @main
+setvar 0x402F 0x1 // Warden saw you
+end

@@ -1,0 +1,49 @@
+#dynamic 0x800000
+
+#org @main
+comparefarbytetobyte 0x0300501E 0x0
+if 0x1 goto @zeroo
+comparefarbytetobyte 0x0300501E 0x1
+if 0x1 goto @onee
+comparefarbytetobyte 0x0300501E 0x2
+if 0x1 goto @twoo
+comparefarbytetobyte 0x0300501E 0x3
+if 0x1 goto @threee
+comparefarbytetobyte 0x0300501E 0x7F
+if 0x1 goto @sevenEff
+end
+
+#org @zeroo
+msgbox @zero 0x6
+end
+
+#org @onee
+msgbox @one 0x6
+end
+
+#org @twoo
+msgbox @three 0x6
+end
+
+#org @threee
+msgbox @three 0x6
+end
+
+#org @sevenEff
+msgbox @sevenF 0x6
+end
+
+#org @zero
+= We are on floor 0
+
+#org @one
+= We are on floor 1
+
+#org @two
+= We are on floor 2
+
+#org @three
+= We are on floor 3
+
+#org @sevenF
+= We are on floor 7F\nOH BOI

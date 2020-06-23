@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1D3 0x0 0x81859CF 0x81859EC POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I want to become a good Trainer.\nNot like you bad guys!

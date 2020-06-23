@@ -1,0 +1,30 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+sound 0x15
+applymovement 0x18 @exclamation
+waitmovement 0x0
+spriteface 0x18 FACE_UP
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveup
+waitmovement 0x0
+release
+end
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Ey there, bruh!\nThis here's my ladder.\pI found it first, ya hear me?\pShoo!\nGo find your own.
+
+#org @moveup
+#raw STEP_U
+#raw 0xFE

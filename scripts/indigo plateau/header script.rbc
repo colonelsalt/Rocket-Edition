@@ -1,0 +1,83 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0xE
+#define _GUARD_KOD 0x15
+#define _RATICATE 0x14
+#define _BILL 0x13
+#define _GUARD 0x4
+
+#org @main
+sethealingplace 0xA
+setwarpplace 0x1 0x4B 0xFF 0x6 0xC
+checkflag 0x39 // post-Champion room scene
+if 0x1 call @warpToChampion
+compare 0x4012 0x4 // Red battle introduction has happened
+if _GREATER_EQ call @warpToOak
+checkflag 0x241
+if 0x1 call @missingnoCheckReset
+checkflag 0x240
+if 0x1 call @postKnockout
+compare 0x4014 0x16
+if 0x1 call @ronnieReady
+compare 0x4016 0x34
+if 0x1 call @postRaticate
+compare 0x4014 0x15
+if 0x1 call @postBill
+compare 0x4014 0x13
+if 0x1 call @postTv
+end
+
+#org @missingnoCheckReset
+setvar 0x4014 0x19
+return
+
+#org @postKnockout
+movesprite2 _GUARD_KOD 0x0 0x3
+movesprite2 _RONNIE 0x2 0x3
+spritebehave _RONNIE _LOOK_RIGHT
+movesprite2 _RATICATE 0x2 0x4
+spritebehave _RATICATE _LOOK_RIGHT
+movesprite2 _BILL 0x4 0x2
+return
+
+#org @postRaticate
+movesprite2 _RATICATE 0x5 0x2
+movesprite2 _RONNIE 0x5 0x3
+spritebehave _RONNIE _LOOK_UP
+movesprite2 _BILL 0x3 0x3
+spritebehave _BILL _LOOK_UP
+spritebehave _GUARD _LOOK_RIGHT
+return
+
+#org @ronnieReady
+movesprite2 _RONNIE 0x3 0xA
+spritebehave _RONNIE _LOOK_UP
+call @postBill
+return
+
+#org @postBill
+movesprite2 _BILL 0x4 0x3
+spritebehave _BILL _LOOK_UP
+return
+
+#org @postTv
+playsong2 0x144
+spritebehave _RONNIE _LOOK_UP
+spritebehave 0x2 _LOOK_UP
+spritebehave 0x10 _LOOK_UP
+spritebehave 0x9 _LOOK_UP
+spritebehave 0x7 _LOOK_UP
+spritebehave 0xA _LOOK_UP
+spritebehave 0xB _LOOK_UP
+spritebehave 0x3 _LOOK_UP
+spritebehave 0xD _LOOK_UP
+return
+
+#org @warpToChampion
+setwarpplace 0x1 0x4F 0xFF 0x6 0x13
+return
+
+#org @warpToOak
+setwarpplace 0x1 0x50 0xFF 0x5 0xC
+return
+

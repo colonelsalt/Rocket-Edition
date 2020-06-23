@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+textcolor 0x0
+msgbox @bosstalk1 0x6
+applymovement 0xFF @playermove
+waitmovement 0x0
+goto 0x808D62
+
+#org @bosstalk1
+= Giovanni: [player], I presume?\pYeah, just come on up here by the\ndesk.
+
+#org @playermove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

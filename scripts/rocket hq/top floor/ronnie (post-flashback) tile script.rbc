@@ -1,0 +1,101 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0x9
+
+#org @main
+lock
+textcolor 0x0
+msgbox @ronnieTalk1 0x6
+pause 0x15
+sound 0x9
+showsprite _RONNIE
+spriteface 0xFF FACE_RIGHT
+applymovement _RONNIE @ronnieApproach
+waitmovement 0x0
+msgbox @ronnieTalk2 0x6
+pause 0x25
+spriteface _RONNIE FACE_RIGHT
+pause 0x30
+spriteface _RONNIE FACE_LEFT
+pause 0x25
+msgbox @ronnieTalk3 0x6
+pause 0x10
+applymovement _RONNIE @stepL
+waitmovement 0x0
+msgbox @ronnieTalk4 0x6
+pause 0x25
+spriteface _RONNIE FACE_DOWN
+pause 0x15
+msgbox @ellipses 0x6
+pause 0x20
+spriteface _RONNIE FACE_LEFT
+pause 0x10
+applymovement _RONNIE @stepL
+waitmovement 0x0
+msgbox @ronnieTalk5 0x6 
+pause 0x15
+applymovement _RONNIE @stepToLeave
+applymovement 0xFF @playerMove
+waitmovement 0x0
+pause 0x10
+msgbox @ronnieTalk6 0x6
+applymovement _RONNIE @ronnieLeave
+waitmovement 0x0
+sound 0x9
+hidesprite _RONNIE
+checksound
+setvar 0x4062 0x1 // changes Player's backsprite to Admin one
+setvar 0x4016 0xC // deactives this script
+release
+end
+
+#org @ronnieTalk1
+= Hey [player]-- yo, yo, yo!
+
+#org @ronnieTalk2
+= Ronnie: Damn, boy[.]\nWhat's with the new get-up?\p[.]\pSay what?\c\h08ó They made little\n[player] an Admin now, did they?\pWell, no jokes. So now you can rob\nwomen and teenagers, is it?
+
+#org @ronnieTalk3
+= Haha!\nCongrats, bud.\pYou know, given all my inborn\ngangster skills, it speaks to my\lmodesty that they didn't promote\lme too yet, doesn't it?
+
+#org @ronnieTalk4
+= Now-now[.]\nAny more juicy news?\p[.]\pOh, now! You're going to Pallet to\ninterrogate Professor Oak?\pDude, no way. That's too rad.\pYou know, they[.]\c\h08ó didn't give me a\nnew mission yet.
+
+#org @ellipses
+= [.]
+
+#org @ronnieTalk5
+= Why, now isn't that a prime\nopportunity?\pI'll come with you to Pallet Town\nand we'll beat up the old prof\ltogether!\pOh, man! Fate is too kind\nsometimes, isn't she, [player]?
+
+#org @ronnietalk6
+= Well, Pallet Town[.] that's west\nKanto, isn't it?\pSo we either go south from Mt.\nMoon or through that pesky\lDiglett Cave off by Vermillion,\land we'll be on the right track.\pRight on!\nLet's get cracking!\pYou had better be the good cop,\n[player], 'cause I'm bad as hell!
+
+#org @ronnieApproach
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @stepToLeave
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_D
+#raw FACE_U
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @ronnieLeave
+#raw FACE_L
+#raw 0x1C
+#raw STEP_L
+#raw 0xFE

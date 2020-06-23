@@ -1,0 +1,251 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+spriteface 0xFF FACE_RIGHT
+applymovement 0x17 @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @ronnietalk 0x6
+applymovement 0x17 @ronniewalk
+applymovement 0xFF @playerwalk
+waitmovement 0x0
+applymovement 0x11 @stepL
+waitmovement 0x0
+msgbox @grunt1talk 0x6
+applymovement 0x12 @stepR
+waitmovement 0x0
+msgbox @grunt2talk 0x6
+pause 0x10
+spriteface 0x12 FACE_DOWN
+pause 0x10
+msgbox @grunt2talkextra 0x6
+spriteface 0x12 FACE_RIGHT
+applymovement 0x17 @stepD
+waitmovement 0x0
+msgbox @ronnietalk2 0x6
+applymovement 0x17 @disbelief
+waitmovement 0x0
+msgbox @ronnietalk3 0x6
+pause 0x7
+spriteface 0x17 FACE_LEFT
+pause 0x4
+msgbox @ronnietalk4 0x6
+spriteface 0x17 FACE_DOWN
+applymovement 0x17 @stepD
+waitmovement 0x0
+msgbox @ronnietalk5 0x6
+applymovement 0x11 @stepL
+waitmovement 0x0
+msgbox @grunt1talk2 0x6
+applymovement 0x12 @stepR
+waitmovement 0x0
+msgbox @grunt2talk2 0x6
+applymovement 0x11 @grunt1leave
+applymovement 0x12 @grunt2leave
+spriteface 0x16 FACE_UP
+pause 0x70
+applymovement 0x16 @stepU
+waitmovement 0x0
+textcolor 0x1
+msgbox @grunt3talk 0x6
+applymovement 0x16 @grunt3leave
+waitmovement 0x0
+sound 0x9
+pause 0x30
+spriteface 0x17 FACE_LEFT
+textcolor 0x0
+msgbox @ronnietalk6 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @ronnieyes
+goto @ronnieno
+
+#org @ronnieyes
+msgbox @ronnietalkyes 0x6
+goto @scriptend
+
+#org @ronnieno
+msgbox @ronnietalkno 0x6
+goto @scriptend
+
+#org @scriptend
+applymovement 0x17 @stepL
+waitmovement 0x0
+msgbox @ronnietalk7 0x6
+applymovement 0x17 @ronnieleave
+waitmovement 0x0
+sound 0x9
+movesprite 0x17 0x0 0x0
+setflag 0x203
+setvar 0x4019 0x4
+release
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @ronniewalk
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0x0
+#raw 0xFE
+
+#org @playerwalk
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0x3
+#raw 0xFE
+
+#org @ronnietalk
+= Ronnie: There you are, [player]!\nDude, you better get over here!\pEverybody's all in a frenzy about\nsome strong-ass Trainer that came\lin here just now.\pI just got here, so I haven't got\na clue what happened, but it\lsounds pretty darn exciting.\pCome on!
+
+#org @grunt1talk
+= I'm telling you, he beat me\nstraight out without even breaking\la sweat!\pIt's like I barely got the chance\nto even make a move before he was\lall up in my face demanding I give\lhim prize money!
+
+#org @grunt2talk
+= Tell me about it. That spiky-\nhaired kid was ruthless, man.\pWhere do you think he came from?\pMust have been some rich little\nchild prodigy who ran away from\lPokémon school or something.\lDisgusting.
+
+#org @grunt2talkextra
+= And where the hell did he get all\nthose uber-powerful Pokémon?\pThat's some irresponsible\nparenting right there if you ask\lme.
+
+#org @ronnietalk2
+= Ronnie: What?
+
+#org @ronnietalk3
+= You guys are telling me you got\nyour asses handed to you by some\lkid?\pWho taught you guys how to battle,\nhuh? Your moms?
+
+#org @disbelief
+#raw 0x1A
+#raw STEP_D
+#raw 0x1C
+#raw 0x1A
+#raw 0x3
+#raw 0x1C
+#raw 0x1A
+#raw 0x2
+#raw 0x1C
+#raw 0x0
+#raw 0x1C
+#raw 0xFE
+
+#org @ronnietalk4
+= I'm not buying this, [player].
+
+#org @ronnietalk5
+= I'll go hunt down this twerp and\nwe'll see who's the real prodigy\laround here. Geez.
+
+#org @grunt1talk2
+= Suit yourself, pal.\pI'm gonna go hit the Pokémon\nCenter for a while.\pCan't find any damn fossils\naround here anyway.
+
+#org @grunt2talk2
+= Roger that.
+
+#org @grunt1leave
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x60
+#raw 0xFE
+
+#org @grunt2leave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x60
+#raw 0xFE
+
+#org @grunt3talk
+= I-I think the Pokémon Center\nsounds pretty nice right about\lnow.
+
+#org @grunt3leave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x60
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @ronnietalk6
+= Talk about a bunch of wussies.\pYou're not scared of some little\nkid Trainer, are you, [player]?
+
+#org @ronnietalkyes
+= [.]\pDude, stop contradicting me; this\nis not very productive!\pAnyway, you better harden up,\nthen!\pSee, [player], a true gangster is\nicy and fearless like a renegade!\pYou could learn a thing or two\nfrom me, I'm telling you.
+
+#org @ronnietalkno
+= See, that's what I'm talking\nabout, man!\pI knew you were a cool dude like\nthat.
+
+#org @ronnietalk7
+= Come on!\pSpiky-haired little twerpy kids or\nancient old Pokémon bones-- I'm\lnot leaving this damn cave till I\lfind something that'll make Petrel\lsee me for the dedicated master\lcriminal that I am!\pLet's go, damn it!
+
+#org @ronnieleave
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x60
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

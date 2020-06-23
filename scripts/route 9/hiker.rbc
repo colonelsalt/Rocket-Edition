@@ -1,0 +1,5 @@
+#dynamic 0x800000
+
+
+#org @after
+= Hahaha!\nYou Rockets don't scare me!

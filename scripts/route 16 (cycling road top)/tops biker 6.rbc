@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Why we standin' around in a\nformation that looks kinda like a\lheart, you askin'?\pI tell ya!\p'Cause we're the heartiest bunch\nof Bikers you ever seen!

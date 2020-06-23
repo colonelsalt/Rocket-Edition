@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I'm somewhat terrified of you\nguys.\pBut also a little thankful that I\ndon't have to type up our monthly\lsales report today after all.

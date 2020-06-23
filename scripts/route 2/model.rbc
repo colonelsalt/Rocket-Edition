@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+textcolor 0x1
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ah[.]\nI can't feel my legs[.]

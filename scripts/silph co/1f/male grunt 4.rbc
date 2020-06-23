@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Of all things, they tasked me with\nsetting up those spinny warp tile\lthingies.\pI wanted to do some real\noccupation, too, darn it!

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I keep telling the lieutenant that\nthis Gym puzzle is the most absurd\lskill-devoid contraption ever\linvented.\pHe just scoffs and calls me a\nlightweight.

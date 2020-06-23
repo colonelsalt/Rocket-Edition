@@ -1,0 +1,24 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x402E 0x10
+if _GREATER_EQ goto @postApricorn
+checkflag 0x29D
+if 0x1 goto @postInvasion
+msgbox 0x8839AB2 MSG_FACE
+end
+
+#org @postInvasion
+msgbox @talk MSG_FACE
+end
+
+#org @postApricorn
+msgbox @talk2 MSG_FACE
+end
+
+#org @talk
+= W-w-welcome to S-Silph Co[.]\nThe President is on the[.]\p[.]\pAaaah! Nobody taught me how to\ndeal with a criminal invasion!
+
+#org @talk2
+= Hmph! You dare show your face here\nagain, Rocket?

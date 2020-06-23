@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= They say this ship's Captain is a\nlegendary Cut master!\pHe has inspired admirers for his\nCutting skills around the world.

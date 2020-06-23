@@ -1,0 +1,42 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+checkflag 0x2F0
+if 0x1 goto @postGame
+compare 0x4014 0x15
+if _GREATER_EQ goto @withBill
+faceplayer
+msgbox @talk 0x6
+applymovement LASTTALKED @faceDown
+release
+end
+
+#org @withBill
+msgbox @talk2 0x6
+release
+end
+
+#org @postGame
+faceplayer
+msgbox @talk3 0x6
+applymovement LASTTALKED @faceDown
+release
+end
+
+
+#org @talk
+= Sorry, sir!\pThe Elite Four are currently\nengaged with another challenger.\pYou'll have to wait your turn with\neveryone else.
+
+#org @talk2
+= Now!\nWe have rules for a reason, sir!\pThe Elite Four shall not be disturbed\nin the middle of a battle!\pThe Professor is perfectly entitled\nto see to his grandson's health,\lthat's another matter.\pJust be patient and you'll hear\nthe outcome with everyone else.
+
+#org @talk3
+= No, no, no!\pWe're not taking any more\nchallengers right now!\pAnd especially not you!\p[.]\pMaybe[.]\c\h08ó sometime[.]\c\h08ó\nSomewhere down the line.\pWho knows..?
+
+
+
+#org @faceDown
+#raw FACE_D
+#raw 0xFE

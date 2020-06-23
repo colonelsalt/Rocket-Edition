@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @start
+lock
+faceplayer
+checkflag 0x204
+if 0x1 goto @postTutorial
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Wrong staircase, pal. Have you not\nbeen listening?
+
+#org @postTutorial
+msgbox @talk2 0x6
+release
+end
+
+#org @talk2
+= I'm afraid I can't let you enter\nthe Rocket Laboratory without\lsupervision.\pThe scientists there are working\nwith highly expensive and not to\lmention dangerous materials.\pShoo!

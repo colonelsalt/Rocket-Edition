@@ -1,0 +1,41 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+spriteface 0x6 FACE_LEFT
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox @talk1 0x6
+checkflag 0x215 // checks if Lt. Surge talked to
+if 0x0 goto @stop
+msgbox @letThrough 0x6
+setvar 0x4014 0x2
+releaseall
+end
+
+#org @stop
+textcolor 0x2
+msgbox @stopTalk 0x6
+textcolor 0x0
+msgbox @stopTalk2 0x6
+applymovement 0xFF @playerMove
+waitmovement 0x0
+releaseall
+end
+
+#org @talk1
+= Welcome to the S.S. Anne!\pExcuse me, do you have a ticket?
+
+#org @stopTalk
+= [player] doesn't have the needed\nS.S. Ticket.
+
+#org @stopTalk2
+= Sorry!\nYou need a ticket to get aboard.
+
+#org @playerMove
+#raw STEP_U
+#raw 0xFE
+
+#org @letThrough
+= Oh? You're with the lieutenant?\nI see.\pWell, step right on through, sir.\nThe party has already begun.

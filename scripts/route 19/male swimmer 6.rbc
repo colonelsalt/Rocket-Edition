@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xEC 0x0 0x8187811 0x818783E EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= What is this, has Team Rocket gone\naquatic?

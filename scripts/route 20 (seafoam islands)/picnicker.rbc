@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1D8 0x0 0x8188165 0x81881A3 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Well, did you take a lot of loot\nfrom that Pokémon Mansion, Rocket?

@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= I'm not leaving this place until I\ncatch a Chansey, damn it!

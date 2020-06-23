@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x0 0xA4 0x0 @challenge @defeat
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= Dude, are you, like, a Rocket?
+
+#org @defeat
+= That's like totally bad, man.
+
+#org @after
+= Like Power Glove bad, you know\nwhat I'm saying?

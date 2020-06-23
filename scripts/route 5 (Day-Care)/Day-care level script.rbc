@@ -1,0 +1,195 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define MAN 0x1
+#define YOUNGSTER 0x2
+#define NIDORAN 0x3
+
+#org @main
+lockall
+special 0x113
+applymovement 0x7F @camera1
+waitmovement 0x0
+applymovement MAN @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @DCtalk 0x6
+applymovement YOUNGSTER @stepU
+waitmovement 0x0
+msgbox @boytalk 0x6
+pause 0x10
+spriteface NIDORAN FACE_RIGHT
+pause 0x12
+textcolor 0x2
+cry 0x20 0x0
+msgbox @nidogrowl MSG_KEEPOPEN
+waitcry
+closeonkeypress
+spriteface NIDORAN FACE_UP
+pause 0x10
+textcolor 0x0
+pause 0x20
+spriteface MAN FACE_LEFT
+pause 0x25
+spriteface MAN FACE_DOWN
+pause 0x25
+msgbox @DCtalk2 0x6
+applymovement YOUNGSTER @stepU
+waitmovement 0x0
+msgbox @boytalk2 0x6
+pause 0x15
+spriteface YOUNGSTER FACE_DOWN
+pause 0x10
+applymovement YOUNGSTER @stepD
+waitmovement 0x0
+msgbox @boytalk2.5 0x6
+applymovement YOUNGSTER @boyleave
+waitmovement 0x0
+applymovement 0x7F @playermove
+applymovement 0xFF @playermove
+waitmovement 0x0
+applymovement YOUNGSTER @boyleave
+waitmovement 0x0
+setflag 0x20D
+sound 0x9
+hidesprite YOUNGSTER
+applymovement 0x7F @playerback
+applymovement 0xFF @playerback
+waitmovement 0x0
+checksound
+pause 0x15
+spriteface MAN FACE_LEFT
+pause 0x20
+applymovement MAN @DCdown
+waitmovement 0x0
+pause 0x17
+applymovement MAN @stepD
+waitmovement 0x0
+pause 0x10
+msgbox @DCtalk3 0x6
+applymovement MAN @stepToNido
+waitmovement 0x0
+msgbox @DCtalk3.5 0x6
+applymovement MAN @DCladderwalk
+applymovement NIDORAN @nidoLadderWalk
+waitmovement 0x0
+pause 0x20
+sound 0x83 // "loud swipe"
+setmaptile 0x1 0x2 0x32A 0x0
+fadescreen 0x2
+special 0x8E // screen refresh
+pause 0x15
+spriteface MAN FACE_RIGHT
+pause 0x10
+msgbox @DCtalk4 0x6
+applymovement MAN @DCleave
+applymovement NIDORAN @nidoLeave
+waitmovement 0x0
+sound 0x9
+hidesprite MAN
+applymovement NIDORAN @nidoLeave
+waitmovement 0x0
+sound 0x9
+hidesprite NIDORAN
+checksound
+applymovement 0x7F @camera2
+waitmovement 0x0
+special 0x114
+setvar 0x4016 0x3
+setflag 0x20E
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @camera1
+#raw 0xD
+#raw 0xD
+#raw 0xFE
+
+#org @DCtalk
+= Welcome, young man. I run the\nDay-Care service.\pWould you like me to raise one of\nyour Pokémon?
+
+#org @boytalk
+= I sure would!\pMy Nidoran here needs to get\nhimself some experience, but I'm\ljust too busy with my other\lPokémon as it is.\pIsn't that right, Nido?
+
+#org @nidogrowl
+= Nidoran\hB5: Nido-nido!
+
+#org @DCtalk2
+= Very well. We'll raise your\nNidoran for a while.\pHe should be fit for fight in no\ntime at all, I assure you.
+
+#org @boytalk2
+= Awesome! Thank you, sir.
+
+#org @boytalk2.5
+= Now back to my Pokémon adventure!
+
+#org @boyleave
+#raw STEP_D
+#raw 0xFE
+
+#org @playermove
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @playerback
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @DCdown
+#raw STEP_D
+#raw 0xFE
+
+#org @DCtalk3
+= Why, hello there. Would you like\nto raise your Pokémon as we--\p[.]\c\h08ó\nOh?\c\h08ó Hehehe[.]\pMy apologies, I didn't quite catch\nyour uniform.\pI take it you're with the others?\c\h08ó\nRight this way then.
+
+
+#org @stepToNido
+#raw STEP_U
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE
+
+#org @DCtalk3.5
+= Follow me now, little Nido!
+
+#org @DCladderwalk
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw 0xFE
+
+#org @nidoLadderWalk
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw FACE_L
+#raw 0xFE
+
+#org @DCtalk4
+= There's a good lad. Now just come\non down here.
+
+#org @DCleave
+#raw STEP_L
+#raw 0xFE
+
+#org @nidoLeave
+#raw STEP_L
+#raw 0xFE
+
+#org @camera2
+#raw 0xC
+#raw 0xC
+#raw 0xFE

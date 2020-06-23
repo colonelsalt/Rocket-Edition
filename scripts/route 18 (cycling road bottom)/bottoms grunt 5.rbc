@@ -1,0 +1,23 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4033 0x8
+if 0x1 goto @postJulien
+compare 0x4033 0x7
+if 0x1 goto @postJulien
+msgbox @talk 0x6
+release
+end
+
+#org @postJulien
+msgbox @postJulienTalk 0x6
+release
+end
+
+#org @talk
+= Team Rocket is a gang of wussies\ncompared to the Bottoms!
+
+#org @postJulienTalk
+= Gotta hand it to you, Rocket[.]\pThat shady guy Julien[.]\nIt takes guts to go against him[.]

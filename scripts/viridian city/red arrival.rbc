@@ -1,0 +1,98 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RED 0x13
+
+#org @main
+lockall
+fadeout 0x1
+pause 0x40
+clearflag 0x200
+sound 0x9
+checksound
+pause 0x20
+showsprite _RED
+applymovement _RED @walk1
+waitmovement 0x0
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x15
+if 0x1 call @leftSide
+compare 0x8000 0x16
+if 0x1 call @rightSide
+sound 0x7
+pause 0x25
+msgbox @ellipses 0x6
+lockall
+pause 0x25
+applymovement 0xFF @playerMove
+applymovement _RED @walk2
+waitmovement 0x0
+sound 0x9
+checksound
+pause 0x30
+hidesprite _RED
+fadein 0x1
+setflag 0x200
+setvar 0x4016 0x2F
+releaseall
+end
+
+
+#org @leftSide
+applymovement _RED @walkL
+waitmovement 0x0
+return
+
+#org @rightSide
+applymovement _RED @walkR
+waitmovement 0x0
+return
+
+#org @ellipses
+= ...
+
+
+#org @walk1
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw 0xFE
+
+#org @walkL
+#raw STEP_L3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw FACE_D
+#raw 0xFE
+
+#org @walkR
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw FACE_D
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @walk2
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw 0xFE
+
+

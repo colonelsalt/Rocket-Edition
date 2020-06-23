@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x6D 0x0 0x8172A55 0x8172A8F 0x8022EC
+msgbox 0x8172A97 MSG_NORMAL
+end

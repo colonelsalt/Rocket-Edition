@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Yo!\pWe're the Tops!\nRoute 16 is our turf, ya get me?\pYou messin' with one of us, you\nmessin' with the whole gang!

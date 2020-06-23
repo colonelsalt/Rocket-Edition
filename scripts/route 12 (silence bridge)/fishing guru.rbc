@@ -1,0 +1,53 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GURU 0x1
+
+#org @main
+lock
+checkflag 0x2A8
+if 0x1 goto @angry
+compare 0x4032 0x2
+if 0x1 goto @distracted
+compare 0x4032 0x3
+if 0x4 goto @happy
+faceplayer
+msgbox 0x19EFE0 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox 0x19F1FA 0x6
+release
+end
+
+#org @saidYes
+msgbox @yesTalk 0x6
+release
+end
+
+#org @angry
+faceplayer
+msgbox @angryTalk 0x6
+release
+end
+
+#org @distracted
+msgbox @distractedTalk 0x6
+release
+end
+
+#org @happy
+faceplayer
+msgbox @happyTalk 0x6
+release
+end
+
+#org @yesTalk
+= Good for you, buddy!\p[.]\p(If this thug-looking guy thinks\nhe'll get a free Rod off of me\ljust for saying he likes fishing,\lhe's one entitled dude[.])
+
+#org @angryTalk
+= Well, are you happy now, spy?\pI will come up with an even better\nRod than my brother, you watch!
+
+#org @distractedTalk
+= Oh, man[.]\nThat was one big-ass Magikarp[.]\pHoo-hoo! Better write it down so I\ndon't forget.
+
+#org @happyTalk
+= Well, hello there!\nHow is that Magikarp doing?

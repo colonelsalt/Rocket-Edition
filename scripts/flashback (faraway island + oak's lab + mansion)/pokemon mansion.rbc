@@ -1,0 +1,834 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x5
+#define _GIOVANNI 0x8
+#define _BLAINE 0xA
+#define _FUJI 0x7
+#define _BILL 0x9
+#define _SHIGEKI 0x6
+#define _DITTO4 0xD
+#define _MISSINGNO 0x10
+#define _CRACKED_TUBE 0x11
+#define _MEWTWO_TUBE 0x12
+#define _MEWTWO_ARMORED 0x13
+#define _DRAGONITE 0x14
+#define _MEWTWO_NORMAL 0x15
+
+#org @main
+pause 0x20
+textcolor 0x0
+compare 0x402E 0x18
+if 0x1 goto @shigekiScript2
+compare 0x402E 0x17
+if 0x1 goto @shigekiScript
+compare 0x402D 0xC
+if 0x1 goto @7thScript
+compare 0x402D 0xB // if this is sixth scene in Pokémon Mansion
+if 0x1 goto @6thScript
+checkflag 0x28F // if this is fifth scene in Pokémon Mansion
+if 0x1 goto @5thScript
+checkflag 0x28E // if this is fourth scene in Pokémon Mansion
+if 0x1 goto @4thScript
+compare 0x402D 0x9 // if this is third scene in Pokémon mansion
+if 0x1 goto @3rdScript 
+compare 0x402D 0x8 // if this is second scene in Pokémon mansion
+if 0x1 goto @2ndScript
+msgbox @bossTalk 0x6
+pause 0x20
+applymovement _OAK @oakPace1
+waitmovement 0x0
+applymovement _OAK @oakPace2
+applymovement 0xFF @oakPace2
+waitmovement 0x0
+spriteface _GIOVANNI FACE_DOWN
+spriteface _BLAINE FACE_DOWN
+spriteface _FUJI FACE_DOWN
+spriteface _BILL FACE_DOWN
+spriteface _SHIGEKI FACE_DOWN
+pause 0x25
+msgbox @bossTalk2 0x6
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @2ndScript
+msgbox @bossTalk3 0x6
+applymovement _OAK @approachDitto
+waitmovement 0x0
+cry 0x84 0x0
+applymovement _DITTO4 @dittoWobble
+pause 0x20
+msgbox @bossTalk4 0x6
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @3rdScript
+msgbox @bossTalk5 0x6
+goto @missingNoEscape
+
+#org @missingNoEscape
+pause 0x25
+sound 0x70 // buzzing sound
+checksound
+sound 0x70 // buzzing sound
+checksound
+pause 0x10
+sound 0x46 // crash sound
+fadescreen 0x2
+spriteface _MISSINGNO FACE_DOWN
+lockall
+checksound
+spriteface _GIOVANNI FACE_DOWN
+sound 0x15 // exclamation
+applymovement _FUJI @exclamation
+applymovement _BILL @exclamation
+applymovement _SHIGEKI @exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+spriteface _BILL FACE_UP
+spriteface _FUJI FACE_DOWN
+spriteface _BLAINE FACE_UP
+pause 0x15
+spriteface _FUJI FACE_UP
+spriteface _BLAINE FACE_RIGHT
+spriteface _BILL FACE_DOWN
+pause 0x15
+spriteface _FUJI FACE_RIGHT
+spriteface _BILL FACE_RIGHT
+spriteface _BLAINE FACE_LEFT
+sound 0x46 // crash sound
+fadescreen 0x2
+checksound
+applymovement _BLAINE @stepRight1
+waitmovement 0x0
+pause 0x15
+sound 0x5C // glass breaking sound
+fadescreen 0x2
+spriteface _MISSINGNO FACE_UP
+checksound
+sound 0xA // jump sound
+applymovement _FUJI @jump
+waitmovement 0x0
+pause 0x10
+sound 0x5C // glass breaking sound
+fadescreen 0x2
+spriteface _MISSINGNO FACE_LEFT
+checksound
+pause 0x15
+applymovement _BILL @stepDown1
+applymovement _BLAINE @stepRight1
+applymovement _FUJI @stepLeft2
+sound 0x21 // breaking out of tube sound
+fadescreen 0x3
+hidesprite _MISSINGNO
+showsprite _CRACKED_TUBE
+checksound
+releaseall
+fadescreen 0x2
+pause 0x40
+compare 0x402E 0x17
+if 0x1 goto @shigekiCont
+goto @3rdScript2
+
+#org @3rdScript2
+msgbox @bossTalk6 0x6
+pause 0x30
+applymovement 0xFF @cameraToOak
+waitmovement 0x0
+pause 0x20
+spriteface _GIOVANNI FACE_RIGHT
+spriteface _OAK FACE_LEFT
+pause 0x20
+msgbox @bossTalk7 0x6
+pause 0x25
+spriteface _OAK FACE_DOWN
+spriteface _GIOVANNI FACE_DOWN
+pause 0x20
+msgbox @bossTalk8 0x6
+pause 0x20
+setflag 0x28E
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @4thScript
+applymovement _FUJI @fujiPace
+waitmovement 0x0
+msgbox @bossTalk10 0x6
+pause 0x15
+applymovement _FUJI @fujiPace2
+waitmovement 0x0
+msgbox @bossTalk11 0x6
+pause 0x20
+setflag 0x28F
+warpmuted 0x1 0x63 0xFF 0xC 0xE // warp to next scene on same map
+waitstate
+end
+
+#org @5thScript
+msgbox @bossTalk12 0x6
+applymovement _BILL @stepD
+waitmovement 0x0
+applymovement _SHIGEKI @stepR
+waitmovement 0x0
+applymovement _FUJI @stepR
+waitmovement 0x0
+applymovement _BLAINE @stepU
+waitmovement 0x0
+pause 0x20
+applymovement 0xFF @cameraToOak2
+waitmovement 0x0
+pause 0x20
+msgbox @bossTalk13 0x6
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @6thScript
+msgbox @bossTalk14 0x6
+spriteface _MEWTWO_TUBE FACE_DOWN
+lockall
+cry 0x96 0x0
+waitcry
+releaseall
+pause 0x10
+msgbox @bossTalk15 0x6
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @7thScript
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x10
+msgbox @bossTalk16 0x6
+pause 0x10
+cry 0x96 0x0
+waitcry
+pause 0x15
+sound 0x83
+applymovement _MEWTWO_ARMORED @strikeDragonite
+fadescreen 0x2
+spriteface _DRAGONITE FACE_UP
+sound 0xD // impact with floor sound
+waitmovement 0x0
+checksound
+pause 0x10
+msgbox @bossTalk17 0x6
+pause 0x10
+spriteface _MEWTWO_ARMORED FACE_LEFT
+cry 0x96 0x0
+applymovement _MEWTWO_ARMORED @mewtwoPace2
+waitmovement 0x0
+msgbox @bossTalk18 0x6
+pause 0x15
+sound 0x85 // "charge" sound
+applymovement _MEWTWO_ARMORED @mewtwoCharge
+checksound
+sound 0xB1 // psychic sound
+checksound
+sound 0xD1 // break sound
+pause 0x7
+fadescreen 0x2
+hidesprite _MEWTWO_ARMORED
+setflag 0x28F
+showsprite _MEWTWO_NORMAL
+sound 0x15 // exclamation
+applymovement _FUJI @exclamation
+applymovement _SHIGEKI @exclamation
+applymovement _BILL @exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+pause 0x15
+spriteface _MEWTWO_NORMAL FACE_UP
+pause 0x15
+spriteface _MEWTWO_NORMAL FACE_LEFT
+pause 0x15
+spriteface _MEWTWO_NORMAL FACE_RIGHT
+pause 0x15
+spriteface _MEWTWO_NORMAL FACE_DOWN
+pause 0x15
+sound 0xB1 // psychic sound
+checksound
+sound 0x46 // crash sound
+// remove south laser cage wall
+setmaptile 0x4 0x13 0x23F 0x1
+setmaptile 0x5 0x13 0x284 0x0
+setmaptile 0x6 0x13 0x284 0x0
+setmaptile 0x7 0x13 0x284 0x0
+setmaptile 0x8 0x13 0x22F 0x1
+
+special 0x8E // screen refresh
+fadescreen 0x2
+applymovement _BILL @runLeft1
+applymovement _FUJI @runLeft1
+applymovement _SHIGEKI @runUp1
+applymovement _BLAINE @runRight2
+waitmovement 0x0
+pause 0x15
+spriteface _MEWTWO_NORMAL FACE_LEFT
+pause 0x20
+sound 0xB1 // psychic sound
+checksound
+sound 0x7C // crash sound
+
+// show left gravel area
+setmaptile 0x1 0x13 0x2B9 0x0
+setmaptile 0x2 0x13 0x2B9 0x0
+setmaptile 0x3 0x13 0x2BA 0x0
+setmaptile 0x1 0x14 0x2CC 0x1
+setmaptile 0x2 0x14 0x2CB 0x1
+setmaptile 0x3 0x14 0x2C2 0x0
+setmaptile 0x1 0x15 0x37E 0x1
+setmaptile 0x2 0x15 0x37C 0x1
+setmaptile 0x3 0x15 0x37F 0x0
+special 0x8E // screen refresh
+fadescreen 0x2
+applymovement _BILL @jump
+pause 0x15
+spriteface _MEWTWO_NORMAL FACE_RIGHT
+pause 0x20
+sound 0xB1 // psychic sound
+checksound
+sound 0x7C // crash sound
+
+// show right gravel area
+setmaptile 0x8 0x14 0x2B8 0x0
+setmaptile 0x9 0x14 0x2B9 0x0
+setmaptile 0xA 0x14 0x2B9 0x0
+setmaptile 0xB 0x14 0x2B9 0x0
+setmaptile 0xC 0x14 0x2B9 0x0
+setmaptile 0xD 0x14 0x2B9 0x0
+setmaptile 0x8 0x15 0x37B 0x0
+setmaptile 0x9 0x15 0x37C 0x1
+setmaptile 0xA 0x15 0x37C 0x1
+setmaptile 0xB 0x15 0x37C 0x1
+setmaptile 0xC 0x15 0x37C 0x1
+setmaptile 0xD 0x15 0x37C 0x1
+special 0x8E // screen refresh
+fadescreen 0x2
+
+pause 0x20
+spriteface _MEWTWO_NORMAL FACE_DOWN
+applymovement 0xFF @cameraPan2
+waitmovement 0x0
+pause 0x25
+
+sound 0xB1 // psychic sound
+checksound
+sound 0x21
+// show hole in wall
+setmaptile 0x3 0x15 0x37D 0x0
+setmaptile 0x4 0x15 0x284 0x0
+setmaptile 0x5 0x15 0x284 0x0
+setmaptile 0x6 0x15 0x284 0x0
+setmaptile 0x7 0x15 0x2EB 0x0
+setmaptile 0x3 0x16 0x2F4 0x1
+setmaptile 0x4 0x16 0x285 0x0
+setmaptile 0x5 0x16 0x285 0x0
+setmaptile 0x6 0x16 0x285 0x0
+setmaptile 0x7 0x16 0x2F3 0x1
+setmaptile 0x3 0x17 0x2FC 0x1
+setmaptile 0x4 0x17 0x285 0x0
+setmaptile 0x5 0x17 0x285 0x0
+setmaptile 0x6 0x17 0x285 0x0
+setmaptile 0x7 0x17 0x2FB 0x1
+setmaptile 0x3 0x18 0x304 0x1
+setmaptile 0x4 0x18 0x285 0x0
+setmaptile 0x5 0x18 0x285 0x0
+setmaptile 0x6 0x18 0x285 0x0
+setmaptile 0x7 0x18 0x303 0x1
+setmaptile 0x4 0x19 0x34B 0x0
+setmaptile 0x5 0x19 0x34B 0x0
+setmaptile 0x6 0x19 0x34C 0x0
+special 0x8E // screen refresh
+fadescreen 0x2
+checksound
+pause 0x15
+msgbox @bossTalk19 0x6
+cry 0x96 0x0
+waitcry
+applymovement _MEWTWO_NORMAL @escape
+waitmovement 0x0
+sound 0x9 // shuffle
+hidesprite _MEWTWO_NORMAL
+checksound
+pause 0x10
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @shigekiScript
+msgbox @shigekiTalk 0x6
+pause 0x20
+sound 0xFD
+fadescreen 0x2
+pause 0x10
+setmaptile 0x3 0xC 0x35 0x0
+setmaptile 0x2 0xE 0x44 0x0
+setmaptile 0x3 0x11 0x8C 0x0
+setmaptile 0x5 0xD 0x140 0x0
+setmaptile 0x5 0xE 0x74 0x0
+setmaptile 0x5 0x10 0xD9 0x0
+setmaptile 0x6 0xC 0x27F 0x0
+setmaptile 0x7 0xD 0x55 0x0
+setmaptile 0x7 0x12 0x153 0x0
+setmaptile 0x8 0xF 0xE2 0x0
+setmaptile 0x9 0xE 0x119 0x0
+special 0x8E // screen refresh
+pause 0x20
+call @returnToNormal
+setmaptile 0x1 0xE 0x37 0x0
+setmaptile 0x2 0xC 0x16B 0x0
+setmaptile 0x3 0x10 0x31F 0x0
+setmaptile 0x3 0x12 0x15F 0x0
+setmaptile 0x4 0xD 0x5C 0x0
+setmaptile 0x6 0x11 0xC 0x0
+setmaptile 0x7 0xF 0xB7 0x0
+setmaptile 0x8 0xC 0x151 0x0
+special 0x8E // screen refresh
+sound 0xFD
+pause 0x20
+call @returnToNormal
+fadescreen 0x2
+setmaptile 0x1 0xF 0x73 0x0
+setmaptile 0x2 0x11 0x7F 0x0
+setmaptile 0x3 0xD 0x249 0x0
+setmaptile 0x3 0x12 0x35 0x0
+setmaptile 0x4 0x10 0x134 0x0
+setmaptile 0x5 0xB 0x56 0x0
+setmaptile 0x5 0x11 0x175 0x0
+setmaptile 0x6 0x13 0x32 0x0
+setmaptile 0x7 0xD 0x118 0x0
+setmaptile 0x7 0x10 0x72 0x0
+setmaptile 0x8 0x11 0xFD 0x0
+setmaptile 0x9 0xE 0x246 0x0
+special 0x8E // screen refresh
+pause 0x15
+fadescreen 0x2
+pause 0x15
+call @returnToNormal
+checksound
+pause 0x10
+msgbox @shigekiTalk2 0x6
+goto @missingNoEscape
+
+#org @returnToNormal
+setmaptile 0x3 0xC 0x284 0x0
+setmaptile 0x2 0xE 0x284 0x0
+setmaptile 0x3 0x11 0x284 0x0
+setmaptile 0x5 0xD 0x284 0x0
+setmaptile 0x5 0xE 0x284 0x0
+setmaptile 0x5 0x10 0x284 0x0
+setmaptile 0x6 0xC 0x284 0x0
+setmaptile 0x7 0xD 0x284 0x0
+setmaptile 0x7 0x12 0x284 0x0
+setmaptile 0x8 0xF 0x284 0x0
+setmaptile 0x9 0xE 0x284 0x0
+
+setmaptile 0x1 0xE 0x285 0x0
+setmaptile 0x2 0xC 0x284 0x0
+setmaptile 0x3 0x10 0x284 0x0
+setmaptile 0x3 0x12 0x284 0x0
+setmaptile 0x4 0xD 0x284 0x0
+setmaptile 0x6 0x11 0x284 0x0
+setmaptile 0x7 0xF 0x284 0x0
+setmaptile 0x8 0xC 0x284 0x0
+
+setmaptile 0x1 0xF 0x285 0x0
+setmaptile 0x2 0x11 0x284 0x0
+setmaptile 0x3 0xD 0x284 0x0
+setmaptile 0x4 0x10 0x284 0x0
+setmaptile 0x5 0xB 0x284 0x0
+setmaptile 0x5 0x11 0x284 0x0
+setmaptile 0x6 0x13 0x284 0x0
+setmaptile 0x7 0x10 0x284 0x0
+setmaptile 0x8 0x11 0x284 0x0
+
+special 0x8E // screen refresh
+return
+
+
+#org @shigekiCont
+msgbox @shigekiTalk3 0x6
+pause 0x15
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @shigekiScript2
+msgbox @shigekiTalk4 0x6
+applymovement _SHIGEKI @stepR
+waitmovement 0x0
+sound 0x12
+checksound
+sound 0x15
+checksound
+pause 0x5
+sound 0xFF
+checksound
+//sound 0x19
+checksound
+pause 0x25
+spriteface _SHIGEKI FACE_UP
+pause 0x25
+spriteface _SHIGEKI FACE_LEFT
+pause 0x15
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+msgbox @shigekiTalk5 0x6
+pause 0x25
+// TODO: Other scientists move away
+spriteface _BLAINE FACE_LEFT
+spriteface _BILL FACE_UP
+pause 0x10
+spriteface _FUJI FACE_RIGHT
+pause 0x25
+applymovement _FUJI @moveFuji
+applymovement _BILL @moveBill
+applymovement _BLAINE @moveBlaine
+applymovement _OAK @moveOak
+applymovement _GIOVANNI @moveGiovanni
+waitmovement 0x0
+pause 0x25
+spriteface _SHIGEKI FACE_RIGHT
+pause 0x10
+msgbox @shigekiTalk6 0x6
+pause 0x13
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+
+
+#org @oakPace1
+#raw STEP_R
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @oakPace2
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0x1C
+#raw FACE_L
+#raw 0xFE
+
+#org @oakPace3
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @bossTalk
+= Blaine, Fuji, Bill, and professor\nShigeki, Kanto's authority on\lgenetic engineering.
+
+#org @bossTalk2
+= Each member was a genius in his\nown right, and wasn't afraid to\lwork day and night for months for\la chance to save Kanto.
+
+#org @bossTalk3
+= The project proved much more\ndifficult than expected.
+
+#org @bossTalk4
+= Most test cases came out as\nformless, half-dead pieces of\lflesh that did not resemble Mew in\lany way.
+
+#org @bossTalk5
+= Though equally as erratic and\ndisgustingly shapeless as the\lothers[.]\pThis newborn monster had inherited\nMew's strength.
+
+#org @bossTalk6
+= It broke free from its test tube\nand escaped the lab, killing\lseveral of the earlier specimen in\lits wake.
+
+#org @bossTalk7
+= This little incident became known\nas "The Catastrophe".\pAnd it scarred the scientists as\nwell as it did me.
+
+#org @bossTalk8
+= I began to lose faith in my\ninvestment, and I think Oak was\lstarting to feel the same way.
+
+#org @bossTalk10
+= Fuji suggested a way to contain\nMew's power within a solid,\lsentient body.
+
+#org @bossTalk11
+= By creating a clone that would\ncombine Mew's DNA with that of a\lhuman.
+
+#org @bossTalk12
+= Initial tests proved promising,\nand the scientists agreed to each\lcontribute a sample of their own\lDNA to be used for the Mew clone.
+
+#org @bossTalk13
+= Oak was the only one who refused\nto provide a DNA sample.\pHis skepticism for the project had\nby now risen to a peak.
+
+#org @bossTalk14
+= Sooner than anyone could\nanticipate, the team had produced\ltheir definite "Mewtwo".
+
+#org @bossTalk15
+= A human-like, immensely powerful\npsychic Pokémon[.]\pPossessing the requisite cold,\nblood-thirsty mind and sapient\lintelligence.
+
+#org @bossTalk16
+= Devoid of empathy, but\ndisturbingly intelligent, the\lnewborn clone could find no reason\lto fight for Kanto's cause.
+
+#org @bossTalk17
+= Why the war did not appeal to\nMewtwo we couldn't quite say[.]\pBut it refused to be used as a\nmilitary weapon.
+
+#org @bossTalk18
+= And when we insisted[.]\c\h08ó\nIt rebelled.
+
+#org @bossTalk19
+= With psychic powers we had no\nmeans to control, Mewtwo ruined\lthe lab and escaped the scientists\lwho had given it life.
+
+#org @shigekiTalk
+= "The Catastrophe"[.]\c\h08ó\nIt was an abomination[.]\pPowerful, yes[.]\c\h08ó\nBut erratic and uncontrollable.\pIt was as if[.]\c\h08ó its presence would\ndistort the fabric of reality[.]
+
+#org @shigekiTalk2
+= Like nothing we had ever seen[.]\c\h08ó\nIt was clearly too much to handle.
+
+#org @shigekiTalk3
+= As you probably know already[.]\pIt made its escape in a violent\nfrenzy.
+
+#org @shigekiTalk4
+= The monster didn't get far before\nI was able to immobilize it and\lput it to sleep.
+
+#org @shigekiTalk5
+= I told the others I had everything\nunder control.\pWhen they asked me where the\ncreature lay dormant[.]\pI said I didn't know.
+
+#org @shigekiTalk6
+= But the truth was[.]\c\h08ó\nI knew it all too well.
+
+#org @approachDitto
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @dittoWobble
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw ONSPOT_D
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @jump
+#raw 0x55
+#raw 0xFE
+
+#org @stepLeft2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_R
+#raw 0xFE
+
+#org @stepDown1
+#raw STEP_D2
+#raw FACE_U
+#raw 0xFE
+
+#org @stepRight1
+#raw STEP_R2
+#raw FACE_L
+#raw 0xFE
+
+#org @cameraToOak
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @cameraToOak2
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @fujiPace
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw STEP_R
+#raw STEP_R
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @fujiPace2
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @cameraPan2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @strikeDragonite
+#raw 0x38
+#raw 0x37
+#raw FACE_R
+#raw 0xFE
+
+#org @mewtwoPace2
+#raw 0x27
+#raw 0x27
+#raw 0x27
+#raw 0x27
+#raw 0x27
+#raw 0x27
+#raw 0xFE
+
+#org @mewtwoCharge
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0xFE
+
+#org @escape
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0xFE
+
+#org @runLeft1
+#raw STEP_L2
+#raw FACE_R
+#raw 0xFE
+
+#org @runUp1
+#raw STEP_U2
+#raw FACE_D
+#raw 0xFE
+
+#org @moveFuji
+#raw STEP_R
+#raw 0xFE
+
+#org @moveBill
+#raw FACE_L
+#raw 0xFE
+
+#org @moveBlaine
+#raw 0x19
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw 0xFE
+
+#org @moveOak
+#raw 0x1A
+#raw FACE_U
+#raw STEP_U
+#raw STEP_U
+#raw 0x1A
+#raw FACE_R
+#raw 0xFE
+
+#org @moveGiovanni
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @runRight2
+#raw STEP_R2
+#raw STEP_R2
+#raw FACE_L
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE

@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9F 0x0 0x81798AD 0x81798DD POKESTEAL
+msgbox 0x81798E9 MSG_NORMAL '"I like tiny Pokémon.\nBig ones are..."
+end

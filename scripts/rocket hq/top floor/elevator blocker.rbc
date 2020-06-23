@@ -1,0 +1,42 @@
+#dynamic 0x800000
+// person event 0x5
+
+#org @main
+lock
+faceplayer
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x204
+if 0x0 goto @pathBlocker
+msgbox @talk 0x6
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+release
+end
+
+#org @pathBlocker
+msgbox @talk2 0x6
+release
+end
+
+#org @postRed
+msgbox @talk4 0x6
+release
+end
+
+#org @talk
+= If you're looking for Boss's\noffice, it's down on the bottom\lfloor through the elevator here.\pDon't know why you would be,\nthough.
+
+#org @talk2
+= Hey, grunt! Don't you have a\nmission to do right about now?\pQuit screwing around the hideout,\nthen!\pYou don't want to get on Petrel's\nbad side[.]
+
+#org @talk3
+= These are tough times to be a\ncriminal, man.\pThe world just won't accept us for\nit any longer, it seems[.]
+
+#org @talk4
+= Apparently the kid got ahold of\nthe key to use the elevator[.]\pThen he went down there and wiped\nthe floor with Boss.\p[.]\pWha-- don't look at me, I didn't\ngive it to him. Promise!

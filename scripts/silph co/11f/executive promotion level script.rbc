@@ -1,0 +1,108 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PRESIDENT 0x1
+#define _GIOVANNI 0x3
+
+#org @main
+sound 0x7B
+applymovement 0xFF @promotionTwirl2
+waitmovement 0x0
+pause 0x15
+msgbox @promotionMsg 0x6
+pause 0x10
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk 0x6
+textcolor 0x2
+pause 0x10
+additem 0x176 0x1
+loadpointer 0x0 @crowbarMsg
+giveitem2 0x176 0x1 0x13E
+closeonkeypress
+pause 0x20
+applymovement _GIOVANNI @moveAround
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+pause 0x10
+textcolor 0x0
+msgbox @bossTalk2 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x10
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+setvar 0x4056 0x95 // set Player sitting sprite to index 149
+msgbox @bossTalk3 0x6
+setflag 0x2A4
+setvar 0x402E 0xA
+end
+
+#org @promotionMsg
+= \c\h17[player] was promoted to\c\h0BÇÀ\nRocket Executive!\c\h08\n\c\h08[Ke]\c\h18
+
+#org @bossTalk
+= Say no more, [player].\c\h08ó You'll also\ncarry one of these from now on.\pIt will come in handy in the types\nof jobs you'll have going forward.
+
+#org @crowbarMsg
+= [player] received the Crowbar!
+
+#org @bossTalk2
+= As an Executive, you now have the\npower to steal Pokémon from all\lTrainers, excepting only Gym\lLeaders and the Elite Four!\pA position of massive influence[.]\c\h08ó\nBut you've proven yourself worthy.
+
+#org @bossTalk3
+= I'll handle the negotiations here.\pYou're now dismissed from this\nmission, [player]!\pGo have some well-earned rest, and\nget ready for the next one.\pWith Master Ball in our hands,\nthere's no end to what we can do!\pOur hard work has finally borne\nfruit. Long live Team Rocket!
+
+#org @promotionTwirl2
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw FACE_L
+#raw 0xFE
+
+#org @moveAround
+#raw STEP_U
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw FACE_L
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

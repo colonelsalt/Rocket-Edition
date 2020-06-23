@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x110 0x0 @challenge 0x818825C ADMIN_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= I'm not surprised to see a thug\nlike you around these parts!\pTell me, did you come to burgle\nthe Pokémon Mansion?
+
+#org @postBattle
+= Stay away from me, criminal!

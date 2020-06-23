@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I thought I'd all but given up on\nTeam Rocket before this mission.\pDay after day of patrols and\nstealing Jigglypuff from little\lgirls[.] it got old, you know?\pBut man[.] this is something else!

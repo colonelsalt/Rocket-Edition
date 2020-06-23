@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4028 0x1
+if 0x1 goto @bribed
+msgbox @talk 0x6
+release
+end
+
+#org @bribed
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= So there's this big fat Pokémon\nblocking the way here.\pBut, I mean[.] it's not my job to\nmove it! I'm just a guard.
+
+#org @talk2
+= Hmm[.] my colleagues from the\nSaffron gates told me to ignore\lany pink-haired guys in Team\lRocket uniforms[.]\p[.]Oh!\pWell, I guess there's nobody\nhere, then.

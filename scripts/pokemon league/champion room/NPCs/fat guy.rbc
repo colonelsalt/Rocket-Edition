@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= C-can't\c\h08Û m-move[.]\c\h08Û I-I'ma-a\c\h08Û\ntoo s-scared[.]\c\h08Û p-petrified[.]\pI-I don't\c\h08Û s-s-see nothing but no\c\h08Û\nf-f-freaking g-ghost[.]\pAh\c\h08ÛAhhhh\c\h08ÛAAhhhh\c\h08ÛAAAAAAAAAHHHHHHHH!\c\h08Û\nHELP!

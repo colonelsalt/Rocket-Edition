@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1D7 0x0 0x81891EB 0x8189212 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9982
+msgbox 0x818921D MSG_NORMAL '"Oh, well.\nMy girlfriend will chee..."
+end

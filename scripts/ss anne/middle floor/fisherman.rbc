@@ -1,0 +1,9 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x0 0xDF 0x0 0x8173DDB 0x8173DF7
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= Party?\pYeah, I'm as disappointed as you,\nman. Where are all the hot chicks?

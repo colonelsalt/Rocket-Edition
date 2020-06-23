@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#define _LEADER 0x4
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface _LEADER FACE_DOWN
+release
+end
+
+#org @talk
+= Hey, we got your back, man.\pGo up to the counter and get us\nthose goods, now!

@@ -1,0 +1,35 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+compare 0x402E 0x11
+if _GREATER_EQ goto @postEvacuation
+msgbox @talk 0x6
+spriteface 0x3 FACE_UP
+release
+end
+
+#org @postEvacuation
+msgbox @talk2 0x6
+spriteface 0x3 FACE_UP
+release
+end
+
+#org @postBoss
+msgbox @talk3 0x6
+spriteface 0x3 FACE_UP
+release
+end
+
+#org @talk
+= A red-haired lady's been coming in\nand out of the Gym here lately.\lShe's not the Leader, is she?\pIf she were, I'd sure like me a\nround against her! Hehehehe[.]
+
+#org @talk2
+= Aw[.] darn it!\nThat old Giovanni's back[.]
+
+#org @talk3
+= With all the drama that goes on in\nthis gym[.] Who needs TV?

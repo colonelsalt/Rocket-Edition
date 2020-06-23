@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x214 0x0 0x81724F9 @defeat POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @defeat
+= Well, of course you know!\nWhat are you, stupid?
+
+#org @postBattle
+= How can you grow up in a world of\nPokémon and not understand such\lbasic truths?\pYou'd think I was talking to\nsomeone from a different world!

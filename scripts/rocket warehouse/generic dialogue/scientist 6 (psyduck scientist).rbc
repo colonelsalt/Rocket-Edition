@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface 0x10 FACE_LEFT
+release
+end
+
+#org @talk
+= I suppose you're wondering why we\nput a Psyduck inside this fence\land not in the pond over there?\pYeah, don't worry about it;\nit lacks the intelligence to even\lrealize it's out of water, see.\pIt's pretty funny.

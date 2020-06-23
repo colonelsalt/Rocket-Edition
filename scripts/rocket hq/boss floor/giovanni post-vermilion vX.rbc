@@ -1,0 +1,32 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define GIOVANNI 0x1
+#define ARIANA 0xA
+
+#org @main
+lock
+checkflag 0x227 // checks if Red encounter has happened
+if 0x1 goto SCRIPTNO2 // 827B19
+textcolor 0x0
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @talk 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+goto MAINSCRIPT // 8234C2
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Giovanni: Ah, if it isn't\n[player]. Well, come on up.
+
+#org @movePlayer
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

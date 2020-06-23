@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x179 0x0 @challenge @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Halt!\nStop right there, Rocket!
+
+#org @defeat
+= That's illegal!
+
+#org @postBattle
+= I never knew there were so many of\nyou Rockets[.]\pStill, you'll never take the\nbuilding!

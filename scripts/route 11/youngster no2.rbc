@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x64 0x0 0x8185285 0x81852C1 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9BEE
+msgbox 0x81852E3 MSG_NORMAL '"Tch[.]\nI better go find stronger ..."
+end

@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x108 0x0 @challenge 0x818444F POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81AA332
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= I'm a rambling, gambling dude!
+
+#org @after
+= Man, I'm glad the true nature of\nmy gambling habits don't have to\lbe censored anymore!

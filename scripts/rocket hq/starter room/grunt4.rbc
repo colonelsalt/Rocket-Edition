@@ -1,0 +1,43 @@
+#dynamic 0x800000
+
+#org @start
+lock
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x204
+if 0x1 goto @postTutorial
+msgbox @talk 0x6
+release
+end
+
+#org @postTutorial
+faceplayer
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+faceplayer
+msgbox @talk3 0x6
+release
+end
+
+#org @postRed
+faceplayer
+msgbox @talk4 0x6
+release
+end
+
+#org @talk
+= Does this outfit make me look\nmasculine?
+
+#org @talk2
+= Why did I join Team Rocket?\pWhy, to get stinkin' rich and do\nwhatever the hell I want!
+
+#org @talk3
+= So now the police are rewarding us\nfor not doing crimes[.]\pAnd these guys here are rewarding\nus for doing MORE crimes.\pAh!\nI don't know what I should do!
+
+#org @talk4
+= It stings slightly less to have\nbeen beaten by a kid when I know\lBoss was, too.

@@ -1,0 +1,14 @@
+#dynamic 0x800000
+
+#org @main
+compare 0x401F 0x78
+if 0x4 goto @sinister
+msgbox 0x81902F5 MSG_FACE '"This shop does good business in\nA..."
+end
+
+#org @sinister
+msgbox @robberyTalk MSG_FACE
+end
+
+#org @robberyTalk
+= Oh, I know I shouldn't have gone\nto the Mart just today[.]\pWhat do I need those Antidotes\nfor, anyway..?

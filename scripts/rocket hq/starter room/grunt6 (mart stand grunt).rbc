@@ -1,0 +1,52 @@
+#dynamic 0x800000
+#define MERCHANT 0x7
+
+#org @start
+lock
+checkflag 0x20B
+if 0x1 goto @mart
+checkflag 0x204
+if 0x1 goto @setUp
+msgbox @dumbTalk 0x6
+release
+end
+
+#org @dumbTalk
+= Yes! My life's dream has finally\ncome true!\pI am now a true Pokémon gangster!\nAh[.] feels good.
+
+#org @setUp
+faceplayer
+msgbox @preTalk 0x6
+spriteface MERCHANT FACE_UP
+release
+end
+
+#org @preTalk
+= I'm setting up a little business\nhere, grunt.\pCold hard cash is where it's at!
+
+// -----------------------------------------------------------------------
+
+#org @mart
+lock
+faceplayer
+textcolor 0x0
+preparemsg @what
+waitmsg
+pokemart @martItems
+textcolor 0x0
+msgbox @goodBye MSG_KEEPOPEN
+spriteface MERCHANT FACE_DOWN
+release
+end
+
+#org @what
+= Well? What do you want, pal?
+
+#org @goodBye
+= Yeah, get outta here, why don't\nya?
+
+#org @martItems
+#raw word 0x20
+#raw word 0x1E
+#raw word 0x53
+#raw word 0x0

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x61 0x0 0x8184FBD 0x8184FD8 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9B34
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= M-my mommy told me cheaters never\nwin, you know[.]

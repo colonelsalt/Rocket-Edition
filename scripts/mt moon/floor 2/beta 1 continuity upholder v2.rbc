@@ -1,0 +1,20 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+spriteface 0x1 FACE_DOWN
+textcolor 0x0
+msgbox @talk 0x6
+spriteface 0x1 FACE_LEFT
+applymovement 0xFF @moveaway
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Huh-ho! You thought you could just\nskip on through here on to\lCerulean, didn't you? No-can-do,\lbuddy, sorry: You'll have to wait\lfor the next beta release for\lthat! Ho ho ho ho[.]
+
+#org @moveaway
+#raw STEP_L
+#raw 0xFE

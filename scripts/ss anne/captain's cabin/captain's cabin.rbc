@@ -1,0 +1,284 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define CAPTAIN 0x1
+#define KOFFING 0x2
+#define PROTON 0x3
+#define POKEBALL 0x4
+
+#org @main
+lock
+checkflag 0x219
+if 0x0 goto @1stScript
+msgbox @nothing 0x6
+release
+end
+
+#org @1stScript
+fadeout 0x0
+cry 0x98 0x0
+pause 0x20
+cry 0xAF 0x0
+pause 0x20
+cry 0xF6 0x0
+waitcry
+pause 0x17
+msgbox @description 0x6
+pause 0x7
+spriteface CAPTAIN FACE_DOWN
+pause 0x5
+sound 0x15 // exclamation
+applymovement CAPTAIN @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @capnTalk 0x6
+applymovement CAPTAIN @capnWalk
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+playsong 0x11B 0x0
+msgbox @capnTalk2 0x6
+pause 0x15
+spriteface CAPTAIN FACE_UP
+pause 0x20
+spriteface CAPTAIN FACE_RIGHT
+pause 0x15
+msgbox @capnTalk3 0x6
+msgbox @challenge 0x6
+trainerbattle 0x3 0x6 0x0 @defeat
+copyvar 0x8000 0x401F
+call 0x81FCA7 // POKESTEAL
+applymovement CAPTAIN @stepR
+waitmovement 0x0
+comparevars 0x401F 0x8000
+if 0x5 goto @stolen
+textcolor 0x0
+msgbox @innocentTalk 0x6
+goto @2ndScript
+end
+
+#org @stolen
+textcolor 0x0
+bufferpokemon 0x0 0x4084
+msgbox @stealTalk 0x6
+goto @2ndScript
+end
+
+#org @2ndScript
+pause 0x10
+sound 0xF
+checksound
+spriteface CAPTAIN FACE_LEFT
+pause 0x35
+clearflag 0x200
+showsprite KOFFING
+sound 0x9
+pause 0x12
+cry 0x6D 0x0
+applymovement KOFFING @kofApproach
+waitmovement 0x0
+pause 0x20
+msgbox @adminTalk 0x6
+pause 0x12
+cry 0x6D 0x0
+applymovement KOFFING @kofStep
+pause 0x30
+sound 0xBD
+fadescreen 0x2
+checksound
+pause 0x12
+sound 0x48
+fadescreen 0x2
+checksound
+pause 0x12
+sound 0x48
+fadescreen 0x2
+checksound
+pause 0x15
+sound 0x15 // exclamation
+applymovement CAPTAIN @exclamation
+waitmovement 0x0
+pause 0x15
+spriteface CAPTAIN FACE_RIGHT
+pause 0x20
+spriteface CAPTAIN FACE_LEFT
+pause 0x20
+applymovement CAPTAIN @capnBarf
+waitmovement 0x0
+pause 0xB
+sound 0xAB
+checksound
+msgbox @capnTalk4 0x6
+sound 0xAB
+checksound
+pause 0x15
+sound 0x9
+clearflag 0x201
+showsprite PROTON
+applymovement PROTON @adminApproach
+waitmovement 0x0
+msgbox @adminTalk2 0x6
+spriteface KOFFING FACE_UP
+pause 0x10
+cry 0x6D 0x0
+waitcry
+pause 0x15
+sound 0xF
+pause 0x5
+fadescreen 0x2
+hidesprite KOFFING
+setflag 0x200
+clearflag 0x202
+pause 0x5
+showsprite POKEBALL
+sound 0x10
+pause 0x10
+hidesprite POKEBALL
+setflag 0x202
+pause 0x20
+spriteface PROTON FACE_RIGHT
+msgbox @adminTalk3 0x6
+applymovement PROTON @adminStep
+waitmovement 0x0
+msgbox @adminTalk4 0x6
+pause 0x15
+spriteface PROTON FACE_RIGHT
+pause 0x20
+applymovement PROTON @stepR
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+msgbox @adminTalk5 0x6
+pause 0x25
+setflag 0x201
+setflag 0x219
+warp 0x1 0x4 0xFF 0x20 0x7
+waitstate
+release
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @description
+= Pokémon cries appear to be coming\nfrom inside the crates!\c\h08ó\c\h08ó
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @capnTalk
+= Hey, you! Trespassing on my cabin\nduring my private time, are we?
+
+#org @capnWalk
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @capnTalk2
+= And who might you be?\p[.]\pWell, judging by that outfit of\nyours, I'd say you're trouble!
+
+#org @capnTalk3
+= Oh, I see how it is!\pYou came here to pick up those\ncrates, didn't you?\pSee, my crew found those things\nlying around on deck earlier, and\lI sure as heck don't remember\lloading them aboard in Lilycove\lCity!\pIf this is part of some smuggling\nbusiness, then I'll have none of\lit!
+
+#org @challenge
+= Let me show you how we deal with\npetty smugglers where I come\lfrom!\pI'll Cut you right up!
+
+#org @defeat
+= Gosh darn landlubber!\nI'll have you arrested!
+
+#org @stealTalk
+= What in the..?\nM-my [buffer1]!\pYou filthy thief!\nYou'll suffer for this!\pI'll have you know we have some\npowerful authority figures aboard\lthis ship!\pI'll have you tried in national\ncourt if I have to, you smuggling,\lthieving little--
+
+#org @innocentTalk
+= My, you're a strong little\nsmuggler too, ain't ya?\pWell, it doesn't matter, because I\nhappen to have one of the\lstrongest Trainers in the nation\laboard this ship, and he'll put\lyou right in your place, you\llittle--
+
+#org @kofApproach
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw STEP_D
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk
+= Koffing!\c\h08ó\nPoison Gas, now!
+
+#org @kofStep
+#raw 0x1C
+#raw ONSPOT_R
+#raw ONSPOT_R
+#raw 0x1C
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw 0xFE
+
+#org @capnBarf
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_U2
+#raw 0xFE
+
+#org @capnTalk4
+= Ugh!\c\h08ó\\nOh, God[.]\pI've never been this sick in all\nmy fifty years at sea!\pDarn it all, you filthy,\ncheating--\c\h08ó\\pBlurgh[.]\c\h08ó\\nOh, my stomach is turning..!
+
+#org @adminApproach
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk2
+= Proton: Good riddance.\nNicely done, Koffing.
+
+#org @adminTalk3
+= I see you finally found the\ncrates, grunt. Good.\pIt'll probably take a couple of\ntrips to get them all off the\lship, but we'll manage.
+
+#org @adminStep
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk4
+= I don't think this old guy is\ngoing to pose much of a problem\lanytime soon anyway.
+
+#org @adminTalk5
+= Let's get to it.
+
+#org @nothing
+= There's nothing here[.]

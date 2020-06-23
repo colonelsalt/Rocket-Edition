@@ -1,0 +1,64 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x6
+
+#org @main
+preparemsg 0x817A30C
+waitmsg
+checksound
+cry 0x69 0x0
+waitkeypress
+waitcry
+msgbox @notCalmed MSG_KEEPOPEN
+setvar 0x4059 0x1
+pause 0x15
+closeonkeypress
+pause 0x10
+applymovement BLUE @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @ellipses 0x6
+pause 0x10
+spriteface BLUE FACE_LEFT
+spriteface 0xFF FACE_RIGHT
+pause 0x10
+msgbox @talk 0x6
+pause 0x20
+spriteface BLUE FACE_DOWN
+pause 0x25
+spriteface BLUE FACE_LEFT
+pause 0x20
+msgbox @talk2 0x6
+applymovement BLUE @leave
+waitmovement 0x0
+sound 0x9
+hidesprite BLUE
+setflag 0x224
+checksound
+releaseall
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @notCalmed
+= The mother's spirit appeared for a\nmoment to have been calmed[.]\p[.]\c\h08ó\nBut then it changed its mind!\p"Thou canst not calm me, for thine\nintentions are not pure!\pThou hast come only to bring more\nharm upon my kind[.]\pTo profit from agony and death[.]\n'tis the most despicable greed[.]\pThou art evil[.]\c\h08ó\n(evil[.]\c\h08ó evil[.]\c\h08ó\c\h08ó EVIL[.][.]!!)"
+
+#org @ellipses
+= Blue: [.]
+
+#org @talk
+= What was that about?\nTalk about weird[.]\pDid you have any idea what it was\ntalking about?\p[.]\pYeah, me neither.
+
+#org @talk2
+= Well, up we go, I guess.
+
+#org @leave
+#raw 0x1C
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE

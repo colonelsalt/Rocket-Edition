@@ -1,0 +1,79 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SILVER 0xD
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+goto @common
+
+#org @common
+pause 0x20
+spriteface _SILVER FACE_UP
+pause 0x25
+applymovement _SILVER @playerFace
+waitmovement 0x0
+pause 0x20
+msgbox @talk2 0x6
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x2A
+if 0x1 goto @walkAround
+applymovement _SILVER @walk
+waitmovement 0x0
+goto @end
+
+#org @walkAround
+applymovement _SILVER @walk2
+waitmovement 0x0
+goto @end
+
+#org @end
+sound 0x9
+hidesprite _SILVER
+checksound
+setflag 0x3C
+setvar 0x402E 0xF
+release
+end
+
+#org @talk
+= Silver: [.]\pYou're that goon of my dad's from\nbefore, aren't you?\pHmph!\pHe dedicates all his time to it,\nyour little gang.\pAnd now...\c\h08ó\nIt's all falling apart.
+
+#org @talk2
+= "Number one in the world"[.]\pAnd he can't even defend himself\nagainst the littlest things.\pWhat a joke.\p[.]\pOh, you didn't hear yet, did you?\pHah!\pWell, don't let me spoil the bad\nnews for you[.]
+
+#org @playerFace
+#raw 0x4A
+#raw 0xFE
+
+#org @walk
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @walk2
+#raw FACE_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE

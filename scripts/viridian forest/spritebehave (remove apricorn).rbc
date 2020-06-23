@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define _TREE 0xC
+
+#org @main
+setworldmapflag 0x8A4
+compare 0x402E 0x10
+if 0x4 call @removeApricorn
+end
+
+#org @removeApricorn
+spritebehave _TREE 0x7
+return

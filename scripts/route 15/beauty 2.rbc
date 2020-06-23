@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x112 0x0 0x818680C 0x8186841 ADMIN_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Oh, bother!\pSeems like my pretty little\nPokémon couldn't protect me from a\lcriminal like you[.]

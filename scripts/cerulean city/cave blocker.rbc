@@ -1,0 +1,44 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+compare 0x402E 0x12
+if 0x4 goto @battle
+end
+
+#org @battle
+msgbox @talk2 0x6
+trainerbattle 0x3 0x24 0x0 @defeat
+call EXEC_STEAL
+textcolor 0x0
+msgbox @talk3 0x6
+fadescreen 0x1
+hidesprite 0xC
+setflag 0x2E5
+sound 0x9
+checksound
+fadescreen 0x0
+release
+end
+
+
+#org @talk
+= This is Cerulean Cave.\pNobody enters without permission\nfrom the Pokémon Champion!\p[.]\pYeah, what..?\pLook, I don't care what fairy-\ntales you heard about what's\linside of here!\pRules are rules, buddy!
+
+#org @talk2
+= H-hey!\nI said keep out, punk!
+
+#org @defeat
+= You'll regret this!
+
+#org @talk3
+= [.]\pThey stationed me here for your\nown safety, you know!\pIf the thing in there chews you up\nand spits you out, that's on you!
+
+
+
+
+
+

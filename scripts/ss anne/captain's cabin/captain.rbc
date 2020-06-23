@@ -1,0 +1,20 @@
+#dynamic 0x800000
+
+#org @main
+lock
+checkflag 0x219
+if 0x1 goto @postScene
+msgbox @talk1 0x6
+release
+end
+
+#org @talk1
+= Ah[.] Nothing like a full pipe of\nsailor's baccy after a meal[.]\pMy, if only all my afternoons were\nthis peaceful[.]
+
+#org @postScene
+msgbox @talk2 0x6
+release
+end
+
+#org @talk2
+= Blargh[.]\pAw[.]\n(Cough), (splat)\pI can't command the ship\nin this condition!\pMy, what I wouldn't give for a\ngood back massage right about now!

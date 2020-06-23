@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= There just ain't no comparing the\nTops to the Bottoms, you know?\pWe're just[.] superior!\nOn every level, man!

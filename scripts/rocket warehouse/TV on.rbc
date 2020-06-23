@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+compare 0x401D 0x5 // checks if 2nd level script performed
+if 0x1 call @TVon
+end
+
+#org @TVon
+setmaptile 0x10 0xA 0x61 0x1
+return

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Mr. Fuji used to be a scientist,\nbut now he looks after abandoned\land orphaned Pokémon.\pHe's a good guy! He'll kick you\nout of here!

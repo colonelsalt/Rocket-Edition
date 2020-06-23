@@ -1,0 +1,58 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _ERIKA 0x7
+
+#org @main
+setvar 0x8004 0x5
+setvar 0x8005 0x2
+special 0x174
+trainerbattle 0x1 0x1A1 0x0 0x8197114 0x8197260 @postBattle
+checkflag 0x293
+if 0x0 goto 0x816D0C6
+setvar 0x8004 0x5
+setvar 0x8005 0x4
+special 0x173
+msgbox 0x886EC54 MSG_KEEPOPEN '"I must say, that costume of yours\..."
+release
+end
+
+#org @postBattle
+copyvar 0x8000 0x401F
+call BOSS_STEAL
+comparevars 0x401F 0x8000
+if _NOT_EQ call @stolen
+setvar 0x8004 0x5
+setvar 0x8005 0x1
+special 0x173
+clearflag 0x9E
+setflag 0x4B3
+setflag 0x823
+setvar 0x8008 0x4
+call 0x81A6B18
+textcolor 0x1
+goto 0x816D0C6
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _ERIKA @exclamation
+waitmovement 0x0
+textcolor 0x0
+bufferpokemon 0x0 0x4084
+textcolor 0x1
+msgbox @stolenTalk 0x6
+return
+
+#org @stolenTalk
+= Oh, my!\pNow there's a man who goes for\nwhat he wants.\pI'll tell you, darling[.]\pI'd offer you up every [buffer1]\nI own just to see that again.\pOh, but do let me carry on before\nI get too distracted[.]
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+
+
+

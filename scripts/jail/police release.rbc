@@ -1,0 +1,241 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _POLICE 0x4
+#define _SHIGEKI 0x8
+
+#org @main
+lock
+checkflag 0x2DC
+if 0x1 goto @postRelease
+msgbox @talk 0x6
+applymovement _POLICE @stepU
+waitmovement 0x0
+pause 0x10
+sound 0xF1
+pause 0x5
+setmaptile 0xA 0x8 0x2B3 0x0
+setmaptile 0xA 0x9 0x2BB 0x0
+setmaptile 0x9 0x8 0x2B2 0x0
+setmaptile 0x9 0x9 0x2BA 0x1
+special 0x8E
+pause 0x3
+setmaptile 0xA 0x8 0x2C3 0x0
+setmaptile 0xA 0x9 0x2CB 0x0
+setmaptile 0x9 0x8 0x2C2 0x0
+setmaptile 0x9 0x9 0x2CA 0x1
+special 0x8E
+pause 0x3
+sound 0xAA
+setmaptile 0xA 0x8 0x2D3 0x0
+setmaptile 0xA 0x9 0x2DB 0x0
+setmaptile 0x9 0x8 0x2D2 0x0
+setmaptile 0x9 0x9 0x2DA 0x1
+special 0x8E
+pause 0x15
+applymovement _POLICE @policeMove
+waitmovement 0x0
+pause 0x25
+applymovement _SHIGEKI @shigekiMove
+waitmovement 0x0
+applymovement _SHIGEKI @stepU
+waitmovement 0x0
+msgbox @shigekiTalk 0x6
+pause 0x20
+spriteface _SHIGEKI FACE_RIGHT
+pause 0x25
+spriteface _SHIGEKI FACE_UP
+pause 0x20
+msgbox @shigekiTalk2 0x6
+compare 0x401F 0x0
+if _GREATER goto @payBounty
+pause 0x15
+applymovement _SHIGEKI @faceLeft
+goto @continue
+
+#org @continue
+pause 0x15
+applymovement _SHIGEKI @stepL
+waitmovement 0x0
+pause 0x10
+applymovement _SHIGEKI @shigekiDown
+applymovement _POLICE @policeRight
+waitmovement 0x0
+pause 0x10
+applymovement _POLICE @stepU
+waitmovement 0x0
+msgbox @talk2 0x6
+pause 0x20
+applymovement _POLICE @policeRight2
+waitmovement 0x0
+pause 0x15
+applymovement _SHIGEKI @shigekiLeave
+waitmovement 0x0
+sound 0x27 // warp sound
+applymovement _SHIGEKI @shigekiWarp
+waitmovement 0x0
+movesprite2 _SHIGEKI 0x13 0x0
+movesprite _SHIGEKI 0x13 0x0
+setflag 0x2DC
+clearflag 0x200
+setvar 0x402E 0xA
+release
+end
+
+#org @payBounty
+pause 0x25
+applymovement _SHIGEKI @shigekiUp
+waitmovement 0x0
+pause 0x20
+buffernumber 0x0 0x401F
+msgbox @bountyTalk 0x6
+showmoney 0x0 0x0 0x0
+msgbox @bountyTalk2 0x6
+pause 0x10
+applymovement _SHIGEKI @stepU
+waitmovement 0x0
+copyvar 0x8000 0x401F
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @brokeLoop
+goto @moneyLoop
+
+#org @moneyPaid
+sound 0x41
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+release
+pause 0x25
+applymovement _SHIGEKI @shigekiDown
+waitmovement 0x0
+applymovement _SHIGEKI @faceLeft
+goto @continue
+
+#org @moneyLoop
+paymoney 0x3E8 0x0
+subvar 0x8000 0x1
+compare 0x8000 0x0
+if 0x1 goto @moneyPaid
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @brokeLoop
+goto @moneyLoop
+
+#org @brokeLoop
+paymoney 0x1 0x0
+checkmoney 0x1 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @moneyPaid
+goto @brokeLoop
+
+#org @postRelease
+faceplayer
+msgbox @postReleaseTalk 0x6
+release
+end
+
+
+#org @talk
+= Well, you!\c\h08ó\nToday's your lucky day.\pNever knew you had such rich\nfriends lying around.\pIt ain't right if you ask me!\p[.]\pBut I gotta go by what the law\nsays.\pHere we go[.]
+
+#org @shigekiTalk
+= [player]!\c\h08ó\nI see you're still around.\p[.]\pDon't you recognize me?\c\h08ó\nIt's me, Shigeki!
+
+#org @shigekiTalk2
+= I'm bailing you out, young man.\pAfter what you did for me[.]\c\h08ó\nWith "The Catastrophe"[.]\pIt's the least I could do.
+
+#org @bountyTalk
+= But[.]\pThe bounty that was on your head[.]\c\h08ó\n[$][buffer1],000[.]
+
+#org @bountyTalk2
+= You've got to contribute what you\ncan, or I'll have nothing left to\lfeed myself.
+
+#org @talk2
+= All right, you worthless crook!\c\h08ó\n[.]You're free to go.
+
+#org @postReleaseTalk
+= Gah!\pIf it were up to me, you'd be in\nfor life, Rocket!
+
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @faceLeft
+#raw 0x2F
+#raw 0xFE
+
+#org @policeMove
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @shigekiMove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @shigekiUp
+#raw STEP_U
+#raw 0xFE
+
+#org @shigekiDown
+#raw STEP_D
+#raw FACE_U
+#raw 0xFE
+
+#org @policeRight
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @policeRight2
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @shigekiLeave
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @shigekiWarp
+#raw FACE_D
+#raw 0x1B
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw 0x60
+#raw 0xFE
+
+
+
+

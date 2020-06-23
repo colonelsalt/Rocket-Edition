@@ -1,0 +1,49 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x6
+
+#org @main
+lock
+faceplayer
+checkflag 0x225
+if 0x1 goto @2ndScript
+msgbox @talk 0x6
+pause 0x15
+spriteface BLUE FACE_DOWN
+pause 0x20
+msgbox @talk2 0x6
+applymovement BLUE @bluMove
+waitmovement 0x0
+spritebehave BLUE 0x8
+movesprite2 BLUE 0xC 0xF
+setflag 0x225
+release
+end
+
+#org @2ndScript
+msgbox @2talk 0x6
+spriteface BLUE FACE_DOWN
+release
+end
+
+#org @talk
+= Blue: Well, you ready?\nWe're almost there.
+
+#org @talk2
+= [.]\pI can sense something ominous by\nthat staircase over there.\pI don't know what it is, but[.]\c\h08ó\nI'm not scared!\pI'll face it if you will,\nMr. Rocket.
+
+#org @bluMove
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @2talk
+= Come on, Mr. Rocket, let's do it!\nYou're not scared, are you?

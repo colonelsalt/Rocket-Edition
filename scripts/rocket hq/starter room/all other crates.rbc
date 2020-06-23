@@ -1,0 +1,141 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+checkflag 0x202
+if 0x0 goto @getrattata
+checkflag 0x204
+if 0x0 goto @noBeingGreedy
+msgbox @nothing 0x6
+release
+end
+
+#org @noBeingGreedy
+spriteface 0x0 FACE_UP
+textcolor 0x0
+msgbox @greedyStopper 0x6
+spriteface 0x0 FACE_DOWN
+release
+end
+
+#org @nothing
+= There's nothing here[.]
+
+#org @greedyStopper
+= Petrel: Hey, you! Only one Rattata\nper grunt, do you hear me?
+
+//_______________________________________________________
+
+#org @getrattata
+applymovement 0x1 @grunt1move
+showpokepic 0x13 0x3 0x3
+cry 0x13 0x0
+msgbox @want 0x5
+compare 0x800D 0x1
+if 0x1 goto @yes
+hidepokepic
+msgbox @notext 0x6
+givepokemon 0x13 0x5 0x0 0x0 0x0 0x0
+fanfare 0x13E
+msgbox @receive 0x4
+waitfanfare
+closeonkeypress
+msgbox @givenickname 0x5
+compare 0x800D 0x1
+if 0x1 goto @name
+goto @scriptend
+end
+
+#org @want
+= So you want Rattata, the\nRat Pokémon as your starter?
+
+#org @yes
+hidepokepic
+msgbox @yestext 0x6
+givepokemon 0x13 0x5 0x0 0x0 0x0 0x0
+fanfare 0x13E
+msgbox @receive 0x4
+waitfanfare
+closeonkeypress
+msgbox @givenickname 0x5
+compare 0x800D 0x1
+if 0x1 goto @name
+goto @scriptend
+end
+
+#org @grunt1move
+#raw 0x1C
+#raw 0x1C
+#raw 0x10
+#raw 0x10
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x60
+#raw 0xFE
+
+#org @yestext
+= This Pokémon does not look very\nenergetic.
+
+#org @notext
+= No? Well, that's too bad. You're\ngetting it anyway.
+
+#org @receive
+= [black_fr][player] received Rattata!
+
+#org @givenickname
+= [black_fr]Would you like to give a\nnickname to Rattata?
+
+#org @name
+setvar 0x8004 0x0
+call @nickname
+goto @scriptend
+end
+
+#org @nickname
+fadescreen 0x1
+special 0x9E
+waitstate
+return
+
+#org @scriptend
+waitmsg
+closeonkeypress
+hidesprite 0x1
+setflag 0x202
+setflag 0x828
+setvar 0x4016 0x1
+applymovement 0x0 @petrelstep
+waitmovement 0x0
+textcolor 0x00
+msgbox @petreltalk 0x6
+release
+end
+
+#org @petrelstep
+#raw 0x1C
+#raw 0x1C
+#raw 0x21
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk
+= Next in line, now!\nMove it, move it!

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+showpokepic 0x198 0xA 0x3
+msgbox @text MSG_KEEPOPEN
+hidepokepic
+release
+end
+
+#org @text
+= MissingNo.\nComputer glitch Pokémon.\pA powerful but incomplete digital\nreplica of Mew's DNA.\pErratic and impossible to control.\pKnown to interfere with computer\nsystems and duplicate items.\pThe full extent of its ability to\nmanipulate its surroundings is not\lknown.

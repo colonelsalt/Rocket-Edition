@@ -1,0 +1,7 @@
+#dynamic 0x800000
+
+#org @text1
+= Celadon Pokémon Gym\nLeader: Erika\pWinning Trainers:\nBlue, Red
+
+#org @text2
+= Celadon Pokémon Gym\nLeader: Erika\pWinning Trainers:\nBlue, Red, Mohammed Smith

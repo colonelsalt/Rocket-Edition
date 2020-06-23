@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Hey!\nChamp in the making!\pI totally, definitely, one hundred\npercent DO NOT KNOW who Viridian's\lGym Leader is!\pI have NO INVOLVEMENT with this\nperson, and he does not represent\lthe views of the Indigo League!\p[.]\pWhat's up?\nJust practicing.
+
+#org @talk2
+= Hmm[.]\nI don't trust you, Mr. Pink guy.\pBut hey-- as long as there's no\ncut in my salary, you guys can make\la Magikarp boss for all I care!

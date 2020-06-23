@@ -1,0 +1,56 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4033 0x8
+if 0x1 goto @postGift
+compare 0x4033 0x7
+if 0x1 goto @postJulien
+msgbox @preJulienTalk 0x6
+release
+end
+
+#org @postJulien
+msgbox @postJulienTalk 0x6
+checkitemroom 0xCF 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+fanfare 0x101
+additem 0xCF 0x1
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+msgbox @putAway MSG_KEEPOPEN
+setvar 0x4033 0x8
+release
+end
+
+#org @postGift
+msgbox @postGiftTalk 0x6
+release
+end
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @preJulienTalk
+= What are you looking at, Rocket?\pYou got what you came for, didn't\nyou? (Snigger[.])
+
+#org @postJulienTalk
+= [.]\c\h08ó\nW-wow[.]\pI'll be damned, Rocket[.]\c\h08ó\nYou beat Julien?!\pThat guy's one of the scariest\nfellows we deal with[.]\pHe knows folks in high places, and\nalways gets his way, you know.\pIf he's really gone for good now,\nwe owe you one, Rocket.\pTake this as a sign of respect\nfrom us Bottoms.
+
+#org @postGiftTalk
+= You cool, Rocket.\nUs Bottoms have got your back.
+
+#org @noRoomTalk
+= You dummy!\nYou've no room for it!
+
+#org @itemMsg
+= [player] received the Black Belt!
+
+#org @putAway
+= [player] put the Black Belt in\nthe Items pocket.

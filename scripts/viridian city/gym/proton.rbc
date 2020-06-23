@@ -1,0 +1,34 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+checkflag 0x2F0
+if 0x1 goto @postGame
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @postGame
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Proton: Still around, are you?\pThe way this Red kid has ruined my\nschedule really gets on my nerves.\pLet's knock him out quick and get\nthings back to normal already.
+
+#org @talk2
+= Proton: Hmph!\nWhat a joke.\pI won't be caught dead calling you\n"Boss", rest assured.\p[.]\pAnd Giovanni sent you to take on\nthe Elite Four, now?\pGo ahead[.]\c\h08ó I've got other plans in\nmind for Team Rocket[.]
+
+#org @talk3
+= Proton: Well, then. So you did it.\nHow was jail?\p[.]\pIt's no use sticking around here\nmuch longer, sorry to say.\pI'll have a word with Archer and\nwe'll make our own plans[.]
+
+

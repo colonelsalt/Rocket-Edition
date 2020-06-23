@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ronnie: [player]!\nHoly macaroni!\pIt's the moment we've all been\nwaiting for, isn't it?!\pTime to show Kanto just what Team\nRocket is made of!\pWe're gonna royally kick the ass\nof every scientist in this\lbuilding, aren't we, [player]?

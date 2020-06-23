@@ -1,0 +1,63 @@
+#dynamic 0x800000
+
+#org @start
+lock
+applymovement 0x1 @faceleft
+waitmovement 0x0
+textcolor 0x00
+checkflag 0x201
+if 0x0 call @receive
+msgbox @talk4 0x6
+applymovement 0xFF @moveplayer
+end
+
+#org @receive
+spriteface 0xFF 0x4
+msgbox @talk 0x6
+applymovement 0x1 @walk
+waitmovement 0x0
+msgbox @talk2 0x6
+applymovement 0x1 @walk2
+waitmovement 0x0
+msgbox @talk3 0x6
+giveitem 0x154 0x1 0x0
+setflag 0x201
+setvar 0x4011 0x0
+return
+
+#org @faceleft
+#raw 0x2
+#raw 0xFE
+
+#org @talk
+= Another new recuit, is it?\pYeah, I've got that HM of yours\nright here; just a sec.
+
+#org @walk
+#raw 0x10
+#raw 0x10
+#raw 0x13
+#raw 0x13
+#raw 0x1C
+#raw 0x24
+#raw 0xFE
+
+#org @talk2
+= Free Fly for all grunts, now, eh?\nMy, Giovanni's going soft.
+
+#org @walk2
+#raw 0x12
+#raw 0x12
+#raw 0x11
+#raw 0x11
+#raw 0x2
+#raw 0xFE
+
+#org @talk3
+= Here it is, pal. Don't go putting\nit to waste, now.
+
+#org @talk4
+= Now get out of here-- I've got\nwork to do.
+
+#org @moveplayer
+#raw 0x11
+#raw 0xFE

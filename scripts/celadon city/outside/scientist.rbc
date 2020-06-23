@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= You lowly Rockets[.]\pI knew I should've never trusted\nthat grunt to take care of my\lSilph Scope!\pNow what am I going to do?\nSilph will fire me for sure!\pDamn[.] maybe I should just join\nthe Rockets after all[.]

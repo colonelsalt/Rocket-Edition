@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x18C 0x0 @pre 0x81747B8 EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @pre
+= I came in here just to train.\pIt's great, 'cause none of the\nriffraff can get through the\lgates!
+
+#org @after
+= I guess I spoke too soon[.]

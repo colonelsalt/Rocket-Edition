@@ -1,0 +1,28 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4016 0x10
+if _GREATER_EQ goto @postMissingno
+checkflag 0x29B
+if 0x1 goto @postMission
+msgbox @talk MSG_FACE
+end
+
+#org @postMission
+msgbox @talk2 MSG_FACE
+end
+
+#org @postMissingno
+msgbox @talk3 MSG_FACE
+end
+
+#org @talk
+= Eh?\nYou're looking for Blaine?\pI'd look in the Pokémon Mansion.\nSuch a nostalgic fellow, he is!\pHe's probably gone to admire the\ncharred remnants of some past\lexperiment and lost track of time!
+
+#org @talk2
+= That Pokémon Mansion used to look\nso majestic in my youth.\pNow it's a nest for all sorts of\nvagabonds and panhandlers!
+
+#org @talk3
+= Geez[.] I don't know what came over\nme earlier[.]\pIt was like the whole word sort of\ndidn't work right anymore[.]\pI wasn't sure if I'd ever recover!\pWhat a relief we don't live in a\nworld like that, eh?
+

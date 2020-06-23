@@ -1,0 +1,421 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0xE
+#define _POKE_BALL 0x16
+#define _RATICATE 0x14
+#define _BILL 0x13
+#define _GUARD 0x4
+
+#org @main
+lockall
+faceplayer
+textcolor 0x0
+checkflag 0x240
+if 0x1 goto @postKnockout
+compare 0x4014 0x16
+if 0x1 goto @postBlock
+compare 0x4014 0x15
+if 0x1 goto @postBill
+compare 0x4014 0x14
+if 0x1 goto @postOak
+msgbox @talk 0x6
+lockall
+pause 0x10
+getplayerpos 0x8000 0x8001
+compare 0x8000 0xD
+if 0x1 call @fromLeft
+compare 0x8000 0xE
+if 0x1 call @fromBelow
+compare 0x8000 0xF
+if 0x1 call @fromRight
+msgbox @talk2 0x6
+lockall
+pause 0x20
+spriteface _RONNIE FACE_UP
+pause 0x25
+applymovement _RONNIE @facePlayer
+pause 0x15
+msgbox @talk3 0x6
+lockall
+pause 0x10
+spriteface _RONNIE FACE_UP
+spriteface 0xFF FACE_UP
+fadeout 0x0
+sound 0x2
+setmaptile 0xD 0x8 0x21D 0x1
+setmaptile 0xE 0x8 0x21E 0x1
+setmaptile 0xD 0x9 0x225 0x1
+setmaptile 0xE 0x9 0x226 0x1
+special 0x8E // screen refresh
+pause 0xA
+spriteface 0x3 FACE_UP
+spriteface 0x2 FACE_UP
+spriteface 0x10 FACE_UP
+spriteface 0x7 FACE_UP
+spriteface 0x9 FACE_UP
+spriteface 0xA FACE_UP
+spriteface 0xB FACE_UP
+pause 0x10
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+playsong 0x144 0x0
+pause 0x20
+textcolor 0x1
+msgbox @TVtalk 0x6
+lockall
+pause 0x30
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+clearflag 0x200
+setvar 0x401D 0x5
+warpmuted 0x3 0x10 0xFF 0x6 0xE
+waitstate
+end
+
+#org @fromLeft
+applymovement _RONNIE @stepL
+waitmovement 0x0
+return
+
+#org @fromBelow
+applymovement _RONNIE @stepD
+waitmovement 0x0
+return
+
+#org @fromRight
+applymovement _RONNIE @stepR
+waitmovement 0x0
+return
+
+#org @talk
+= Hello, [player]!\nGood lord, it's been a while[.]\p[.]\c\h08ó\nHey, don't you recognize me?\pStupid old dingbat!\c\h08ó [.]It's me!\c\h08ó\nRonnie!\pMan, I'll tell you!\pIt's been tough since Team Rocket[.]\c\h08ó\nBeing a solo gangster and all.\pI've robbed a couple of Youngsters\nand schoolgirls and things, but\lit's just not the same anymore[.]
+
+#org @talk2
+= Well, but look at you, Mr. Posh!\pI suppose the hair gel comes with\nthe promotion, does it?\pI always thought you were a little\ncamp, but this takes the cake!\pHahaha[.]\c\h08ó\nAnyway[.]
+
+#org @talk3
+= These are mad times, [player]!\c\h08ó\nHave you heard the news?\pLance is done for! Defeated!\c\h08ó\nHahaha[.] and guess what?\pSomeone's just gone in to challenge\nthe new Elite Four already!\pOh, oh!\c\h08ó But here's the best part!\c\h08ó\nGuess who the new Champion is..?\pHere, just wait, it's gonna be on\nTV any second now[.]
+
+#org @TVtalk
+= Announcer: It's a historic day for\nKanto-Johto, ladies and gentlemen!\pChampion Lance has been defeated\nin Pokémon League battle by a\lyoung challenger from Pallet Town!\pWe spoke to the region's remarkable\nnew adolescent Champion shortly\lafter his victory.
+
+#org @facePlayer
+#raw 0x4A
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+
+
+// ---------------------------------
+
+#org @postOak
+msgbox @postOakTalk 0x6
+releaseall
+end
+
+#org @postBill
+msgbox @postBillTalk 0x6
+releaseall
+end
+
+#org @postKnockout
+msgbox @postKnockoutTalk 0x6
+releaseall
+end
+
+
+#org @postBillTalk
+= Ronnie: Who was that nerdy guy,\n[player]? Friend of yours?
+
+#org @postOakTalk
+= Ronnie: Who would've thought that\nback at Mt. Moon, eh?\p[.]\pHmm..?\c\h08ó\nProf. Oak was here just now?\pHey, calm down, [player]!\pWhy should we care about that old\nfart anymore..?
+
+#org @postKnockoutTalk
+= Ronnie: We've come a long way,\nhaven't we, [player]?\pYou go handle what you need to now.\nI've got your back.
+
+
+// ---------------------------------
+
+#org @postBlock
+getplayerpos 0x8000 0x8001
+msgbox @postBlockTalk 0x6
+lockall
+pause 0x25
+msgbox @postBlockTalk2 0x6
+lockall
+fadeout 0x0
+compare 0x8001 0xB
+if 0x1 call @movePlayer
+applymovement _RONNIE @moveDown
+waitmovement 0x0
+pause 0x25
+msgbox @postBlockTalk3 0x6
+lockall
+pause 0x30
+spriteface _RONNIE FACE_UP
+pause 0x30
+msgbox @postBlockTalk4 0x6
+lockall
+pause 0x25
+spriteface _RONNIE FACE_LEFT
+pause 0x30
+msgbox @postBlockTalk5 0x6
+lockall
+pause 0x25
+call @moveRonnie
+pause 0x25
+msgbox @postBlockTalk6 0x6
+lockall
+pause 0x10
+call @talkStep
+playsong 0x112 0x0
+msgbox @postBlockTalk7 0x6
+lockall
+call @raticateEntryAndLeave
+setvar 0x4016 0x34
+movesprite2 _RATICATE 0x5 0x2
+movesprite _RATICATE 0x5 0x2
+showsprite _RATICATE
+movesprite2 _RONNIE 0x5 0x3
+movesprite2 _RONNIE 0x5 0x3
+showsprite _RONNIE
+movesprite2 _BILL 0x3 0x3
+spritebehave _BILL _LOOK_UP
+movesprite _BILL 0x3 0x3
+showsprite _BILL
+spriteface _BILL FACE_UP
+spritebehave _GUARD _LOOK_RIGHT
+spriteface _GUARD FACE_RIGHT
+showsprite _GUARD
+clearflag 0x39
+releaseall
+end
+
+
+#org @movePlayer
+applymovement 0xFF @moveRight
+return
+
+#org @moveRonnie
+compare 0x8001 0x9
+if 0x1 call @oneUp
+compare 0x8001 0xA
+if 0x1 call @oneUpAndFaceRight
+compare 0x8001 0xB
+if 0x1 call @faceRight
+return
+
+#org @talkStep
+compare 0x8001 0x9
+if 0x1 call @stepUF
+compare 0x8001 0xA
+if _GREATER_EQ call @stepRF
+return
+
+#org @raticateEntryAndLeave
+compare 0x8001 0x9
+if 0x1 call @faceRight
+compare 0x8001 0xA
+if _GREATER_EQ call @faceDown
+pause 0x20
+msgbox @postBlockTalk8 0x6
+lockall
+pause 0x25
+sound 0x36 // throw Poké ball sound
+call @moveBall
+showsprite _POKE_BALL
+checksound
+pause 0x7
+sound 0xF // Poké ball open
+fadescreen 0x2
+hidesprite _POKE_BALL
+showsprite _RATICATE
+checksound
+pause 0x10
+cry 0x14 0x0
+applymovement _RATICATE @spin
+waitmovement 0x0
+waitcry
+pause 0x10
+msgbox @postBlockTalk9 0x6
+lockall
+pause 0x25
+compare 0x8001 0x9
+if 0x1 call @rightSteps
+applymovement _RONNIE @runLeave
+applymovement _RATICATE @runLeave
+waitmovement 0x0
+hidesprite _RONNIE
+hidesprite _RATICATE
+return
+
+
+#org @moveBall
+compare 0x8001 0x9
+if 0x1 call @ballToTop
+compare 0x8001 0xA
+if 0x1 call @ballToMiddle
+compare 0x8001 0xB
+if 0x1 call @ballToBottom
+return
+
+#org @ballToTop
+movesprite2 _POKE_BALL 0x4 0xA
+movesprite _POKE_BALL 0x4 0xA
+movesprite2 _RATICATE 0x4 0xA
+movesprite _RATICATE 0x4 0xA
+return
+
+#org @ballToMiddle
+movesprite2 _POKE_BALL 0x3 0xB
+movesprite _POKE_BALL 0x3 0xB
+movesprite2 _RATICATE 0x3 0xB
+movesprite _RATICATE 0x3 0xB
+return
+
+#org @ballToBottom
+movesprite2 _POKE_BALL 0x3 0xC
+movesprite _POKE_BALL 0x3 0xC
+movesprite2 _RATICATE 0x3 0xC
+movesprite _RATICATE 0x3 0xC
+return
+
+#org @rightSteps
+applymovement _RONNIE @runRight
+applymovement _RATICATE @runRight
+waitmovement 0x0
+return
+
+
+#org @oneUp
+applymovement _RONNIE @moveUp
+waitmovement 0x0
+return
+
+#org @oneUpAndFaceRight
+applymovement _RONNIE @moveUp
+waitmovement 0x0
+spriteface _RONNIE FACE_RIGHT
+return
+
+#org @faceRight
+spriteface _RONNIE FACE_RIGHT
+return
+
+#org @faceDown
+spriteface _RONNIE FACE_DOWN
+return
+
+#org @stepUF
+applymovement _RONNIE @stepU
+waitmovement 0x0
+return
+
+#org @stepRF
+applymovement _RONNIE @stepR
+waitmovement 0x0
+return
+
+
+
+#org @postBlockTalk
+= Ronnie: Hey, what's all this\ncommotion, [player]?\pAre you guys trying to break in\nto the Elite Four? That's rad!
+
+#org @postBlockTalk2
+= [.]\pWhat's that, you need help?\p[.]\c\h08ó\nWhat?\c\h08ó You mean[.]\c\h08ó my help..?
+
+#org @postBlockTalk3
+= Damn[.]\c\h08ó\n[.]I never thought you'd say that.
+
+#org @postBlockTalk4
+= You know, [player], I[.]\pI know I haven't been the greatest\nbuddy in the world.\pI keep getting things wrong and\nscrewing stuff up.\pI know I'm not as smart as you\nand all[.]
+
+#org @postBlockTalk5
+= I just[.]\c\h08ó wanted to be bad.\pA real badass pimp gangster, right?\c\h08ó\nThe whole nine yards.\p[.]\pI didn't want to wait around.\pDidn't want anyone to think I was\na sissy. I couldn't take it.
+
+#org @postBlockTalk6
+= [.]\c\h08ó\nI'm real sorry.\pI'm going to set things straight and\nbe a proper thief like you one day.\pI'll do things by the plan.\c\h08ó\nNo more cutting corners.
+
+#org @postBlockTalk7
+= So look!\c\h08ó\nJust this once[.]\pLeave it to me, [player]!\nFor old time's sake.
+
+#org @postBlockTalk8
+= Raticate!
+
+#org @postBlockTalk9
+= On alert, you lazy rat!\c\h08ó\n[.]we've got work to do.
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @moveRight
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE
+
+#org @spin
+#raw 0x1B
+#raw FACE_R
+#raw 0x1B
+#raw FACE_U
+#raw 0x1B
+#raw FACE_L
+#raw 0x1B
+#raw FACE_U
+#raw 0x1B
+#raw 0xFE
+
+#org @runRight
+#raw STEP_R2
+#raw STEP_U2
+#raw 0xFE
+
+#org @runLeave
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+
+
+
+
+
+

@@ -1,0 +1,104 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x6
+
+#org @main
+lock
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x20
+textcolor 0x0
+checkflag 0x1ED
+if 0x1 goto @secondVid
+msgbox @talk 0x6
+pause 0x20
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @talk2 0x6
+pause 0x20
+applymovement _OAK @walk
+waitmovement 0x0
+pause 0x20
+spriteface _OAK FACE_RIGHT
+pause 0x15
+msgbox @talk3 0x6
+pause 0x20
+setvar 0x4016 0x22
+setvar 0x4014 0xD
+setflag 0x200
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x74 0xFF 0xD 0x11
+release
+end
+
+#org @secondVid
+msgbox @2talk 0x6
+pause 0x20
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @2talk2 0x6
+pause 0x20
+applymovement _OAK @2walk
+waitmovement 0x0
+pause 0x15
+msgbox @2talk3 0x6
+pause 0x20
+setvar 0x4016 0x24
+setvar 0x4014 0xD
+setflag 0x200
+clearflag 0x1ED
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x74 0xFF 0x16 0x7
+release
+end
+
+
+
+#org @talk
+= There's a fatal flaw in the logic\nunderlying the Mewtwo Project.\pYes[.]\c\h08ó there is immense potential\nin genetic engineering, no doubt.\pAnd we've correctly isolated the\ngenes responsible for aggression\land sociopathy.
+
+#org @talk2
+= But what good are they[.]\pIn the body of a Pokémon that\ncannot be reasoned with?
+
+#org @talk3
+= The wartime chaos makes people\nfocus on raw muscle power to the\lexclusion of everything else.\pThey forget that we are not\nsavages.
+
+#org @2talk
+= Why have Pokémon grown to be such\na dominating force in society?
+
+#org @2talk2
+= Not by their individual power\nalone.\pLeft to their own devices, Pokémon\nare passive, simple-minded\lcreatures.\pAbove all, the thing that\ndetermines the strength of a\lpack of Pokémon[.]
+
+
+#org @2talk3
+= Is the intelligence, the\ndiscipline and the leadership[.]\pOf the humans that control them.\pA Pokémon is only as strong as its\nmaster.
+
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @walk
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @2walk
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw FACE_R
+#raw 0xFE
+
+
+
+
+
+
+
+

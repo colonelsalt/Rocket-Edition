@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= You guys would invade us and go\nthrough all this commotion[.]\pJust for the sake of some BALLS?\nSurely it can't be worth it[.]

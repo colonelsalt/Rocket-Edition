@@ -1,0 +1,126 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0x5
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+checkflag 0x2A3
+if 0x1 goto @postScientist
+compare 0x402E 0x1 // only one scientist remains
+if 0x3 goto @oneScientist
+msgbox @preScientistTalk 0x6
+spriteface _RONNIE FACE_DOWN
+release
+end
+
+#org @postScientist
+msgbox @pTalk 0x6
+pause 0x25
+spriteface _RONNIE FACE_DOWN
+pause 0x25
+msgbox @pTalk2 0x6
+pause 0x25
+faceplayer
+pause 0x15
+msgbox @pTalk3 0x6
+pause 0x10
+applymovement _RONNIE @stepL
+waitmovement 0x0
+msgbox @pTalk4 0x6
+pause 0x25
+textcolor 0x3
+fanfare 0x105
+preparemsg @giveKey
+waitmsg
+waitfanfare
+removeitem 0x163 0x1
+closeonkeypress
+applymovement _RONNIE @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @pTalk5 0x6
+pause 0x10
+applymovement _RONNIE @halfLeave
+waitmovement 0x0
+pause 0x20
+spriteface _RONNIE FACE_LEFT
+pause 0x15
+msgbox @pTalk6 0x6
+applymovement _RONNIE @stepL
+waitmovement 0x0
+msgbox @pTalk7 0x6
+applymovement _RONNIE @fullLeave
+waitmovement 0x0
+sound 0x9
+checksound
+hidesprite _RONNIE
+setflag 0x2DE
+setvar 0x402E 0x7
+end
+
+#org @oneScientist
+msgbox @oneScientistTalk 0x6
+spriteface _RONNIE FACE_DOWN
+release
+end
+
+#org @preScientistTalk
+= Ronnie: Hey, [player]!\nWhat are you up to?\p[.]\pTaking hostages, are you?\pOh! That sure sounds[.]\c\h08ó\n(Exciting as hell[.])\pWell! Leave the gruntwork to us\ngrunts, eh, [player]?\pWe're just[.] wiring up this Warp\nTile here!\p(Sigh[.])\c\h08ó\nShould only take a second[.]
+
+#org @pTalk
+= Ronnie: Holy Miltank!\nNow that was something else!\pYou sure showed that geek what\nTeam Rocket's about, [player]!
+
+#org @pTalk2
+= [.]\p(I guess that's the sort of\nbadassery you get to do as a high-\lranked Admin, eh?)
+
+#org @pTalk3
+= [.]\c\h08ó\n(Sigh[.])\pIf only there was some way I could\nshow these higher-ups that I've\lgot what it takes too, you know?\pI'm a tough-knuckled criminal just\nlike you, [player][.] am I right?
+
+#org @pTalk4
+= Hey, I know!\pThat card you used to lock that\ngeek up with just now[.]\pSay, since you're all done with\nyour hostage-taking business[.]\pHow about I take that card down to\nPetrel and Proton down there and\lreport to them the job's all done?\pNow there's a win-win agreement\nif I ever saw one!\p[.]\c\h08ó\nHow about it?
+
+#org @pTalk5
+= Oh, [player]. You're the bestest\ngangster bud I ever had, you know!
+
+#org @giveKey
+= [player] handed over the Card Key.
+
+#org @pTalk6
+= Oh yeah, we're all done with that\nWarp Tile now, by the way.\pWant to know where it leads?\nHaha!\pStraight up to the company\nPresident's office at 11F!\pWe set it up so Boss would have a\nstraight line up to the old fogey\lfor when he comes!
+
+#org @pTalk7
+= How about you head up there now\nand hold the fort meanwhile?\pWith the hostages and Warp Tiles\nall ready, I guess Boss will be\lright around the corner, won't he?\pWell, chit-chats ahoy!\nCatch ya later, pal!
+
+#org @oneScientistTalk
+= Ronnie: Yo, [player].\pStill busy on that Warp Tile, as\nyou can see[.]\pOh yeah, there's some nerdy-\nlooking dude in the room opposite.\pIs that one of the guys you're\nlocking up? Better have at him.
+
+#org @halfLeave
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @fullLeave
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE

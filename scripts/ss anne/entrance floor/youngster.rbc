@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x60 0x0 0x8173999 0x81739B1 POKESTEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= Listen, listen!\nLet me be your friend, okay?\pThen I can learn to be bad like\nyou when I grow up!\pDon't tell mom!

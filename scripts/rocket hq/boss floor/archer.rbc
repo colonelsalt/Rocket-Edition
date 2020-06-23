@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Archer: Yeah, that Fuji turned out\nuseful in the end.\pThe less enjoyable part of that\nmission was how that Red kid came\lup and knocked out my whole squad!\pI thought reports about him were\njust exaggeration, but no[.]\pHe's a force to be reckoned with[.]

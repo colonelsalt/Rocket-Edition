@@ -1,0 +1,27 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LEADER 0x4
+
+#org @main
+lock
+applymovement _LEADER @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveUp
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Hey, [player]!\nWhere the hell are you off to?\pGo up to the counter and get us\nthose goods!
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE

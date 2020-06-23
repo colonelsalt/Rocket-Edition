@@ -1,0 +1,27 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+getplayerpos 0x8000 0x8001
+spriteface 0xFF FACE_UP
+pause 0x20
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+playsong 0x156 0x0
+textcolor 0x1
+msgbox @TVtalk 0x6
+pause 0x20
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+warpmuted 0x7 0x1 0xFF 0x7 0x4
+end
+
+#org @cameraPan
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @TVtalk
+= Announcer: And now, in alarming\ncrime-related news[.]\pA renowned collector of technical\nmachines was earlier today a\lvictim of a vicious robbery while\laway from his Cerulean City home.\pPolice arrived at the scene\nshortly after the incident, but\lwere unable to catch the\lperpetrators before they made\ltheir escape.\pOur own Northern Kanto reporter\nFord Regular reports from the\lscene.

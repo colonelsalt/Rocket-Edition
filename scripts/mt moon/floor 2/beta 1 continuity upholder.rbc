@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface 0x1 FACE_LEFT
+release
+end
+
+#org @talk
+= Huh-ho! You thought you could just\nskip on through here on to\lCerulean, didn't you? No-can-do,\lbuddy, sorry: You'll have to wait\lfor the next beta release for\lthat! Ho ho ho ho[.]

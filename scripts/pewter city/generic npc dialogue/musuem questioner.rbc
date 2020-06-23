@@ -1,0 +1,23 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox 0x817E53E MSG_YESNO '"Did you check out the Museum?"
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox @noTalk MSG_KEEPOPEN
+closeonkeypress
+release
+end
+
+#org @saidYes
+msgbox @yesTalk MSG_KEEPOPEN
+release
+end
+
+#org @noTalk
+= Really?\nWell, it's like my pa says!\pCulture, that's what you darn\nRockets lack, isn't it?
+
+#org @yesTalk
+= Well, I sure as hell hope you\ndidn't steal any of our fossils!

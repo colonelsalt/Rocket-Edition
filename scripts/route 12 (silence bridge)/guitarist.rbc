@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x11D 0x0 @challenge 0x818559B EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Hey, that big fat Pokémon that\nused to be in the way here\lsuddenly disappeared!
+
+#org @postBattle
+= The sleeping Pokémon took off\nright around the same time I saw\lthis mute little cap-wearing kid\lwalk past[.]

@@ -1,0 +1,39 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @heal
+msgbox @saidNo 0x6
+release
+end
+
+
+#org @heal
+msgbox @saidYes 0x6
+fadescreen 0x1
+fanfare 0x100
+waitfanfare
+special 0x0
+lock
+faceplayer
+fadescreen 0x0
+msgbox @postTalk 0x6
+release
+end
+
+
+#org @talk
+= Greetings, young one.\pI've come out here to spread the\nword about our Lord and Savior\lArceus, peace be upon him[.]\pShall I lend you my healing powers\nas I read his divine wisdom?
+
+#org @saidYes
+= Ah!\nThe spirit of a true believer!
+
+#org @saidNo
+= BLASPHEMY!\nETERNAL HELLFIRE AWAITS YOU!
+
+#org @postTalk
+= "Blessed are the damaged Pokémon,\nfor they will send reckless\lTrainers to the Center of healing."

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Man, I hope that Lapras will lay\nan egg before too long[.]\pThose things are so rare, man[.]\nBe such a shame to let it go[.]

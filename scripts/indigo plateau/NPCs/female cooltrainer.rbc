@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Lance has been my hero since he\nwon the war all that time ago.\pI still don't believe it[.]

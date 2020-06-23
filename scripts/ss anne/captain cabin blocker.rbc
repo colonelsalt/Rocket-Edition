@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Voir!\nIt is I, Garcon!\pZe greatest chef in all of\nKanto-Johto!\pOui. 'Tis true. Did you come for\nmy le autograph?\pNo?\nOh, ze captain.\pHe is not to be disturbed, for he\nis busy consuming my very own\lsmoked Magikarp extraordinaire!\pIt must be enjoyed in quiet\nseclusion.\pAdieu; come again later.

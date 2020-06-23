@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ah[.]\nPokémon[.]\pIf you can't exploit them for\nprofit, what's the use of them?

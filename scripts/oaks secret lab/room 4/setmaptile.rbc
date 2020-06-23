@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4016 0x2C
+if 0x1 call @pcOnMaybe
+end
+
+#org @pcOnMaybe
+checkflag 0x2F0 // don't turn on PC for endgame scene
+if 0x0 call @pcOn
+return
+
+#org @pcOn
+setmaptile 0x7 0x5 0x9 0x1
+compare 0x4046 0x3
+if _LESS call @firstPcOn
+return
+
+#org @firstPcOn
+setmaptile 0x13 0xF 0x9 0x1
+return

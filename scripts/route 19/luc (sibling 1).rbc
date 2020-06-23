@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x6 0x1EA 0x0 0x8187D45 0x8187D7E 0x8187DE8 ADMIN_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Luc: My sis protects me from bad\npeople like you..!

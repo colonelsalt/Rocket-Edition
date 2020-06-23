@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Someday, Lance is going to come\nhere and throw you all in jail!\pTh-that's what Mr. Fuji said..!

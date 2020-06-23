@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x91 0x0 0x8183E04 0x8183E2A POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9A3C
+msgbox 0x8183E3C MSG_NORMAL '"Whisper[.]\nWhisper[.]"
+end

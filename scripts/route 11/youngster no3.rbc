@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x62 0x0 0x818506A 0x818509B POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9B72
+msgbox 0x81850CF MSG_NORMAL '"What now?\nLeave me alone!"
+end

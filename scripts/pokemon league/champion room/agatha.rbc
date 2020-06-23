@@ -1,0 +1,100 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _AGATHA 0x5
+
+#org @main
+lock
+faceplayer
+compare 0x4011 0x3
+if _GREATER_EQ goto @postBattle
+msgbox @talk 0x6
+//special 0x3B
+//playsong 0x128 0x0
+trainerbattle 0x3 0x19C 0x0 @defeatText 
+call POKESTEAL
+call @talkStep
+textcolor 0x1
+msgbox @talk2 0x6
+pause 0x25
+spriteface _AGATHA FACE_UP
+pause 0x20
+msgbox @talk3 0x6
+pause 0x25
+faceplayer
+pause 0x15
+msgbox @talk4 0x6
+setvar 0x4011 0x3
+warpmuted 0x1 0x4F 0xFF 0x6 0x5
+waitstate
+release
+end
+
+#org @postBattle
+msgbox @talk4 0x6
+spriteface _AGATHA FACE_DOWN
+release
+end
+
+
+#org @talkStep
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x5
+if 0x1 call @stepLfunc
+compare 0x8000 0x6
+if 0x1 call @stepDfunc
+compare 0x8000 0x7
+if 0x1 call @stepRfunc
+return
+
+#org @stepLfunc
+applymovement _AGATHA @stepL
+waitmovement 0x0
+return
+
+#org @stepDfunc
+applymovement _AGATHA @stepD
+waitmovement 0x0
+return
+
+#org @stepRfunc
+applymovement _AGATHA @stepR
+waitmovement 0x0
+return
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+
+#org @talk
+= Agatha: [player].\c\h08ó\nI had a feeling you'd step forward.\pThere's nothing more to be said[.]\c\h08ó\nI've given you fair warning.\pYou saw as well as I that Red is\nthe rightful Champion.\pThere'll be none of these coups\nand conspiracies here[.]\pI'll guard this door on my honor!\c\h0B[Ke]À
+
+#org @defeatText
+= [.]\nAnd to a criminal..!
+
+#org @talk2
+= Agatha: [.]\c\h08ó\nVery well.\pJust know Samuel won't take kindly\nto your interference.\pIf his old self really has\nreturned[.]\pThere's nothing he wouldn't do to\nkeep enemies like you away.
+
+#org @talk3
+= But a loss is a loss.\c\h08ó\nI'll step aside.
+
+#org @talk4
+= Mark my words, [player].\nThat man has a powerful spirit.
+
+
+
+

@@ -1,0 +1,17 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+applymovement LASTTALKED @faceUp
+release
+end
+
+#org @talk
+= Drawing pixel art is interesting\nmost times[.]\pBut it will become a pain in the\nass when you just can't make your\lpicture look how you want it to!
+
+#org @faceUp
+#raw FACE_U
+#raw 0xFE

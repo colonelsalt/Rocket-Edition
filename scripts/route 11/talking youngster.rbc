@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= It's funny that the road through\nhere is so narrow that just one\lPokémon lying in the way blocks\loff all traffic.

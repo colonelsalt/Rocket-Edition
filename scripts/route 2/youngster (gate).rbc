@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= Many Pokémon live only in forests \nand caves.\pYou need to be persistent and look\neverywhere to get different kinds.\p[.]\pP-please don't steal mine, okay?

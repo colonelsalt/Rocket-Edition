@@ -1,0 +1,7 @@
+#dynamic 0x800000
+
+#org @challenge
+= I'm taking matters into my own\nhands! Come at me, Rocket!
+
+#org @after
+= I think I should have just stayed\nput[.]

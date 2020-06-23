@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x2 0x2 0x0 @challenge @defeat 0x8022EC
+msgbox @after 0x6
+end
+
+#org @challenge
+= I'm lost, mister. Do you think you\ncould help me get out?
+
+#org @defeat
+= That's not what I wanted!
+
+#org @after
+= I don't want to talk to you.\nYou're scary.

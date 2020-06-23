@@ -1,0 +1,50 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x806
+if 0x1 goto @alreadyOn
+comparefarbytetobyte 0x0203F3A8 0x1
+if 0x1 goto @check2
+goto @notInCave
+end
+
+#org @check2
+comparefarbytetobyte 0x0203F3A9 0x51
+if 0x1 goto @lightUp
+comparefarbytetobyte 0x0203F3A9 0x52
+if 0x1 goto @lightUp
+goto @notInCave
+end
+
+#org @lightUp
+msgbox @flashOn MSG_KEEPOPEN
+sound 0x60
+lighten 0x0
+darken 0x0
+setflag 0x806
+checksound
+msgbox @lightText MSG_KEEPOPEN
+closeonkeypress
+end
+
+#org @notInCave
+msgbox @noCaveText MSG_KEEPOPEN
+closeonkeypress
+end
+
+#org @alreadyOn
+msgbox @onText MSG_KEEPOPEN
+closeonkeypress
+end
+
+#org @flashOn
+= [player] switched on the\nFlashlight.
+
+#org @lightText
+= It lit up the cave!
+
+#org @noCaveText
+= [player] switched on the\nFlashlight.\p[.]\pBut it was not needed!
+
+#org @onText
+= [.]\nBut the Flashlight is already on!

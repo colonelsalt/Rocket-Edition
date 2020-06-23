@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @sign MSG_KEEPOPEN
+release
+end
+
+#org @sign
+= Nope!\nThere's only trash here.

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Yo, yo, yo!\nRocket man!\pYou and me both know, the Tops be\nthe only gang that rule this here\lCycling Road!\pBut man!\nWe got respect for y'all. Respect.

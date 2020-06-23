@@ -1,0 +1,72 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define CLYDE 0x9
+
+#org @main
+lock
+faceplayer
+compare 0x402B 0x1
+if 0x4 goto @allowed
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @checkIfAllowed
+checkflag 0x21C
+if 0x1 goto @shortVersion
+msgbox @talk 0x6
+goto @checkIfAllowed
+
+#org @checkIfAllowed
+sound 0x15 // exclamation
+applymovement CLYDE @exclamation
+waitmovement 0x0
+msgbox @talk2 0x6
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @allowEntry
+msgbox @talk2No 0x6
+setflag 0x21C
+spriteface CLYDE FACE_DOWN
+release
+end
+
+#org @shortVersion
+msgbox @talk3 0x6
+spriteface CLYDE FACE_DOWN
+release
+end
+
+#org @allowEntry
+msgbox @allowEntryTalk 0x6
+setvar 0x402B 0x1
+release
+end
+
+#org @allowed
+checkflag 0x4B5
+if 0x1 goto 0x816EF4B
+msgbox 0x819BCF6 MSG_KEEPOPEN
+release
+end
+
+#org @talk
+= Yo!\nChamp in the making!\pSabrina's Pokémon use psychic\npowers instead of--
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk2
+= [.]hey!\c\h08ó\nWhat's that you're wearing?\pCould I see your Trainer Card,\nplease?\p[.]
+
+#org @allowEntryTalk
+= Oh[.]\c\h08ó\n(Wow, I wasn't expecting that[.])\p(It looks so real[.]\c\h08ó Even has\nthe hologram and everything[.])\p[.]\pEr-hem! Excuse me, Mr. Smith.\nI don't know what came over me.\pCome right in!\pSabrina is eagerly awaiting your\nchallenge.
+
+#org @talk2No
+= Hmm?\c\h08ó No?\c\h08ó\nThat's just as I thought!\pThe nerve[.]\c\h08ó This Gym is not for\nbums and petty thugs, you hear?\pGet out!\pAnd don't come back unless it's\nwith an official Training license!
+
+#org @talk3
+= This Gym is not for bums and petty\nthugs, you hear?\pGet out!\pAnd don't come back unless it's\nwith an official Training license!

@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk 0x6
+end
+
+#org @talk
+= Looking good today, Mr. Smith!\pRemember, if you see any shady-\nlooking folks walking around\lthese parts, let me know!\pThe old Warden wants none of that,\nyou know! No, sur-rey!

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Petrel: Well! Looks like you've\nbeen busy since we last spoke, eh?\pExcited about the new mission?\nSure as hell I can get behind it.

@@ -1,0 +1,89 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+textcolor 0x2
+checkflag 0x2F0
+if 0x1 goto @postGame
+compare 0x4016 0x10
+if _GREATER_EQ goto @postMissingno
+msgbox @talk 0x6
+spriteface 0x3 FACE_DOWN
+release
+end
+
+#org @postMissingno
+msgbox @talk2 0x6
+spriteface 0x3 FACE_DOWN
+release
+end
+
+#org @postGame
+msgbox @talk3 0x6
+fadeout 0x0
+pause 0x15
+spriteface 0x3 FACE_UP
+pause 0x25
+msgbox @talk4 0x6
+pause 0x15
+applymovement 0x3 @stepU
+waitmovement 0x0
+msgbox @talk5 0x6
+pause 0x25
+faceplayer
+pause 0x20
+msgbox @talk6 0x6
+pause 0x20
+cry 0x96 0x2
+preparemsg @talk7
+waitmsg
+waitcry
+pause 0x14
+playsong 0x156 0x0
+waitkeypress
+setwildbattle 0x96 0x50 0x0
+setflag 0x807
+special 0x138
+waitstate
+clearflag 0x807
+special2 LASTRESULT 0xB4
+compare LASTRESULT 0x1
+if 0x1 goto 0x8162558
+compare LASTRESULT 0x4
+if 0x1 goto 0x8162561
+compare LASTRESULT 0x5
+if 0x1 goto 0x8162561
+setflag 0x2BC
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Mewtwo: If you wish to find\n"The Catastrophe", [player][.]\pGo speak to Shigeki in Viridian\nCity.\pNow leave me to train for my next\nworthy challenger.
+
+#org @talk2
+= Mewtwo: So you found "The\nCatastrophe"[.]\pWell done, [player].\nI'm impressed.\pBut I'm not ready to battle you\nagain yet.
+
+#org @talk3
+= Mewtwo: [.][player].\c\h08ó\nWe meet again.\pYou've come a long way.
+
+#org @talk4
+= I thought for sure he would come[.]\c\h08ó\nThat child[.]\pBut now I suppose he never will.\nYou'll do instead, [player].
+
+#org @talk5
+= I've lived a long life inside this\ncave[.]\pPerhaps it's time I finally laid\ndown my guard[.]\pAnd allowed a worthy Trainer to\ntry his hand at catching me.
+
+#org @talk6
+= You get one chance, [player].\pBut this time[.]\c\h08ó\nI'm not holding back!\pI'll never accept you as my master\nif you don't put up a fight!
+
+#org @talk7
+= [.]\c\h08ó\nBrace yourself!
+
+

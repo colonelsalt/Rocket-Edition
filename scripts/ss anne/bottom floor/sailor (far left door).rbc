@@ -1,0 +1,9 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x0 0x8C 0x0 0x81740F6 @defeat
+msgbox 0x817413A MSG_NORMAL '"When we're out at sea, jellyfish\n..."
+end
+
+#org @defeat
+= Argh!\nBeaten by a rotten criminal!

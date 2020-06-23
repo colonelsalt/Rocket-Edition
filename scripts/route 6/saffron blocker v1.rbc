@@ -1,0 +1,39 @@
+#include stdmoves.rbh
+#dynamic 0x800000
+
+#org @main
+lock
+applymovement 0x2 @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @engineertalk 0x6
+applymovement 0x1 @stepL
+waitmovement 0x0
+msgbox @guardtalk 0x6
+pause 0x10
+spriteface 0x2 FACE_UP
+msgbox @engineertalk2 0x6
+spriteface 0x2 FACE_RIGHT
+release
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @engineertalk
+= I'm telling ya. This here water\nfountain's real jumbled up.\pMight take me quite a good while\nto get it fixed.
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @guardtalk
+= No worries; take your time.\pIt's not as if I'll die of thirst\nor anything.
+
+#org @engineertalk2
+= Ey, chum.\nCan't you see we're working here?\pRoad's closed anyway, ain't it?\nGo find some other way, ya hear?

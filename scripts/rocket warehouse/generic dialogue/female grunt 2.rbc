@@ -1,0 +1,22 @@
+#dynamic 0x800000
+// PE 0x16
+
+#org @main
+lock
+faceplayer
+checkflag 0x208
+if 0x1 goto @postTV
+msgbox @talk 0x6
+release
+end
+
+#org @postTV
+msgbox @talk2 0x6
+release
+end
+
+#org @talk2
+= What's all the commotion?\pIt's not as if we joined Team\nRocket because we were after\lsocietal acceptance, is it?
+
+#org @talk
+= When I was little, I wanted to go\nto Hoenn to be a Contest star.\pNow I'm a hard-edged Pokémon\ngangster. And I love it.\pWe do grow up, don't we?

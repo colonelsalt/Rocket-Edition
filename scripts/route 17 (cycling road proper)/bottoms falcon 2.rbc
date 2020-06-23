@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xFF 0x0 @challenge @defeat @after
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= We represent the Bottoms!\pIf you fail to see how we're the\nmost badass gang in Kanto[.]\lBrother, you must be blind!
+
+#org @defeat
+= It ain't right!
+
+#org @postBattle
+= We respect you, you respect us.\nHow's that, Rocket?
+
+#org @after
+addvar 0x4033 0x1
+call EXEC_STEAL
+end

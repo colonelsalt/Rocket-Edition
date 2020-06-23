@@ -1,0 +1,33 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x4016 0x10
+if _GREATER_EQ goto @postMissingno
+compare 0x4016 0xE
+if _GREATER_EQ goto @postShigeki
+msgbox @talk 0x6
+release
+end
+
+#org @postShigeki
+msgbox @talk2 0x6
+release
+end
+
+#org @postMissingno
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Grandpa gets off on catching\nRattata in front of kids and\ldrinking in the evenings.\pHe likes to tell us he was a\ngreat man once. Don't they all?
+
+#org @talk2
+= Oh goodness! Grandpa[.]\nI don't know what he did before[.]\pBut please don't let them take him\naway!
+
+#org @talk3
+= Grandpa seems so grateful for what\nyou did.\pThank you, Rocket[.]\nFor setting things straight!
+

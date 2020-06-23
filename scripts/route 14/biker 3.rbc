@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xC4 0x0 0x8186344 0x8186362 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= You know, maybe I would have\njoined you Rockets too if only you\lhad motorbikes!\pI just can't live without 'em!

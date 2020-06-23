@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xEB 0x0 0x81877A3 @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @defeat
+= Oh, no, no, no!
+
+#org @postBattle
+= Damn it, Rocket!\nI didn't mean it like that!

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xFE 0x0 0x8187362 0x8187395 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Maybe some Pokémon need element\nStones to evolve.\pBut damn it!\pThat stupid Department Store in\nCeladon won't let me buy anything\lfrom them anymore!

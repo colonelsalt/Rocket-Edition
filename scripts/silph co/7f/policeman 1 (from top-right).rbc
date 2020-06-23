@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x17F 0x0 @challenge @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Look at all the fear and chaos\nyou're spreading!
+
+#org @defeat
+= It's too much!
+
+#org @postBattle
+= My job is to secure the interests\nof Silph!

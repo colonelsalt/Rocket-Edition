@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Hey, you're a funny-looking dude[.]\nDid I see you on TV somewhere?\pYeah, anyway[.]\n[$]50 for a ticket. You want it?

@@ -1,0 +1,313 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define ARCHER 0x17
+#define RONNIE 0x1E
+#define GRUNT1 0x18
+#define GRUNT2 0x1C
+#define GRUNT3 0x19
+#define FGRUNT 0x1D
+#define NERD 0xE
+
+#org @main
+checkflag 0x214
+if 0x1 goto @2ndScript
+lockall
+textcolor 0x1
+msgbox @TVtalk 0x6
+lockall
+fadeout 0x1
+setmaptile 0x10 0xA 0x35 0x1 // turns TV off
+special 0x8E // screen refresh
+pause 0x30
+compare 0x8001 0xD // checks if Player to right of TV
+if 0x1 call @RIGHT
+compare 0x8001 0xE // checks if Player to left of TV
+if 0x1 call @LEFT
+pause 0x20
+spriteface ARCHER FACE_LEFT
+pause 0x10
+textcolor 0x0
+msgbox @adminTalk1 0x6
+pause 0x5
+releaseall
+playsong 0x112 0x0
+pause 0x60
+textcolor 0x1
+msgbox @hysteria1 0x6
+pause 0x40
+textcolor 0x0
+msgbox @hysteria2 0x6
+pause 0x40
+msgbox @hysteria3 0x6
+pause 0x40
+applymovement GRUNT1 @stepU
+waitmovement 0x0
+spriteface RONNIE FACE_DOWN
+spriteface NERD FACE_LEFT
+spriteface GRUNT2 FACE_LEFT
+spriteface FGRUNT FACE_LEFT
+spriteface GRUNT3 FACE_LEFT
+lockall
+msgbox @gruntTalk1 0x6
+lockall
+applymovement GRUNT2 @stepU
+waitmovement 0x0
+spriteface NERD FACE_DOWN
+spriteface GRUNT1 FACE_DOWN
+lockall
+msgbox @gruntTalk2 0x6
+lockall
+pause 0x10
+spriteface RONNIE FACE_RIGHT
+pause 0x15
+spriteface RONNIE FACE_DOWN
+pause 0x15
+applymovement RONNIE @stepD
+waitmovement 0x0
+spriteface GRUNT1 FACE_UP
+spriteface NERD FACE_UP
+spriteface FGRUNT FACE_UP
+lockall
+msgbox @ronTalk1 0x6
+lockall
+applymovement ARCHER @stepL
+waitmovement 0x0
+spriteface RONNIE FACE_RIGHT
+spriteface GRUNT1 FACE_UP
+spriteface NERD FACE_UP
+spriteface GRUNT2 FACE_UP
+spriteface GRUNT3 FACE_UP
+spriteface FGRUNT FACE_UP
+lockall
+msgbox @adminTalk2 0x6
+lockall
+fadeout 0x0
+applymovement ARCHER @adminWalk
+waitmovement 0x0
+msgbox @adminTalk3 0x6
+lockall
+applymovement ARCHER @adminWalk2
+waitmovement 0x0
+msgbox @adminTalk4 0x6
+lockall
+applymovement ARCHER @stepD
+waitmovement 0x0
+msgbox @adminTalk5 0x6
+lockall
+spriteface ARCHER FACE_RIGHT
+pause 0x20
+spriteface ARCHER FACE_DOWN
+pause 0x17
+msgbox @adminTalk5.5 0x6
+lockall
+applymovement ARCHER @adminWalk3
+waitmovement 0x0
+spriteface RONNIE FACE_UP
+msgbox @adminTalk6 0x6
+lockall
+pause 0x20
+spriteface ARCHER FACE_DOWN
+pause 0x20
+msgbox @adminTalk7 0x6 
+lockall
+pause 0x10
+releaseall
+playsong 0x112 0x0
+pause 0x75
+setflag 0x214
+setvar 0x4054 0x0 // changes Player's OW sprite back to normal
+warpmuted 0x3 0x2E 0xFF 0x3 0xD
+end
+
+
+#org @2ndScript
+spriteface 0xFF FACE_RIGHT
+pause 0x15
+applymovement ARCHER @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @2adminTalk1 0x6
+applymovement ARCHER @2adminWalk1
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+pause 0x20
+msgbox @2adminTalk2 0x6
+pause 0x20
+spriteface ARCHER FACE_RIGHT
+pause 0x25
+spriteface ARCHER FACE_DOWN
+pause 0x20
+msgbox @2adminTalk3 0x6
+applymovement ARCHER @stepD
+waitmovement 0x0
+msgbox @2adminTalk4 0x6
+applymovement ARCHER @2adminWalk2
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+pause 0x10
+msgbox @2adminTalk5 0x6
+pause 0x15
+spriteface ARCHER FACE_DOWN
+pause 0x20
+msgbox @2adminTalk6 0x6
+pause 0x10
+spriteface 0xFF FACE_RIGHT
+spriteface ARCHER FACE_LEFT
+applymovement ARCHER @stepL
+waitmovement 0x0
+pause 0x20
+msgbox @2adminTalk7 0x6
+setvar 0x401D 0x7
+clearflag 0x210 // Nugget Bridge grunt ID
+release
+end
+
+
+#org @RIGHT
+applymovement 0xFF @cameraPlayerRight
+waitmovement 0x0
+return
+
+#org @LEFT
+applymovement 0xFF @cameraPlayerLeft
+waitmovement 0x0
+return
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @cameraPlayerRight
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @cameraPlayerLeft
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw 0xFE
+
+#org @TVtalk
+= Announcer: The regional police\nforce is reportedly working around\lthe clock to implement Lance's new\lanti-crime program.\pWe will bring you more news on its\nprogress as it arrives.
+
+#org @adminTalk1
+= Archer: [.]
+
+#org @hysteria1
+= Oh no!\nThey're onto us!
+
+#org @hysteria2
+= I knew those cops meant trouble!\nNow what are we going to do?!
+
+#org @hysteria3
+= Man, I don't want to go to jail!
+
+#org @gruntTalk1
+= Ronnie!\nYou worthless piece of crap!\pNow we've got the police and the\ngovernment on our heels all\lbecause you couldn't keep yourself\lfrom robbing every little girl you\lcame across!
+
+#org @gruntTalk2
+= Yeah, you punk!\pWhy couldn't you just stick to the\nmission like the rest of us, huh?\pYou always had to be the hothead,\ndidn't you?
+
+#org @ronTalk1
+= Ronnie: B-but guys!\nGimme a break!\pHow was I supposed to know that\nbrat was the collector guy's\ldaughter?\pI mean, I was just doing exactly\nwhat all of you do!\pMatter of fact, I bet your\nstinking asses would have done\lexactly what I did if you'd have\lhad half the chance, you dumb\llittle--
+
+#org @adminTalk2
+= Archer: That's enough, grunt.\c\h08ó\nBe quiet.
+
+#org @adminWalk
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1B
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk3
+= Archer: Lance, that son of a\nGranbull[.]\pPretending like he hasn't known\nabout our operations for ages\lalready.\pRidiculous[.]
+
+#org @adminWalk2
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk4
+= Archer: Grunts!\pThe day Lance gives a Rattata's\nass about Kanto's safety will be\lthe day I die.\pBut he has clearly decided that\nnow is a good time to seem like a\ldo-gooder for the press.
+
+#org @adminTalk5
+= What exactly this means for us I\nam going to have to discuss with\lBoss.\pThe bloody pulp to which you and\nyour family will be beaten should\lyou ever reveal any confidential\linformation to the police should\lnot be news to you anyway.
+
+#org @adminTalk5.5
+= Besides that, I don't really care\nwhether any one of you get the\lpolice on your tail or not.\pYou rob or refrain from robbing as\nyou see fit, and then[.]\pYou personally suffer whatever\nconsequences come from that.
+
+#org @adminWalk3
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk6
+= Archer: I might also add that\nhowever "morally impervious" Lance\lthinks his special cops are[.]\pI've yet to meet a Kanto policeman\nwho's totally immune to bribery[.]
+
+#org @adminTalk7
+= Anyhow[.]\pThe bottom line is: Keep doing as\nyou've been told, grunts!\pYou still get to be Pokémon\ngangsters, just don't be stupid\labout it, all right?
+
+#org @2adminTalk1
+= Archer: Well!\pI won't pretend like my capacity\nfor giving praise to anyone at all\lwas not a little hampered just\lnow, but I'll try my best.
+
+#org @2adminWalk1
+#raw 0x1C
+#raw STEP_U
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE
+
+#org @2adminTalk2
+= Great work on your mission,\n[player].\pYou've saved our Porygon supply,\nand you've done it even without\lhaving to expend more resources\lthan we can afford.\pI am going to personally commend\nyou to Boss for a job well done.
+
+#org @2adminTalk3
+= So[.] it is in good conscience that\nI trust you with another high-\lstakes mission.\pI'll get right down to it.
+
+#org @2adminTalk4
+= We are involved in a smuggling\ndeal with a certain Gym Leader\ldown in Vermilion City.\pHeh.\nYes, that's right.\pGiven his rather public status as\na Kanto veteran from the war, it\lshould come as no surprise that\lSurge happens to be a Rocket\lsympathizer.
+
+#org @2adminWalk2
+#raw 0x1C
+#raw STEP_R
+#raw STEP_D
+#raw 0x1C
+#raw FACE_L
+#raw 0xFE
+
+#org @2adminTalk5
+= Anyway[.]\pThe good lieutenant has managed to\nget a number of rare Johto Pokémon\lsmuggled into the S.S. Anne liner\lthat's just about to dock at the\lVermilion harbor.\pHe'll be handing them over to us\nin exchange for some goods that\lour scientists have synthesized in\lthe lab are here in the other\lroom.
+
+#org @2adminTalk6
+= Go pick them up, and then head\nsouth of here through Saffron to\lget to Vermilion City.\pThe Rocket admin we've stationed\nthere is a bit of a downer, but\lyou should probably meet up with\lhim just to lend yourself a bit\lmore credibility when dealing with\lSurge.
+
+#org @2adminTalk7
+= Did you get all of that?\c\h08ó\nThat's a good lad.\pPick up those drugs from our\nscientists, and off to Vermillion\lwith you!

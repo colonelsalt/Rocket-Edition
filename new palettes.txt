@@ -1,0 +1,33 @@
+indices:
+
+16: lifting primeape
+17: Ariana [@0x923220]
+18: Archer [@0x923240]
+19: Emerald reporters
+1A: Proton
+1B: Koffing [@0x81FCC0]
+1C: Hoenn prostitute [@0x833630]
+1D: Mewtwo [@0x83D940]
+1E: Rocket Admin (Player) [@0x83FF80]
+1F: Raticate [@0x842000]
+20: Rocket Executive (Player) [@0x849800]
+21: Jynx [@0x854D80]
+22: Apricorn Tree [@0x84B280]
+23: Nidoking [@0x84B2C0]
+24: ??? [@0x87DB20]
+25: Gargoyle robot, eyes on [@0x87E2E0]
+26: Gargoyle robot, eyes off [@0x87E300]
+27: Baby Red [@0x87F660]
+28: Rocket Boss (Player) [@0x87C2E0]
+29: Briefcase [@0x8805E0]
+2A: Trenchcoat Giovanni [@0x880620]
+2B: Plainclothed Ronnie [@0x880600]
+2C: Lavender Ghost + MissingNo. [@0x8877E0]
+2D: Haunter [@0x887800]
+2E: Gengar [@0x887820]
+2F: Dying Agatha [@0x88A2C0]
+30: Tauros [@0x88A2E0]
+31: MissingNo. + Charizard + Pikachu OW [@0x88A300]
+32: Courtroom judge [@0x88A320]
+33: Alakazam + Snorlax OW [@0x88A4C0]
+34: Professor Elm [@0x8916E0]

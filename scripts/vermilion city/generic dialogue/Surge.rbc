@@ -1,0 +1,118 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SURGE 0x1
+
+#org @main
+lock
+faceplayer
+checkflag 0x822
+if 0x1 goto @battle
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @challengeMaybe
+checkflag 0x220
+if 0x1 goto @postBoat
+msgbox @talk 0x6
+release
+end
+
+#org @postBoat
+msgbox @talk2 0x6
+release
+end
+
+#org @challengeMaybe
+msgbox @talk3 MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @battle
+msgbox @noTalk 0x6
+release
+end
+
+'---------------
+#org @battle
+setvar 0x8004 0x4
+setvar 0x8005 0x2
+special 0x174
+trainerbattle 0x1 0x1A0 0x0 0x8866137 0x8866032 @postBattle
+checkflag 0x231
+if 0x0 goto @postBattle
+msgbox 0x886608B MSG_KEEPOPEN '"Well, what can I say, Rocket?\nYou..."
+release
+end
+
+'---------------
+#org @postBattle
+copyvar 0x800A 0x401F
+call @stealMaybe
+comparevars 0x401F 0x800A
+if _NOT_EQ call @stolen
+setvar 0x8004 0x4
+setvar 0x8005 0x1
+special 0x173
+checkflag 0x23B
+if 0x0 call 0x816B9AB
+clearflag 0xA0
+setflag 0x4B2
+setflag 0x822
+setvar 0x8008 0x3
+call 0x81A6B18
+goto @postPostBattle
+
+#org @postPostBattle
+comparevars 0x401F 0x800A
+if 0x1 call @notStolen
+checkitemroom 0x142 0x1
+compare LASTRESULT 0x0
+if 0x1 goto 0x816B9F0
+additem 0x142 0x1
+loadpointer 0x0 0x8194D87 '"[player] received TM34\nfrom Lt. S..."
+giveitem2 0x142 0x1 0x101
+setflag 0x231
+msgbox 0x8194DA8 MSG_KEEPOPEN '"TM34 contains Shock Wave!\pTeach i..."
+release
+end
+
+#org @stealMaybe // error checking -- in case bag was full before
+checkflag 0x822
+if 0x0 call BOSS_STEAL
+return
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _SURGE @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @stolenTalk 0x6
+return
+
+#org @notStolen
+textcolor 0x0
+msgbox 0x88660C0 MSG_KEEPOPEN '"The Thunderbadge cranks up your\nP..."
+return
+
+
+#org @talk
+= Hey, you got stuff to do, don't\nyou Rocket?\pHahah!\pOr did you want to hear about the\ntime electric Pokémon saved me\lfrom those Johto bastards during\lthe war?
+
+#org @talk2
+= Hey! You got ahold of those\ncrates, then?\pAnd battled it out with the\nCaptain, too, did you?\pWell, it's just like I always used\nto say!\pAin't nothing like a battle to\nround off a good day's smuggling!\pBwahaha!
+
+#org @talk3
+= Fwahahaha!\nSo you returned, Rocket?\pHey[.] What's that you got there?\nA[.] Trainer Card?\pWell, I'll be! How much did you\npay to get that forged, eh? Haha!\pSo did you come here to challenge\nme to a Gym battle?
+
+#org @noTalk
+= Oh, the Rocket is scared of the\ngreat big lieutenant!\pHahahaha! Well, I sure would be\nif I were you!\pNo shame in it, brother!
+
+#org @stolenTalk
+= What in tarnation?!\c\h08ó\nYou stealing my Pokémon?!\p[.]\c\h08ó\nWell, I'll be!\pAin't no one ever done that to me\nsince the war!\pYou're one feisty brute if I ever\nsaw one!\pWell, take this too, Rocket.\nYou've earned my respect.
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+

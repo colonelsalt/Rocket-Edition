@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xCD 0x0 0x8187456 0x8187472 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= You're not gettin' involved with\nany of these Tops or Bottoms, huh?\pPathetic!\nThey'll never stop quarreling[.]

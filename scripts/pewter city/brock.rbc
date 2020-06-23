@@ -1,0 +1,74 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BROCK 0x1
+
+#org @main
+setvar 0x8004 0x2
+setvar 0x8005 0x2
+special 0x174
+trainerbattle 0x1 0x19E 0x0 0x8190CD4 0x886E80B @postBattle
+checkflag 0x254
+if 0x0 goto 0x816A5F3
+msgbox 0x886E904 MSG_KEEPOPEN '"There are all kinds of Trainers in..."
+release
+end
+
+
+#org @postBattle
+setvar 0x8004 0x2
+setvar 0x8005 0x1
+special 0x173
+setflag 0x4B0
+setflag 0x820
+setvar 0x406C 0x1
+setflag 0x2E
+clearflag 0x92
+setvar 0x8008 0x1
+call 0x81A6B18
+goto @postPostBattle
+
+
+#org @postPostBattle
+copyvar 0x8000 0x401F
+call BOSS_STEAL
+textcolor 0x0
+comparevars 0x401F 0x8000
+if _NOT_EQ call @stolen
+comparevars 0x401F 0x8000
+if 0x1 call @notStolen
+checkitemroom 0x147 0x1
+compare LASTRESULT 0x0
+if 0x1 goto 0x816A634
+additem 0x147 0x1
+loadpointer 0x0 0x8190FDB '"[player] received TM39\nfrom Brock..."
+giveitem2 0x147 0x1 0x101
+setflag 0x254
+msgbox 0x886E904 MSG_KEEPOPEN '"There are all kinds of Trainers in..."
+release
+end
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _BROCK @exclamation
+waitmovement 0x0
+bufferpokemon 0x0 0x4084
+msgbox @stolenTalk 0x6
+return
+
+#org @notStolen
+msgbox 0x8190FC1 MSG_KEEPOPEN '"Wait!\nTake this with you."
+return
+
+#org @stolenTalk
+= Ah..!\c\h08ó\nHow could you?!\pYou people, I swear[.]\c\h08ó\nYou'll never win in the end!\p[.]\pBye-bye, [buffer1][.]\c\h08ó\nI hardly knew you[.]\pYou were the hardest of rocks[.]\nBut now[.]\c\h08ó I've let you[.]\c\h08ó crack[.]\p[.]\c\h08ó\n(Snivel[.])\p[.]\c\h08ó\nI guess you want a TM too, huh?
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+
+

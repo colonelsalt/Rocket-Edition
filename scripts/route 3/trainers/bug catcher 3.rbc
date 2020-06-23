@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x69 0x0 @challenge @defeat POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Hey!\pYou're one of those shady- looking\nthugs who were messing around at\lMt. Moon earlier!
+
+#org @defeat
+= Cut it out!
+
+#org @postBattle
+= I never thought I'd be this up and\nclose with a wanted criminal[.]

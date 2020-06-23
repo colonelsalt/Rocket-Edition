@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#define _GIOVANNI 0x3
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface _GIOVANNI FACE_RIGHT
+release
+end
+
+#org @talk
+= Giovanni: Go have yourself some\nwell-earned rest, [player]!\pI'll handle negotiations with this\nold fellow for now.\pThat Master Ball will soon be\nours!

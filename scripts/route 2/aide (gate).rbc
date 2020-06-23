@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Run for your life!\nI have AID--\p[.]\pEr[.] I mean, I'm one of Prof.\nOak's aides, of course.

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @talk1
+= I took you for granted, and so\nI lost.\pAs proof of your victory, I confer\non you this[.]the official Pokémon\lLeague Boulderbadge.\p\c\h06Á[player] received the Boulderbadge\nfrom Brock!\c\h17\c\h0BÇÀ\c\h08\n\c\h08[Ke]\c\h18\p\c\h06ÇHaving the Boulderbadge makes\nyour Pokémon more powerful.
+
+#org @talk2
+= There are all kinds of Trainers in\nthis huge world of ours.\pYou may even encounter a few bad\nones who try to steal from you!\pBut don't worry about them!\nThey never win in the end[.]
+
+#org @talk3
+= TM39 contains Rock Tomb.\pIt hurls boulders at the foe and\nlowers its Speed.

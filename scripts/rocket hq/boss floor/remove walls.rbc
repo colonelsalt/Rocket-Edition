@@ -1,0 +1,6 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x205
+if 0x1 call 0x16146A
+end

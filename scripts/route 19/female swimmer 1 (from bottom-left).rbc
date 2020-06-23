@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x114 0x0 0x8187A11 0x8187A44 ADMIN_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= That doesn't mean you can have any\nof my Pokémon, you thug!

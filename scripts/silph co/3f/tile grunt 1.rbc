@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= This Warp Tile here's real\nimportant, in case you were\lwondering!\pDon't you doubt that!

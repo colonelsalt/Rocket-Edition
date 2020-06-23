@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @after
+= I'm just standing around here,\nwaiting for someone to approach.\pThen I can make fun of how\nstupid we look!\pThat way, I have an air of smug\nsuperiority in every interaction.

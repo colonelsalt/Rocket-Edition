@@ -1,0 +1,17 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x2EA
+if 0x1 goto @unlocked
+msgbox @lockedText MSG_SIGN
+end
+
+#org @unlocked
+msgbox @unlockedText MSG_SIGN
+end
+
+#org @lockedText
+= The door is locked.
+
+#org @unlockedText
+= The door is open. It shows clear\nmarks of violent treatment[.]

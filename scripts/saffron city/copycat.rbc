@@ -1,0 +1,69 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x289
+if 0x1 goto @stolen
+checkflag 0x28A
+if 0x1 goto @notStolen
+checkitem 0x50 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @hasDoll
+msgbox @talk 0x6
+release
+end
+
+#org @hasDoll
+removeitem 0x50 0x1
+msgbox @dollTalk 0x6
+trainerbattle 0x3 0xF 0x0 @defeat
+copyvar 0x8009 0x401F
+call POKESTEAL
+comparevars 0x8009 0x401F
+if 0x1 goto @innocent
+setflag 0x289
+release
+end
+
+#org @innocent
+textcolor 0x1
+msgbox @innocentTalk 0x6
+additem 0x13B 0x1
+loadpointer 0x0 @TMget
+giveitem2 0x13B 0x1 0x101
+setflag 0x28A
+release
+end
+
+#org @stolen
+msgbox @stealTalk 0x6
+release
+end
+
+#org @notStolen
+msgbox @notStolenTalk 0x6
+release
+end
+
+#org @talk
+= [player]: I am a very bad man!\p[player]: Hahaha! I steal Pokémon\nfrom little girls!\p[player]: Hmmm! Maybe if I bring\nthis girl a Poké Doll she will\llet me battle her!\p[.]\pCopycat: Hmm? Quit mimicking?\nBut that's my favorite hobby!
+
+#org @dollTalk
+= [player]: I brought the little girl\na Poké Doll! Will she fight now?\p[player]: I might just steal her\nPokémon if I win! Hahahaha!\p[player]: Of course, I don't know\nthat if I don't steal from her,\lshe might think I'm nice and give\lme something!\p[.]\pCopycat: Hmm? Quit talking to\nmyself and battle?\pCopycat: Sure. Bring it on!
+
+#org @defeat
+= [player]: I'm so good!\nI beat the little girl!
+
+#org @innocentTalk
+= [player]: I was nice to the girl!\p[player]: Oh, oh, oh!\nIs she going to give me something?\p[player]: I want the thing!\p[player]: Woof, woof, woof! I'm a\nlittle dog! Give me my bone!\p[.]\pCopycat: What's that? I shouldn't\ncondescend you like that?\pOh, okay.\nYou're funny, Rocket man.\pI guess you can have this since\nyou were nice to me.
+
+#org @TMget
+= [player] received TM27!
+
+#org @stealTalk
+= [player]: Moahahaha! I stole the\nlittle girl's Pokémon!\p[player]: I'm so cool!\p[player]: She's probably going to\nreport it to the police, though!\p[player]: Oh no!\p[.]\pCopycat: Hmm? Quit mimicking?\nBut that's my favority hobby!
+
+#org @notStolenTalk
+= [player]: I'm a member of a\ncriminal organization.\p[player]: But I don't steal from\nlittle girls every chance I get!\p[player]: I wonder why I joined in\nthe first place[.]\p[.]\pCopycat: Hmm? Quit mimicking?\nBut that's my favorite hobby!

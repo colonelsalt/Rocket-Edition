@@ -1,0 +1,13 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x1
+msgbox @talk 0x6
+spriteface 0x1 FACE_LEFT
+release
+end
+
+#org @talk
+= Um[.] this is the Underground Path\nleading to Route 6, isn't it?\pOh[.] I'm just so anxious that I\nshould come to the right place,\lyou see[.]\p[.]\p(Is he going to be there waiting\nfor me..?)

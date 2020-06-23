@@ -1,0 +1,49 @@
+#dynamic 0x800000 
+
+#org @main 
+callasm 0x8806AE1
+compare LASTRESULT 0x0 
+if 0x1 call @down 
+compare LASTRESULT 0x1 
+if 0x1 call @up 
+compare LASTRESULT 0x2 
+if 0x1 call @left 
+compare LASTRESULT 0x3 
+if 0x1 call @right 
+goto 0x81A4FC7 
+
+#org @down 
+applymovement 0xFF @lookdown 
+waitmovement 0xFF 
+return 
+
+#org @up 
+applymovement 0xFF @lookup 
+waitmovement 0xFF 
+return 
+
+#org @left 
+applymovement 0xFF @lookleft 
+waitmovement 0xFF 
+return 
+
+#org @right 
+applymovement 0xFF @lookright 
+waitmovement 0xFF 
+return 
+
+#org @lookdown 
+#raw 0x0 
+#raw 0xFE 
+
+#org @lookup 
+#raw 0x1 
+#raw 0xFE 
+
+#org @lookleft 
+#raw 0x2 
+#raw 0xFE 
+
+#org @lookright 
+#raw 0x3 
+#raw 0xFE

@@ -1,0 +1,32 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2F0
+if 0x1 goto @postGame
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I hear some of the grunts here are\norganising some kind of heist.\pI mean, I could use some more\naction, but I don't know if I'm\lquite cut out for that stuff!
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @postGame
+msgbox @talk3 0x6
+release
+end
+
+#org @talk2
+= Hey, if I were you, bud[.]\pI'd make the most of my bounty\nnow while I can!\pIf we're getting a new Champion,\nwho knows if we'll get any rewards\lfor being good or bad, I say!
+
+#org @talk3
+= Well, that was it, then[.]\nGood game!\p[.]\pWhat the hell are we all still\nstanding around here for?
+

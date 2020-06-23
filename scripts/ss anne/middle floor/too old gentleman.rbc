@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I hear there's a lot of commotion\ngoing on by the balcony upstairs.\pI can't be bothered to check it.\nI'm too old for this stuff.

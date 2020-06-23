@@ -1,0 +1,197 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GURU 0x1
+
+#org @main
+lock
+compare 0x4032 0x2
+if 0x1 goto @postFuschia
+compare 0x4032 0x3
+if 0x4 goto @afterwards
+pause 0x10
+spriteface _GURU FACE_UP
+sound 0x15 // exclamation
+applymovement _GURU @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @postFuschia
+msgbox @diary MSG_SIGN
+spriteface _GURU FACE_DOWN
+sound 0x15 // exclamation
+applymovement _GURU @exclamation
+playsong 0x11B 0x0
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk2 0x6
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x4
+if 0x1 goto @fromLeft
+applymovement _GURU @runToPlayer1
+waitmovement 0x0
+goto @continue
+
+#org @fromLeft
+applymovement _GURU @runToPlayer2
+waitmovement 0x0
+goto @continue
+
+#org @continue
+spriteface 0xFF FACE_UP
+checkflag 0x2A7
+if 0x1 goto @angry
+msgbox @talk3 0x6
+pause 0x20
+spriteface _GURU FACE_RIGHT
+fadeout 0x1
+spriteface _GURU FACE_DOWN
+pause 0x20
+msgbox @talk4 0x5
+compare LASTRESULT 0x1
+if 0x0 goto @saidNo
+msgbox @talk5 0x6
+setvar 0x8002 0xFF
+givepokemon 0x81 0x14 0x0 0x0 0x0 0x0
+fanfare 0x101
+textcolor 0x2
+preparemsg @magikarpGet
+waitmsg
+waitfanfare
+bufferpokemon 0x1 0x81
+setvar 0x8007 0x0
+compare LASTRESULT 0x1
+if 0x1 call @sent2pc
+msgbox @nicknameorno 0x5
+compare LASTRESULT 0x1
+if 0x1 call @giveNick
+closeonkeypress
+compare 0x8007 0x69
+if 0x1 call @pcbox
+setvar 0x4032 0x3
+playsong 0x135 0x0
+release
+end
+
+#org @angry
+msgbox @talk6 0x6
+goto @battle
+
+#org @saidNo
+playsong 0x11B 0x0
+msgbox @talk7 0x6
+goto @battle
+
+#org @battle
+trainerbattle 0x3 0x1C 0x0 @defeatText
+checkflag 0x2A4
+if 0x1 call POKESTEAL
+textcolor 0x0
+msgbox @talk8 0x6
+setvar 0x4032 0x3
+setflag 0x2A8
+release
+end
+
+#org @sent2pc
+setvar 0x8007 0x69
+copyvar 0x8008 0x4037
+addvar 0x8008 0x1
+return
+
+#org @giveNick
+compare 0x8007 0x69
+if 0x1 goto @pcnick
+countpokemon
+subvar LASTRESULT 0x1
+copyvar 0x8004 LASTRESULT
+call 0x1A74EB // nickname function
+return
+
+#org @pcnick
+fadescreen 0x1
+special 0x166
+waitstate
+lock
+faceplayer
+return
+
+#org @pcbox
+buffernumber 0x2 0x8008
+msgbox @pcmsg 0x6
+return
+
+#org @afterwards
+msgbox @diary2 MSG_SIGN
+release
+end
+
+#org @talk
+= Hey, you! Go nose around in some\nother people's private business!\pThat diary is for my eyes only,\nyou hear me?
+
+#org @diary
+= Dear Diary,\pI have at last managed to perfect\nthe formula for creating the most\lSUPER Rod known to man.\pIt will outperform both of my\nbrothers' Rods by a mile, and no\lTrainer who tries it will ever go\lback to using another.\p[.]\pThe Rod is made from[.]\c\h08ó\nSturdy but regular materials[.]\pFirm grip[.]\c\h08ó\nFast action[.]\pIn addition[.]\pI infused its hook and sinker with[.]\c\h08ó\nthe odor of a female Gyarados.\pBecause Gyarados, as any fisherman\nknows, is the sea Pokémon with the\lgreatest sex appeal of all, it[.]\c\h08ó
+
+#org @talk2
+= Oh, no!\c\h08ó\nTh-that thing there's private!
+
+#org @talk3
+= Blast it all!\c\h08ó\nMy brother sent you, didn't he?\p[.]\c\h08ó\nThat good-for-nothing coward[.]\pNow he'll have my secret!\nWhat will I do..?!
+
+#org @talk4
+= Hang on[.]\pMy brother in Fuschia told me he\nhad a pink-haired spy sent on him.\pHe said the spy was sympathetic,\nand promised not to leak his\lsecrets[.]\pI-is it true?\pDo you promise not to tell the\nFishing Guru my secrets?
+
+#org @talk5
+= Oh, thank you!\c\h08ó So there is justice\nin the world after all[.]\pYou know, I got this from a cousin\nof mine in the Lake of Rage.\pTake it as a sign of my gratitude.
+
+#org @magikarpGet
+= [player] obtained a Shiny Magikarp!
+
+#org @nicknameorno
+= Would you like to give a nickname\nto Magikarp?
+
+#org @pcmsg
+= [buffer2] was sent to Box [buffer3]\nin Bill's PC.
+
+#org @talk6
+= I know who you are!\pYou're that spy the Fishing Guru\nsent on my brother in Fuschia!\pDarn it!\nHe warned me about you[.]\pWell[.] You're not getting away\nthat easily this time!\pI'll defend my Rod till my last\nbreath!
+
+#org @defeatText
+= I-it's not right..!
+
+#org @talk7
+= No..?\p[.]\pW-well, fine!\pI'll just have to force you to\nstay quiet, then, won't I?
+
+#org @talk8
+= You evil little..!\pI'll have my brother in court for\nthis!
+
+#org @diary2
+= The Fisherman's diary lies closed\non the table.
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @runToPlayer1
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_D
+#raw 0xFE
+
+#org @runToPlayer2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_D
+#raw 0xFE

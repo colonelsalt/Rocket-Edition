@@ -1,0 +1,318 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x4
+#define _FUJI 0x5
+#define _BLAINE 0x3
+
+#org @main
+lockall
+spriteface 0xFF FACE_UP
+fadeout 0x0
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+pause 0x10
+spriteface _FUJI FACE_DOWN
+pause 0x10
+sound 0x15 // exclamation
+applymovement _FUJI @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @fujiTalk 0x6
+spriteface _BILL FACE_LEFT
+pause 0x10
+applymovement _BILL @stepL
+waitmovement 0x0
+msgbox @billTalk 0x6
+pause 0x20
+spriteface _BILL FACE_DOWN
+pause 0x15
+msgbox @billTalk2 0x6
+pause 0x10
+applymovement _BILL @moveToTop
+pause 0x25
+spriteface _BLAINE FACE_UP
+applymovement 0xFF @playerMove
+applymovement 0x7F @cameraPan
+pause 0x15
+spriteface _FUJI FACE_RIGHT
+pause 0x40
+waitmovement 0x0
+applymovement _BILL @stepD
+waitmovement 0x0
+playsong 0x121 0x0
+msgbox @billTalk3 0x6
+pause 0x20
+spriteface _BILL FACE_LEFT
+pause 0x15
+applymovement _BILL @paceL
+waitmovement 0x0
+pause 0x25
+msgbox @billTalk4 0x6
+pause 0x25
+spriteface _BILL FACE_DOWN
+pause 0x20
+msgbox @billTalk5 0x6
+pause 0x15
+spriteface _FUJI FACE_UP
+pause 0x10
+applymovement _FUJI @stepU
+waitmovement 0x0
+msgbox @fujiTalk2 0x6
+pause 0x15
+spriteface _BLAINE FACE_LEFT
+pause 0x10
+applymovement _BLAINE @stepL
+waitmovement 0x0
+msgbox @blaineTalk 0x6
+spriteface _BLAINE FACE_UP
+pause 0x15
+applymovement _BILL @stepD
+waitmovement 0x0
+msgbox @billTalk6 0x6
+pause 0x25
+spriteface _BILL FACE_UP
+pause 0x15
+applymovement _BILL @stepU
+waitmovement 0x0
+msgbox @billTalk7 0x6
+pause 0x10
+spriteface _BLAINE FACE_LEFT
+spriteface _FUJI FACE_RIGHT
+sound 0x15 // exclamation
+applymovement _FUJI @exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+pause 0x20
+spriteface _BLAINE FACE_UP
+pause 0x10
+applymovement _BLAINE @stepU
+waitmovement 0x0
+msgbox @blaineTalk2 0x6
+pause 0x20
+spriteface _BILL FACE_DOWN
+pause 0x10
+applymovement _BILL @stepD
+waitmovement 0x0
+msgbox @billTalk8 0x6
+pause 0x25
+spriteface _BILL FACE_RIGHT
+pause 0x20
+msgbox @billTalk9 0x6
+pause 0x25
+spriteface _BILL FACE_DOWN
+applymovement 0x7F @paceL
+waitmovement 0x0
+pause 0x20
+msgbox @billTalk10 0x6
+pause 0x25
+applymovement _BILL @paceD
+waitmovement 0x0
+pause 0x15
+msgbox @billTalk11 0x6
+pause 0x10
+applymovement _BILL @stepD
+waitmovement 0x0
+msgbox @billTalk12 0x6
+pause 0x25
+spriteface _BILL FACE_LEFT
+pause 0x30
+spriteface _BILL FACE_DOWN
+pause 0x20
+msgbox @billTalk13 0x6
+pause 0x10
+applymovement _BILL @stepD
+waitmovement 0x0
+pause 0x10
+msgbox @billTalk14 0x6
+pause 0x20
+applymovement _BILL @billWalk1
+waitmovement 0x0
+applymovement _BILL @stepD
+waitmovement 0x0
+msgbox @billTalk15 0x6
+pause 0x20
+applymovement _BILL @billWalk2
+applymovement _FUJI @fujiWalk
+applymovement _BLAINE @blaineWalk
+waitmovement 0x0
+pause 0x60
+spritebehave _FUJI 0x10
+spritebehave _BLAINE 0x11
+playsong 0x117 0x0
+setvar 0x402E 0xE
+setflag 0x2A6
+clearflag 0x2C
+clearflag 0x3C
+special 0x114
+end
+
+#org @fujiTalk
+= Mr. Fuji: No!\c\h08ó\nWhat is this criminal doing here?\pBill, you can't be serious..!\pDo you know what this Rocket here\ndid to me, how he[.]\c\h08ó he--
+
+#org @billTalk
+= Bill: Quiet, Fuji.\pIf [player] stole candy from one of\nyour orphans, I'm sure he's sorry.\pThe project we're about to realize\nis way bigger than your personal\lvendettas, don't you understand?
+
+#org @billTalk2
+= Bill: [.]\pNow, then.\c\h08ó\nWe should be all ready.\pTake a seat, [player], and let's\nget down to business.
+
+#org @billTalk3
+= Bill: Listen up.\pIt seems as if the only Master\nBall prototype is about to fall\linto Giovanni's hands.\pIt would have saved me a lot of\ntrouble to get it myself[.]\p(Er-hem!)\c\h08ó\n[.]but so be it.
+
+#org @billTalk4
+= I had a good look at the finished\nblueprints and committed them to\lmemory.\pIf we can't get ahold of that\nMaster Ball prototype[.]\lWhy, we'll just make our own.
+
+#org @billTalk5
+= This brief window of time before\nMaster Ball becomes publicly\lavailable[.]\pIt's our unique chance to capture\none of the most powerful Pokémon\lin existence[.]\pI'm not going to let it go to\nwaste.
+
+#org @fujiTalk2
+= Mr. Fuji: So that's what this is\nabout, is it?\pThat's why you brought us out\nhere?\pAnother blue-eyed expedition to\ncapture Mewtwo?\pThat's ridiculous!\nIt'll never work!
+
+#org @blaineTalk
+= Blaine: [.]\c\h08ó\nHe's right, you know.\pRemember Mewtwo's genetic makeup?\pWe engineered it with an immunity\ntowards the standard Poké Ball\lcapture mechanism.\pUnless it actively chooses to let\ndown its guard[.]\pNot even this Master Ball can have\nany chance of catching it[.]
+
+#org @billTalk6
+= Bill: I know, I know! I was right\nthere with you, wasn't I?\p[.]\c\h08ó\n(Sigh[.])\pNo, you simple-minded old fogeys[.]\c\h08ó\nI'm not talking about Mewtwo.\pLet Lance and Giovanni run circles\naround that beast all they like[.]\lThey seem to enjoy it.
+
+#org @billTalk7
+= Bill: Don't you see, people?\pHow this Master Ball is going to\nlet us tie up one of our biggest\lloose ends, once and for all[.]\pOne that's haunted more than the\nthree of us for so many years..!
+
+#org @blaineTalk2
+= Blaine: But[.]\c\h08ó Bill!\c\h08ó\nS-surely you don't mean..!
+
+#org @billTalk8
+= Bill: I do.\pNow.\c\h08ó\nListen to me.
+
+#org @billTalk9
+= The three of us can manufacture\nour own Master Ball in a\lrelatively short period of time[.]\pThere are a few practical matters,\nhowever[.]\pThat we're going to need some help\nto pull off.
+
+#org @billTalk10
+= Bill: This is where you come in,\n[player].
+
+#org @billTalk11
+= Bill: I'm going to need your help.\pI hate asking favors of anyone,\nbut it is what it is.\pIf nothing else, [player][.]\pI promise I'll make it worth your\nwhile.\c\h08ó Many times over.
+
+#org @billTalk12
+= What I need from you is really\nvery simple.\pNumber one[.]\pDeep in Viridian Forest, I've\nplanted a particular rare breed of\lJohto Apricorns.\pAt least one of them should have\nsprouted by now; go pluck it and\lbring it here.
+
+#org @billTalk13
+= Second, and more importantly,\n[player][.]\pI need access to your Rocket\nscientists' pirated Silph\ltecnhology.\pRansack the Rocket Lab on the\nmain floor of your HQ in Celadon.\pI have it on good record that your\npeople have made replicas of\lSilph's latest high-end Poké Ball\lprocessing chip.\pGrab one and bring it to us, as\nsoon as conceivably possible.
+
+#org @billTalk14
+= [player].\pYou have no idea what great\nthings are at stake here[.]\pNor the rewards that are in store\nfor you if you cooperate.\pDo what I ask, and you will not\nregret it.
+
+#org @billTalk15
+= Now, gentlemen!\p[.]\pWe have work to do.
+
+#org @cameraPan
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @moveToTop
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @billWalk1
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @billWalk2
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw FACE_R
+#raw 0xFE
+
+#org @fujiWalk
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @blaineWalk
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @paceL
+#raw STEP_L
+#raw 0xFE
+
+#org @paceD
+#raw STEP_D
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

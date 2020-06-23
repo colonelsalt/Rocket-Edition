@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Mr. Fuji: It's a fool's errand\nyou're running, Rocket!\pLeave Giovanni now while you still\nhave the chance!

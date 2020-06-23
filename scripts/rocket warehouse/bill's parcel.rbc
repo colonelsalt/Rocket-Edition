@@ -1,0 +1,31 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkitem 0x15D 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @parcelReceived
+checkitem 0x171 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @parcelReceived
+msgbox @parcelGet 0x6
+additem 0x15D 0x1
+loadpointer 0x0 @parcelMsg
+giveitem2 0x15D 0x1 0x13E
+release
+end
+
+#org @parcelReceived
+msgbox @talk2 0x6
+release
+end
+
+#org @parcelGet
+= Yeah, you're the one who's going\nto see Bill, right?\pThe package thing is right here--\nhope it helps at least a little\lbit.
+
+#org @talk2
+= How'd it go with that Bill dude?\nDid he like the freebies?
+
+#org @parcelMsg
+= [player] received Bill's Parcel\nfrom the grunt.

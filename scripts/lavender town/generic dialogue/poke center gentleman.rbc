@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= You people will do anything for the\nsake of money, won't you?\pThere is no job too dirty, no deed\ntoo heinous, no crime too wicked!

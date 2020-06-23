@@ -1,0 +1,208 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _AGATHA 0x1
+
+#org @main
+lock
+textcolor 0x1
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x4
+if _LESS call @faceLeft
+compare 0x8000 0x8
+if _GREATER call @faceRight
+msgbox @talk 0x6
+call @playerMove
+applymovement _AGATHA @stepD
+waitmovement 0x0
+msgbox @talk2 0x6
+pause 0x15
+spriteface _AGATHA FACE_LEFT
+pause 0x10
+applymovement _AGATHA @1left
+waitmovement 0x0
+pause 0x25
+msgbox @talk3 0x6
+pause 0x15
+spriteface _AGATHA FACE_UP
+pause 0x20
+msgbox @talk4 0x6
+pause 0x15
+spriteface _AGATHA FACE_RIGHT
+pause 0x15
+applymovement _AGATHA @1right
+waitmovement 0x0
+spriteface _AGATHA FACE_DOWN
+pause 0x10
+msgbox @talk5 0x6
+pause 0x20
+spriteface _AGATHA FACE_UP
+pause 0x15
+applymovement _AGATHA @stepU
+waitmovement 0x0
+msgbox @talk6 0x6
+pause 0x30
+spriteface _AGATHA FACE_DOWN
+pause 0x10
+msgbox @talk7 0x6
+setvar 0x404F 0x2
+release
+end
+
+
+#org @playerMove
+compare 0x8000 0x7
+if 0x1 call @oneLeft
+compare 0x8000 0x8
+if 0x1 call @twoLeft
+compare 0x8000 0x9
+if 0x1 call @threeLeft
+compare 0x8000 0xB
+if 0x1 call @fiveLeft
+compare 0x8000 0x5
+if 0x1 call @oneRight
+compare 0x8000 0x4
+if 0x1 call @twoRight
+compare 0x8000 0x3
+if 0x1 call @threeRight
+compare 0x8000 0x1
+if 0x1 call @fiveRight
+spriteface 0xFF FACE_UP
+return
+
+#org @faceLeft
+spriteface _AGATHA FACE_LEFT
+return
+
+#org @faceRight
+spriteface _AGATHA FACE_RIGHT
+return
+
+#org @oneLeft
+applymovement 0xFF @1left
+waitmovement 0x0
+return
+
+#org @twoLeft
+applymovement 0xFF @2left
+waitmovement 0x0
+return
+
+#org @threeLeft
+applymovement 0xFF @3left
+waitmovement 0x0
+return
+
+#org @fiveLeft
+applymovement 0xFF @5left
+waitmovement 0x0
+return
+
+#org @oneRight
+applymovement 0xFF @1right
+waitmovement 0x0
+return
+
+#org @twoRight
+applymovement 0xFF @2right
+waitmovement 0x0
+return
+
+#org @threeRight
+applymovement 0xFF @3right
+waitmovement 0x0
+return
+
+#org @fiveRight
+applymovement 0xFF @5right
+waitmovement 0x0
+return
+
+#org @talk
+= Agatha: We meet again, [player].\c\h08ó\nMuch has happened, it seems.
+
+#org @talk2
+= I was filled with pride when Blue\ndefeated me and took his rightful\lplace as Champion.\pPride that there was something worth\npreserving in my blood after all.\pBut Red[.]\c\h08ó He seems a different\nbeast altogether[.]
+
+#org @talk3
+= I'd never paid much attention to\nthat child, but it's clear I made\la mistake.\pI can understand now why Samuel\nheld him in such high regard all\lthese years[.]
+
+#org @talk4
+= To tell you the truth[.]\pI don't quite know what brought it\nout of these kids[.]
+
+#org @talk5
+= Well[.] you're looking for Samuel,\naren't you?\c\h08ó I'll say.\pWhen he walked past me just now[.]\c\h08ó\nIt was strange[.]\pHe was ice cold. Didn't say a word.\c\h08ó\nBut there was a glint in his eye.\pThat cultivated, brownnosing\npoliteness had all but disappeared.
+
+#org @talk6
+= There was something in him like the\nway he used to be in the old days.\pLike he had a definite purpose he\nwas chasing[.]
+
+#org @talk7
+= Do what you must, [player].\c\h08ó\nBut bear in mind[.]\pThat I will honor whoever is the\nrightful Champion.\pAnd I cannot stand behind anyone\nwho interferes with that justice.\pYou've been warned.
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @1left
+#raw STEP_L
+#raw 0xFE
+
+#org @2left
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @3left
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @5left
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw 0xFE
+
+#org @1right
+#raw STEP_R
+#raw 0xFE
+
+#org @2right
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @3right
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @5right
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw 0xFE
+

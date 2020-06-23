@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Our Gym Leader Koga is a respected\nman around here.\pBut rumor has it he's on good\nterms with those Rocket fellows!\pSuch a shame for a man like that,\nisn't it?

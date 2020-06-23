@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x183 0x0 @challenge 0x8176BC8 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= What would your mother say about\nyou now, scoundrel?
+
+#org @postBattle
+= For shame!\nYou're a disgrace to the world[.]

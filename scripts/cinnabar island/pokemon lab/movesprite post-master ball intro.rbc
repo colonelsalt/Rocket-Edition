@@ -1,0 +1,30 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x4
+#define _FUJI 0x5
+#define _BLAINE 0x3
+
+#org @main
+compare 0x402E 0xE
+if 0x4 call @movePeeps
+checkitem 0x117 0x1
+compare LASTRESULT 0x1
+if 0x4 call @movePeeps2
+end
+
+#org @movePeeps
+movesprite2 _BILL 0xB 0x2
+spritebehave _BILL 0xA // look right
+movesprite2 _FUJI 0xB 0x3
+movesprite2 _BLAINE 0xC 0x3
+spritebehave _BLAINE 0x7 // look up
+return
+
+#org @movePeeps2
+movesprite2 _BILL 0x6 0x5
+spritebehave _BILL 0x0
+movesprite2 _BLAINE 0xA 0x5
+spritebehave _BLAINE 0xA
+movesprite2 _FUJI 0xC 0x3
+spritebehave _FUJI 0x7
+return

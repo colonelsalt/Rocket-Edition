@@ -1,0 +1,457 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x14
+#define _ARIANA 0xB
+#define _SILVER 0xA
+#define _BRIEFCASE 0x15
+
+
+#org @main
+lockall
+pause 0x10
+sound 0x12 // door sliding sound
+checksound
+pause 0x30
+textcolor 0x1
+msgbox @arianaTalk 0x6
+pause 0x25
+textcolor 0x0
+msgbox @bossTalk 0x6
+pause 0x15
+sound 0x9
+pause 0x40
+clearflag 0x201
+showsprite _GIOVANNI
+applymovement _GIOVANNI @bossWalk1
+waitmovement 0x0
+fadeout 0x0
+pause 0x10
+msgbox @bossTalk2 0x6
+getplayerpos 0x8000 0x8001
+compare 0x8001 0x5
+if 0x1 goto @top
+compare 0x8001 0x6
+if 0x1 goto @upperMiddle
+compare 0x8001 0x7
+if 0x1 goto @lowerMiddle
+// bottom
+applymovement 0xFF @bottomMove
+waitmovement 0x0
+goto @continue
+
+#org @top
+applymovement 0xFF @topMove
+waitmovement 0x0
+goto @continue
+
+#org @upperMiddle
+applymovement 0xFF @upperMiddleMove
+waitmovement 0x0
+goto @continue
+
+#org @lowerMiddle
+applymovement 0xFF @lowerMiddleMove
+waitmovement 0x0
+goto @continue
+
+
+#org @continue
+pause 0x10
+applymovement _GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bossTalk3 0x6
+pause 0x25
+applymovement _GIOVANNI @bossStep
+waitmovement 0x0
+pause 0x30
+msgbox @bossTalk4 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x25
+msgbox @bossTalk5 0x6
+pause 0x25
+applymovement _GIOVANNI @bossStep2
+waitmovement 0x0
+pause 0x20
+msgbox @bossTalk6 0x6
+pause 0x20
+setdooropened 0x24 0xA
+doorchange
+movesprite2 _ARIANA 0x24 0xA
+movesprite _ARIANA 0x24 0xA
+clearflag 0x21E
+showsprite _ARIANA
+applymovement _ARIANA @arianaStep
+waitmovement 0x0
+sound 0x9
+setdoorclosed 0x24 0xA
+doorchange
+applymovement _ARIANA @arianaMove
+waitmovement 0x0
+pause 0x10
+textcolor 0x1
+msgbox @arianaTalk2 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x20
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk7 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_UP
+pause 0x35
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x25
+msgbox @bossTalk8 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_DOWN
+pause 0x30
+applymovement _GIOVANNI @bossStep3
+waitmovement 0x0
+pause 0x30
+msgbox @bossTalk9 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_LEFT
+pause 0x30
+msgbox @bossTalk10 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x30
+msgbox @bossTalk11 0x6
+pause 0x40
+applymovement _GIOVANNI @bossStep4
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+pause 0x20
+msgbox @bossTalk12 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+msgbox @bossTalk13 0x6
+pause 0x30
+applymovement _GIOVANNI @bossStep5
+waitmovement 0x0
+pause 0x25
+msgbox @bossTalk14 0x6
+pause 0x20
+sound 0x7
+clearflag 0x3D
+showsprite _BRIEFCASE
+checksound
+pause 0x30
+applymovement _GIOVANNI @bossStep6
+waitmovement 0x0
+pause 0x30
+msgbox @bossTalk15 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_LEFT
+pause 0x30
+msgbox @bossTalk16 0x6
+pause 0x25
+applymovement _GIOVANNI @bossLeave
+waitmovement 0x0
+hidesprite _GIOVANNI
+pause 0x25
+sound 0x9
+checksound
+pause 0x50
+setdooropened 0x24 0xA
+doorchange
+movesprite2 _SILVER 0x24 0xA
+movesprite _SILVER 0x24 0xA
+showsprite _SILVER
+applymovement _SILVER @arianaStep
+waitmovement 0x0
+sound 0x9
+setdoorclosed 0x24 0xA
+doorchange
+pause 0x15
+msgbox @silverTalk1 0x6
+pause 0x10
+applymovement _SILVER @silverMove
+waitmovement 0x0
+pause 0x20
+msgbox @silverTalk2 0x6
+pause 0x25
+applymovement _SILVER @silverLeave
+waitmovement 0x0
+sound 0x9
+checksound
+hidesprite _SILVER
+pause 0x50
+spriteface _ARIANA FACE_RIGHT
+pause 0x25
+applymovement _ARIANA @stepR
+waitmovement 0x0
+textcolor 0x1
+msgbox @arianaTalk3 0x6
+pause 0x25
+applymovement _ARIANA @arianaLeave
+waitmovement 0x0
+setdooropened 0x24 0xA
+doorchange
+applymovement _ARIANA @bossStep
+waitmovement 0x0
+hidesprite _ARIANA
+sound 0x9
+setdoorclosed 0x24 0xA
+doorchange
+checksound
+sound 0x0
+fadein 0x0
+setflag 0x201
+setflag 0x21E
+setvar 0x4016 0x30
+releaseall
+end
+
+
+#org @arianaTalk
+= No, Giovanni!\c\h08Û\nPlease..!\c\h08Û I won't allow this..!
+
+#org @bossTalk
+= [.]\c\h08ÛThere's nothing you can say,\ndarling.\lLeave me be.
+
+#org @bossTalk2
+= Giovanni: [player].\c\h08Û\nYou're here at last.\pI'm ashamed you should have to see\nme like this[.]
+
+#org @bossTalk3
+= I've been defeated in battle for\nthe very last time.\pI cannot face my followers any\nlonger.\pI've[.]\c\h08Û betrayed your trust.
+
+#org @bossTalk4
+= With the last scrap of honor I\nhave left[.]\pIt's time for me to move on.\pWe've worn out our welcome in\nKanto long ago.\pI think it's best[.]\c\h08Û if this were\nthe end of Team Rocket.
+
+#org @bossTalk5
+= [.]\pBut I don't expect all of my\nAdmins and Executives to agree.
+
+
+#org @bossTalk6
+= So, [player][.]\pYou are free to keep wreaking\nhavoc on Kanto if you prefer.\pBut whatever becomes of Team\nRocket from here on out[.]\pIt will be without me at the helm.
+
+#org @arianaTalk2
+= Ariana: I-I[.]\c\h08Û\nI won't have this insanity!\pA-all our work, Giovanni!\nEverything we stood for..!\pOver some child..?
+
+#org @bossTalk7
+= Giovanni: Yes, a child, Ariana.\c\h08Û\nA child who will soon rule the\lregion[.]\pWithout the slightest bloodshed\nto his name.\pAnd what have we achieved?
+
+#org @bossTalk8
+= We've roused the anger and the\nsupport of those who longed back\lto the golden years of Kanto[.]\pAnd become the masters of its\ncriminal underworld.\pBut we're no closer to our ultimate\ngoal than we were ten years ago[.]
+
+#org @bossTalk9
+= I truly thought we had the clearest\npath to power laid out for us[.]\p[.]\pI was lying to myself the whole\ntime.
+
+#org @bossTalk10
+= That kid[.]\pFrom the first I ever heard of him,\nhe made me so[.]\c\h08Û\angry[.]\pAll my violent frustration, my\nbitterness[.]\pI didn't understand why he brought\nit all out of me[.]\pDidn't understand that he was\nmaking me see, all too clearly[.]\pThe blind, stubborn weakling I had\nbecome.
+
+#org @bossTalk11
+= But I do now.\c\h08Û\nAnd so it's time for me to go.
+
+#org @bossTalk12
+= [player].\c\h08Û\nI apologize for everything.\pTeam Rocket will not rule Kanto.\p[.]\c\h08Û\nBut perhaps[.]
+
+#org @bossTalk13
+= No[.]\c\h08Û\nI won't say any more for now.
+
+#org @bossTalk14
+= Take this.\pAs a final token of my\nappreciation, [player].
+
+#org @bossTalk15
+= I had such high hopes for you.\c\h08Û\nIt makes me proud[.]\pHow far you've come since I first\ncalled you into my office all that\ltime ago[.]
+
+#org @bossTalk16
+= Make the best of the power and\nresponsibility I've given you.\pSo long.
+
+#org @silverTalk1
+= No!\c\h08Û\nCome back, you bastard..!
+
+#org @silverTalk2
+= Silver: Don't you dare[.]\c\h08Û\nDon't you dare run away!\pI hate you!\pYou're the reason for everything\nthat's bad!
+
+#org @arianaTalk3
+= Ariana: [.]\c\h08Û\n(Be strong[.])\p(It's what he would have wanted[.])
+
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @bossWalk1
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @topMove
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @upperMiddleMove
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_R
+#raw 0xFE
+
+#org @lowerMiddleMove
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw 0xFE
+
+#org @bottomMove
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw 0xFE
+
+#org @bossStep
+#raw STEP_U
+#raw 0xFE
+
+#org @bossStep2
+#raw STEP_D
+#raw FACE_L
+#raw 0xFE
+
+#org @bossStep3
+#raw STEP_D
+#raw 0xFE
+
+#org @bossStep4
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @bossStep5
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @bossStep6
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @arianaStep
+#raw STEP_D
+#raw 0xFE
+
+#org @arianaMove
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @bossLeave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @silverMove
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @silverLeave
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @arianaLeave
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_U
+#raw 0xFE
+
+
+
+
+
+
+

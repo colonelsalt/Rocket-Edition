@@ -1,0 +1,190 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GURU 0x11
+#define _SON 0x12
+
+#org @main
+lock
+fadeout 0x0
+applymovement _GURU @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @guruTalk 0x6
+pause 0x25
+spriteface _GURU FACE_LEFT
+pause 0x20
+msgbox @guruTalk2 0x6
+pause 0x20
+spriteface _SON FACE_RIGHT
+pause 0x10
+applymovement _SON @stepR
+waitmovement 0x0
+msgbox @sonTalk 0x6
+pause 0x20
+spriteface _GURU FACE_LEFT
+applymovement _GURU @stepL
+waitmovement 0x0
+msgbox @guruTalk3 0x3
+pause 0x20
+spriteface _GURU FACE_UP
+pause 0x10
+applymovement _GURU @stepU
+waitmovement 0x0
+msgbox @guruTalk4 0x6
+spriteface _GURU FACE_DOWN
+spriteface _SON FACE_DOWN
+sound 0x15 // exclamation
+applymovement _GURU @exclamation
+applymovement _SON @exclamation
+playsong 0x11B 0x0
+waitmovement 0x0
+spriteface _GURU FACE_LEFT
+msgbox @guruTalk5 0x6
+sound 0xA
+applymovement _SON @jumpD
+waitmovement 0x0
+checksound
+sound 0xA
+applymovement _SON @jumpD
+waitmovement 0x0
+checksound
+pause 0x10
+applymovement _SON @runToPlayer
+waitmovement 0x0
+msgbox @sonTalk2 0x6
+trainerbattle 0x3 0x1B 0x0 @defeatText
+call POKESTEAL
+applymovement _GURU @guruToPlayer
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox @guruTalk6 0x6
+pause 0x20
+spriteface _GURU FACE_UP
+pause 0x25
+msgbox @ellipses 0x6
+pause 0x20
+spriteface _GURU FACE_LEFT
+pause 0x10
+msgbox @guruTalk7 0x6
+pause 0x10
+applymovement _GURU @stepL
+waitmovement 0x0
+msgbox @guruTalk8 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox @noTalk 0x6
+fadescreen 0x1
+hidesprite _GURU
+hidesprite _SON
+setflag 0xAC
+pause 0x10
+sound 0x9
+checksound
+fadescreen 0x0
+setflag 0x2A7
+setvar 0x4032 0x2
+end
+
+#org @saidYes
+msgbox @yesTalk 0x6
+fanfare 0x101
+additem 0x44 0x3
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+msgbox @putAway MSG_KEEPOPEN
+setflag 0xAC
+setvar 0x4032 0x2
+release
+end
+
+
+#org @guruTalk
+= You know, junior[.]\pYou've shaped up to be quite the\nable fisherman.\pHow proud I am, seeing you[.] with\nthat Rod clutched expertly in your\lhands[.] austere fish-catching\ldetemination in your eyes[.]\pIt's beyond description.
+
+#org @guruTalk2
+= I think it's finally time[.]\c\h08ó I\nlet you in on our family secrets.
+
+#org @sonTalk
+= Oh, gee, dad!\nWhat kind of secret is that?\pI promise I won't tell anyone!
+
+#org @guruTalk3
+= The secret behind[.]\c\h08ó\nWhat makes our Rod so[.]\c\h08ó GOOD.\pWhy it will forever be the envy of\nmy younger brother.
+
+#org @guruTalk4
+= You see, junior[.]\nIt's really quite simple.\pThe handle of a Good Rod[.]\c\h08ó is one we\ncultivate from the finest-grade\lIlex Forest wood[.]\pWe make the line from a special\ntype of extra-durable nylon[.]\pAnd then[.]\c\h08ó right at the point of\nthe hook[.]\pWe put just a little bit of[.]\c\h08ó\npharmaceutical grade cocaine,\lso that the fish.\c\h08ó.\c\h08ó.\c\h08ó
+
+#org @guruTalk5
+= Junior!\c\h08ó It's another one of your\nuncle's spies, trying to eavesdrop\lon our best-kept fishing secrets!\pGet him!
+
+#org @sonTalk2
+= I know how to deal with bad guys\nlike you!\pI won't let you ruin dad's\nfishing business!
+
+#org @defeatText
+= Ah! I'm sorry I couldn't defend\nyou, pa!
+
+#org @guruTalk6
+= I knew it! That devious brother\nof mine is sending crooks on me to\lsteal my secrets!\pArgh!\nI won't stand for it one minute..!
+
+#org @ellipses
+= [.]
+
+#org @guruTalk7
+= L-look, man, I'm just a[.]\c\h08ó humble\nentrepreneur[.]\c\h08ó trying to provide\lfor my only child.\pMy brother[.]\c\h08ó he lacks the skill\nand imagination to make a decent\lRod himself[.]\pSo he tries to squeeze me out with\nforce instead!
+
+#org @guruTalk8
+= Th-the secrets you overheard[.]\pIf my brother finds out, he'll\nhave me bankrupt in no time!\pYou have a heart in there some-\nwhere, don't you, bandit?\pCan you promise not to tell my\nbrother about my secrets?
+
+#org @yesTalk
+= Oh, my!\nThank you, spy!\pI don't have much to offer you in\nreturn for daring to go against my\lbrother like that.\p[.]\pOur dealer gave me some of these,\nbut I can't find any use for them.\pMaybe you will?
+
+#org @itemMsg
+= [player] received 3 Rare Candies!
+
+#org @putAway
+= [player] put the Rare Candies in the\nItems pocket.
+
+#org @noTalk
+= (Sigh[.])\c\h08ó\nI knew it..!\pIt's a dog-eat-dog world out\nthere, isn't it?\pWell, I hope my brother pays you\nwell for spying!\pC'mon, junior!
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @jumpD
+#raw 0x52
+#raw 0xFE
+
+#org @runToPlayer
+#raw STEP_D2
+#raw 0xFE
+
+#org @guruToPlayer
+#raw STEP_D2
+#raw STEP_D2
+#raw FACE_L
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE

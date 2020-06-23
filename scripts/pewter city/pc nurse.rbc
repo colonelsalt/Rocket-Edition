@@ -1,0 +1,182 @@
+#dynamic 0x800000
+#define _NURSE 0x3
+
+#org @main
+lock
+faceplayer
+call 0x81A6578
+compare 0x4035 0x4
+if 0x4 goto @postJobMaybe
+compare 0x4035 0x3
+if 0x1 goto @midJobMaybe
+compare 0x4035 0x2
+if 0x1 goto @reward
+compare 0x4035 0x1
+if 0x1 goto @midQuest
+compare 0x4035 0x0
+if 0x1 goto @startQuest
+release
+end
+
+#org @startQuest
+msgbox @talk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox @noTalk 0x6
+release
+end
+
+#org @saidYes
+msgbox @yesTalk 0x6
+pause 0x25
+spriteface _NURSE FACE_RIGHT
+pause 0x10
+fadeout 0x0
+msgbox @ellipses 0x6
+pause 0x25
+spriteface _NURSE FACE_DOWN
+pause 0x10
+msgbox @yesTalk2 0x6
+pause 0x25
+spriteface _NURSE FACE_LEFT
+pause 0x30
+spriteface _NURSE FACE_DOWN
+pause 0x15
+msgbox @yesTalk3 0x6
+fadein 0x0
+setvar 0x4035 0x1
+release
+end
+
+#org @midQuest
+msgbox @midQuestTalk 0x6
+release
+end
+
+#org @reward
+msgbox @rewardTalk 0x6
+pause 0x25
+spriteface _NURSE FACE_RIGHT
+pause 0x30
+spriteface _NURSE FACE_DOWN
+pause 0x10
+msgbox @rewardTalk2 0x6
+checkitemroom 0x29 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+fanfare 0x101
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+additem 0x29 0x1
+msgbox @putAway MSG_KEEPOPEN
+setvar 0x4035 0x3
+closeonkeypress
+pause 0x10
+applymovement _NURSE @curtsey
+waitmovement 0x0
+pause 0x10
+checkflag 0x27E // unless Julien bribe already accepted, suggest Nurse job
+if 0x0 goto @offerJob
+release
+end
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @offerJob
+textcolor 0x1
+msgbox @jobTalk 0x6
+pause 0x20
+spriteface _NURSE FACE_LEFT
+pause 0x30
+spriteface _NURSE FACE_DOWN
+pause 0x10
+msgbox @jobTalk2 0x6
+release
+end
+
+#org @midJobMaybe
+checkflag 0x27E
+if 0x0 goto @midJob
+release
+end
+
+#org @midJob
+msgbox @midJobTalk 0x6
+release
+end
+
+#org @postJobMaybe
+checkflag 0x2B0
+if 0x0 goto @postJob
+release
+end
+
+#org @postJob
+msgbox @postJobTalk 0x6
+compare 0x4035 0x5 // if Miss Hoenn gift received
+if 0x1 goto @stopAllFurtherTalk
+release
+end
+
+#org @stopAllFurtherTalk
+setflag 0x2B0
+release
+end
+
+#org @talk
+= Wait, hang on a moment[.]\pYou're one of those Team Rocket\nguys, aren't you?\pYou're just the type I'm looking\nfor right now.\p[.]\pLook, I can't stand it anymore!\nI need some thug like you to help!\pI want you to go teach somebody a\nlesson. Will you do it?
+
+#org @noTalk
+= Eeeek!\nOh, all right!\pEr[.]\nPretend I never said anything!
+
+#org @yesTalk
+= All right, listen[.]\pSo I'm dating this cop who's\nstationed in Viridian City.\pI mean, I'm a sucker for guys in\nuniforms, what can I say?\pI mean, he's a real stud.\nFights crime real good and all.\lNo offense.\pBut you know[.] with that great big\nforest separating us and all, we\ldon't get time to see each other\lthat often, and[.]
+
+#org @ellipses
+= [.]
+
+#org @yesTalk2
+= Argh!\nGod damn it!\pThat son of a Granbull is cheating\non me, I know it!\pI mean, I didn't want to believe\nit either, but it's clear as day!\pFirst he comes late for our date,\nthen he starts forgetting to call\lme good night[.]\pThe signs were so obvious..!\pBut then, last week[.]\pI decided to come to Viridian for\na surprise date, see.\pI went on up to his place, and\nguess what I saw?!\pHe was hanging out-- alone, with\nsome other girl!\pThe most disgusting fake little\nbimbo I ever saw!\lLaughing and smiling together!\p[.]\pGrrrrr..!\nIt makes me livid!\pThat lying, cheating bastard\nthinks he can walk all over me! 
+
+#org @yesTalk3
+= You go on down to Viridian and\ngive him a nice old beating!\pThe more he cries, the more I'll\npay you, Rocket!\pAnd as you walk away[.]\pYou make sure to let him know who\nit came from!\pThen we'll see who's laughing and\nsmiling, won't we[.]
+
+#org @midQuestTalk
+= [.]\pWell, Rocket?\pDid you go beat up my police\nofficer boyfriend in Viridian?\p[.]\pHurry! Don't let that bastard go\nfree another second!
+
+#org @rewardTalk
+= [.]\pWell, Rocket? Tell me what a pulp\nyou beat my boyfriend to!\p[.]\pWhat?\pThe girl I saw him with was[.]\c\h08ó\nA[.]\c\h08ó Pokémon?\p[.]\pThat's the lousiest excuse I\never..!\p[.]\c\h08ó\nOh, you saw it, huh?\p[.]\pHuh. I guess he might not be such\na cheating scumbag after all[.]\pMaybe[.]\c\h08ó he's really just a[.]\c\h08ó\nReally loving guy who cares for me\land respects me as a person[.]
+
+#org @rewardTalk2
+= Hah!\c\h08ó What a laugh.\c\h08ó\nI'm not convinced.\p[.]\pBut[.]\c\h08ó I guess he didn't need\nbeating up after all.\pStill[.]\c\h08ó I should probably\ncompensate you for clearing things\lup anyway, huh?\p[.]\pHave this, Rocket. It's certainly\nhelped me out plenty[.]
+
+#org @itemMsg
+= [player] received the Red Flute!
+
+#org @putAway
+= [player] put the Red Flute in the\nItems pocket.
+
+#org @noRoomTalk
+= You don't have space for it?!\nMake some!
+
+#org @jobTalk
+= You know, Rocket[.]\pI think being away from Teddy\ntoo long is driving me mad.\pI wish I had more time off so I\ncould keep an eye on him myself!\p[.]\pProblem is[.] I'm the only day-shift\nnurse in this place, and my boss\lwon't have me cut more hours[.]
+
+#org @jobTalk2
+= Say[.]\pDo you know a girl who'd want to\nwant to work as my extra?\pIt's the simplest job in the\nworld, let me tell you!\p[.]\c\h08ó\nExperience, education..?\pNah, the only qualification you\nneed is a pretty face.\pYou push the button on the healing\nmachine and curtsey real sweet.\lNine to five.\pOh, and the stares from all the\nadmiring Trainers who stop by are\lsure to make a young girl giddy!\p[.]\pWell, if you come across a gal\nwho'd want the job, let me know!
+
+#org @midJobTalk
+= [.]\pWell, Rocket?\pDid you find a pretty girl who'd\nwant to work here part-time?\p[.]\pNo?\nLet me know when you do!
+
+#org @postJobTalk
+= [.]\pOh, by the way, Rocket, this girl\nyou recruited is a real gem!\pWhy, I'd almost rather chat with\nher than be with Teddy! Hahahaha[.]
+
+#org @curtsey
+#raw 0x5B
+#raw 0x1A
+#raw 0xFE

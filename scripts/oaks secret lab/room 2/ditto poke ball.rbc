@@ -1,0 +1,76 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _ITEM 0x4
+#define _DITTO 0x7
+
+#org @main
+lock
+fanfare 0x101
+msgbox @item 0x6
+pause 0x10
+sound 0xC5
+hidesprite _ITEM
+clearflag 0x200
+showsprite _DITTO
+applymovement _DITTO @twirl
+waitmovement 0x0
+cry 0x84 0x0
+waitcry
+setflag 0x200
+setvar 0x8006 0x69
+// TODO: set appropriate level
+setwildbattle 0x84 0x32 0x0
+dowildbattle
+setvar 0x8006 0x0
+fadescreen 0x1
+hidesprite _DITTO
+fadescreen 0x0
+setflag 0x1ED
+release
+end
+
+
+#org @item
+= [player] found one\c\h08ó.\c\h08ó.\c\h08ó?!
+
+#org @twirl
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x4A
+#raw 0xFE
+
+

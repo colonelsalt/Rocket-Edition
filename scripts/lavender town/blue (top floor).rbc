@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Blue: Well, this wasn't very\nexciting.\pThere's just some old guy up here!\nNo rare Pokémon or items!\p[.]\pWhat? Oh, you're here to see the\nold man, are you?

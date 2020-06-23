@@ -1,0 +1,233 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @start
+setvar 0x4015 0x1
+lock
+pause 0x08
+textcolor 0x00
+msgbox @talk1 0x6
+applymovement 0xFF @introwalk
+waitmovement 0x0
+applymovement 0x11 @step
+waitmovement 0x0
+msgbox @talk2 0x6
+applymovement 0x11 @step
+waitmovement 0x0
+msgbox @talk3 0x6
+playsong 0x110 0x0
+applymovement 0x11 @walk1
+applymovement 0xFF @playermove1
+waitmovement 0x0
+msgbox @talk4 0x6
+applymovement 0x11 @step2
+waitmovement 0x0
+msgbox @talk5 0x6
+applymovement 0xFF @playermove2
+applymovement 0x11 @walk2
+waitmovement 0x0
+applymovement 0xFF @playermove3
+applymovement 0x11 @walk3
+waitmovement 0x0
+hidesprite 0x10
+applymovement 0x11 @walk4
+applymovement 0xFF @playermove4
+waitmovement 0x0
+sound 0xA
+applymovement 0x11 @jump
+waitmovement 0x0
+applymovement 0xFF @playermove5
+applymovement 0x11 @walk5
+waitmovement 0x0
+msgbox @talk6 0x6
+applymovement 0x11 @step2
+waitmovement 0x0
+msgbox @talk7 0x6
+spriteface 0x11 FACE_DOWN
+pause 0x30
+msgbox @ellipses 0x6
+spriteface 0x11 FACE_RIGHT
+msgbox @talk8 0x6
+spriteface 0x11 FACE_DOWN
+setflag 0x207
+showsprite 0x10
+hidesprite 0x11
+release
+end
+
+#org @introwalk
+#raw 0x1C
+#raw 0x13
+#raw 0xFE
+
+#org @talk1
+= Ronnie: There you are!
+
+#org @step
+#raw 0x1A
+#raw 0x23
+#raw 0xFE
+
+#org @talk2
+= Okay, [player], I'm going to teach\nyou all there is to know about\lstealing people's Pokémon!\l...\lWhat's that?\lHow am I an expert in Pokémon\lcrime all of a sudden? Okay,\llook-- yeah, I know I just joined\lTeam Rocket, but I'll have you\lknow I came prepared! Immorality\lis my passion, man!
+
+#org @talk3
+= Come with me!
+
+#org @walk1
+#raw 0x1C
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x12
+#raw 0x12
+#raw 0x3
+#raw 0xFE
+
+#org @playermove1
+#raw 0x1C
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x12
+#raw 0x2
+#raw 0xFE
+
+#org @talk4
+= Er-hem! "Pokémon Robbery for\nDummies: Chapter one.\lThe first step to any successful\lPokémon heist is to pick a\lsuitable target."
+
+#org @step2
+#raw 0x1C
+#raw 0x24
+#raw 0x1C
+#raw 0xFE
+
+#org @talk5
+= Now, seeing as we're only Grunts,\nwe can only steal from kids and\lold people for the time being,\lwhich sucks, but hey-- I'm sure\lwe'll be rising up the ranks in no\ltime flat, so don't worry about\lit. Anyway, point being: we've\lgotta find ourselves an old fart\lor a little brat-- give me a shout\lif you see any.
+
+#org @walk2
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x11
+#raw 0x2
+#raw 0x1C
+#raw 0x3
+#raw 0x1C
+#raw 0xFE
+
+#org @playermove2
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0xFE
+
+#org @walk3
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x1
+#raw 0x1C
+#raw 0x0
+#raw 0x1C
+#raw 0xFE
+
+#org @playermove3
+#raw 0x11
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0xFE
+
+#org @walk4
+#raw 0x10
+#raw 0x10
+#raw 0x12
+#raw 0x12
+#raw 0xFE
+
+#org @playermove4
+#raw 0x12
+#raw 0x10
+#raw 0x10
+#raw 0x12
+#raw 0xFE
+
+#org @jump
+#raw 0x54
+#raw 0xFE
+
+#org @walk5
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @playermove5
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @talk6
+= [player], [player]! Innocent-looking\nschoolgirl six o'clock! Man, this\lis our big chance! Okay, okay,\lokay-- focus, now. Let me see what\lthe experts say next...
+
+#org @talk7
+= "Step two: Engage your chosen\ntarget in a Pokémon battle, and\lproceed to defeat them."
+
+#org @ellipses
+= \c\h08ó.\c\h08ó.\c\h08ó.
+
+#org @talk8
+= Well, what are you waiting for? Go\nbeat the crap out of the little\lgirl, now; you heard the experts.\l...\lWhat? Who? Me?\lNaw, c'mon, man; that's-- I mean,\lthat'd be far too easy. Besides,\lyou're the newbie here, aren't\lyou? Yeah, um... I-I'll be right\lbehind you, buddy.

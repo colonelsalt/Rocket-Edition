@@ -1,0 +1,54 @@
+#dynamic 0x800000
+
+#org @start
+lock
+checkflag 0x22E
+if 0x1 goto @postPallet
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x204
+if 0x1 goto @postTutorial
+msgbox @talk 0x6
+release
+end
+
+#org @postRed
+faceplayer
+msgbox @talk4 0x6
+release
+end
+
+#org @postTV
+faceplayer
+msgbox @talk3 0x6
+release
+end
+
+#org @postTutorial
+faceplayer
+msgbox @talk2 0x6
+release
+end
+
+#org @postPallet
+faceplayer
+msgbox @talk5 0x6
+release
+end
+
+#org @talk
+= Rattata?\nGeez, what a bummer.
+
+#org @talk2
+= Beg, steal, lie, cheat!\nAh, it's the life, grunt.
+
+#org @talk3
+= Because the police are now\nencouraging us to be nice, these\lguys here have now set up a\lcounter-program to encourage us to\lbe bad.\pThese guys must be really\npassionate about crime, huh?
+
+#org @talk4
+= We're done for!\pWhat's going to happen to Team\nRocket now?
+
+#org @talk5
+= Ever since that Red kid invaded\nHQ, I'm terrified to ever steal\lPokémon from little kids again!\p[.]What if they turn out to be\nexactly like him?

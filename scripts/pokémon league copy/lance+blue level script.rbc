@@ -1,0 +1,398 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define LANCE 0x1
+#define _BLUE 0xA
+
+#org @main
+checkflag 0x2AE
+if 0x1 goto @2ndScript
+applymovement 0xFF @playerCamera
+waitmovement 0x0
+pause 0x35
+applymovement LANCE @stepD
+waitmovement 0x0
+spriteface 0x5 FACE_RIGHT
+spriteface 0x3 FACE_LEFT
+spriteface 0x7 FACE_UP
+spriteface 0x2 FACE_UP
+spriteface 0x8 FACE_UP
+spriteface 0x6 FACE_UP
+spriteface 0x4 FACE_UP
+spriteface 0x9 FACE_UP
+spritebehave 0x5 0xA // look right
+spritebehave 0x3 0x9 // look left
+spritebehave 0x7 0x7 // look up
+spritebehave 0x2 0x7
+spritebehave 0x8 0x7
+spritebehave 0x6 0x7
+spritebehave 0x4 0x7
+spritebehave 0x9 0x7
+lockall
+textcolor 0x0
+msgbox @champTalk1 0x6
+lockall
+pause 0x35
+spriteface LANCE FACE_LEFT
+pause 0x20
+spriteface LANCE FACE_DOWN
+pause 0x15
+msgbox @champTalk2 0x6
+lockall
+applymovement LANCE @champStroll1
+waitmovement 0x0
+msgbox @champTalk3 0x6
+lockall
+applymovement LANCE @champStroll2
+waitmovement 0x0
+msgbox @champTalk4 0x6
+lockall
+applymovement LANCE @champStroll3
+waitmovement 0x0
+msgbox @champTalk5 0x6
+lockall
+applymovement LANCE @champStroll4
+waitmovement 0x0
+msgbox @champTalk6 0x6
+lockall
+applymovement LANCE @stepD
+waitmovement 0x0
+msgbox @champTalk7 0x6
+lockall
+pause 0x20
+spriteface LANCE FACE_LEFT
+pause 0x25
+spriteface LANCE FACE_DOWN
+pause 0x20
+msgbox @champTalk8 0x6
+lockall
+pause 0x25
+applymovement LANCE @champStroll5
+waitmovement 0x0
+msgbox @champTalk9 0x6
+lockall
+applymovement LANCE @champStroll6
+waitmovement 0x0
+msgbox @champTalk10 0x6
+lockall
+applymovement LANCE @stepD
+waitmovement 0x0
+msgbox @champTalk11 0x6
+lockall
+applymovement LANCE @finalStroll
+waitmovement 0x0
+applymovement LANCE @stepD
+waitmovement 0x0
+msgbox @champTalk12 0x6
+lockall
+pause 0x20
+spriteface LANCE FACE_RIGHT
+pause 0x25
+spriteface LANCE FACE_DOWN
+pause 0x20
+msgbox @champTalk13 0x6
+lockall
+pause 0x20
+releaseall
+pause 0x15
+applymovement LANCE @champLeave
+waitmovement 0x0
+hidesprite LANCE
+setvar 0x401D 0x6
+setflag 0x208
+pause 0x35
+clearflag 0x2AE
+warpmuted 0x3 0x2E 0xFF 0x10 0xB
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @playerCamera
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @champTalk1
+= Lance: Er-hem!
+
+#org @champTalk2
+= It has come to my attention that\nthe Kanto region has recently been\lthe victim of several acts of\lorganized crime at the hands of\lthis "Team Rocket".
+
+#org @champStroll1
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @champTalk3
+= I am also led to believe that this\norganization has perpetrated a\lnumber of lesser crimes, primarily\laround the Celadon area, but that\lthe local police force has had a\ltendency to turn a blind eye to\lthese misdemeanors.
+
+#org @champStroll2
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @champTalk4
+= With this burglary, as well as\nwith recent reports of similar\lmischievous behavior on Mt. Moon\land at the Pokémon Tower in\lLavender, the Rockets have proven\lthemselves to pose a genuine\lthreat to regional security.
+
+#org @champStroll3
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @champTalk5
+= All of this is, of course,\n\c\h08ócompletely unacceptable.
+
+#org @champStroll4
+#raw FACE_U
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @champTalk6
+= I have therefore decided to\ninitiate a new program to combat\lorganized crime.\pWe will bring the Rockets to\njustice!
+
+#org @champTalk7
+= We are stationing federal police\nagents in every major city across\lthe region.\pThese specially trained, morally\nimpervious forces will actively\lcombat larger criminal operations,\land will provide victims of crimes\lwith a safe avenue in which to\lreport their perpetrators.
+
+#org @champTalk8
+= Furthermore[.]\pAs of today, each and every\nidentified member of Team Rocket\lis a wanted criminal!\pFor every Pokémon reported stolen\nby each member, the bounty on his\lor her head will increase.
+
+#org @champStroll5
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @champTalk9
+= These public bounties should help\nraise awareness among the citizens\lof Kanto about the region's most\lnotorious criminals.\pIn addition to informing\nauthorities of their whereabouts,\lcitizens are advised to stay away\lfrom, and especially to avoid\lassisting in any way, these\lindividuals!\pBusinesses such as Poké Marts are\nalso encouraged to deny service to\lwanted criminals in order to\lprevent undue damage to their\lreputation.
+
+#org @champTalk10
+= Of course, we want equally to\nencourage criminals who choose to\lrenounce their past evildoings and\lbecome law-abiding citizens again.
+
+#org @champStroll6
+#raw FACE_L
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @champTalk11
+= That is why any Rocket who chooses\nto hand back a stolen Pokémon to a\llocal police officer will have the\lbounty on his head reduced in\lproportion to the strength of the\lreturned Pokémon.\pAdditionally, police officers will\nhand out rewards to former\lcriminals who have kept a record\lof good behavior over longer\lperiods.
+
+#org @finalStroll
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @champTalk12
+= With these measures, we move\nconfidently in the direction of a\lcrime-free Kanto.\pNo lowly thugs should ever be\nallowed to threaten the security\lor the well-being of this proud\lregion!
+
+#org @champTalk13
+= Lance: [.]\c\h08ó\nThat is all.
+
+#org @champLeave
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+
+
+
+// ###################################################
+// ---------------------------------------------------
+// ###################################################
+
+#org @2ndScript
+sound 0x62
+applymovement 0xFF @playerCamera
+waitmovement 0x0
+pause 0x25
+playsong 0x13C 0x0
+applymovement _BLUE @stepD
+waitmovement 0x0
+spriteface 0x5 FACE_RIGHT
+spriteface 0x3 FACE_LEFT
+spriteface 0x7 FACE_UP
+spriteface 0x2 FACE_UP
+spriteface 0x8 FACE_UP
+spriteface 0x6 FACE_UP
+spriteface 0x4 FACE_UP
+spriteface 0x9 FACE_UP
+spritebehave 0x5 0xA // look right
+spritebehave 0x3 0x9 // look left
+spritebehave 0x7 0x7 // look up
+spritebehave 0x2 0x7
+spritebehave 0x8 0x7
+spritebehave 0x6 0x7
+spritebehave 0x4 0x7
+spritebehave 0x9 0x7
+lockall
+textcolor 0x0
+msgbox @blueTalk 0x6
+lockall
+pause 0x25
+spriteface _BLUE FACE_LEFT
+pause 0x10
+applymovement _BLUE @wander1
+waitmovement 0x0
+pause 0x15
+msgbox @blueTalk2 0x6
+lockall
+pause 0x20
+applymovement 0x6 @stepU
+waitmovement 0x0
+spriteface _BLUE FACE_DOWN
+msgbox @interview1 0x6
+lockall
+pause 0x10
+applymovement _BLUE @stepD
+waitmovement 0x0
+msgbox @blueTalk3 0x6
+lockall
+pause 0x15
+applymovement 0x3 @stepL
+waitmovement 0x0
+spriteface _BLUE FACE_RIGHT
+textcolor 0x1
+msgbox @interview2 0x6
+lockall
+pause 0x20
+applymovement _BLUE @wander2
+waitmovement 0x0
+pause 0x15
+textcolor 0x0
+msgbox @blueTalk4 0x6
+lockall
+pause 0x10
+applymovement 0x2 @stepU
+waitmovement 0x0
+fadeout 0x0
+msgbox @interview3 0x6
+lockall
+pause 0x15
+spriteface _BLUE FACE_UP
+pause 0x20
+applymovement _BLUE @wander3
+waitmovement 0x0
+pause 0x20
+msgbox @blueTalk5 0x6
+lockall
+pause 0x25
+spriteface _BLUE FACE_DOWN
+fadein 0x0
+pause 0x10
+applymovement _BLUE @stepD
+waitmovement 0x0
+msgbox @blueTalk6 0x6
+releaseall
+sound 0x62
+pause 0x20
+applymovement _BLUE @leave
+waitmovement 0x0
+sound 0x9
+hidesprite _BLUE
+pause 0x25
+fadeout 0x0
+sound 0x0
+fadein 0x0
+setvar 0x401D 0x8
+setvar 0x4014 0x13
+setflag 0x200
+clearflag 0x204
+warpmuted 0xD 0x0 0xFF 0xD 0xA
+waitstate
+end
+
+
+#org @blueTalk
+= Blue: Hey, everyone!\nNice to meet you!\pI'm Blue from Pallet Town, and[.]\c\h08ó\nI'm the Pokémon Champion!\pI'm the strongest Trainer in Kanto!\nAnd Johto too besides!\pThe best there is!\c\h08ó\nThat's me! Haha!
+
+#org @blueTalk2
+= It's been my dream for a long time[.]\c\h08ó\nAnd it's taken a lot of work[.]\pBut now I'm finally here.\c\h08ó\nHa! Am I great or what?
+
+#org @interview1
+= Interviewer: What are some of the\nchanges we can expect under your\lnew government, Mr. Blue?
+
+#org @blueTalk3
+= Blue: Oh, lots of good stuff, of\ncourse!\pWe're going to work to[.]\c\h08ó um[.]\c\h08ó\nLet everyone ride bikes indoors!\pYeah! I think that would be a\ngreat change!
+
+#org @interview2
+= Interviewer: And can we expect the\nunilateral trade agreement with\lHoenn to be upheld under you, sir?
+
+#org @blueTalk4
+= Blue: Er[.]\c\h08ó Yes.\c\h08ó\nFor sure.\pLook, we'll figure that out[.]\nNobody has to worry!\pNow that I'm Champion there's\ngoing to be nothing but peace and\lhappiness for everyone!\pDon't you doubt it!
+
+#org @interview3
+= Interviewer: Blue, sir!\pThere are rumors that another\nTrainer from your hometown has\ldefeated the Kanto Gym Leaders and\lintends to challenge you next!\pCan you comment on this?\nAre you concerned about him?
+
+#org @blueTalk5
+= Blue: Hah!\c\h08ó\nYeah, I know that stupid stinker[.]\pHe's got no chance[.]\c\h08ó\nSo let him come!\pI'll wipe the floor with that loser\nand we'll forget all about him.\pJust you wait and see..!
+
+#org @blueTalk6
+= Anyway, folks[.]\c\h08ó\nYou're too kind, but duty calls!\pBeing Champion is hard work!\c\h08ó\nSmell ya later!
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0xFE
+
+#org @wander1
+#raw STEP_L
+#raw 0xFE
+
+#org @wander2
+#raw STEP_R
+#raw 0xFE
+
+#org @wander3
+#raw STEP_U
+#raw 0xFE
+
+#org @leave
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

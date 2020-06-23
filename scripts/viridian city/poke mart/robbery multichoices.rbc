@@ -1,0 +1,19 @@
+#dynamic 0x800000
+
+#org @thunderstone
+= Thunderstone
+
+#org @waterStone
+= Water Stone
+
+#org @fireStone
+= Fire Stone
+
+#org @ultraBalls
+= 20 Ultra Balls
+
+#org @fullRestores
+= 15 Full Restores
+
+#org @cash
+= [$]10,000 cash

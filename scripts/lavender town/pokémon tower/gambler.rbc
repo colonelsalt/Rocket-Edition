@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xB 0x0 @challenge @defeat POKESTEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= My dear Bellsprout[.]\pHe took a gamble at life by going\nhead on against a Charizard.
+
+#org @defeat
+= (Snivel[.])\pHe was his master's Pokémon till\nthe bitter end!
+
+#org @after
+= You Rockets aren't so popular\naround these parts.\pPokécide is a crime not easily\nforgiven!

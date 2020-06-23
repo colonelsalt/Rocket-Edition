@@ -1,0 +1,556 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define GIOVANNI 0x1
+#define ARIANA 0xA
+#define BLAINE 0xB
+
+#org @main
+lock
+textcolor 0x0
+msgbox @bosstalk1 0x6
+applymovement 0xFF @playermove
+waitmovement 0x0
+goto @continue
+
+#org @continue
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk2 0x6
+applymovement GIOVANNI @move1
+waitmovement 0x0
+msgbox @bosstalk3 0x6
+applymovement GIOVANNI @pauseleft
+waitmovement 0x0
+msgbox @bosstalk4 0x6
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk5 0x6
+pause 0x10
+spriteface GIOVANNI FACE_RIGHT
+pause 0x10
+msgbox @bosstalk6 0x6
+applymovement ARIANA @stepL
+waitmovement 0x0
+textcolor 0x1
+msgbox @aritalk 0x6
+pause 0x10
+applymovement GIOVANNI @wanderLeft
+waitmovement 0x0
+textcolor 0x0
+msgbox @bosstalk7 0x6
+pause 0x15
+spriteface GIOVANNI FACE_DOWN
+pause 0x15
+msgbox @bosstalk8 0x6
+pause 0x17
+applymovement GIOVANNI @wanderRight
+waitmovement 0x0
+pause 0x20
+msgbox @bosstalk9 0x6
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk10 0x6
+pause 0x10
+fadescreen 0x1
+pause 0x40
+fadescreen 0x0
+pause 0x15
+waitmovement 0x0
+msgbox @bosstalk11 0x6
+pause 0x10
+applymovement GIOVANNI @moveUp
+waitmovement 0x0
+msgbox @bosstalk12 0x6
+applymovement GIOVANNI @moveDownLeft
+waitmovement 0x0
+msgbox @bosstalk13 0x6
+pause 0x15
+applymovement GIOVANNI @returnToCenter
+waitmovement 0x0
+msgbox @bosstalk14 0x6
+pause 0x20
+spriteface GIOVANNI FACE_UP
+pause 0x30
+msgbox @bosstalk15 0x6
+pause 0x20
+sound 0x9
+checksound
+pause 0x25
+movesprite 0x6 0x11 0xD // moves guard grunt into boss room
+applymovement 0x6 @guardComes
+waitmovement 0x0
+applymovement 0x6 @stepU
+waitmovement 0x0
+msgbox @guardTalk 0x6
+applymovement GIOVANNI @stepU
+waitmovement 0x0
+msgbox @bosstalk16 0x6
+applymovement 0x6 @guardLeave
+waitmovement 0x0
+spriteface GIOVANNI FACE_DOWN
+pause 0x10
+msgbox @bosstalk17 0x6
+sound 0x9
+checksound
+pause 0x20
+movesprite BLAINE 0x12 0xD
+applymovement BLAINE @blaiApproach1
+waitmovement 0x0
+movesprite 0x6 0x10 0xE // move guard back to original position
+fadeout 0x1
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk18 0x6
+applymovement 0xFF @scootOver
+pause 0x20
+applymovement BLAINE @blaiApproach2
+waitmovement 0x0
+playsong 0x121 0x0
+fadein 0x1
+applymovement BLAINE @stepU
+waitmovement 0x0
+msgbox @blaitalk1 0x6
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk19 0x6
+pause 0x10
+spriteface BLAINE FACE_RIGHT
+pause 0x37
+spriteface BLAINE FACE_UP
+pause 0x20
+msgbox @blaitalk2 0x6
+applymovement GIOVANNI @cowardwalk
+waitmovement 0x0
+msgbox @bosstalk20 0x6
+pause 0x20
+applymovement BLAINE @cowardfollow
+waitmovement 0x0
+msgbox @blaitalk3 0x6
+applymovement BLAINE @stepU
+waitmovement 0x0
+textcolor 0x2
+msgbox @blaitalk4 0x6
+textcolor 0x0
+applymovement BLAINE @noname
+waitmovement 0x0
+pause 0x17
+msgbox @blaitalk5 0x6
+pause 0x15
+spriteface BLAINE FACE_UP
+pause 0x25
+msgbox @blaitalk6 0x6
+pause 0x15
+applymovement GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bosstalk21 0x6
+applymovement GIOVANNI @noname2
+waitmovement 0x0
+msgbox @bosstalk22 0x6
+applymovement BLAINE @unsure
+waitmovement 0x0
+msgbox @blaitalk7 0x6
+applymovement GIOVANNI @stepDSpecial
+sound 0x46 // "wooden smash"
+msgbox @NO 0x6
+waitmovement 0x0
+applymovement GIOVANNI @bossangry
+waitmovement 0x0
+msgbox @bosstalk23 0x6
+spriteface GIOVANNI FACE_DOWN
+pause 0x10
+msgbox @bosstalk23Extra 0x6
+pause 0x20
+applymovement BLAINE @stepU
+waitmovement 0x0
+msgbox @blaitalk8 0x6
+pause 0x20
+spriteface BLAINE FACE_LEFT
+pause 0x20
+msgbox @blaitalk9 0x6
+pause 0x15
+spriteface BLAINE FACE_UP
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk24 0x6
+pause 0x15
+spriteface GIOVANNI FACE_LEFT
+pause 0x20
+msgbox @bosstalk25 0x6
+applymovement GIOVANNI @bossthreat
+waitmovement 0x0
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk26 0x6
+pause 0x15
+spriteface GIOVANNI FACE_RIGHT
+pause 0x20
+spriteface GIOVANNI FACE_DOWN
+pause 0x10
+msgbox @bosstalkExtra 0x6
+pause 0x10
+applymovement BLAINE @stepU
+waitmovement 0x0
+msgbox @blaitalk10 0x6
+applymovement BLAINE @blaiLeave
+waitmovement 0x0
+movesprite2 BLAINE 0xA 0x0
+hidesprite BLAINE
+fadeout 0x1
+sound 0x9
+checksound
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+playsong 0x112 0x0
+fadein 0x1
+msgbox @bosstalk27 0x6
+applymovement 0xFF @playerReturn
+waitmovement 0x0
+pause 0x17
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk28 0x6
+applymovement GIOVANNI @returnToCouch
+waitmovement 0x0
+msgbox @bosstalk29 0x6
+pause 0x15
+applymovement GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bosstalk30 0x6
+setvar 0x401A 0x5
+setvar 0x4016 0x2
+setvar 0x4015 0x0
+setflag 0x20C
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepDSpecial
+#raw 0x29
+#raw 0xFE
+
+#org @bosstalk1
+= Giovanni: [player], I presume?\pYeah, just come on up here by the\ndesk.
+
+#org @playermove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @bosstalk2
+= Now, then.\nLet's not waste any time.
+
+#org @move1
+#raw STEP_D
+#raw 0x1A
+#raw 0xFE
+
+#org @bosstalk3
+= I heard from Petrel that the\nfossil excavation mission at Mt.\lMoon was wrecked by the workings\lof two little kid Trainers.
+
+#org @pauseleft
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bosstalk4
+= Now, between the fact that Petrel\nis the weakest of my sorry bunch\lof Rocket admins and that the\lmission team consisted of complete\land utter rookie grunts[.]
+
+#org @bosstalk5
+= It still boggles my mind to the\ncore how in the deepest depths of\lGiratina's hell a pair of pre-teen\ltwats could beat up an entire\lsquad of full-grown men and run\laway with the spoils right in\lfront of their GOD DAMN EYES!
+
+#org @bosstalk6
+= I mean, for crying out loud,\nAriana: little kids!\pHow freaking absurd is this?
+
+#org @aritalk
+= Ariana: It's very absurd,\nGiovanni.
+
+#org @wanderLeft
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bosstalk7
+= Giovanni: [.]\c\h08ó\n(Sigh[.])\c\h08ó
+
+#org @bosstalk8
+= Now, having finished berating\nPetrel for his incompetence, he\ltells me that you were the grunt\lstanding guard by the fossils.\pHe said you fought the stronger of\nthe twerps, and that you maybe\leven fared better against him than\lany of the other asshats on your\lteam.
+
+#org @wanderRight
+#raw STEP_R
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @bosstalk9
+= This is why I've called you in\nhere.\pI want you to tell me everything\nyou know about this kid--\pEvery little detail, every little\nminutia you happened to glean from\lyour battle with him.\pI want to have this twerp\nthoroughly profiled so we can see\lto it that he'll never dare mess\lwith Team Rocket again!
+
+#org @bosstalk10
+= Let's start with the basics[.]
+
+#org @bosstalk11
+= Giovanni: [.]\c\h08ó\nI see[.]\c\h08ó
+
+#org @moveUp
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bosstalk12
+= (Red, eh?)\p[.]\c\h08ó\n(What a ridiculous name[.])
+
+#org @moveDownLeft
+#raw FACE_D
+#raw 0x1C
+#raw STEP_D
+#raw STEP_L
+#raw 0x1C
+#raw 0xFE
+
+#org @bosstalk13
+= (Charmeleon[.] and the other one\nrunning around with a Wartortle[.])\p(Why, those are warfare Pokémon\nfor Chrissakes-- what kids could\lhave access to those?)\p(And officially licensed Pokémon\nTrainers, no less[.])\p(Who could these kids' parents\nbe..?)
+
+#org @returnToCenter
+#raw FACE_R
+#raw 0x1A
+#raw STEP_R
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @bosstalk14
+= I have a bad feeling about these\ntwo--\c\h08ó this Red character\lespecially[.]\pWe'll have to keep our eyes open\nif he comes our way again, do you\lhear me?
+
+#org @bosstalk15
+= (Whoever these rich kids are-- I\nswear[.])\p(They're a dangerous breed[.])
+
+#org @guardComes
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0x1C
+#raw 0xFE
+
+#org @guardTalk
+= Boss, sir. Gym Leader Blaine is\nhere to speak with you.
+
+#org @bosstalk16
+= Giovanni: Send him in.
+
+#org @guardLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @bosstalk17
+= You may stay if you want, [player].\c\h08ó\nIn fact--\c\h08ó I'd like you to.
+
+#org @blaiApproach1
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @bosstalk18
+= Giovanni: There you are, Blaine.\pRight here by the desk, if you'd\nplease. Move over, [player].
+
+#org @blaiApproach2
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @scootOver
+#raw STEP_R
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @blaitalk1
+= Blaine: You've probably already\nguessed why I'm here, Giovanni[.]\lAnd you're not gonna like it.
+
+#org @bosstalk19
+= Giovanni: I have my suspicions,\nbut I want to hear it from your\lown little chicken mouth, all the\lsame.
+
+#org @blaitalk2
+= Blaine: (Sigh[.])\c\h08ó\pI can't keep making any more\nPorygon for you.\pI'm really sorry about it,\nGiovanni, but I can't.
+
+#org @bosstalk20
+= Giovanni: [.]\nYou're a filthy coward, Blaine.
+
+#org @blaitalk3
+= Blaine: Listen, now!\pFuji knows all you guys have been\ndoing up in the Pokémon Tower, and\lhe's gone into a crazy fit over\lit!\pJust yesterday he sent an angry\nemail to all his old colleagues at\lthe Pokémon Lab, warning them\lthat, I quote:
+
+#org @blaitalk4
+= "Team Rocket is up to no good!\pThey've got spies all over, and\nthey're ruthless!\pBe on the lookout for any\nsuspicious activity!"
+
+#org @blaitalk5
+= Blaine: You know as well as me,\nGiovanni, that the source code for\lPorygon is copyrighted by Silph\lCo.\pIf I'm caught making them in the\nLab, it's all over for me!
+
+#org @blaitalk6
+= You know I'll always support what\nyou guys are doing here[.]\pBut I'm not gonna risk my position\nas a Gym Leader for Team Rocket,\lall right?\pI'll have to lay low for a while.
+
+#org @bosstalk21
+= Giovanni: God damn you, Blaine[.]\pDo you even realize what a major\nsource of revenue Porygon is for\lour Game Corner?\pPlayers just won't want to gamble\nas much if they don't have the\lprospect of winning one dangled in\lfront of them.
+
+#org @bosstalk22
+= Christ.\pAnd where else do you suggest we\nget our Porygon supply-- at the\lPoké Mart?\pThere's only a handful of\nscientists in Kanto who'd be\lwilling or even able to make the\lthings, let alone help us\ldistribute them illegally.
+
+#org @blaitalk7
+= Blaine: Maybe[.]\c\h08ó\nLook, it's been over a decade[.]\pI know you're not keen on the\nidea, but how about we see if\lmaybe Professor Oak would be\lwilling to hel--
+
+#org @NO
+= Giovanni: NO!
+
+#org @bosstalk23
+= I will never deal with that filthy\ntraitor. Never! Do you hear me?
+
+#org @bosstalk23Extra
+= I want nothing to do with that\nspineless dimwit of a professor,\land you should know better than to\lsuggest it!
+
+#org @blaitalk8
+= Blaine: All right.\nForget it.
+
+#org @blaitalk9
+= Blaine: (sigh[.])\c\h08ó\nWell, then[.]\pI suggest you talk to Bill about\nit.\pHe's an unpredictable kid, but\nhe's smart, and I'll bet you\lanything he nicked himself a copy\lof the Porygon from me or Fuji\lback in the day.\pHe should be more than apt for the\njob.
+
+#org @bosstalk24
+= Giovanni: Hmph.\pWell, I don't suppose we have much\nof a choice.\pBill has done a couple of smaller\ntech-related jobs for us in the\lpast, but he's a fickle kid, and I\ldon't like him.\pPlus, he always demands ridiculous\ncompensation for everything he\ldoes, the rascal.
+
+#org @bosstalk25
+= But[.] seeing as he's our only hope\nright now[.]\pI suppose he'll do.
+
+#org @ellipses
+= Giovanni: [.]\c\h08ó
+
+#org @bosstalk26
+= I'm letting you off the hook for\nnow, Blaine-- for old time's sake.\pBut if you hinder Team Rocket's\noperations again[.]\pWell[.]\c\h08ó you're not going to get a\nfavorable outcome.\pIs that clear?
+
+#org @bosstalkExtra
+= I expect you to be back making\nPorygon for us again once this\lwhole Fuji business blows over.
+
+#org @blaitalk10
+= Blaine: Yes, Giovanni.\c\h08ó\nThank you.
+
+#org @bosstalk27
+= Giovanni: [player], over here.\nI have a new mission for you.
+
+#org @bosstalk28
+= Here's what I want you to do now,\nlisten carefully:\pYou're going to go to Bill's\nhouse, just north of Cerulean.\pYou're going to offer him a job,\non behalf of Team Rocket, as a\ltemporary manufacturer of Porygon.\pIf he says no, tell him we'll make\nhim an offer he can't refuse.\pTell him he can name any price or\nservice he likes[.] within reason.
+
+#org @bosstalk29
+= Another squad of grunts should be\nheaded for Cerulean on another\lmission right about now as well.\pI suggest you rendezvous with them\nin the secret Rocket base we've\lstationed just south of the city.\pThe Rocket admin there should be\nable to give you a few rare items\lto tempt Bill with as well.
+
+#org @bosstalk30
+= Is that clear?\c\h08ó\nWell, on with you, then!\pI'm counting on you, [player]!
+
+#org @cowardwalk
+#raw STEP_L
+#raw 0x1C
+#raw 0xFE
+
+#org @cowardfollow
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @noname
+#raw STEP_R
+#raw 0x1C
+#raw 0xFE
+
+#org @noname2
+#raw STEP_R
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @unsure
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bossangry
+#raw STEP_U2
+#raw 0x1C
+#raw 0xFE
+
+#org @bossthreat
+#raw 0x1C
+#raw STEP_D
+#raw 0x1C
+#raw 0xFE
+
+#org @blaiLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @playerReturn
+#raw STEP_L
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @returnToCouch
+#raw STEP_U
+#raw 0x1C
+#raw FACE_D
+#raw 0xFE

@@ -1,0 +1,20 @@
+#dynamic 0x800000
+
+#org @start
+lock
+checkflag 0x204
+if 0x1 goto @preTV
+msgbox @dumbTalk 0x6
+release
+end
+
+#org @dumbTalk
+= So this is what organized crime\nlooks like.\p[.]well, I don't know what I\nexpected.
+
+#org @preTV
+msgbox @angryTalk 0x6
+release
+end
+
+#org @angryTalk
+= Ah! Team Rocket is going soft, I\ncan feel it in my bones!\pWe just don't inspire the type of\nrespect in the Celadon streets\lthat we once did[.]

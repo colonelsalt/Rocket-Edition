@@ -1,0 +1,257 @@
+#dynamic 0x800000
+#define _BILL 0x13
+#define _CLYDE 0x3
+#include stdmoves.rbh
+
+#org @main
+lockall
+textcolor 0x0
+msgbox @billTalk 0x6
+lockall
+sound 0x9
+movesprite2 _BILL 0xB 0x10
+showsprite _BILL
+applymovement _BILL @billWalk
+waitmovement 0x0
+call @playerMove
+pause 0x10
+msgbox @billTalk2 0x6
+lockall
+pause 0x10
+applymovement _BILL @stepU
+waitmovement 0x0
+msgbox @billTalk3 0x6
+lockall
+pause 0x20
+spriteface _BILL FACE_LEFT
+pause 0x25
+msgbox @billTalk4 0x6
+lockall
+pause 0x20
+applymovement _BILL @billPace
+waitmovement 0x0
+pause 0x20
+msgbox @billTalk5 0x6
+lockall
+pause 0x20
+spriteface _BILL FACE_RIGHT
+pause 0x15
+msgbox @billTalk6 0x6
+lockall
+spriteface _CLYDE FACE_LEFT
+pause 0x10
+applymovement _CLYDE @stepL
+waitmovement 0x0
+msgbox @clydeTalk 0x6
+lockall
+pause 0x10
+applymovement _BILL @stepR
+waitmovement 0x0
+msgbox @billTalk7 0x6
+lockall
+pause 0x15
+applymovement _BILL @billPace2
+waitmovement 0x0
+pause 0x10
+msgbox @billTalk8 0x6
+lockall
+pause 0x10
+applymovement _BILL @billLeave
+waitmovement 0x0
+movesprite2 _BILL 0x4 0x3
+movesprite _BILL 0x4 0x3
+setvar 0x4014 0x15
+releaseall
+end
+
+
+
+#org @billTalk
+= [player]!\c\h08ó\nOh, thank Arceus[.]
+
+#org @billTalk2
+= Bill: I came as soon as I could[.]\c\h08ó\nDamn it!\pI tried to outrun that geezer Oak,\nbut I'm afraid I might have been\ltoo late[.]\pThe clock is ticking now.\nWe have to stop this quickly!
+
+#org @billTalk3
+= Look, [player].\c\h08ó\nI've seen the basement lab[.]\pI know about the kid, I know\neverything.
+
+#org @billTalk4
+= Now he's got his Badges and he's\nheading off to fight the Elite Four.\pWell, we both know he's going to\nhave no trouble with them.\pThen the moment he's Champion, Oak\nwill swoop in and make sure he has\lcomplete political control[.]
+
+#org @billTalk5
+= Lance was just defeated and the\npublic's in a frenzy[.]\pEverybody's watching[.]\c\h08ó\nAgh!\p[.]\pThe only part of this I can't seem\nto wrap my head around is[.]\pWho the hell is Blue?\c\h08ó\nAnyway, no matter.
+
+#org @billTalk6
+= Hey, gym guy!\pWhat's the name of the challenger\nwho came in earlier?
+
+#org @clydeTalk
+= Some kid Red from Pallet Town.\nCan't mistake him.\pI heard he might be coming.\nSounds like a beast, man.
+
+#org @billTalk7
+= Bill: ..!
+
+#org @billTalk8
+= Well, there's nothing left to\nspeculate about, [player].\lIt's going down.\pWe have to get in[.]\c\h08ó\nWe have to move!
+
+
+#org @billWalk
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_U2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_U
+#raw 0xFE
+
+#org @billLeave
+#raw STEP_L2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+
+#org @billPace
+#raw STEP_D2
+#raw 0xFE
+
+#org @billPace2
+#raw STEP_U2
+#raw 0xFE
+
+#org @stepU
+#raw 0x1A
+#raw ONSPOT_U
+#raw 0x1A
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1A
+#raw ONSPOT_R
+#raw 0x1A
+#raw 0xFE
+
+
+#org @playerMove
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x3
+if 0x1 call @move3
+compare 0x8000 0x4
+if 0x1 call @move4
+compare 0x8000 0x5
+if 0x1 call @move5
+compare 0x8000 0x6
+if 0x1 call @move6
+compare 0x8000 0x7
+if 0x1 call @move7
+compare 0x8000 0x8
+if 0x1 call @move8
+compare 0x8000 0x9
+if 0x1 call @move9
+return
+
+#org @move3
+applymovement 0xFF @mmove3
+waitmovement 0x0
+return
+
+#org @move4
+applymovement 0xFF @mmove4
+waitmovement 0x0
+return
+
+#org @move5
+applymovement 0xFF @mmove5
+waitmovement 0x0
+return
+
+#org @move6
+applymovement 0xFF @mmove6
+waitmovement 0x0
+return
+
+#org @move7
+applymovement 0xFF @mmove7
+waitmovement 0x0
+return
+
+#org @move8
+applymovement 0xFF @mmove8
+waitmovement 0x0
+return
+
+#org @move9
+applymovement 0xFF @mmove9
+waitmovement 0x0
+return
+
+#org @mmove3
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @mmove4
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @mmove5
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @mmove6
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @mmove7
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @mmove8
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @mmove9
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+
+
+
+
+
+
+
+
+
+

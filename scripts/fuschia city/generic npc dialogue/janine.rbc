@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= My father is the Gym Leader of\nthis town.\pHe always tells me you Rockets are\nfighting for the good of Kanto.\lI think he's right.\pOh, but[.] I'm not supposed to tell\nanybody about that, of course.

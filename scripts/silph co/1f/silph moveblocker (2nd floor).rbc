@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveDown
+waitmovement 0x0
+releaseall
+end
+
+#org @talk
+= Petrel: Hey, [player]!\pGet your ass over here so we can\nfill you in on what your job is!
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE

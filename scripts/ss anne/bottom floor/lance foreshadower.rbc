@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= I saw some poweful-looking guy\nflying in here on a Dragonite.\pI think he's famous, but I'm not\nfrom around here so I don't know.

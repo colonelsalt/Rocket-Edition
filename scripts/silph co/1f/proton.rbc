@@ -1,0 +1,56 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+checkflag 0x2A4
+if 0x1 goto @postMission
+compare 0x402E 0x0
+if 0x1 goto @noneRemaining
+compare 0x402E 0x1
+if 0x1 goto @oneRemaining
+compare 0x402E 0x5
+if 0x3 goto @midMission
+msgbox @talk 0x6
+release
+end
+
+#org @midMission
+buffernumber 0x0 0x402E
+msgbox @talk2 0x6
+release
+end
+
+#org @oneRemaining
+msgbox @talk3 0x6
+release
+end
+
+#org @noneRemaining
+msgbox @talk4 0x6
+release
+end
+
+#org @postMission
+msgbox @talk5 0x6
+release
+end
+
+
+#org @talk
+= Proton: Boss needs you to imprison\nthose scientists.\pDon't waste any time!
+
+#org @talk2
+= Proton: Hmm, [player]?\pAll right, you still have [buffer1]\nscientists left to imprison.\pGet on with it!
+
+#org @talk3
+= Proton: All right, [player]?\pSounds like you have just one\nscientist left to imprison.\pGo get him so Boss can come up and\nfinish things here!
+
+#org @talk4
+= Proton: Well, so you imprisoned\nall the scientists, hmm?\pWell done, [player].\pI suggest you go up to 11F and see\nto it the coast is clear for Boss.
+
+#org @talk5
+= Proton: [.]\nBoss did what..?\pPromoted you to Executive?\nThat can't be..?\p[.]\pI-I'm sure it's well deserved, of\ncourse.
+
+

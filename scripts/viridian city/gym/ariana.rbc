@@ -1,0 +1,138 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _ARIANA 0x5
+
+#org @main
+lock
+faceplayer
+textcolor 0x1
+call @badgeCheck
+compare LASTRESULT 0x0
+if 0x1 goto @challenge
+compare 0x4075 0x3
+if _GREATER_EQ goto @postBoss2
+checkflag 0x2AE
+if 0x1 goto @postBoss
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @tryChallenge
+msgbox @talk 0x6
+release
+end
+
+#org @tryChallenge
+msgbox @talk2 0x6
+release
+end
+
+#org @postBoss
+msgbox @postBossTalk 0x6
+setvar 0x4075 0x3
+goto @postBoss2
+
+
+#org @postBoss2
+msgbox @postBossTalk2 0x6
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @hasCard
+release
+end
+
+#org @hasCard
+msgbox @hasCardTalk 0x6
+release
+end
+
+#org @challenge
+msgbox @challengeTalk 0x6
+trainerbattle 0x3 0x32 0x0 @winTalk
+setflag 0x827
+setflag 0x4B7
+copyvar 0x8000 0x401F
+call BOSS_STEAL
+textcolor 0x1
+comparevars 0x8000 0x401F
+if _NOT_EQ call @stolen
+comparevars 0x8000 0x401F
+if 0x1 call @notStolen
+msgbox @finalTalk 0x6
+fadescreen 0x1
+hidesprite _ARIANA
+fadescreen 0x0
+release
+end
+
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _ARIANA @exclamation
+waitmovement 0x0
+msgbox @stolenTalk 0x6
+return
+
+#org @notStolen
+msgbox @notStolenTalk 0x6
+return
+
+#org @badgeCheck
+setvar LASTRESULT 0x7
+checkflag 0x820
+if 0x1 call @subtract
+checkflag 0x821
+if 0x1 call @subtract
+checkflag 0x822
+if 0x1 call @subtract
+checkflag 0x823
+if 0x1 call @subtract
+checkflag 0x824
+if 0x1 call @subtract
+checkflag 0x825
+if 0x1 call @subtract
+checkflag 0x826
+if 0x1 call @subtract
+return
+
+#org @subtract
+subvar LASTRESULT 0x1
+return
+
+
+#org @talk
+= Ariana: No, indeed.\nNo new challengers have shown up.\lAs I had expected.\p[.]\pOh, the child you saw earlier?\pHe's going through a tough up-\nbringing, there's no doubt[.]\pBut it's a tough world he's born\ninto, make no mistake!\p[.]\c\h08ó\n(Sigh[.])\pHe'll grow out of his rebellious\nphase soon enough.
+
+#org @talk2
+= Ariana: Huh, [player]?\nYou got a fake Trainer Card?\pAnd now you want to challenge[.]\nthe Viridian Gym Leader?\pArgh, quit your messing around!\pWe've got more important things to\nworry about!\p[.]\pMaybe sometime down the line, all\nright?
+
+#org @postBossTalk
+= Ariana: [.]\c\h08ó\nI knew it.\pI knew it'd be you he gave that\nrank to before he ran away.\p[.]\pHmph!\c\h08ó\nBut rest assured, [player][.]\pWhatever accolades Giovanni wanted\nto heap on you[.]\pYou are not my Boss.\c\h08ó\nI don't have one anymore.
+
+#org @postBossTalk2
+= For now I must[.]\c\h08ó\nGuard the Gym he left behind[.]\pAnd after that..?\c\h08ó\nI don't want to think about it.
+
+#org @hasCardTalk
+= What?!\c\h08ó\nThat Trainer Card[.]\lYOU want to challenge me?\p[.]\c\h08ó\nHow pathetic[.]\pLook, I'll give you this[.]\pIf you're serious about this gym\nfraud of yours[.]\pGo beat the other Leaders first.\pThen I'll humor your silly hobbies\nas much as you like.
+
+#org @challengeTalk
+= Ariana: So you've taken them all\nout..?\pThe other Gym Leaders.\pWell then, "Mr. Smith"[.]\c\h08ó\nLet's see what you've got.\pI always knew that to earn my place\nby Giovanni's side I had to keep\lmy Pokémon in peak condition[.]\pAnd to show no mercy to anyone.\c\h08ó\n[.]you are no exception!\c\h0BéÀ
+
+#org @winTalk
+= All right, [player].\pTake that precious Earthbadge if\nyou must!\n\c\h17\c\h0BÇÀ\c\h08\n\c\h08[Ke]\c\h18
+
+#org @stolenTalk
+= [.]!\c\h08ó\nI should've seen that coming..!\pWe've truly descended into anarchy,\nhaven't we..?\p[.]\c\h08ó\nStealing from one another?\pWell[.]
+
+#org @notStolenTalk
+= It's clear, then[.]\pI'm no more able to defend myself\nthan he was[.]\pTruly[.]
+
+#org @finalTalk
+= If I needed a sign to tell me it\nwas time to move on, you've given\lit to me, [player].\pI must go[.]\c\h08ó\nFollow Giovanni's example[.]\pFinish the work he started[.]\p[.]\c\h08ó\nTo the end and beyond[.]
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+

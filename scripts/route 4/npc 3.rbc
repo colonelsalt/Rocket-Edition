@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I was just going for my daily hike\naround Mt. Moon when all of a\lsudden these Rocket guys kicked me\lout and told me to mind my own\lbusiness!\pThe nerve[.]

@@ -1,0 +1,147 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0xE
+#define _PLAYER 0x12
+#define _OAK 0x11
+
+#org @main
+lockall
+pause 0x20
+textcolor 0x1
+msgbox @tvTalk 0x6
+pause 0x20
+playsong 0x145 0x0
+pause 0x25
+setmaptile 0xD 0x8 0x286 0x1
+setmaptile 0xE 0x8 0x287 0x1
+setmaptile 0xD 0x9 0x28E 0x1
+setmaptile 0xE 0x9 0x28F 0x1
+special 0x8E // screen refresh
+pause 0x20
+spriteface 0x2 FACE_DOWN
+spriteface 0x10 FACE_DOWN
+pause 0x8
+spriteface 0x3 FACE_RIGHT
+spriteface 0x7 FACE_LEFT
+spriteface 0xB FACE_RIGHT
+pause 0x8
+spriteface _RONNIE FACE_LEFT
+pause 0x2A
+applymovement _RONNIE @stepL
+waitmovement 0x0
+spriteface _PLAYER FACE_RIGHT
+textcolor 0x0
+msgbox @ronnieTalk 0x6
+pause 0x25
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x10
+spriteface _PLAYER FACE_DOWN
+pause 0x10
+sound 0x15 // exclamation
+applymovement _PLAYER @exclamation
+waitmovement 0x0
+pause 0x10
+applymovement _OAK @stepU
+waitmovement 0x0
+msgbox @oakTalk 0x6
+pause 0x20
+applymovement _OAK @oakWalk1
+waitmovement 0x0
+pause 0x30
+msgbox @oakTalk2 0x6
+pause 0x20
+spriteface _OAK FACE_LEFT
+pause 0x20
+applymovement _OAK @oakWalk2
+waitmovement 0x0
+applymovement _OAK @stepU
+waitmovement 0x0
+msgbox @oakTalk3 0x6
+applymovement _OAK @oakLeave
+waitmovement 0x0
+pause 0x28
+msgbox @oakTalk4 0x6
+pause 0x20
+sound 0x9
+pause 0x30
+hidesprite _OAK
+setvar 0x4054 0x8C // set walking sprite back to #140
+setvar 0x4014 0x14
+setflag 0x204
+warpmuted 0xD 0x0 0xFF 0xD 0xC
+waitstate
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @tvTalk
+= Announcer: Exciting changes in\nstore for the region!\pChampion Blue's new Elite Four have\nsince made preparations to meet the\lmysterious new Challenger.\pWe'll bring you more news as it\ncomes.
+
+#org @ronnieTalk
+= Ronnie: Can you believe it,\n[player]?\pThat spiky-haired little twerp!\c\h08ó\nWhat a gas!
+
+#org @oakTalk
+= Oak: So it's true then.\c\h08ó\nI don't believe it[.]
+
+#org @oakTalk2
+= Blue..?\c\h08ó\nIt's[.]\c\h08ó not possible[.]
+
+#org @oakTalk3
+= [.]\c\h08ó\nHere, guard! Let me through!
+
+#org @oakTalk4
+= I'm the new Champion's grandfather,\nand I demand to see him!\pThis is an urgent matter!
+
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @oakWalk1
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0xFE
+
+#org @oakWalk2
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @oakLeave
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+
+
+

@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Something ought to be done to stop\ncriminals like you!

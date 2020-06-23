@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1DA 0x0 0x8179577 0x81795A1 POKESTEAL
+msgbox 0x81795B5 MSG_NORMAL '"You looked cute and harmless.\nWas..."
+end

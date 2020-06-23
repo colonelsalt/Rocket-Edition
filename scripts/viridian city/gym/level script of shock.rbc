@@ -1,0 +1,41 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _ARIANA 0x5
+#define _GRUNT1 0x2
+#define _FEMALE_GRUNT 0x1
+#define _MART_GRUNT 0xB
+#define _MARKET_GRUNT 0xA
+#define _GYM_GUY 0xC
+#define _GIOVANNI 0xD
+#define _KARATE_MAN 0x9
+#define _COOLTRAINER1 0x8
+#define _COOLTRAINER2 0x7
+#define _TAMER 0x6
+#define _PETREL 0xE
+#define _PROTON 0xF
+
+#org @main
+lockall
+spriteface _TAMER FACE_LEFT
+spriteface _MART_GRUNT FACE_DOWN
+spriteface _COOLTRAINER1 FACE_DOWN
+spriteface _KARATE_MAN FACE_RIGHT
+spriteface 0x3 FACE_DOWN
+spriteface _COOLTRAINER2 FACE_DOWN
+sound 0x15 // exclamation
+applymovement _GYM_GUY @exclamation
+applymovement _TAMER @exclamation
+applymovement 0x3 @exclamation
+waitmovement 0x0
+spriteface _MART_GRUNT FACE_LEFT
+setvar 0x4075 0x2
+releaseall
+end
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

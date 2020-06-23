@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Come on, Haunter! I love Haunter!\nI collect them!\pHuh?\pHaunter turned into a different\nPokémon while being traded!\p[.]\pHaha! Sucks for you that you don't\nhave anyone to trade with, huh?

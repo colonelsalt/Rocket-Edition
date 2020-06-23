@@ -1,0 +1,60 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x1
+#define _GIOVANNI 0x7
+
+#org @main
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x20
+textcolor 0x0
+msgbox @bossTalk 0x6
+pause 0x10
+cry 0x97 0x0
+waitcry
+pause 0x20
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @bossTalk1.5 0x6
+applymovement _OAK @oakPacing
+waitmovement 0x0
+spriteface 0x6 FACE_DOWN
+spriteface _GIOVANNI FACE_DOWN
+spriteface 0x3 FACE_DOWN
+spriteface 0x5 FACE_DOWN
+pause 0x30
+msgbox @bossTalk2 0x6
+pause 0x30
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @bossTalk
+= By far the strongest Pokémon in\nexistence, but contained in the\lbody of the most benevolent and\lsofthearted creature you could\lever see.
+
+#org @bossTalk1.5
+= We couldn't make the thing knock\nout a Magikarp for sport, let\lalone ravage a crowd of enemy\lmonsters in the field.
+
+#org @bossTalk2
+= So Oak decided on another\nsolution.\pTo harness Mew's power, they would\ncreate from it a genetic clone,\lconditioned from birth to be\ldevoid of empathy, and to possess\lan innate urge for battle.
+
+#org @cameraPan
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @oakPacing
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE

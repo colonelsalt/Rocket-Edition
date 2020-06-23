@@ -1,0 +1,115 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define PROTON 0x9
+#define TREE 0x7
+
+#org @main
+lock
+pause 0x12
+textcolor 0x0
+msgbox @talk1 0x6
+movesprite2 PROTON 0x16 0x11
+showsprite PROTON
+pause 0x10
+sound 0x9
+pause 0x15
+applymovement PROTON @adminApproach
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+msgbox @talk2 0x6
+pause 0x15
+spriteface PROTON FACE_LEFT
+pause 0x20
+spriteface PROTON FACE_DOWN
+pause 0x15
+msgbox @talk3 0x6
+applymovement PROTON @adminDown
+applymovement 0xFF @playerMove
+waitmovement 0x0
+applymovement PROTON @stepD
+waitmovement 0x0
+sound 0x79 // "slash attack"
+applymovement TREE @cutting
+waitmovement 0x0
+hidesprite TREE
+setflag 0x216
+pause 0x10
+msgbox @talk4 0x6
+pause 0x15
+spriteface PROTON FACE_LEFT
+pause 0x15
+msgbox @talk5 0x6
+applymovement PROTON @adminLeave1
+waitmovement 0x0
+setdooropened 0xE 0x19
+doorchange
+applymovement PROTON @adminLeave2
+waitmovement 0x0
+hidesprite PROTON
+movesprite2 PROTON 0x0 0x27
+setdoorclosed 0xE 0x19
+doorchange
+setvar 0x401B 0x2
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @talk1
+= You're not getting through there\njust like that, you know.
+
+#org @adminApproach
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @talk2
+= Proton: A lonely grunt walking\naround Vermilion by himself?\pI take it you're the one they sent\nto help me with the smuggling\ldeal.
+
+#org @talk3
+= Well?\nDid you bring the goods?\pFine, move over.
+
+#org @adminDown
+#raw STEP_D
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @cutting
+#raw 0x69
+#raw 0xFE
+
+#org @talk4
+= Proton: [.]\pWhat a meaningless thing\nto plant a tree right in front of\lthe entrance to a Gym.
+
+#org @talk5
+= Well?\nYou coming?
+
+#org @adminLeave1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @adminLeave2
+#raw STEP_U
+#raw 0xFE

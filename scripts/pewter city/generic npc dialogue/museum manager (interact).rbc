@@ -1,0 +1,19 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare PLAYERFACING FACE_RIGHT
+if 0x1 goto @inside
+msgbox @talk MSG_KEEPOPEN
+spriteface 0x1 FACE_LEFT
+release
+end
+
+#org @inside
+msgbox 0x8190539 MSG_KEEPOPEN
+release
+end
+
+#org @talk
+= What are you, an actor for our\nspace exhibit?\lIf not, please buy a ticket out\lfront, would you?

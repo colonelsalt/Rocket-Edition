@@ -1,0 +1,13 @@
+#dynamic 0x800000
+
+#org @main
+clearflag 0x2F1 // show Daisy
+setflag 0x21F // hide KOd Daisy sprite
+compare 0x4014 0x4 // if it is happening now
+if 0x1 call @flagClearer
+end
+
+#org @flagClearer
+clearflag 0x220 // show Agatha
+setflag 0x225 // hide Archer from Pokémon Tower
+return

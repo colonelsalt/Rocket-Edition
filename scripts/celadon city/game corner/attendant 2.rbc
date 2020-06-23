@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @main
+= Welcome to Rocket Game Corner!\n(Er[.] what are you doing running\laround the slots, grunt? Don't you\lhave something better to do?)\lEr-hem!\lWant to buy some coins?

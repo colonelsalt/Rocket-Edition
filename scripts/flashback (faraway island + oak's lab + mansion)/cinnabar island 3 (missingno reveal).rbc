@@ -1,0 +1,55 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SHIGEKI 0x1
+
+#org @main
+lock
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+sound 0xB9
+checksound
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x25
+spriteface _SHIGEKI FACE_LEFT
+pause 0x25
+msgbox @talk2 0x6
+pause 0x20
+applymovement _SHIGEKI @leave
+waitmovement 0x0
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+
+#org @cameraPan
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @talk
+= Right along the eastern shore\nof Cinnabar Island.\pFrozen beneath the ocean surface[.]
+
+#org @talk2
+= I presumed it would only be a\nmatter of time[.]\pBefore the creature would find a\nway to break free from my remote-\lcontrolled protection systems[.]
+
+#org @leave
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+
+
+

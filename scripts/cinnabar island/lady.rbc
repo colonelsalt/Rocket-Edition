@@ -1,0 +1,34 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x4016 0x10
+if _GREATER_EQ goto @postMissingno
+checkflag 0x29B
+if 0x1 goto @postMission
+msgbox @talk 0x6
+release
+end
+
+#org @postMission
+msgbox @talk2 0x6
+release
+end
+
+#org @postMissingno
+msgbox @talk3 0x6
+release
+end
+
+
+#org @talk
+= Oh, Gym Leader Blaine? They say\nhe's gone missing[.]\pI heard he's often out wandering\nin the Pokémon Mansion, but who\lwants to go searching through that\lcreepy place?
+
+#org @talk2
+= So Blaine showed up, then?\nThank goodness.\pHe shouldn't get asssociated with\nthe types who frequent the Pokémon\lMansion these days[.]
+
+#org @talk3
+= Thank heavens everything's back\ntogether again.\pOnce the world started fracturing\ninto squares[.]\pI thought for sure my hairdo\nwould be the last thing to recover.
+

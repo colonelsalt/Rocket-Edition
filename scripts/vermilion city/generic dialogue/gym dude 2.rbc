@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Did you know that Lt. Surge was in\nthe WAR?\p[.]\pYeah, you do?\pMaybe that's because it's all he\never talks about..?

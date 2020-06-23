@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1A5 0x0 0x8173C52 0x8173CB4 POKESTEAL
+msgbox 0x8173CC4 MSG_NORMAL '"You should be nice to friends!"
+end

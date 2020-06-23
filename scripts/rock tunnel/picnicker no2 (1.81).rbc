@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1DC 0x0 0x817951C 0x8179547 POKESTEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= Listen, I'm underage. We're not\ngonna take this joke further[.]

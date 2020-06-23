@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= I[.] um[.]\nHave no strategies to offer!\pIf these two kids can get this\nfar, all my battle theories go out\lthe window!

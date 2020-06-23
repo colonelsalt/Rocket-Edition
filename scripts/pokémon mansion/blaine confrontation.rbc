@@ -1,0 +1,255 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BLAINE 0x7
+#define _POKE_BALL 0x6
+
+#org @main
+lock
+spriteface _BLAINE FACE_RIGHT
+pause 0x5
+sound 0x15 // exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @intro 0x6
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto @mainScript
+
+#org @mainScript
+spriteface _BLAINE FACE_UP
+msgbox @talk 0x6
+trainerbattle 0x3 0x11 0x0 @defeatText
+pause 0x10
+textcolor 0x0
+msgbox @talk2 0x6
+pause 0x25
+spriteface _BLAINE FACE_LEFT
+pause 0x30
+msgbox @talk3 0x6
+pause 0x10
+applymovement _BLAINE @stepL
+waitmovement 0x0
+msgbox @talk4 0x6
+pause 0x25
+spriteface _BLAINE FACE_DOWN
+pause 0x30
+msgbox @talk5 0x6
+pause 0x30
+spriteface _BLAINE FACE_UP
+pause 0x20
+msgbox @talk6 0x6
+pause 0x25
+spriteface _BLAINE FACE_LEFT
+pause 0x30
+spriteface _BLAINE FACE_UP
+pause 0x10
+applymovement _BLAINE @stepU
+waitmovement 0x0
+msgbox @talk7 0x6
+pause 0x15
+applymovement _BLAINE @pace1
+waitmovement 0x0
+pause 0x30
+spriteface _BLAINE FACE_RIGHT
+pause 0x30
+msgbox @talk8 0x6
+applymovement _BLAINE @stepR
+waitmovement 0x0
+msgbox @talk9 0x6
+pause 0x15
+applymovement _BLAINE @pace2
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+pause 0x25
+msgbox @talk9.5 0x6
+pause 0x25
+spriteface _BLAINE FACE_LEFT
+pause 0x30
+msgbox @talk10 0x6
+pause 0x20
+spriteface _BLAINE FACE_RIGHT
+pause 0x15
+applymovement _BLAINE @stepR
+waitmovement 0x0
+msgbox @talk11 0x6
+pause 0x25
+spriteface _BLAINE FACE_DOWN
+pause 0x25
+msgbox @talk12 0x6
+pause 0x15
+spriteface _BLAINE FACE_RIGHT
+pause 0x15
+applymovement _BLAINE @stepR
+waitmovement 0x0
+msgbox @talk13 0x6
+pause 0x20
+spriteface _BLAINE FACE_UP
+pause 0x30
+spriteface _BLAINE FACE_RIGHT
+pause 0x20
+msgbox @talk14 0x6
+pause 0x25
+spriteface _BLAINE FACE_DOWN
+pause 0x30
+msgbox @talk15 0x6
+pause 0x10
+applymovement _BLAINE @pace3
+waitmovement 0x0
+pause 0x15
+applymovement _BLAINE @stepR
+waitmovement 0x0
+sound 0x7 // thud sound
+showsprite _POKE_BALL
+clearflag 0x0A5
+checksound
+pause 0x20
+spriteface _BLAINE FACE_UP
+pause 0x25
+msgbox @talk16 0x6
+pause 0x10
+applymovement _BLAINE @pace4
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+pause 0x10
+msgbox @talk17 0x6
+applymovement _BLAINE @blaineLeave
+waitmovement 0x0
+sound 0x9 // shuffle
+hidesprite _BLAINE
+setflag 0x29B
+setvar 0x4014 0x7
+checksound
+end
+
+#org @intro
+= Blaine: Argh!\pSo you've come for me at last,\nhave you? Giovanni's pet.
+
+#org @talk
+= It was only a matter of time.\nBrace yourself, kid!\pI never wanted this mess, do you\nhear me? I regret everything!
+
+#org @defeatText
+= Please[.]\nTry to understand..!
+
+#org @talk2
+= Blaine: All right, all right!\nHave it your way, Rocket!\p[.]\pHe just can't seem to get it, that\nGiovanni[.]
+
+#org @talk3
+= I[.]\c\h08ó I believe in Team Rocket's\ncause as much anyone, but[.]\pI'm a Gym Leader, and an\nacademic; not a petty criminal!\pWe can't all sacrifice all we\nare for his pretentious ideals\lof revenge, can we?
+
+#org @talk4
+= And now[.]\c\h08ó Oak's going to publicly\nshame me if I keep doing work for\lTeam Rocket[.]\pMeanwhile Giovanni's going to beat\nme up if I don't!\pIt's a mess!
+
+#org @talk5
+= [.]\c\h08ó\nWell, well[.]\pI guess you've showed me that\nGiovanni for his part is serious\lin his threats[.]\p[.]
+
+#org @talk6
+= Look, Rocket[.]\pI'll do anything if you get your\nboss to give me a second chance.\pI--\c\h08ó I'll tell you anything you\nwant to know!
+
+#org @talk7
+= Did Giovanni tell you about the\nwork we did in this very mansion\leleven years ago?\p[.]\c\h08ó\nHe did, did he?\pWell, I'll tell you something he\nsure as hell didn't!
+
+#org @talk8
+= I happen to know that Oak lost his\nfaith in the Mewtwo Project long\lbefore he stood at the Plateau and\lrenounced his power.\pAlthough the project was strictly\nhis idea, once he saw that thing[.]\p"The Catastrophe"[.]\c\h08ó he didn't\nbelieve a genetically engineered\lPokémon could ever win us the war.
+
+#org @talk9
+= And do you know how I know all\nthis?\c\h08ó Because he told me!
+
+#org @talk9.5
+= Shortly after "The Catastrophe",\nOak approached me to ask for help.\pHe told me about a brand new\nscientific project that he said\lwould have the potential to[.]\p"Make the two of us far more\npowerful than any Mewtwo ever\lcould[.]"
+
+#org @talk10
+= He said he had begun work on it in\na separate secret lab of his, but\lthat he needed my assistance to\lsee it through to completion.
+
+#org @talk11
+= But at that point I felt things\nwere finally looking up with the\lMewtwo Project[.]\pI didn't want to divert my focus,\nand it seemed so out of the blue[.]\lso I turned him down.\pHa!\c\h08ó Well, we both know what all my\nfocused effort came to in the end!
+
+#org @talk12
+= [.]\c\h08ó\nA "secret lab"[.]\pOh, he's a shady guy, that Oak[.]\pEven disregarding his abominable\nsurrender[.]
+
+#org @talk13
+= Listen.\pIf you can convince your boss I\nmean it, tell him I'll do whatever\lhe wants me to.\pI'll even make his precious\nPorygon again if he needs it.
+
+#org @talk14
+= Now, if Oak wants to rat me out,\nwell then[.]\pHalf this region's Leaders are in\ncahoots with you guys already[.]\pI'll[.]\c\h08ó take one for the team, I\nsuppose.\p[.]\c\h08ó\n(Sigh[.])
+
+#org @talk15
+= I guess some extra precautions\ncouldn't hurt[.]
+
+#org @talk16
+= Leave that Key there, if you\nwould.\pI don't want any weakling Trainers\nchallenging my Gym during times\llike these[.]
+
+#org @talk17
+= Now leave me to it, Rocket.\c\h08ó\nYour boss gets his way today.
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @playerApproach
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE
+
+#org @pace1
+#raw STEP_L
+#raw 0xFE
+
+#org @pace2
+#raw STEP_U
+#raw 0xFE
+
+#org @pace3
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw FACE_R
+#raw 0xFE
+
+#org @pace4
+#raw STEP_U
+#raw STEP_R
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @blaineLeave
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE

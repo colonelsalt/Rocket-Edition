@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+cry 0x7C 0x0
+textcolor 0x2
+msgbox @talk MSG_KEEPOPEN
+waitcry
+closeonkeypress
+release
+end
+
+#org @talk
+= Jynx: Jinga joonga juu!

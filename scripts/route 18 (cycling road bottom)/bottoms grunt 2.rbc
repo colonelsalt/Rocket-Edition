@@ -1,0 +1,33 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4033 0x8
+if 0x1 goto @postJulien
+compare 0x4033 0x7
+if 0x1 goto @postJulien
+compare 0x4033 0x5
+if 0x4 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @postBossTalk 0x6
+release
+end
+
+#org @postJulien
+msgbox @postJulienTalk 0x6
+release
+end
+
+#org @talk
+= What do you want from us, little\nsuit-gangster?
+
+#org @postBossTalk
+= You may have beaten boss, but that\ndon't mean you have my respect!
+
+#org @postJulienTalk
+= Respect, Rocket.\nYou're pretty strong, ain't ya?

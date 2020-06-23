@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x208
+if 0x1 goto @postTV
+msgbox @talk 0x6
+release
+end
+
+#org @postTV
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Aw, geez[.]\pSeen any little kids or old people\naround?\pBet you probably just took them\nfor yourself, didn't you?\pFine. Whatever[.]
+
+#org @talk2
+= Haha[.] man, you know what's funny?\pThe policeman here[.] He doesn't\neven care whether the Pokémon I\lreturn were even stolen or not.\pSo I just caught a bunch of\nRattata and handed them in so he'd\llower my bounty.\pTalk about a good deal, eh?

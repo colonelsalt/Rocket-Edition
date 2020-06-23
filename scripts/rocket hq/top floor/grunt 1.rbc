@@ -1,0 +1,62 @@
+#dynamic 0x800000
+// person event 0x2
+
+#org @start
+lock
+faceplayer
+checkflag 0x292
+if 0x1 goto @preCinnabar
+checkflag 0x21E
+if 0x1 goto @postPromotion
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x204
+if 0x1 goto @postTutorial
+msgbox @talk 0x6
+release
+end
+
+#org @postTutorial
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+release
+end
+
+#org @postRed
+msgbox @talk4 0x6
+release
+end
+
+#org @postPromotion
+msgbox @talk5 0x6
+release
+end
+
+#org @preCinnabar
+msgbox @talk6 0x6
+release
+end
+
+#org @talk
+= I remember my first steal like it\nwas yesterday.\pThere's nothing more satisfying\nthan seeing the look on some poor\lguy's face as you rob him of his\llifelong companion and run away\llaughing.\pAhh[.] relish it while it lasts,\ngrunt.
+
+#org @talk2
+= I wonder what I'll have to do for\nthem to promote me to Rocket\lAdmin.\pI figure taking Pokémon from kids\nand old fogeys has to be the least\lof it. Sigh[.]
+
+#org @talk3
+= Hey! They talked about Team Rocket\non TV!\pI wish I could go "Hi, mom!" or\nsomething in front of the camera.\pMaybe she wouldn't like it all\nthat much.
+
+#org @talk4
+= Holy moly! I didn't even stand a\nchance against that kid!\pThat Charizard, man.\nI'm telling ya[.]
+
+#org @talk5
+= Hey!\nThey promoted you!\pDoes it mean you're more bad than\nme? I'm jealous!
+
+#org @talk6
+= I heard the Gym Leader in Fuchsia\nis friendly towards us Rockets.\pI sure wouldn't mind having that\ndude's ninja skills on my side[.]

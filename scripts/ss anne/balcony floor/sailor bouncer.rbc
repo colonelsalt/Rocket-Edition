@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+checkflag 0x220
+if 0x1 goto @postBoat
+msgbox @talk 0x6
+release
+end
+
+#org @postBoat
+faceplayer
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Now, now[.]\nSettle down, people!\pOur VIP guests have just finished\ntheir meal and are engaging in\lsome private conversation.\pTheir time is very precious!\pThey are not to be disturbed\nwithout reason.
+
+#org @talk2
+= Phew!\pThe crowd eventually realized that\nthe important people had left, and\ldecided to do the same.

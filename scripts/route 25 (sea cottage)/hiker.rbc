@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xB6 0x0 @challenge 0x81893EA EXEC_STEAL
+msgbox 0x81893FB MSG_NORMAL '"Drat!\nA Zubat bit me back in that..."
+end
+
+#org @challenge
+= I just got down from Mt. Moon, but\nI've still got gas in my a--\ler[.] I mean, in the tank!

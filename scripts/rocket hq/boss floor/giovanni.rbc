@@ -1,0 +1,75 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define GIOVANNI 0x1
+
+#org @main
+lock
+faceplayer
+checkflag 0x29D
+if 0x1 goto @postCinnabar
+checkflag 0x292
+if 0x1 goto @postPallet
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x220
+if 0x1 goto @postVermilion
+checkflag 0x208
+if 0x1 goto @postTV
+msgbox @talk 0x6
+spriteface GIOVANNI FACE_DOWN
+release
+end
+
+#org @postVermilion
+msgbox @talk2 0x6
+spriteface GIOVANNI FACE_DOWN
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+spriteface GIOVANNI FACE_DOWN
+release
+end
+
+#org @postRed
+compare 0x4016 0x9 // if save is continued from end of Beta v2, goto flashback here
+if 0x1 goto @continuity
+msgbox @talk4 0x6
+spriteface GIOVANNI FACE_DOWN
+release
+end
+
+#org @continuity
+special 0x16F // activates National Dex
+goto FLASHBACKSTART // 0x827CFC
+
+#org @postPallet
+msgbox @talk5 0x6
+spriteface GIOVANNI FACE_DOWN
+release
+end
+
+#org @postCinnabar
+msgbox @talk6 0x6
+spriteface GIOVANNI FACE_DOWN
+release
+end
+
+#org @talk
+= Giovanni: Come on now!\pGet on over to Bill's house north\nof Cerulean and don't come back\luntil you've made that dork take\lthe offer!
+
+#org @talk2
+= Giovanni: Get moving, [player]!\pHead on over to Lavender Town east\nof here and teach that Mr. Fuji a\llesson!
+
+#org @talk3
+= Giovanni: I'm very busy right now,\n[player].\pI'd rather you didn't disturb me,\nall right?
+
+#org @talk4
+= Giovanni: Onwards to Pallet Town,\n[player]! No loitering about!
+
+#org @talk5
+= Giovanni: Head off to Cinnabar\nIsland and teach Blaine a thing or\ltwo about the consequences of\lbeing a coward!
+
+#org @talk6
+= Giovanni: This Silph Co. operation\nis of massive importance!\pThis is the time for you to really\nshow me that I've been right in\ltrusting you as I have, [player].

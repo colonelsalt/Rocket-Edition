@@ -1,0 +1,171 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x4032 0x6
+if 0x4 goto @happy
+compare 0x4032 0x5
+if 0x1 goto @giveReward
+compare 0x4032 0x4
+if 0x1 goto @sad
+checkflag 0x2A8 // if Super Rod secret stolen
+if 0x1 goto @superRodStolen
+compare 0x4032 0x3 // if Super Rod guy confronted (and secret not stolen)
+if 0x1 goto @superRodSpared
+checkflag 0x2A7 // if Good Rod secret stolen
+if 0x1 goto @goodRodStolen
+compare 0x4032 0x2 // if Good Rod guy confronted (and secret not stolen)
+if 0x1 goto @goodRodSpared
+checkflag 0x28D
+if 0x1 goto @intermediary
+msgbox @talk MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @accept
+msgbox @noTalk 0x6
+release
+end
+
+#org @happy
+msgbox @happyTalk 0x6
+release
+end
+
+#org @sad
+msgbox @sadTalk 0x6
+release
+end
+
+#org @superRodStolen
+checkflag 0x2A7 // has Good Rod secret been stolen as well?
+if 0x0 goto @oneStolen
+msgbox @superRodStolenTalk 0x6
+setvar 0x4032 0x5
+goto @giveReward
+
+#org @oneStolen
+msgbox @oneStolenTalk 0x6
+setvar 0x4032 0x5
+goto @giveReward
+
+#org @giveReward
+checkflag 0x2A7 // if only Super Rod secret stolen, get lesser reward
+if 0x0 goto @giveRewardSmall
+msgbox @giveRewardTalk 0x6
+// GIVE BLUE FLUTE
+checkitemroom 0x27 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+fanfare 0x101
+additem 0x27 0x1
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+msgbox @putAway MSG_KEEPOPEN
+setvar 0x4032 0x6
+release
+end
+
+#org @giveRewardSmall
+msgbox @giveRewardSmallTalk 0x6
+// GIVE MYSTIC WATER
+checkitemroom 0xD1 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+fanfare 0x101
+additem 0xD1 0x1
+textcolor 0x2
+preparemsg @itemMsg2
+waitmsg
+waitfanfare
+msgbox @putAway2 MSG_KEEPOPEN
+setvar 0x4032 0x6
+release
+end
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @superRodSpared
+msgbox @superRodSparedTalk 0x6
+setvar 0x4032 0x4
+release
+end
+
+#org @goodRodStolen
+msgbox @goodRodStolenTalk 0x6
+release
+end
+
+#org @goodRodSpared
+msgbox @goodRodSparedTalk 0x6
+release
+end
+
+#org @accept
+msgbox @yesTalk 0x6
+setflag 0x28D
+release
+end
+
+#org @intermediary
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Hello there!\nI'm the Fishing Guru!\p[.]\pOh[.] you're one of those Rockets\nfrom the TV, aren't you?\pHmm[.]\pLook, I can't have you seen out in\npublic using my Rod! But[.]\pIf you'll do me a favor[.] Just\nbetween me and you, of course[.]\pI might get you some special\ntreats I fished up for you[.]\pWhat do you say?
+
+#org @superRodStolenTalk
+= Well, well, well!\nMy Rocket Spy!\pDid you manage to get ahold of\nsome of my brothers' secrets?\p[.]\pOh me, oh my!\nTell me more!\p[.]\pGosh, why did I never think of\nthat..?\p[.]\pMuahahahahah[.]\pNow I know nobody can challenge my\nstatus as the Fishing Guru!\pThanks to you, bud, I can stay on\ntop of my fishing game yet!
+
+#org @oneStolenTalk
+= Well, well, well!\nMy Rocket Spy!\pDid you manage to get ahold of\nsome of my brothers' secrets?\p[.]\pOh me, oh my!\nTell me more!\p[.]\pWait[.]\c\h08ó what?!\pYou refuse to tell me about my\nyounger brother's secret?!\p[.]\pYou're some weird-ass double-\ncrosser, aren't you?\pHow hard is it to stay consistent?
+
+#org @superRodSparedTalk
+= Well, well, well!\nMy Rocket spy!\pDid you manage to get ahold of\nsome of my brothers' secrets?\p[.]\pWhat?!\c\h08ó\nYou won't tell me?\p[.]\c\h08ó\nNot one of them..?!\pDarn you, little petty criminal!\pWhat did my brothers tempt you\nwith, eh?\pA free copy of their own superior\nrods, I'll bet..!\p(Sob[.])\c\h08ó\n(Snivel[.])\p[.]\pI-I'm the original Fishing Guru,\nyou know[.]
+
+#org @goodRodStolenTalk
+= Well, well, well!\nMy Rocket Spy!\pDid you manage to get ahold of\nsome of my brothers' secrets?\p[.]\pOh me, oh my!\nTell me more!\p[.]\pGosh, why did I never think of\nthat..?\p[.]\pHurry now to my other brother on\nRoute 12!\pIf you can get me his secret as\nwell, you will have your reward!
+
+#org @goodRodSparedTalk
+= Well, well, well!\nMy Rocket spy!\pDid you manage to get ahold of\nsome of my brothers' secrets?\p[.]\pWhat?!\nYou won't tell me?\pWhat in tarnation are you talking\nabout?\pHmph!\pWell, you had better get me the\nsecret of my brother on Route 12's\lRod, you hear me?
+
+#org @giveRewardTalk
+= Accept my gift for a job well\ndone, Rocket.\pI fished it up from deep down\nway back before my brothers\lentered this business, I tell ya!
+
+#org @giveRewardSmallTalk
+= Well[.]\nHahahaha[.]\pI can't help but reward you for\nshowing me my other brother's\lsecret, can I?\pIt will be plenty to make sure my\nRod reclaims its place at the top\lof the market!\pTake this, ya weirdo!
+
+#org @itemMsg
+= [player] obtained the Blue Flute!
+
+#org @putAway
+= [player] put the Blue Flute in\nthe Items pocket.
+
+#org @itemMsg2
+= [player] obtained the\nMystic Water!
+
+#org @putAway2
+= [player] put the Mystic Water\nin the Items pocket.
+
+#org @noRoomTalk
+= You have no room, Rocket!\nMake some!
+
+#org @happyTalk
+= Huh, what were you expecting?\p[.]\pA ROD?!\nHahahahaha[.]\pWhy, you've already got Surf, what\nthe hell do you need a Rod for?
+
+#org @sadTalk
+= (Sob[.])\c\h08ó\n(Snivel[.])\p[.]\pI-I'm the original Fishing Guru,\nyou know[.]
+
+#org @noTalk
+= Suit yourself, bro.\nI don't need your help!
+
+#org @yesTalk
+= Very good. Now listen.\pI've got these two brothers. One\nin Fuschia and one on Route 12.\pI am the Fishing Guru, see?!\pThose twats don't have half the\nexperience in the fishing game as\lI do!\pAnd yet, what do I see in the\nponds and lakes around Kanto?\pYoung, attractive Trainers fishing\nabout with my brothers' Rods!\pI can't believe it!\nWhy?!\pAre they somehow better than mine?\nHow could that possibly be?\pI want you to go spy on them for\nme, Rocket! Do you understand?\pI want you to get to the bottom\nabout what's so special about\lthose Rods and report it to me!\pPry them from their dead hands if\nyou have to!\pGo do this, and I promise\nI'll reward you handsomely.
+
+#org @talk2
+= [.]\pOf course, you musn't tell anyone\nthat I said "pry it from their\ldead hands if you have to" about\lmy brothers.\pI have a family-friendly\nreputation to maintain, you see.

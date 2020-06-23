@@ -1,0 +1,77 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x22E
+if 0x1 goto @postPallet
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x220
+if 0x1 goto @postVermilion
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x205
+if 0x1 goto @postMtMoon
+msgbox @talk 0x6
+release
+end
+
+#org @postMtMoon
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+release
+end
+
+#org @postVermilion
+msgbox @talk4 0x6
+release
+end
+
+#org @postRed
+msgbox @talk5 0x6
+release
+end
+
+#org @postPallet
+msgbox @talk6 0x6
+release
+end
+
+#org @postCinnabar
+msgbox @talk7 0x6
+release
+end
+
+#org @postSaffron
+msgbox @talk8 0x6
+release
+end
+
+#org @talk
+= Ah[.] Fresh meat, is it?\nPink hair, no less.\pDon't you worry, bud, you'll fit\nright in with these punks here.
+
+#org @talk2
+= Ah[.] The little rookie went and\ndid his first mission, did he?\pWell, did you have fun stealing\nCaterpie from Bug Catchers and\lgetting shoved around by Petrel's\lgrumpy ass?\pHuh-hey!\nGlory to you, pal.
+
+#org @talk3
+= Ah[.] Went to see the famous Poké-\nmaniac, did you?\pWell, was he as clever and as edgy\nas they say?\pShame about Lance's whole anti-\ncrime thing, but then[.]\pYou're a good little boy, aren't\nyou?
+
+#org @talk4
+= Ah[.] Been on a nice little\nsmuggling trip, have you?\pHopefully the famed S.S. Anne CUT\nyou some slack, eh? Hahaha.
+
+#org @talk5
+= Ah[.] Battled it out with some\nghosts since last, did you?\pSounds exciting, but you sure\nmissed the action here.\pThoroughly whipped by a little\nboy, we were!
+
+#org @talk6
+= Ah[.] You've been across the region\nsince last, have you?\pWell, how was small-town life?\pDid you enjoy intruding on the\nhomes of innocent locals? Hahaha[.]
+
+#org @talk7
+= Ah[.] You duked it out with the\nHot-Headed Quiz Master, did you?\pExcuse the cliché, but I sure hope\nyou had some Burn Heal! Hahaha[.]
+
+#org @talk8
+= Ah[.] Boss gave little pink-hair a\nnice big promotion, did he?\pIt's just a shame about all of\nthose Trainers you already beat\land can never steal from again!\pHahahaha[.]

@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+setworldmapflag 0x893
+compare 0x401D 0x2 // meaning Bill talked to 3 times
+if 0x1 call @moveGrunts
+checkflag 0x212 // meaning Blue defeated
+if 0x1 call @moveRonnie
+end
+
+#org @moveGrunts
+movesprite2 0xD 0x1F 0x6 // moves Ronnie behind burgled house
+spritebehave 0xD 0x1 // makes Ronnie look left and right
+movesprite2 0x8 0x1E 0xC // moves grunt 1 in front of house
+movesprite2 0x2 0x1D 0xD // mvoes grunt 2 next to him
+return
+
+#org @moveRonnie
+movesprite2 0xD 0x17 0x5 // moves Ronnie to location of police scene script
+movesprite2 0x1 0x1E 0xC // moves police officer in front of burgled house
+return

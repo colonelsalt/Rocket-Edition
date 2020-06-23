@@ -1,0 +1,455 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define SUPERNERD 0x3
+#define RONNIE 0x5
+#define PETREL 0xF
+
+#org @main
+lock
+textcolor 0x0
+spriteface SUPERNERD FACE_DOWN
+msgbox @nerdtalk 0x6
+applymovement 0xFF @playermove
+waitmovement 0x0
+spriteface SUPERNERD FACE_RIGHT
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk2 0x6
+pause 0x10
+spriteface SUPERNERD FACE_UP
+pause 0x10
+msgbox @nerdtalk3 0x6
+pause 0x20
+spriteface SUPERNERD FACE_LEFT
+pause 0x30
+msgbox @nerdtalk4 0x6
+pause 0x50
+movesprite2 RONNIE 0xE 0xE
+sound 0x9 // foot shuffle
+showsprite RONNIE
+pause 0x35
+applymovement RONNIE @ronappear
+waitmovement 0x0
+checksound
+sound 0x15 // exclamation
+applymovement RONNIE @exclamation
+spriteface 0xFF FACE_DOWN
+spriteface SUPERNERD FACE_DOWN
+waitmovement 0x0
+applymovement RONNIE @ronapproach
+waitmovement 0x0
+msgbox @rontalk 0x6
+pause 0x30
+msgbox @rontalk2 0x2
+applymovement 0xFF @moveawayRight
+applymovement SUPERNERD @moveawayLeft
+waitmovement 0x0
+applymovement RONNIE @ronstep
+waitmovement 0x0
+sound 0x15 // exclamation
+applymovement RONNIE @exclamation
+waitmovement 0x0
+sound 0xA
+applymovement RONNIE @jump
+waitmovement 0x0
+sound 0xA
+applymovement RONNIE @jump
+waitmovement 0x0
+pause 0x30
+msgbox @rontalk3 0x6
+sound 0x46
+applymovement SUPERNERD @nerdscared
+applymovement RONNIE @ronangry
+spriteface RONNIE FACE_LEFT
+msgbox @rontalk4 0x6
+applymovement RONNIE @bothways
+waitmovement 0x0
+applymovement RONNIE @ronangry
+waitmovement 0x0
+msgbox @rontalk5 0x6
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk5 0x6
+pause 0x35
+sound 0x9 // feet shuffle
+checksound
+movesprite2 PETREL 0xE 0xE
+showsprite PETREL
+pause 0x50
+msgbox @pettalk 0x6
+pause 0x30
+applymovement PETREL @petappear
+waitmovement 0x0
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk6 0x6
+applymovement PETREL @stepR
+pause 0x25
+spriteface PETREL FACE_RIGHT
+pause 0x25
+msgbox @pettalk2 0x6
+applymovement PETREL @wandering
+waitmovement 0x0
+spriteface RONNIE FACE_RIGHT
+pause 0x50
+applymovement PETREL @stepU
+waitmovement 0x0
+msgbox @pettalk3 0x6
+pause 0x30
+spriteface PETREL FACE_LEFT
+pause 0x30
+msgbox @pettalk4 0x6
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk7 0x6
+pause 0x20
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk8 0x6
+spriteface PETREL FACE_RIGHT
+applymovement PETREL @petwalk
+waitmovement 0x0
+msgbox @pettalk5 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @script2
+goto @bitchslap
+release
+end
+
+
+#org @bitchslap
+closeonkeypress
+msgbox @ellipses 0x6
+pause 0x12
+sound 0x80// "throwing sound"
+checksound
+sound 0x7F // "Pound attack"
+fadescreen 0x2
+applymovement 0xFF @punched
+waitmovement 0x0
+applymovement PETREL @stepR
+waitmovement 0x0
+compare 0x8004 0x69
+if 0x1 call @slap2
+compare 0x8004 0x69
+if 0x0 call @slap1
+compare LASTRESULT 0x0
+if 0x1 goto @bitchslap
+goto @script2
+end
+
+
+#org @slap1
+msgbox @angrypet1 0x5
+setvar 0x8004 0x69
+return
+
+#org @slap2
+msgbox @angrypet2 0x5
+return
+
+
+#org @script2
+msgbox @pettalk6 0x6
+pause 0x10
+spriteface PETREL FACE_LEFT
+pause 0x20
+msgbox @pettalk7 0x6
+pause 0x10
+spriteface PETREL FACE_RIGHT
+pause 0x10
+msgbox @pettalk7extra 0x6
+spriteface PETREL FACE_LEFT
+pause 0x15
+applymovement PETREL @onestep
+waitmovement 0x0
+pause 0x30
+msgbox @pettalk8 0x6
+pause 0x20
+spriteface PETREL FACE_LEFT
+pause 0x10
+applymovement PETREL @stepL
+waitmovement 0x0
+pause 0x10
+msgbox @pettalk9 0x6
+sound 0x15 // exclamation
+applymovement RONNIE @exclamation
+waitmovement 0x0
+applymovement RONNIE @stepR
+waitmovement 0x0
+msgbox @desperateron 0x6
+pause 0x10
+applymovement PETREL @stepL
+waitmovement 0x0
+msgbox @pettalk10 0x6
+pause 0x20
+spriteface PETREL FACE_DOWN
+pause 0x25
+applymovement PETREL @petleave
+waitmovement 0x0
+pause 0x15
+sound 0x9 // feet shuffle
+checksound
+hidesprite PETREL
+pause 0x10
+applymovement RONNIE @ronfinalwalk
+waitmovement 0x0
+pause 0x10
+msgbox @ronfinaltalk 0x6
+pause 0x10
+applymovement RONNIE @petleave
+waitmovement 0x0
+sound 0x9 // feet shuffle
+checksound
+hidesprite RONNIE
+applymovement SUPERNERD @nerdfinalwalk
+waitmovement 0x0
+msgbox @nerdfinaltalk 0x6
+applymovement SUPERNERD @petleave
+waitmovement 0x0
+pause 0x15
+sound 0x9 // feet shuffle
+checksound
+hidesprite SUPERNERD
+pause 0x20
+fadeout 0x0
+sound 0x0
+fadein 0x0
+setflag 0x205
+setflag 0x828 // re-activates Pokémon menu
+setvar 0x401A 0x4
+setvar 0x4018 0x1
+warp 0x1 0x2A 0xFF 0x0C 0x06
+waitstate
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @nerdtalk
+= Did you see that kid?\nThat was insane!
+
+#org @playermove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0x2
+#raw 0xFE
+
+#org @nerdtalk2
+= He beat me in half a heartbeat!\pHe didn't even say a word; just\nknocked me straight out!\pWhat the heck is going on here?!\pHas there been a sudden influx of\nsuper strong little kid Trainers\lall of a sudden? Did I miss this?
+
+#org @nerdtalk3
+= And the fossils, too.\nOh, goodness[.]
+
+#org @nerdtalk4
+= [.]\p([.]damn it, why did I even agree\nto keep doing these stupid odd\ljobs for Team Rocket?)\p(I knew I should have stayed at\nthe Pewter Museum.)\p(At least they gave me a steady\npaycheck to rely on, for\lChrissakes[.])
+
+#org @ronappear
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @ronapproach
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x1C
+#raw 0x1B
+#raw 0x2
+#raw 0x1C
+#raw 0x1C
+#raw 0x1
+#raw 0x1C
+#raw 0x1B
+#raw 0xFE
+
+#org @rontalk
+= Ronnie: Guys, guys! You're never\ngoing to believe this!\pThere's another crazy strong\nlittle kid Trainer walking around\lsomewhere in the cave!\pThey say this one's got a\nCharmeleon, and that he's a lot\lstronger, even, than the spiky-\lhaired twer--
+
+#org @rontalk2
+= Hang on[.]\n\c\h08ó.\c\h08ó.\c\h08ó.\c\h08ó\pNaw, don't tell me[.]\nNo, it can't be..!
+
+#org @moveawayRight
+#raw STEP_R2
+#raw 0x2
+#raw 0xFE
+
+#org @moveawayLeft
+#raw STEP_L2
+#raw 0x3
+#raw 0xFE
+
+#org @ronstep
+#raw STEP_U2
+#raw 0xFE
+
+#org @jump
+#raw 0x53
+#raw 0xFE
+
+#org @rontalk3
+= [.]\c\h08ó\c\h08ó\pWhat[.]\c\h08ó\\c\h08ó\ndid you guys[.]\c\h08ó\c\h08ó
+
+#org @rontalk4
+= DO?!
+
+#org @ronangry
+#raw STEP_L2
+#raw 0xFE
+
+#org @nerdscared
+#raw STEP_L2
+#raw 0x3
+#raw 0xFE
+
+#org @bothways
+#raw 0x1C
+#raw 0x7
+#raw 0x1C
+#raw 0x1A
+#raw 0x6
+#raw 0x1C
+#raw 0x1A
+#raw 0xFE
+
+#org @rontalk5
+= Where are my goddamn fossils,\nhuh?! I swear to God[.]\pI leave you two alone for two\nseconds and you go and mess this\lwhole thing up for me, don't you!
+
+#org @nerdtalk5
+= W-well, listen!\pWe both tried to fend him off, but\nhe was just way too strong[.]\pHe just kind of shrugged us off\nand ran away with both fossils!\pThere was nothing we could do, I\nswear!
+
+#org @pettalk
+= Petrel: Both fossils, did you say?
+
+#org @petappear
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0x2
+#raw 0xFE
+
+#org @nerdtalk6
+= Er[.] y-yes, sir, that's correct.
+
+#org @pettalk2
+= Well, then.
+
+#org @wandering
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @pettalk3
+= (Jesus Arceus Christ. This is\ngonna go over well with Boss[.])
+
+#org @pettalk4
+= The kid. I suppose you got a good\nlook at him.\pDid you see what kind of Pokémon\nhe used, what kind of clothes he\lwas wearing-- noticed any\ldistinguishing characteristics?
+
+#org @nerdtalk7
+= Y-yes, sir.\nOr, that is, only just barely.\pHe had me on the ground in no time\nat all, and then he just ran off!
+
+#org @petwalk
+#raw STEP_D
+#raw FACE_R
+#raw 0xFE
+
+#org @nerdtalk8
+= Th-this pink-haired grunt here\nfought him too, though[.]\pI don't know if maybe he fared any\nbetter[.]
+
+#org @pettalk5
+= Petrel: You.\nWhat's your name, grunt?\p[.]\p[player]?\c\h08ó\nThat's right, I remember now.\pYou fought this kid Trainer just\nnow, did you?\pAnd you remember what he looked\nlike; what Pokémon he used?
+
+#org @punched
+#raw 0x3C
+#raw 0x3C
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @ellipses
+= Petrel: [.]
+
+#org @angrypet1
+= God, if there's anything I hate\nmore than a puny grunt, it's a\llying grunt.\pLet me ask you again, buddy, and\nthis time I suggest you think your\lanswer just a little more through\lbefore you give it:\pDo you remember what the kid\nTrainer looked like?!
+
+#org @angrypet2
+= I've got all day, pal.\pAnytime you feel like cooperating,\njust give me a shout.\p[.]\pNow tell me: Do you remember what\nthe kid Trainer you just fought\llooks like?!
+
+#org @pettalk6
+= Good.\pAt least one of you darn grunts\nproved to be of some use today.
+
+#org @pettalk7
+= We'll have to investigate this\nmatter further.\pWe can't have little kids running\naround beating the crap out of an\lentire squad of us and running\laway!\pThat'll spell the doom for Team\nRocket's image.
+
+#org @pettalk7extra
+= I imagine Boss will want a word\nwith you back at HQ.
+
+#org @onestep
+#raw STEP_U
+#raw 0xFE
+
+#org @pettalk8
+= Now, as regards your mission[.]
+
+#org @pettalk9
+= Nothing more to be done here.\nYou're all dismissed.\pReport back to HQ as soon as\npossible.
+
+#org @desperateron
+= Ronnie: B-but what about me,\nPetrel?\pI found the fossils for you,\ndidn't I?
+
+#org @pettalk10
+= Petrel: Yes, and a fat lot of good\nit did us too, eh?\pI'll hear no more of it, grunt.\nDo as you're told, now.
+
+#org @petleave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @ronfinalwalk
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @ronfinaltalk
+= Ronnie: Stupid little purple-\nbearded jerk[.]\pI'll show him some day[.]
+
+#org @nerdfinalwalk
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @nerdfinaltalk
+= Why do I even bother..?

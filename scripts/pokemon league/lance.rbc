@@ -1,0 +1,14 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LANCE 0x1
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface _LANCE FACE_DOWN
+release
+end
+
+#org @talk
+= Go on, then!\pLord knows you people aren't my\nresponsibility anymore.

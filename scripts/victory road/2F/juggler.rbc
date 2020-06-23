@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x11F 0x0 @pre @post EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @pre
+= Ah, so you wish to challenge the\nElite Four?
+
+#org @post
+= You got me!
+
+#org @after
+= Some kid with a red hat came\nthrough earlier.\pHe was something[.] We don't have\nkids like that where I'm from.

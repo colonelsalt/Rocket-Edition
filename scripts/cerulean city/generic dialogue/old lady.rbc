@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= My goodness!\nYou're one of those evil Rockets!\p[.]\pWell, if you've stolen any good\nPokémon, would you mind trading\lthem with my husband here?\pIt's one of the few things he\nstill finds any joy in doing.

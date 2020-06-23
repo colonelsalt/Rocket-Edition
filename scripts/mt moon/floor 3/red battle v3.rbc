@@ -1,0 +1,115 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define RED 0xE
+#define STEP_U3 0xD
+#define STEP_R3 0xF
+
+#org @main
+lock
+fadeout 0x1
+pause 0x55
+sound 0x9
+pause 0x90
+movesprite2 RED 0xA 0x1A
+showsprite RED
+applymovement RED @approach
+waitmovement 0x0
+sound 0x7
+pause 0x60
+msgbox @talk 0x6
+pause 0x20
+trainerbattle 0x9 0x3 0x3 @playerwin @talk
+fadeout 0x0
+pause 0x30
+msgbox @talk 0x6
+pause 0x20
+applymovement 0xFF @moveaway
+applymovement RED @walk
+waitmovement 0x0
+movesprite2 RED 0x0 0x14
+sound 0x15
+pause 0x30
+textcolor 0x0
+msgbox @nerdtalk 0x6
+pause 0x30
+textcolor 0x2
+msgbox @talk 0x6
+pause 0x20
+sound 0xF
+pause 0x25
+cry 0x5 0x0
+waitcry
+pause 0x10
+sound 0x79
+pause 0x25
+sound 0x79
+pause 0x30
+sound 0x8A
+pause 0x60
+textcolor 0x0
+msgbox @nerdtalk2 0x6
+pause 0x40
+msgbox @nerdtalk3 0x6
+pause 0x30
+sound 0x1
+pause 0x70
+textcolor 0x2
+msgbox @talk 0x6
+pause 0x70
+sound 0x9
+pause 0x10
+fadein 0x3
+pause 0x40
+hidesprite RED
+setvar 0x401A 0x3
+clearflag 0x828 // temporarily removes Pokémon menu
+setflag 0x2F // fossil flag
+setflag 0x30 // fossil flag
+setflag 0x232 // fossil flag
+end
+
+#org @approach
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_U3
+#raw 0x1
+#raw 0xFE
+
+#org @talk
+= ...
+
+#org @playerwin
+= WTF??\nDid you use cheat codes??\pBro, you weren't supposed to beat\nme just now!\p[.]\pGod, how's a man supposed to keep\na plot going if you go about\lmessing it up?!\pOkay, listen: just go along with\nwhat happens next and pretend like\lI just beat you straight out,\lokay?\pJesus.
+
+#org @moveaway
+#raw 0x19
+#raw STEP_L
+#raw 0x3
+#raw 0xFE
+
+#org @walk
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw 0x1C
+#raw 0xFE
+
+#org @nerdtalk
+= Hey, stop!\pI found these fossils!\nThey're both mine!
+
+#org @nerdtalk2
+= Okay!\nI'll share!
+
+#org @nerdtalk3
+= We'll each take a fossil!\nNo being greedy!

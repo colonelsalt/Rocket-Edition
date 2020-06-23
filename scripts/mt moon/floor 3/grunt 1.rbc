@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x15F
+if 0x1 goto @easter
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Come on, it totally looks like a\nfossil, don't you think..?
+
+#org @easter
+msgbox @fine 0x6
+release
+end
+
+#org @fine
+= Fine. Just take it; see if I care.

@@ -1,0 +1,29 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PHOTOGRAPHER 0xC
+
+#org @main
+lock
+textcolor 0x0
+applymovement _PHOTOGRAPHER @stepL
+waitmovement 0x0
+msgbox @talk 0x6
+pause 0x5
+applymovement 0xFF @move
+waitmovement 0x0
+release
+end
+
+
+#org @talk
+= Just like that, Sarah!\nStick it out like a Lickitung!\p[.]\nHey, out the way, guy!\pWe're in the middle of an\nimportant shoot here!
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @move
+#raw STEP_U
+#raw 0xFE

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Captured Pokémon are registered\nwith an ID No. and the OT.\pOT stands for "Original Trainer" -\nthe Trainer who caught it first.\p[.]\pHehe, unless you stole the\nPokémon, of course.\pThen it'll be your name.

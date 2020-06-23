@@ -1,0 +1,51 @@
+#dynamic 0x800000
+#define _DITTO 0x3
+#include stdmoves.rbh
+
+#org @main
+lock
+pause 0x10
+sound 0x25
+checksound
+clearflag 0x201
+showsprite _DITTO
+applymovement _DITTO @fall
+waitmovement 0x0
+sound 0x26
+spriteface 0xFF FACE_LEFT
+checksound
+pause 0x15
+spriteface _DITTO FACE_RIGHT
+pause 0x10
+cry 0x84 0x0
+waitcry
+setflag 0x201
+setvar 0x8006 0x69
+// TODO: set appropriate level
+setwildbattle 0x84 0x32 0x0
+dowildbattle
+setvar 0x8006 0x0
+setvar 0x4044 0x1
+fadescreen 0x1
+hidesprite _DITTO
+fadescreen 0x0
+release
+end
+
+#org @fall
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0x39
+#raw 0xFE
+
+
+
+
+
+

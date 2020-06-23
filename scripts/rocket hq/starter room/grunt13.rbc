@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @start
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= What the devil are you talking to\nme for?\pYou want to get us in trouble,\nman?

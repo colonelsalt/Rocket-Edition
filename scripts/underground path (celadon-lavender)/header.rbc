@@ -1,0 +1,20 @@
+#dynamic 0x800000
+
+#org @main
+setworldmapflag 0x8A8
+setflag 0x283
+checkflag 0x280
+if 0x1 call @clearFlagsMaybe
+end
+
+#org @clearFlagsMaybe
+compare 0x4035 0x4 // show Miss Hoenn if she has returned (and not yet run away to Pewter)
+if 0x0 call @clearFlags
+return
+
+#org @clearFlags
+clearflag 0x283
+movesprite2 0x4 0x43 0x2
+movesprite2 0x3 0x42 0x2
+movesprite2 0x5 0x41 0x2
+return

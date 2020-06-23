@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1D5 0x0 0x8185A91 @defeat POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @defeat
+= I regret it already!
+
+#org @postBattle
+= Aaaah! I wish they never had made\nyour acquaintance[.]

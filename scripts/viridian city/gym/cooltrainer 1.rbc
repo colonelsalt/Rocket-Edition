@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Ooh yeah.\nLooking cool and camouflaged.
+
+#org @talk2
+= Damn it[.]\nIs Team Rocket done for now?\p[.]I guess I should have stayed\nin school.

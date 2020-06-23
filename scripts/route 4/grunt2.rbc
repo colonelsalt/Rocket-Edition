@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Dude, I thought I was going to be\na gangster, not an archeologist.\pI should have stayed in school.

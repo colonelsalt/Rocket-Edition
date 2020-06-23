@@ -1,0 +1,205 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @start
+spriteface 0xFF 0x2
+lockall
+special 0x113
+applymovement 0x7F @camera1
+waitmovement 0x0
+applymovement 0x0 @petrelstep1
+waitmovement 0x0
+textcolor 0x0
+msgbox @petreltalk1 0x6
+applymovement 0x0 @petrelstep2
+waitmovement 0x0
+msgbox @petreltalk2 0x6 
+applymovement 0x0 @petrelstep3
+waitmovement 0x0
+msgbox @petreltalk3 0x6
+applymovement 0x0 @petrelstep4
+waitmovement 0x0
+msgbox @petreltalk4 0x6
+pause 0x20
+spriteface 0x0 FACE_RIGHT
+pause 0x20
+msgbox @petreltalk4.5 0x6
+applymovement 0x0 @petrelstep5
+waitmovement 0x0
+msgbox @petreltalk5 0x6
+applymovement 0x0 @petrelstep6
+waitmovement 0x0
+msgbox @petreltalk6 0x6
+applymovement 0x7F @camera2
+waitmovement 0x0
+applymovement 0x1 @gruntstep
+applymovement 0xFF @gruntstep
+applymovement 0x2 @gruntstep
+applymovement 0x3 @gruntstep
+applymovement 0x4 @gruntstep
+applymovement 0x5 @gruntstep
+applymovement 0x6 @gruntstep
+applymovement 0x7 @gruntstep
+applymovement 0x8 @gruntstep
+applymovement 0x9 @gruntstep
+applymovement 0xA @gruntstep
+applymovement 0xB @gruntstep
+applymovement 0xC @gruntstep
+applymovement 0xD @gruntstep
+applymovement 0xE @gruntstep
+textcolor 0x02
+msgbox @yessir 0x6
+applymovement 0x7F @camera3
+waitmovement 0x0
+textcolor 0x00
+msgbox @petreltalk7 0x6
+applymovement 0x7F @camera4
+waitmovement 0x0
+setvar 0x4011 0x1
+special 0x114
+sound 0xA
+applymovement 0x1 @grunt1move
+waitmovement 0x0
+movesprite2 0x1 0x2 0x5
+cry 0x13 0x0
+waitcry
+pause 0x10
+applymovement 0x0 @petrelstep6
+waitmovement 0x0
+msgbox @petreltalk8 0x6
+setflag 0x82F
+setflag 0x2A5
+releaseall
+end
+
+#org @camera1
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x13
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0xFE
+
+#org @petrelstep1
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk1
+= Petrel: Okay, ladies, listen up--\nI'm only going to say this once!\pYou are now officially Team Rocket\ngrunts!\pYes, that's right, but don't go\npatting yourselves on the back\ljust yet.\pUntil each of you have proven\nyourselves out in the field,\lyou're nothing but a bunch of\lpipsqueaks to me!
+
+#org @petrelstep2
+#raw FACE_U
+#raw STEP_U3
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk2
+= Now, you are going to receive your\nfirst mission in a little bit.\pBut before then we have a couple\nof things we need to get sorted[.]
+
+#org @petrelstep3
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk3
+= In the crates behind me you will\nfind your very own first Pokémon.
+
+#org @petrelstep4
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk4
+= Starting from the top left here, I\nwant each of you to come up, one\lby one, to get your little rodent.
+
+#org @petreltalk4.5
+= You will then proceed to the top\nfloor through the staircase on my\lright.\pOne of our friendly neighborhood\nscience geeks up there will then\lprovide you an HM for Fly.
+
+#org @petrelstep5
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk5
+= Once you have this HM, and once\nyou've managed to summon enough\lballs to steal yourself a proper\lbird Pokémon[.]\pThen you Fly your sorry asses to\nMt. Moon as soon as conceivably\lpossible and await further\linstructions!
+
+#org @petrelstep6
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk6
+= Is that understood?
+
+#org @camera2
+#raw 0x1D
+#raw 0x1D
+#raw 0x1D
+#raw 0x1D
+#raw 0x1C
+#raw 0xFE
+
+#org @gruntstep
+#raw 0x22
+#raw 0x1C
+#raw 0xFE
+
+#org @yessir
+= YES, SIR!
+
+#org @camera3
+#raw 0x1E
+#raw 0x1E
+#raw 0x1E
+#raw 0x1E
+#raw 0xFE
+
+#org @petreltalk7
+= Petrel: Well, then, get to it!
+
+#org @camera4
+#raw 0x10
+#raw 0x10
+#raw 0x10
+#raw 0x10
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x12
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @petreltalk8
+= Okay, next! Get moving, people!
+
+#org @grunt1move
+#raw 0x53
+#raw 0x13
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x11
+#raw 0x1C
+#raw 0xFE

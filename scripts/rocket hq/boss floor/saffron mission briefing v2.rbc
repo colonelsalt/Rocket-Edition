@@ -1,0 +1,19 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x1
+
+#org @main
+lock
+textcolor 0x0
+msgbox @bossTalk 0x6
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto @mainScript // 0x845774
+
+#org @bosstalk
+= Giovanni: There you are, [player].\nLet's get on with it.
+
+#org @playerApproach
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

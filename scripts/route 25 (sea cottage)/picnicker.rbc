@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x99 0x0 0x8189247 0x8189261 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A984C
+msgbox 0x8189281 MSG_NORMAL '"I wish my boyfriend was as good\na..."
+end

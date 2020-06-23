@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x6 0x1E9 0x0 @challenge 0x8186FFA 0x8187057 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Jed: Say, my love, what became of\nthat fat Pokémon sleeping in the\lroad?
+
+#org @postBattle
+= Jed: Such a big beast, and\nsuddenly it is no more!

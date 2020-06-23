@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Oh, who's the gray-haired one?\nHe's cute! Oh, and so powerful!

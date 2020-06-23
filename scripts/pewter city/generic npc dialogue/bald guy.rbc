@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= I'll be damned if our nurse isn't\nthe most passive-aggressive health\lcare worker in Kanto[.]\pSometimes I prefer just to heal my\nPokémon with Potions[.]

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xD1 0x0 @challenge 0x81862EF EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= I'm here scouting for new gang\nmembers for my boss from the\lBottoms gang on Cycling Road!\pYou interested, Rocket?
+
+#org @postBattle
+= Forget it, man!\pWe don't want any wannabe city\ngangsters like you!

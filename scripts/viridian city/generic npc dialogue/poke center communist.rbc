@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= There's a Pokémon Center in every\ntown ahead. They charge no money.\pPokémon healing for the many, not\nthe few!\pThat Lance sure cares about the\nplight of the common Trainer.

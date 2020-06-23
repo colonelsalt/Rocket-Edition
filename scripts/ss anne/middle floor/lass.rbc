@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x0 0x7F 0x0 @challenge @defeat
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= My dad had me doll up for the\nparty just in case Lance came by.
+
+#org @defeat
+= But I'm so pretty!
+
+#org @after
+= Isn't that how Lorelei got into\nthe Elite Four[.] by being pretty?

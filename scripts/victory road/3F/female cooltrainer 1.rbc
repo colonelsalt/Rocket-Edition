@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x193 0x0 0x8174C30 0x8174C5A EXEC_STEAL
+msgbox 0x8174C67 MSG_NORMAL '"You showed me just how good\nI was..."
+end

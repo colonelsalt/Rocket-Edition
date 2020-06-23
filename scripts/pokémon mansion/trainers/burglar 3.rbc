@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xDB 0x0 0x81776C0 0x81776D7 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I thought I saw that bald Gym\nLeader guy go in here earlier[.]

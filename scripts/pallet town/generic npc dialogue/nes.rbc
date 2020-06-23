@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= [player] played with the NES.\p[.]\pCould it be..?\nSamus was a woman all along!

@@ -1,0 +1,66 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+compare 0x4016 0x14 // if Secret Lab entered
+if _GREATER_EQ goto @redBeat
+compare 0x4016 0x10 // if MissingNo. caught
+if _GREATER_EQ goto @blueBeat
+checkflag 0x826
+if 0x1 goto @youBeat
+msgbox @sign MSG_KEEPOPEN
+releaseall
+end
+
+#org @blueBeat
+checkflag 0x826
+if 0x1 goto @youAndBlueBeat
+msgbox @sign2 MSG_KEEPOPEN
+releaseall
+end
+
+#org @youBeat
+msgbox @sign3 MSG_KEEPOPEN
+releaseall
+end
+
+#org @youAndBlueBeat
+msgbox @sign4 MSG_KEEPOPEN
+releaseall
+end
+
+
+#org @redBeat
+checkflag 0x826
+if 0x1 goto @allBeat
+msgbox @sign5 MSG_KEEPOPEN
+releaseall
+end
+
+#org @allBeat
+msgbox @sign6 MSG_KEEPOPEN
+releaseall
+end
+
+
+
+#org @sign
+= Cinnabar Pokémon Gym\nLeader: Blaine\pWinning Trainers:
+
+#org @sign2
+= Cinnabar Pokémon Gym\nLeader: Blaine\pWinning Trainers:\nBlue
+
+#org @sign3
+= Cinnabar Pokémon Gym\nLeader: Blaine\pWinning Trainers:\nMohammed Smith
+
+#org @sign4
+= Cinnabar Pokémon Gym\nLeader: Blaine\pWinning Trainers:\nBlue, Mohammed Smith
+
+#org @sign5
+= Cinnabar Pokémon Gym\nLeader: Blaine\pWinning Trainers:\nBlue, Red
+
+#org @sign6
+= Cinnabar Pokémon Gym\nLeader: Blaine\pWinning Trainers:\nBlue, Red, Mohammed Smith
+
+

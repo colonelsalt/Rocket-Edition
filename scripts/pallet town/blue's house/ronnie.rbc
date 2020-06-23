@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ronnie: Well[.] can't win 'em all,\ncan we, [player]?\pNothing much more we can do but\nhead on back to HQ, is there?

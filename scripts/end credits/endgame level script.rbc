@@ -1,0 +1,68 @@
+#dynamic 0x800000
+
+#org @main
+lock
+compare 0x4088 0x1
+if 0x1 goto @postGame
+setvar 0x4088 0x1
+special 0x0
+pause 0x40
+call @save
+compare LASTRESULT 0x0
+if 0x1 call @doubleCheck
+pause 0x40
+playsong 0x14E 0x0
+pause 0x50
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+warpmuted 0x22 0x4 0xFF 0x5 0x4
+waitstate
+end
+
+
+#org @save
+special 0x5D
+waitstate
+releaseall
+return
+
+#org @doubleCheck
+textcolor 0x2
+msgbox @text 0x6
+pause 0x10
+call @save
+return
+
+
+#org @text
+= Are you sure?\pIf you choose not to save, the\ngame will reset to your previous\lsave file, before fighting Oak.
+
+
+
+#org @postGame
+pause 0x20
+sound 0x46
+pause 0x10
+textcolor 0x0
+msgbox @talk 0x6
+playsong 0x120 0x0
+pause 0x30
+warpmuted 0x1 0x78 0xFF 0xB 0x3
+waitstate
+release
+end
+
+#org @talk
+= Oi, you lazy oaf!\c\h08ó\nGet up!\p[.]\c\h08ó\nYou've got a visitor.
+
+
+
+
+
+
+
+
+
+
+
+
+

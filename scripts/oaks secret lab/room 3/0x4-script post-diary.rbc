@@ -1,0 +1,6 @@
+#dynamic 0x800000
+
+#org @main
+spriteface 0xFF FACE_UP
+setvar 0x4014 0x10
+end

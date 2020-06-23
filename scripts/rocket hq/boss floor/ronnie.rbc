@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ronnie: Been up to any exciting\nmischief, [player]?\pThese guys all suck, by the way.\nThey've got no gangster's hustle.

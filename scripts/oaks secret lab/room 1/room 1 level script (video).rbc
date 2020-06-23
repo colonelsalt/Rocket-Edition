@@ -1,0 +1,58 @@
+#dynamic 0x800000
+#define _OAK 0x1
+#include stdmoves.rbh
+
+#org @main
+lock
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+textcolor 0x0
+pause 0x20
+msgbox @talk 0x6
+pause 0x20
+spriteface _OAK FACE_DOWN
+pause 0x20
+msgbox @talk2 0x6
+pause 0x20
+applymovement _OAK @move
+waitmovement 0x0
+pause 0x20
+msgbox @talk3 0x6
+pause 0x20
+setvar 0x4016 0x17
+setflag 0x200
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x73 0xFF 0x9 0x4
+release
+end
+
+#org @talk
+= The Mewtwo Project is bound to\nfail, but my colleagues refuse to\lsee it.\pMissingNo. was just the canary in\nthe coal mine[.]
+
+#org @talk2
+= A Pokémon clone of Mew, however\nsophisticated, can never be\lcontrolled.
+
+#org @talk3
+= The others have all refused to\nback down[.]\pSo I henceforth start a scientific\nproject of my own.\pIf it can't save Kanto, nothing\ncan.
+
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @move
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+
+
+
+
+

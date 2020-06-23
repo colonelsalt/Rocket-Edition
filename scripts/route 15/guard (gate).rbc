@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Oh, gosh!\pYou're from Team Rocket, aren't\nyou?\pYou'll want to keep in mind the\nSafari Zone Warden here doesn't\ltake too kindly to your sort!

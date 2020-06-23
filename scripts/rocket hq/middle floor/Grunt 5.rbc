@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= What right have I to steal\ninnocent people's Pokémon?\pBy my own aesthetic values, I have\nevery right.\pBecause dude, I just look so\nfreaking badass doing it.

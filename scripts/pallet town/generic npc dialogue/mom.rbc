@@ -1,0 +1,22 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2B7
+if 0x1 goto @noMore
+msgbox @talk 0x6
+setflag 0x2B7
+release
+end
+
+#org @noMore
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Huh..? Why, yes, this is Red's\nhouse. I'm his mother.\p[.]\pBut why..?\pOh, what do you want to know about\nhim? I mean, he's a quiet boy.\pHe always was so interested in\nPokémon battle, and not much else,\lto tell you the truth[.]\pHe never had many friends at all,\nexcept for Blue who lives next\ldoor, but[.] I don't know how good\lfriends those two really were[.]\pWait[.] Who are you to be so\ncurious about my son?\p[.]\pI-I don't like this very much at\nall! Please leave us alone.
+
+#org @talk2
+= I-I don't enjoy talking to you[.]\nI'd like to be left alone, please.

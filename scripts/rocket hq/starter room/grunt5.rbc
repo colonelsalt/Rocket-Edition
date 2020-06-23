@@ -1,0 +1,33 @@
+#dynamic 0x800000
+
+#org @start
+lock
+checkflag 0x204
+if 0x1 goto @postTutorial
+checkflag 0x208
+if 0x1 goto @postTV
+msgbox @talk 0x6
+release
+end
+
+#org @postTutorial
+faceplayer
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+faceplayer
+msgbox @talk3 0x6
+release
+end
+
+
+#org @talk
+= Gotta act cool, gotta act cool,\ngotta act cool[.]
+
+#org @talk2
+= These freaking arrow tiles make me\ndizzy. Why are they even here?
+
+#org @talk3
+= Ha! None of the Poké Marts will\nlet me buy from them anymore[.]\pThank God I have this guy here\nwho sells me healing items.\pI don't think my Pokémon like them\na lot[.] but who cares about them?

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+#define BLUE 0x1
+
+#org @main
+compare 0x4016 0x6
+if 0x1 call @bluFacer
+end
+
+#org @bluFacer
+spritebehave BLUE 0x7 // look up
+return

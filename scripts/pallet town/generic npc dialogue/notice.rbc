@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @notice
+= It's a posted notice[.]\pIf you really want to get annoyed,\npress the L or R Button!\pIf you really need help[.]\nGo on YouTube!

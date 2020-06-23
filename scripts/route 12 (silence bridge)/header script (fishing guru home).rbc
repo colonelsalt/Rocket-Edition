@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define _GURU 0x1
+
+#org @main
+compare 0x4032 0x2
+if 0x1 call @moveGuru
+end
+
+#org @moveGuru
+movesprite2 _GURU 0x9 0x2
+spritebehave _GURU 0x7 // look up
+return

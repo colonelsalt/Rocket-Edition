@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x196 0x0 @pre 0x8174738 EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @pre
+= Wow[.]\nYou Kantoneans dress real fancy!
+
+#org @after
+= Hey[.] I guess some of you are a\nbit scary here too[.]

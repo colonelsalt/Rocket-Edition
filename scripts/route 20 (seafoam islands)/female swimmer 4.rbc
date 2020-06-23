@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x117 0x0 0x8187EBB 0x8187EED ADMIN_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= It's a good thing they keep\noutlaws like you out of here!\pYou might disturb the beautiful\nbird that lives in the cavern!

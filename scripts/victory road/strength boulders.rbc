@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @text MSG_SIGN
+end
+
+#org @text
+= It looks like somebody has pushed\nthis boulder aside already..!

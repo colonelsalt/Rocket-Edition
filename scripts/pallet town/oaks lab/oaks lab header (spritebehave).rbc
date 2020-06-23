@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define M_AIDE_1 0x3
+
+#org @main
+checkflag 0x2E9 // if door not broken into with crowbar
+if 0x0 goto @hideTrainers
+compare 0x4016 0x10
+if 0x1 call @showTrainers
+end
+
+#org @hideTrainers
+setflag 0x232
+setflag 0x233
+return
+
+#org @showTrainers
+spritebehave M_AIDE_1 0x9 // face left
+clearflag 0x232 // trainer version of female aide ID
+clearflag 0x233 // trainer version of top aide ID
+return

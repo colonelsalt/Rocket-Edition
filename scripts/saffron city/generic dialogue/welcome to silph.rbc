@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Welcome to Silph Co.\pThe President is in the boardroom\non 11F.\pDo you have an appointment?

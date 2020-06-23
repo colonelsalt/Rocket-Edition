@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xFB 0x0 @challenge @defeat @after
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= We're the Bottoms!\pYou messing with one of us, you're\nmessing with us all!
+
+#org @defeat
+= You punk-ass[.]
+
+#org @postBattle
+= We're a powerful bunch, I'll have\nyou know!
+
+#org @after
+addvar 0x4033 0x1
+call EXEC_STEAL
+end

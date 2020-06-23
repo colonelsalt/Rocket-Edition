@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Hmm?\nYes, I'm one of Prof. Oak's aides.\p[.]\pWha-- no, no!\nThat's "aides". A-I-D-E-S, see.

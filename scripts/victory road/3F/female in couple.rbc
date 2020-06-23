@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x6 0x1E5 0x0 0x8174E08 0x8174E39 0x8174E8D EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= You've taught me that my boyfriend\nis a wuss who needs to train\lharder!

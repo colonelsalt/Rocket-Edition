@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4016 0x2B
+if _GREATER_EQ goto @postBattle
+textcolor 0x2
+msgbox @sign MSG_SIGN
+end
+
+#org @postBattle
+lock
+textcolor 0x2
+msgbox @talk 0x6
+release
+end
+
+#org @sign
+= The statue glares at you with an\neerily lifelike gaze[.]
+
+#org @talk
+= [player] is not in the sudoers file.\nThis incident will be reported.

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x92 0x0 0x8183F07 0x8183F24 POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9A7A
+msgbox 0x8183F51 MSG_NORMAL '"I should bring more Pokémon with\n..."
+end

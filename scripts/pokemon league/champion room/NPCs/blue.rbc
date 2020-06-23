@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Blue: Aaaah!\c\h08ó\nG-g\c\h08ó-grandmaaaaa!\pW-w-why\c\h08ó are y-y-you \c\h08ód-doing\nthis \c\h08ót-to us?!\c\h08ó S-s-stop it!\pTh-this i-isn't\c\h08ó what b-b-becoming\c\h08ó\nCh-ch-champion was\c\h08ó ssss-s-supposed\lto be l-like..!\pIf o-o-ooonly\c\h08ó I'd kn-kn-own\c\h08ó, I-I'd\nhave\c\h08ó b-brought my Sssilph S-scope!

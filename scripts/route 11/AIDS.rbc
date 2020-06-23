@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Yes, for Pete's sake..!\nI'm one of Prof. Oak's Aides!\p[.]\pI just don't see why everybody\nthinks that's so funny!

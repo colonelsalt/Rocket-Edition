@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= President: Talk about a bunch of\nnonsense!\pOh, what will the shareholders say\nabout this[.]

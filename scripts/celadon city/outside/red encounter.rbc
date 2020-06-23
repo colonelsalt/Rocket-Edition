@@ -1,0 +1,79 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define RED 0x12
+
+#org @main
+lock
+fadeout 0x1
+pause 0x40
+setdooropened 0x22 0x15
+doorchange
+pause 0x30
+sound 0x9
+clearflag 0x200
+showsprite RED
+applymovement RED @walk1
+waitmovement 0x0
+setdoorclosed 0x22 0x15
+doorchange
+pause 0x32
+spriteface RED FACE_RIGHT
+pause 0x20
+applymovement RED @walk2
+waitmovement 0x0
+sound 0x7
+pause 0x25
+msgbox @talk 0x6
+pause 0x25
+applymovement 0xFF @playerMove
+applymovement RED @walk3
+waitmovement 0x0
+pause 0x12
+sound 0x9
+hidesprite RED
+setflag 0x200
+checksound
+pause 0x17
+fadein 0x1
+setvar 0x4016 0x9
+setvar 0x4018 0x4
+setflag 0x227
+release
+end
+
+#org @walk1
+#raw STEP_D3
+#raw FACE_D
+#raw 0xFE
+
+#org @walk2
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw FACE_R
+#raw 0xFE
+
+#org @talk
+= ...
+
+#org @playerMove
+#raw STEP_U
+#raw FACE_D
+#raw 0xFE
+
+#org @walk3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw 0xFE

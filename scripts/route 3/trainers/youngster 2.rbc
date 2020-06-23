@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x59 0x0 0x8183560 0x81835A0 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= H-hey[.] I didn't say spandex\npajamas aren't cool too!

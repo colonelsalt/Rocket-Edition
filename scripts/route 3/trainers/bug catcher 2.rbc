@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x6A 0x0 0x183682 @defeat POKESTEAL
+msgbox 0x1836B3 0x6
+end
+
+#org @defeat
+= Hey[.] wait[.]\nYou were a Rocket?!

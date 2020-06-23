@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x15B 0x0 @challenge 0x8177757 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= I thought I heard an old voice\ngroaning in frustration in the\lother room!
+
+#org @postBattle
+= Nah, it couldn't have been Gym\nLeader Blaine..?\pHe would never frequent a place\nlike this nowadays[.]

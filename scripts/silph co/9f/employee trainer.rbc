@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x158 0x0 @challenge 0x8176C2B EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= There's still time!\pYou haven't destroyed our company\njust yet!
+
+#org @postBattle
+= We will keep on fighting[.]\nUntil the end[.]

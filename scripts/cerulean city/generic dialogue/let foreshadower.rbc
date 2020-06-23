@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I saw this weird sailor guy\nrunning around chopping down trees\learlier.\pIt was a strangely[.] beautiful\nsight[.]

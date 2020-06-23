@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @dudetalk 0x6
+release
+end
+
+#org @dudetalk
+= Baby, you know I always loved me a\nbad girl.\pThe way you rob them Trainers with\nyour sneaky moves-- mm-mm-mmh!\pYou and me, girl, we could take on\nthe world together.\pLike Bonnie and Clyde, you know\nwhat I'm saying?

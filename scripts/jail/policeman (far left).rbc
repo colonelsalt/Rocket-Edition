@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= If you get up to anything funny\nonce you're out[.]\pWe'll send you right back in!\nCount on it!

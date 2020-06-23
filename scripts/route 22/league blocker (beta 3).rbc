@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GUARD 0x1
+
+#org @main
+lock
+spriteface _GUARD FACE_LEFT
+pause 0x10
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveDown
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Halt!\nYou can pass here only if you--\p[.]\pWait! You're no real Trainer at\nall, are you?\pGoodness, what would become of the\nPokémon League if we let petty\lcriminals like you in there!\pDon't make me laugh!\nLeave this place, Rocket!
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE

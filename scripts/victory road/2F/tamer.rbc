@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x12A 0x0 0x8174942 0x817495A EXEC_STEAL
+msgbox 0x8174969 MSG_NORMAL '"You earned the right to be on\nVic..."
+end

@@ -1,0 +1,35 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+checkflag 0x230
+if 0x0 goto @getItem
+release
+end
+
+#org @getItem
+msgbox @talk2 0x6
+fanfare 0x101
+additem 0x44 0x1
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+msgbox @putAway MSG_KEEPOPEN
+setflag 0x230
+release
+end
+
+#org @talk
+= Hi there, [player]!\nThis is colonelsalt speaking.\pI'm sorry, but due to an\ninexplicable glitch, I can't allow\lyou to enter Mt. Moon right now.\pGo and finish up your mission in\nCerulean City, and it'll all be\lfine, okay?\pI'm really sorry!
+
+#org @talk2
+= You can have this for your\ninconvenience.
+
+#org @itemMsg
+= [player] received a Rare Candy!
+
+#org @putAway
+= [player] put the Rare Candy in the\nItems pocket.

@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= I've seen this little red-haired\nkid around the forest sometimes.\pHe seems sad about something or\nother.

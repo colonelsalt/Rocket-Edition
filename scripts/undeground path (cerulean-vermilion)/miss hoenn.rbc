@@ -1,0 +1,36 @@
+#dynamic 0x800000
+#define MISSHOENN 0x3
+
+#org @main
+lock
+textcolor 0x1
+checkflag 0x27E
+if 0x1 goto @allFine
+msgbox @talk 0x6
+checkflag 0x27D
+if 0x1 goto @noSave
+release
+end
+
+#org @noSave
+faceplayer
+msgbox @talk2 0x6
+spriteface MISSHOENN FACE_LEFT
+release
+end
+
+#org @allFine
+faceplayer
+msgbox @talk3 0x6
+spriteface MISSHOENN FACE_LEFT
+release
+end
+
+#org @talk
+= Oh, I'm so happy to finally be\nhere with you, Julien!\pI couldn't stand waiting any\nlonger[.]\pI came as soon as I could, you\nknow. Like we promised[.]
+
+#org @talk2
+= Huh, what?\nYou came to save me?\pNo, no!\nYou don't understand.\pJulien saved me. He's going to get\nme out of this lifestyle, see?\pIt'll be just me and him together.\nHe's got it all planned out[.]
+
+#org @talk3
+= I don't know what made you come\nhere, but I don't need saving[.]\pI-I'm fine, see..?

@@ -1,0 +1,270 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x1
+#define _OAK 0xC
+#define _BILL 0x2
+#define _BLAINE 0x3
+#define _FUJI 0x4
+#define _LANCE 0x10
+#define _COP3 0x13
+#define _COP4 0x14
+
+#org @main
+textcolor 0x0
+compare 0x402D 0x12 // if Shigeki disappareance done
+if 0x1 goto @script6
+compare 0x402D 0x10 // if Fuji surrender scene done
+if 0x1 goto @script5
+compare 0x402D 0xF // if Oak surrender scene done
+if 0x1 goto @script4
+checkflag 0x28F // if Mewtwo escape scenes complete
+if 0x1 goto @script3
+checkflag 0x28E // if Faraway Island scene complete
+if 0x1 goto @script2
+applymovement 0xFF @playerCamera
+waitmovement 0x0
+pause 0x15
+msgbox @bossTalk2 0x6
+pause 0x25
+applymovement _FUJI @stepL
+waitmovement 0x0
+applymovement _FUJI @approachOak
+waitmovement 0x0
+spriteface _OAK FACE_DOWN
+pause 0x20
+applymovement _OAK @stepD
+waitmovement 0x0
+msgbox @bossTalk3 0x6
+spriteface _FUJI FACE_DOWN
+pause 0x20
+applymovement _FUJI @fujiLeave
+waitmovement 0x0
+pause 0x10
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @script2
+pause 0x10
+applymovement _FUJI @stepU
+waitmovement 0x0
+pause 0x10
+msgbox @bossTalk4 0x6
+pause 0x20
+applymovement _FUJI @backToOriginalPos
+waitmovement 0x0
+pause 0x20
+applymovement _OAK @oakPacing
+waitmovement 0x0
+msgbox @bossTalk5 0x6
+pause 0x15
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @script3
+pause 0x25
+applymovement _LANCE @challengeStep
+waitmovement 0x0
+pause 0x20
+applymovement _OAK @stepD
+waitmovement 0x0
+pause 0x25
+applymovement _OAK @stepAside
+applymovement _LANCE @champStep
+waitmovement 0x0
+pause 0x25
+applymovement _LANCE @stepD
+waitmovement 0x0
+pause 0x20
+msgbox @bossTalk6 0x6
+pause 0x25
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @script4
+pause 0x20
+msgbox @bossTalk7 0x6
+applymovement _FUJI @shiftyMove
+waitmovement 0x0
+msgbox @bossTalk8 0x6
+pause 0x30
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @script5
+pause 0x40
+spriteface _BLAINE FACE_RIGHT
+spriteface _BILL FACE_LEFT
+pause 0x35
+spriteface _BLAINE FACE_UP
+spriteface _BILL FACE_UP
+pause 0x25
+applymovement _BLAINE @challengeStep
+applymovement _BILL @challengeStep
+waitmovement 0x0
+pause 0x20
+applymovement _BLAINE @stepU
+applymovement _BILL @stepU
+waitmovement 0x0
+pause 0x10
+msgbox @bossTalk9 0x6
+pause 0x15
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @script6
+pause 0x20
+applymovement _LANCE @stepD
+waitmovement 0x0
+msgbox @bossTalk10 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x20
+msgbox @bossTalk11 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+applymovement _GIOVANNI @fujiLeave
+waitmovement 0x0
+setvar 0x401D 0x5 // activates Indigo Plateau level script
+warpmuted 0x3 0xC 0xFF 0xB 0x2 // to Indigo Plateau (outside)
+waitstate
+end
+
+#org @bossTalk2
+= The minds of the brightest\nscientists in the nation.
+
+#org @bossTalk3
+= Ever since the start of the war,\nOak had been leading a number of\lsecret initiatives to capture and\lharness the power of one Pokémon[.]
+
+#org @bossTalk4
+= Once word got back that Dr. Fuji\nhad at last caught hold of Mew[.]\pWe knew there was no chance\nthe public could know.
+
+#org @bossTalk5
+= It was to be the region's best\nkept secret.\pAnd our only chance of winning.
+
+#org @bossTalk6
+= Oak announced Kanto's surrender to\nLance and Johto[.]\c\h08ó ending the war.
+
+#org @bossTalk7
+= Fuji was the first to throw in the\ntowel.
+
+#org @bossTalk8
+= The old coward openly pledged his\nallegiance to Lance, accepting\lany terms they gave him.
+
+#org @bossTalk9
+= But they eventually followed suit.
+
+#org @bossTalk10
+= Well, Lance stripped me of my\nElite Four position right quick.
+
+#org @bossTalk11
+= And Oak, the bastard traitor[.]\c\h08ó\nLeft me to fend for myself[.]\pAs if I hadn't invested my heart\nand soul-- let alone my personal\lfortune[.]\pTo defend a home now taken over by\nforeign aggressors.
+
+#org @playerCamera
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @approachOak
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @fujiLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @backToOriginalPos
+#raw STEP_R
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @oakPacing
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @stepAside
+#raw STEP_R
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @challengeStep
+#raw STEP_U
+#raw 0xFE
+
+#org @champStep
+#raw STEP_U
+#raw STEP_U
+#raw FACE_D
+#raw 0xFE
+
+#org @shiftyMove
+#raw 0x1C
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE

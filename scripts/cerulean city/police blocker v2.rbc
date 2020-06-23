@@ -1,0 +1,29 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+checkflag 0x208
+if 0x1 goto @2ndOne
+msgbox @talk 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+release
+end
+
+#org @2ndone
+msgbox @talk2 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Ronnie's words echoed:\p"Dude, what the hell are you\nthinking?\pDon't let the cops catch us!\nGet away from there!"
+
+#org @talk2
+= Archer's words echoed:\p"You still get to be Pokémon\ngangsters, just don't be stupid\labout it, all right?"
+
+#org @movePlayer
+#raw STEP_U
+#raw 0xFE

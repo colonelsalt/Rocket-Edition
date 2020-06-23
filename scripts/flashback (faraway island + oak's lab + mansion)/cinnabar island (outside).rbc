@@ -1,0 +1,118 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x1
+#define _GIOVANNI 0x2
+#define _SHIGEKI 0x3
+
+#org @main
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x20
+compare 0x402E 0x14
+if 0x4 goto @mewtwoScript
+textcolor 0x0
+compare 0x402D 0x11 // if this is Shigeki escape scene
+if 0x1 goto @2ndScript
+msgbox @bossTalk 0x6
+pause 0x25
+spriteface _OAK FACE_RIGHT
+pause 0x20
+applymovement _GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bossTalk2 0x6
+pause 0x20
+spriteface _OAK FACE_UP
+pause 0x15
+sound 0x9 // shuffle
+applymovement _OAK @oakEnterLab
+waitmovement 0x0
+hidesprite _OAK
+pause 0x15
+applymovement _GIOVANNI @gioEnterLab
+waitmovement 0x0
+sound 0x9 // shuffle
+hidesprite _GIOVANNI
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @2ndScript
+spriteface _SHIGEKI FACE_DOWN
+pause 0x40
+fadescreen 0x1
+pause 0x20
+msgbox @bossTalk3 0x6
+pause 0x10
+hidesprite _SHIGEKI
+fadescreen 0x0
+pause 0x20
+msgbox @bossTalk4 0x6
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @mewtwoScript
+spriteface _SHIGEKI FACE_DOWN
+pause 0x25
+textcolor 0x2
+msgbox @mewTalk 0x6
+pause 0x15
+applymovement _SHIGEKI @flyStep
+waitmovement 0x0
+cry 0x8E 0x0
+pause 0x40
+setanimation 0x0 0x1
+doanimation 0x1E
+pause 0xF
+hidesprite _SHIGEKI
+checkanimation 0x1E
+pause 0x20
+msgbox @mewTalk2 0x6
+pause 0x20
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @bossTalk
+= At the time, I was the richest man\nin Kanto, and a devout member of\lOak's Elite Four.
+
+#org @bossTalk2
+= I wanted to do everything I could\nfor Kanto[.]\pSo I funded the project.
+
+#org @bossTalk3
+= Nobody knows.
+
+#org @bossTalk4
+= The old guy has been missing ever\nsince the end of the war.
+
+#org @mewTalk
+= When that war of yours finally\ncame to an end[.]\pDisgusted, fearful[.]\pFrom the things he had done and\nseen[.]
+
+#org @mewTalk2
+= He ran away.
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @oakEnterLab
+#raw STEP_U
+#raw 0xFE
+
+#org @gioEnterLab
+#raw STEP_L
+#raw STEP_U
+#raw 0xFE
+
+#org @flyStep
+#raw 0x25
+#raw 0xFE

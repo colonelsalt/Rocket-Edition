@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Only Trainers with an official\nlicense can collect Gym Badges.\pBums like you who battle without\none should be thrown in jail!

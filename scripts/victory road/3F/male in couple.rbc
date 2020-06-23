@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x6 0x1E5 0x0 0x8174D0C 0x8174D45 0x8174D96 EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= B-but[.]\nWhat about true love..?

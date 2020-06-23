@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Hey, aren't you a Roc--\p[.]\pOh, I'm sorry!\nI didn't realize you work here.

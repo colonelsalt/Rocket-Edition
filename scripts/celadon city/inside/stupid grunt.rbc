@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= If you see any suspicious-looking\nTrainers lurking around, make sure\lnot to tell them there's a secret\lswitch behind the poster at the\lGame Corner!\pThat's my strategy, anyway.

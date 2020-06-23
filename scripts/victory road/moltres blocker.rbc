@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Stop right there, Rocket!\nLance may no longer be Champion[.]\pBut it's still my job to guard\nthese Pokémon from people like you!\pI can see you're a formidable one[.]\pBut your authority in the Rocket\nworld means nothing to me!\pI can throw you in jail, no\nproblem! Get lost!

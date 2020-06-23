@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= D-don't call her that!\nThat's a made-up fantasy name!\pYour friend has been acting\nstrange lately.\pI think she's not feeling well\nright now. She needs to stay home.

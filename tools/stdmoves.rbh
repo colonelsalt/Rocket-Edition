@@ -1,0 +1,46 @@
+#define POKESTEAL 0x81FCA7
+#define ADMIN_STEAL 0x804009
+#define EXEC_STEAL 0x838106
+#define BOSS_STEAL 0x804C35
+
+#define _LESS 0x0
+#define _EQUAL 0x1
+#define _GREATER 0x2
+#define _LESS_EQ 0x3
+#define _GREATER_EQ 0x4
+#define _NOT_EQ 0x5
+
+#define _LOOK_UP 0x7
+#define _LOOK_DOWN 0x8
+#define _LOOK_LEFT 0x9
+#define _LOOK_RIGHT 0xA
+
+#define STEP_U 0x11
+#define STEP_R 0x13
+#define STEP_L 0x12
+#define STEP_D 0x10
+
+#define STEP_U2 0x1E
+#define STEP_D2 0x1D
+#define STEP_L2 0x1F
+#define STEP_R2 0x20
+
+#define STEP_D3 0xC
+#define STEP_U3 0xD
+#define STEP_L3 0xE
+#define STEP_R3 0xF
+
+#define FACE_L 0x2
+#define FACE_R 0x3
+#define FACE_D 0x0
+#define FACE_U 0x1
+
+#define ONSPOT_D 0x21
+#define ONSPOT_R 0x24
+#define ONSPOT_L 0x23
+#define ONSPOT_U 0x22
+
+#define ONSPOT_D2 0x29
+#define ONSPOT_U2 0x2A
+#define ONSPOT_L2 0x2B
+#define ONSPOT_R2 0x2C

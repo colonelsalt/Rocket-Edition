@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= We seem to be safe from this\nmadness inside the Pokémon Center.\pOh, what are we going to do..?

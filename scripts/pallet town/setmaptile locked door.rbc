@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4016 0x10 // after Agatha tea scene
+if _GREATER_EQ call @lockDoorMaybe
+end
+
+#org @lockDoorMaybe
+checkflag 0x2E9 // if door not already broken into
+if 0x0 call @lockDoor
+return
+
+#org @lockDoor
+setmaptile 0x10 0xD 0x2D3 0x1
+return

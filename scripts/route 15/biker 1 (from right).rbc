@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xC5 0x0 @challenge 0x81868E8 EXEC_STEAL
+msgbox 0x81868F1 0x6
+end
+
+#org @challenge
+= Hey there, Rocket! C'mon!\nI just got these off some loser!

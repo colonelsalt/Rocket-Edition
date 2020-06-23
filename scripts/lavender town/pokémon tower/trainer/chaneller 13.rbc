@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1C4 0x0 0x817A272 0x817A27F ADMIN_STEAL
+msgbox 0x817A293 0x6
+end

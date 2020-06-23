@@ -1,0 +1,194 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define LETO 0x8
+#define TREE 0x6
+
+#org @main
+lock
+pause 0x8
+textcolor 0x0
+msgbox @greetings 0x6
+clearflag 0x200
+showsprite LETO
+pause 0x10
+applymovement LETO @approach1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @jumpUp
+waitmovement 0x0
+pause 0x15
+applymovement LETO @approach2
+waitmovement 0x0
+pause 0x15
+msgbox @talk 0x6
+applymovement LETO @stepR
+waitmovement 0x0
+msgbox @talk2 0x6
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck
+goto @reject
+release
+end
+
+#org @moneyCheck
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @accept
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+pause 0x10
+spriteface LETO FACE_LEFT
+pause 0x10
+applymovement LETO @leave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @leave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x403F 0x2
+release
+end
+
+#org @accept
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+applymovement LETO @stepR
+waitmovement 0x0
+msgbox @yesTalk 0x6
+pause 0x15
+applymovement LETO @stepRquick
+waitmovement 0x0
+sound 0x79 // "slash attack"
+applymovement TREE @cutting
+waitmovement 0x0
+hidesprite TREE
+setflag 0x2B4
+checksound
+pause 0x2A
+msgbox @goodBye 0x6
+spriteface LETO FACE_RIGHT
+pause 0x15
+applymovement LETO @leave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @leave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x403F 0x2
+release
+end
+
+#org @reject
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+pause 0x10
+spriteface LETO FACE_LEFT
+pause 0x10
+applymovement LETO @leave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @leave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x403F 0x2
+release
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @greetings
+= Oh, my! Is there a tree there in\nyour path?\pRest assured, it is no cause for\ndismay! Help is near!
+
+#org @approach1
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @jumpUp
+#raw 0x15
+#raw 0xFE
+
+#org @approach2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @talk
+= Verily, 'tis I[.] Leto, Cutting\naficionado, at your service!
+
+#org @talk2
+= Would you like to bear witness to\nthese Cutting wonders of mine?\pI will annihilate for you all\ntrees around Pewter and Viridian,\lso they can hamper this Pokémon\ladventure of yours no more!
+
+#org @yesOrNo
+= [.]\c\h08ófor a modest fee of [$]1000,\nnaturally.
+
+#org @yesTalk
+= Ah! Sir, I daresay you made an\nexcellent choice!\pNow, if you'll allow me[.]
+
+#org @cutStep
+#raw STEP_U
+#raw FACE_R
+#raw 0xFE
+
+#org @cutting
+#raw 0x69
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @stepRquick
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0xFE
+
+#org @noTalk
+= No?\c\h08ó\nWhy, f-fine, then.\pI can see that this region is not\nyet cultured enough to appreciate\lthe fine art of a proper Cut!\pWell, should the good sir ever\nchange his mind, I will never be\lfar away from any of this region's\lexquisite trees, rest assured!\pHmph! Good day.
+
+#org @notEnoughTalk
+= What?\nInsufficient funds?\pSir, my asking price is akin to\ngiving it away, I assure you!\pBut[.] if the uncultured folk of\nKanto find it too great an expense\lfor witnessing the finest of fine\lart, then what is a man to do?\pWell, should the good sir ever\nearn the necessary means to afford\lmy services, I will never be\lfar away from any of this region's\lexquisite trees, rest assured!\pHmph! Good day.
+
+#org @goodBye
+= Oh, my Lord..!\nWhat a Cut!\pIt nigh on brings a tear to my\neye, dear Trainer[.] every time!\pWell[.] should you ever need my\nCutting skills again, by this\lregion's most beautiful trees is\lwhere you'll you find me!\pUntil we meet again!
+
+#org @leave1
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw 0xFE
+
+#org @leave2
+#raw 0x14
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE

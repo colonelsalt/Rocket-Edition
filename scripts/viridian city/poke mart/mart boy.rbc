@@ -1,0 +1,14 @@
+#dynamic 0x800000
+
+#org @main
+compare 0x401F 0x78
+if 0x4 goto @sinister
+msgbox 0x819032C MSG_FACE
+end
+
+#org @sinister
+msgbox @robberyTalk MSG_FACE
+end
+
+#org @robberyTalk
+= Oh, Rocket, please don't kill me!\pI would give you all my favorite\nshorts if you'd just let me be!

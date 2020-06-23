@@ -1,0 +1,14 @@
+#dynamic 0x800000
+
+#org @main
+compare 0x401F 0xF
+if 0x4 goto @tooBad
+msgbox 0x81954DD MSG_FACE
+end
+
+#org @tooBad
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= I'm afraid we will not serve\ncriminals such as you, Rocket.\pI would prefer it if you left our\npremises right away.

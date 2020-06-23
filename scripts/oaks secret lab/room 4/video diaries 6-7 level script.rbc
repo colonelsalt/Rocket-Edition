@@ -1,0 +1,488 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x5
+#define _MOM 0x9
+#define _BILL 0xA
+#define _ELM 0xB
+
+#org @main
+lock
+checkflag 0x2F0
+if 0x1 goto @postCreditsScene
+compare 0x4046 0x3
+if 0x1 goto @thirdScript
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x20
+textcolor 0x0
+compare 0x4046 0x2
+if 0x1 goto @secondScript
+msgbox @talk 0x6
+pause 0x25
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @talk2 0x6
+pause 0x25
+applymovement _OAK @walk
+waitmovement 0x0
+pause 0x25
+msgbox @talk3 0x6
+pause 0x25
+applymovement _OAK @walk2
+waitmovement 0x0
+pause 0x20
+spriteface _OAK FACE_UP
+pause 0x25
+spriteface _OAK FACE_DOWN
+pause 0x30
+msgbox @talk4 0x6
+pause 0x20
+setvar 0x4014 0x11
+setvar 0x4016 0x2D
+setflag 0x200
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x76 0xFF 0x13 0x11
+waitstate
+release
+end
+
+#org @secondScript
+msgbox @2talk 0x6
+pause 0x25
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @2talk2 0x6
+pause 0x30
+applymovement _OAK @2walk
+waitmovement 0x0
+pause 0x30
+msgbox @2talk3 0x6
+pause 0x30
+spriteface _OAK FACE_RIGHT
+pause 0x30
+msgbox @2talk4 0x6
+pause 0x30
+applymovement _OAK @2walk2
+waitmovement 0x0
+pause 0x30
+msgbox @2talk5 0x6
+applymovement 0xFF @2cameraPan1
+waitmovement 0x0
+pause 0x25
+clearflag 0x202
+showsprite _MOM
+applymovement _OAK @2walk3
+applymovement 0xFF @2cameraPan2
+waitmovement 0x0
+pause 0x30
+msgbox @2talk6 0x6
+pause 0x30
+spriteface _OAK FACE_RIGHT
+pause 0x30
+msgbox @2talk7 0x6
+pause 0x25
+applymovement _OAK @2walk4
+waitmovement 0x0
+pause 0x25
+msgbox @2talk8 0x6
+pause 0x30
+// spriteface _OAK FACE_DOWN
+// pause 0x25
+applymovement _OAK @2walk5
+waitmovement 0x0
+pause 0x25
+msgbox @2talk9 0x6
+pause 0x30
+applymovement _OAK @2walk6
+waitmovement 0x0
+pause 0x25
+msgbox @2talk10 0x6
+pause 0x35
+applymovement _OAK @2walk7
+waitmovement 0x0
+// pause 0x20
+setvar 0x4014 0x11
+setvar 0x4046 0x3
+setflag 0x200
+setflag 0x202
+warpmuted 0x27 0x0 0xFF 0x4 0x4
+waitstate
+release
+end
+
+#org @thirdScript
+pause 0x40
+sound 0x3
+setmaptile 0x7 0x5 0x8 0x1
+special 0x8E // screen refresh
+setvar 0x4016 0x2E
+pause 0x20
+fadeout 0x0
+pause 0x20
+cry 0x199 0x0
+waitcry
+pause 0x5
+cry 0x199 0x0
+waitcry
+pause 0x5
+cry 0x199 0x0
+waitcry
+pause 0x15
+msgbox @pager 0x6
+fadein 0x0
+setflag 0xA8 // Bill in Cinnabar
+release
+end
+
+
+
+#org @talk
+= The Pokémon League challenge is a\nray of hope for many naive young\lTrainers.\pEven if only one in a million ever\nstand a chance at being Champion.
+
+#org @talk2
+= Fortunately[.]\c\h08ó\nIt can readily be exploited.
+
+#org @talk3
+= As soon as he's given his Pokémon\nLicense, my clone will rise up the\lranks at unprecedented speed[.]\pGym Leaders, criminal organizations,\nLegendary Pokémon[.]\pThey'll be no match for him.
+
+#org @talk4
+= They'll never see a child like\nthis coming.\pThey won't believe their eyes.
+
+#org @2talk
+= Mewtwo escaped the Pokémon Mansion\nand put an end to that farcical\lproject.\pKanto's military resources are\nrunning out[.]\pWe can't afford this war any\nlonger.
+
+#org @2talk2
+= Lance will not give in until he\nhas my head on a pike and all of\lKanto kneeling before him[.]
+
+#org @2talk3
+= [.]\c\h08ó\nIt won't do.\pI will surrender my position as\nChampion.
+
+#org @2talk4
+= Lance will gleefully take my place,\nand the public will shame me as a\lcoward and a traitor[.]\pBut they will let me live.
+
+#org @2talk5
+= And in ten years' time[.]
+
+#org @2talk6
+= I will wipe that grin off your\nconceited face, Lance.
+
+#org @2talk7
+= When my boy has crushed you in\nfair, official Pokémon battle[.]\pYou will find his policies as\nChampion less than friendly\ltowards the likes of you.
+
+#org @2talk8
+= As a minor, the boy will gladly\nconcede his political decisions to\lme.\pAnd[.]\c\h08ó being his only male guardian,\nthe people will have no choice but\lto comply.
+
+#org @2talk9
+= Kanto, Johto[.]\c\h08ó\nThe ends of the world!\lWe will yield unprecedented power.\pWhat human Trainer could possibly\nstand in our way?
+
+#org @2talk10
+= Oh, a decade of public humiliation\nis a small price to pay[.]\pBecause when the time is right[.]
+
+#org @pager
+= The Rocket Pager is beeping!\c\h08ó\c\h08ó\nBetter report to Viridian Gym!\c\h08ó
+
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @walk
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @walk2
+#raw STEP_R
+#raw 0xFE
+
+#org @2walk
+#raw STEP_D
+#raw 0xFE
+
+#org @2walk2
+#raw STEP_R
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @2cameraPan1
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @2walk3
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw 0xFE
+
+#org @2cameraPan2
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @2walk4
+#raw STEP_L
+#raw 0xFE
+
+#org @2walk5
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @2walk6
+#raw STEP_U
+#raw 0xFE
+
+#org @2walk7
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+// ---------------------------------------------------------
+
+#org @postCreditsScene
+applymovement 0xFF @pan
+waitmovement 0x0
+pause 0x10
+applymovement _BILL @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @billTalk 0x6
+pause 0x25
+applymovement _BILL @billWander
+waitmovement 0x0
+pause 0x20
+msgbox @billTalk2 0x6
+pause 0x25
+spriteface _BILL FACE_DOWN
+pause 0x25
+applymovement _BILL @billWander2
+waitmovement 0x0
+pause 0x15
+applymovement _BILL @stepL
+waitmovement 0x0
+msgbox @billTalk3 0x6
+pause 0x25
+spriteface _BILL FACE_DOWN
+pause 0x30 
+spriteface _BILL FACE_UP
+pause 0x25
+applymovement _BILL @billWander4
+waitmovement 0x0
+pause 0x15
+applymovement _BILL @stepR
+waitmovement 0x0
+msgbox @billTalk4 0x6
+pause 0x25
+spriteface _BILL FACE_UP
+pause 0x30
+spriteface _BILL FACE_LEFT
+pause 0x30
+applymovement _BILL @billWander5
+waitmovement 0x0
+pause 0x15
+applymovement _BILL @stepU
+waitmovement 0x0
+msgbox @billTalk5 0x6
+pause 0x20
+movesprite2 _ELM 0xA 0x8
+movesprite _ELM 0xA 0x8
+showsprite _ELM
+applymovement _BILL @billWander6
+applymovement 0xFF @panToElm
+playsong 0x158 0x0
+waitmovement 0x0
+pause 0x35
+applymovement 0xFF @panDown
+applymovement _ELM @elmWalk
+waitmovement 0x0
+pause 0x25
+applymovement _ELM @faceUp
+pause 0x55
+applymovement _ELM @faceRight
+pause 0x25
+msgbox @elmTalk 0x6
+pause 0x20
+applymovement _BILL @stepL
+waitmovement 0x0
+msgbox @billTalk6 0x6
+pause 0x60
+setflag 0x204
+warpmuted 0x23 0x4 0xFF 0x7 0x4
+waitstate
+end
+
+
+
+#org @billTalk
+= Hmm?\c\h08ó Yes, Oak had it all cleared\nout after we broke in.\pI had to make sure none of the\nothers ratted him out in court,\ljust in case.
+
+#org @billTalk2
+= Oh, not to worry[.]\pI made copies of all his blueprints\nand research notes, naturally.\pI'll show you in person.
+
+#org @billTalk3
+= [.]\pYes, very sophisticated[.]\c\h08ó\nBut nothing we couldn't reproduce.
+
+#org @billTalk4
+= [.]\c\h08ó\nIndeed!\pWith the technological advancements\nin the intervening decade[.]\pI think we could build a full-grown\nbattle-ready prototype in just[.]\pThree years' time.
+
+#org @billTalk5
+= Ah, there you are!\c\h08ó\nWell, come and see for yourself.
+
+#org @elmTalk
+= Elm: [.]\c\h08ó\nI've seen enough, Bill.\pCount me in.
+
+#org @billTalk6
+= Bill: [.]\pPleasure doing business with\nyou, Professor.
+
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @faceRight
+#raw 0x30
+#raw 0xFE
+
+#org @faceDown
+#raw 0x2D
+#raw 0xFE
+
+#org @faceUp
+#raw 0x2E
+#raw 0xFE
+
+#org @faceLeft
+#raw 0x2F
+#raw 0xFE
+
+#org @pan
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw 0xFE
+
+#org @billWander
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @billWander2
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @billWander4
+#raw STEP_U
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @billWander5
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw 0xFE
+
+#org @billWander6
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @elmWalk
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @panToElm
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @panDown
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+
+

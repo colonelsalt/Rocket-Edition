@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface 0x1 FACE_LEFT
+release
+end
+
+#org @talk
+= Ah[.] shoot.\p[.]\pListen, road's closed, okay?\nYou're not coming through.\pShoosh. Be gone. Nothing to see\nhere, ya hear me?

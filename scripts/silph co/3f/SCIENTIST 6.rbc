@@ -1,0 +1,62 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SCIENTIST 0x3
+#define _RONNIE 0x5
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+trainerbattle 0x3 0x17 0x0 @defeatText
+msgbox @talk2 0x6
+fadescreen 0x1
+// moves characters and camera to new position
+special 0x113
+setvar 0x8002 0xB
+setvar 0x8003 0xC
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0xB 0xC
+movesprite _SCIENTIST 0x8 0xC
+movesprite _RONNIE 0xC 0xD
+hidesprite 0x6
+hidesprite 0x8
+spriteface 0xFF FACE_LEFT
+spriteface _RONNIE FACE_LEFT
+spriteface _SCIENTIST FACE_RIGHT
+special 0x114
+fadescreen 0x0
+textcolor 0x2
+msgbox @swipe 0x4
+lockall
+sound 0x19
+checksound
+pause 0x10
+closeonkeypress
+lockall
+pause 0x10
+sound 0x26
+setmaptile 0x9 0xB 0x3C0 0x1
+setmaptile 0xA 0xB 0x3C1 0x1
+setmaptile 0x9 0xC 0x3C2 0x1
+setmaptile 0xA 0xC 0x3C3 0x1
+setmaptile 0x9 0xD 0x3C4 0x1
+setmaptile 0xA 0xD 0x3C5 0x1
+special 0x8E
+checksound
+setflag 0x2A3
+subvar 0x402E 0x1
+release
+end
+
+#org @talk
+= Ah!\nYes, I'm Silph's chief engineer.\pYou guys are after the Ball,\naren't you..?\pI want to say I stuck out here to\ndefend the integrity of our\linvention[.]\pBut it was really just because I\ncouldn't sneak past these\lloitering Rockets just outside!\p[.]\pWell, you won't have me without a\nfight, anyway!
+
+#org @defeatText
+= Silph hired me for science, not\nfor Pokémon battle, okay?
+
+#org @talk2
+= Ah[.]\c\h08ó you're locking me up, aren't\nyou?\p(Sigh[.])\c\h08ó\nI guess it was inevitable.\p(At least I have my laptop in\nthere to pass the time[.])
+
+#org @swipe
+= [player] swiped the Card Key.

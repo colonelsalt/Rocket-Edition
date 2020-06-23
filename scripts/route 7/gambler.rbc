@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x2 0x4 0x0 @challenge @defeat 0x8022EC
+msgbox @afterwards 0x6
+end
+
+#org @challenge
+= Hey there, young man. Want to play\na game with me?
+
+#org @defeat
+= My lord, what are the odds..?
+
+#org @afterwards
+= If I were only a few years younger\nI'd teach all you little\lwhippersnappers a lesson, I would!

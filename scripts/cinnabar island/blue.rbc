@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Blue: Boy, I sure hope I didn't\nsay anything I wasn't supposed to,\ldid I, Rocket?\pBut it's all true!\pGrandpa used to press a button\nby the bookshelves in his Lab to\lget down to the basement.\pNot sure what you'd find there now.\nIt was kind of a scary place.

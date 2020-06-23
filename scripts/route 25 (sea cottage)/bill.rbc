@@ -1,0 +1,151 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BILL 0x1
+
+#org @main
+lock
+checkflag 0x211
+if 0x1 goto @storyScriptDone
+compare 0x401C 0x2
+if 0x1 goto @2ndTime
+compare 0x401C 0x3
+if 0x1 goto @noParcel2
+applymovement BILL @facePlayer
+msgbox @talk1 0x6
+spriteface BILL FACE_UP
+setvar 0x401C 0x2 // signifies that Bill has been talked to once
+setvar 0x401D 0x1 // activates tile script
+setmaptile 0x7 0x9 0x189 0x0
+special 0x8E
+release
+end
+
+#org @2ndTime
+msgbox @sigh 0x6
+applymovement BILL @facePlayer
+msgbox @talk2 0x6
+checkitem 0x15D 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noParcel
+goto @hasParcel
+end
+
+#org @noParcel
+msgbox @noParcelTalk 0x6
+msgbox @comeBack 0x6
+spriteface BILL FACE_UP
+setvar 0x401C 0x3 // makes script jump to @noParcel2 next time
+setvar 0x401D 0x0 // deactivates tile script
+setmaptile 0x7 0x9 0x29E 0x0
+special 0x8E
+release
+end
+
+#org @noParcel2
+applymovement BILL @facePlayer
+checkitem 0x15D 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @hasParcel
+msgbox @comeBack 0x6
+spriteface BILL FACE_UP
+release
+end
+
+#org @hasParcel
+textcolor 0x3
+fanfare 0x105
+preparemsg @parcelDelivery
+waitmsg
+waitfanfare
+removeitem 0x15D 0x1
+closeonkeypress
+textcolor 0x0
+spriteface BILL FACE_UP
+pause 0x15
+applymovement BILL @stepU
+waitmovement 0x0
+msgbox @talk3 0x6
+applymovement BILL @stepU
+waitmovement 0x0
+msgbox @talk4 0x6
+pause 0x15
+applymovement BILL @facePlayer
+pause 0x15
+msgbox @talk5 0x6
+pause 0x25
+spriteface BILL FACE_UP
+pause 0x35
+applymovement BILL @facePlayer
+pause 0x25
+msgbox @talk6 0x6
+pause 0x20
+spriteface BILL FACE_LEFT
+pause 0x35
+applymovement BILL @facePlayer
+pause 0x20
+msgbox @talk7 0x6
+pause 0x40
+msgbox @talk8 0x6
+spriteface BILL FACE_UP
+setvar 0x401D 0x1 // activates tile script
+setflag 0x211
+setmaptile 0x7 0x9 0x189 0x0
+special 0x8E
+release
+end
+
+#org @storyScriptDone
+faceplayer
+msgbox @postStoryTalk 0x6
+spriteface BILL FACE_UP
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @facePlayer
+#raw 0x4A
+#raw 0xFE
+
+#org @talk1
+= Hey, guy.\pYeah, I'm Bill all right.\nWhat do you want?\p[.]\pOh, Team Rocket, is it? My, it's\nbeen a while.\pYeah, sorry, but I'm not\ninterested. I've got my research\lto attend to, right?\pI'm not Giovanni's little tech boy\nconsultant anymore.
+
+#org @sigh
+= Bill: [.]\c\h08ó\n(Sigh)\c\h08ó
+
+#org @talk2
+= All right, what's it about?\nThe job.\p[.]\pOh, Porygon, is it? Figures.\p[.]\nHmm?\pYeah, of course I know how to make\nthe things-- who do you take me\lfor?\pJust show me the stuff they gave\nyou to tempt me with already.
+
+#org @noParcelTalk
+= What? You don't even have\nanything for me?\pThen why are you wasting my time?
+
+#org @comeBack
+= Come back when you've got some\nactual rewards for me in return\lfor Giovanni's dirty work.\pThen I might be negotiable to\nconsider it, all right?
+
+#org @parcelDelivery
+= [player] delivered Bill's Parcel.
+
+#org @talk3
+= Bill: [.]\pDamn it, Giovanni, why do you keep\ntreating me like I'm some amateur\lcollector?\pI mean, a shiny Magikarp, really?\pOh, and some Rare Candies, too.\nSpectacular.\p[.]\pAnd what's this? A ticket to some\n"exclusive" party on the S.S.\lAnne liner? Please.\pI've got all the high-end\nconnections I need, and alcohol\lonly dulls my concentration.
+
+#org @talk4
+= Okay, here comes the actual\ninteresting part.\p[.]\pHmm[.]\n[.]\p"As thanks for your cooperation,"\nbla-bla-bla[.] "we'll offer you a\lregular salary of[.]" such-and-\lsuch[.]\pWell, okay, that's respectable.\pBut you do realize I could get\nthat much working at freaking\lSilph. Right, Giovanni? Geez.
+
+#org @talk5
+= Bill: [.]\c\h08ó\pHere's a thing you've got to know\nabout me, pal: I only care about\ltwo things in life:\p\c\h08óScience and rare Pokémon.\c\h08ó\c\h08ó\nThat's it.\pThose two things are the alpha and\nomega of my life.\pMoney, power, status, politics--\nthese mean nil to me, do you see\lthat?
+
+#org @talk6
+= Bill: If I take the job, you tell\nGiovanni it'll be on the following\lconditions:\pFirst, Team Rocket is to send\nme a regular sample of the rarest\lPokémon you acquire-- be that\lthrough breeding, stealing,\lcatching, cloning, or however it\lis you guys do it.\pI'd rather I didn't know, to be\nhonest.
+
+#org @talk7
+= Second, since I know you guys have\nspies in Silph Co., I want you to\lgive me any and all intel you can\lgather on their newest invention.\pRumors have been going around the\ntechnology newsgroups for weeks\labout Silph being on the brink of\la prototype for some innovative\lnew Pokémon capture device.\pIf this is going to be as big as\nthey say, I can hardly afford to\lmiss it.\pNow, I'd go there and\ninvestigate the thing myself, but\lfrankly I'd sooner eat a dead Muk\lthan work for a big conglomerate\llike Silph.
+
+#org @talk8
+= Well, did you get all that?\c\h08ó Good.\nBecause those are my terms.\pFor the time being at least. I\nsuppose I might just change\lmy mind.\pGo back and tell all of that to\nyour little superiors if you'd be\lso kind. I've got work to do.
+
+#org @postStoryTalk
+= Bill: Hmm..?\nAnything else to report?\pNo? Then leave a genius to his\nwork, please.

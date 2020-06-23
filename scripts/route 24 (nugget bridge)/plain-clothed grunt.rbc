@@ -1,0 +1,42 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkitem 0x160 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @postBill
+msgbox @talk 0x6
+applymovement 0x1 @leave
+waitmovement 0x0
+sound 0x9
+hidesprite 0x1
+setflag 0x210
+setvar 0x401C 0x1
+checksound
+release
+end
+
+#org @postBill
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= That's it, man! I've had it!\pAll day I've been standing around,\nwaiting for some half-decent\lTrainer to come along so I can\loffer him a place in Team Rocket,\lonly to find that half of them\lcan't even beat the first couple\lof twerps on this damn bridge!\pLook, it's been twelve god-\nforsaken hours, and I can't feel\lmy legs.\pTell Archer I went for a long\noverdue coffee break, all right?\lJesus.
+
+#org @talk2
+= Mmm-mm! That was one hell of\na moccha latte, if I may say so\lmyself.\pSurely nothing out of the\nordinary happened here while I was\lgone..?
+
+#org @leave
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE

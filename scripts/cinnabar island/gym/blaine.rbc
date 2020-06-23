@@ -1,0 +1,80 @@
+#dynamic 0x800000
+#define _BLAINE 0x8
+#include stdmoves.rbh
+
+#org @main
+setvar 0x8004 0x8
+setvar 0x8005 0x2
+special 0x174
+trainerbattle 0x1 0x1A3 0x0 @preBattleTalk 0x81995FA @postBattle
+checkflag 0x24E
+if 0x0 goto @postPostBattle
+msgbox @postBattleTalk 0x6
+release
+end
+
+'---------------
+#org @postBattle
+setvar 0x8004 0x8
+setvar 0x8005 0x1
+special 0x173
+setflag 0x4B6
+setflag 0x826
+sethealingplace 0x9
+setvar 0x4071 0x1
+clearflag 0x62
+setvar 0x8008 0x7
+call 0x81A6B18
+goto @postPostBattle
+
+'---------------
+#org @postPostBattle
+copyvar 0x8000 0x401F
+call BOSS_STEAL
+comparevars 0x8000 0x401F
+if _NOT_EQ call @stolen
+comparevars 0x8000 0x401F
+if 0x1 call @notStolen
+checkitemroom 0x146 0x1
+compare LASTRESULT 0x0
+if 0x1 goto 0x816DA75
+additem 0x146 0x1
+loadpointer 0x0 0x81996FF '"[player] received TM38\nfrom Blain..."
+giveitem2 0x146 0x1 0x101
+setflag 0x24E
+release
+end
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @stolenTalk MSG_KEEPOPEN
+return
+
+#org @notStolen
+textcolor 0x0
+msgbox @notStolenTalk MSG_KEEPOPEN
+return
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @preBattleTalk
+= Blaine: [player]!\c\h08ó\nW-what are you doing here?\pThey'll kick you out any minute,\nI'm sure they will--\p[.]\pHuh?\c\h08ó\nA Gym challenge?\p[.]\pWell, if you really want to fight\nme again, Rocket, I'll oblige.\pI've been training since last\ntime.\pAnd you know how it goes[.]\p[.]\c\h08ó\nYou better have Burn Heal!\c\h0B[Ke]À
+
+#org @stolenTalk
+= Bastard!\pAfter all I've done for Team\nRocket[.]\pYou go out and rob my Pokémon?!\c\h08ó\nGah!\p[.]\pI guess I've just got to sit still\nand take it like everything else\lyou guys do, huh?\p[.]\c\h08ó\n(Sigh[.])\pYou'd better take this TM.
+
+#org @notStolenTalk
+= Well, well[.]\c\h08ó\nHappy now, Rocket?\pI've got to say, I'm grateful you\ndidn't steal any of my Pokémon\lwhen you had the chance.\pI won't forget that.\c\h08ó\nHere's your TM.
+
+#org @postBattleTalk
+= Scorched[.]\nI'll get you one day, [player].
+

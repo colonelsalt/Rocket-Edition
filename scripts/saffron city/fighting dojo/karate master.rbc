@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x278
+if 0x1 goto @pkmnTaken
+msgbox @talk 0x6
+release
+end
+
+#org @pkmnTaken
+msgbox @takenTalk 0x6
+release
+end
+
+#org @talk
+= As your reward! Hoo-hah!\pTake one of our prized Fighting\nPokémon behind me! Haaah!
+
+#org @takenTalk
+= Rocket! I am in your debt!\nHee-haah!\pStay, if you would!\nAnd train karate with us! Hoo-yah!

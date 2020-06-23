@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @challenge
+= I hear there's a rivalry going on\nbetween the Fishing Brothers.
+
+#org @defeat
+= I mean, that's just what I've\nheard.
+
+#org @after
+= Gossip is poinsonous to the mind!\nI will indulge in it no more.

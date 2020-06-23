@@ -1,0 +1,14 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define GIOVANNI 0x1
+#define ARIANA 0xA
+
+#org @main
+fadescreen 0x1
+pause 0x15
+msgbox @talk 0x6
+warpmuted
+end
+
+#org @talk
+= It was eleven years ago[.]

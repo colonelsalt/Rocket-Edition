@@ -1,0 +1,54 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PETREL 0xD
+
+#org @main
+lock
+faceplayer
+compare 0x4014 0x9
+if 0x1 goto @missionIntro
+checkflag 0x2A4
+if 0x1 goto @postMission
+compare 0x402E 0x0
+if 0x1 goto @noneRemaining
+msgbox @talk 0x6
+release
+end
+
+#org @noneRemaining
+msgbox @talk2 0x6
+release
+end
+
+#org @postMission
+msgbox @talk3 0x6
+release
+end
+
+#org @missionIntro
+lockall
+textcolor 0x0
+msgbox @petrelTalk 0x6
+spriteface _PETREL FACE_DOWN
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto MAINSCRIPT // 0x8462B0
+
+#org @talk
+= Petrel: Well? No use standing\naround, is there, [player]?\pGo on up and hand it to those\nscientists!
+
+#org @talk2
+= Petrel: Oh, now?\pYou beat all those geeks and\nlocked them up, did you?\pTruly excellent.\pIf you're lacking for something to\ndo, head up to 11F right now and\lmake sure everything is smooth for\lBoss's arrival.
+
+#org @talk3
+= Petrel: Bahahaha!\nWeird-looking kid like you[.]\lExecutive!\pWho woulda thought it, eh?\nWell, congratulations, [player].\pI won't hide my jealousy.
+
+#org @petrelTalk
+= Petrel: Well, hey there, [player]!\pLet's get this show on the road,\nshall we?
+
+#org @playerApproach
+#raw STEP_D
+#raw STEP_R
+#raw FACE_U
+#raw 0x1C
+#raw 0xFE

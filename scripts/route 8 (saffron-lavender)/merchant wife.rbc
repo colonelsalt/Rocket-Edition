@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= My husband's snacks are really\nquite delicious.\pThey're really salty, though!\pHe doesn't like to say it, but if\nyou eat too many, you can become\ldehydrated really fast.

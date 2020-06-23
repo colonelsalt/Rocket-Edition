@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Dude[.]\nTechnology, man. It's[.] far out!\pDid you hear about the information\nsuper-highway?\pPretty soon, we're gonna get to\ndownload and play all sorts of\lgames straight from the minds of\llonely geeks, without a Game Boy!\pTalk about a new world, man!

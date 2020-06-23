@@ -1,0 +1,75 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x287
+if 0x1 goto @postBeatUp
+checkflag 0x286
+if 0x1 goto @postTM
+checkflag 0x285
+if 0x1 goto @continue
+msgbox @dumbTalk 0x6
+release
+end
+
+#org @continue
+msgbox @talk MSG_YESNO
+compare LASTRESULT 0x0
+if 0x1 goto @battle
+msgbox @yesTalk 0x6
+additem 0x13D 0x1
+loadpointer 0x0 @TMget
+giveitem2 0x13D 0x1 0x101
+setflag 0x286
+release
+end
+
+#org @battle
+msgbox @noTalk 0x6
+trainerbattle 0x3 0xE 0x0 @defeat
+call EXEC_STEAL
+textcolor 0x0
+msgbox @after 0x6
+addvar 0x401F 0x3
+setflag 0x287
+release
+end
+
+#org @postBeatUp
+msgbox @postBeatUpTalk 0x6
+release
+end
+
+#org @postTM
+msgbox @postTMtalk 0x6
+release
+end
+
+#org @dumbTalk
+= [.]Wait! Don't say a word!\nYou wanted my TM!\pAh! But you're a criminal!\nI cannot be seen helping you.\pThat would be bad[.] for my future.\nI can sense it.\pGet out of my house, please.
+
+#org @talk
+= [.]Wait! Don't say a word!\pYou came to[.]\c\h08ó\nAh! To beat me up! Oh, goodness!\pBut I'm a humble, innocent old\nman! I don't want any trouble!\p[.]\pHere[.] look! I'll give you my TM!\nIt's very powerful, see!\pI'll give it to you if you\npromise not to beat me up! Okay..?
+
+#org @yesTalk
+= Phew!\nI'm glad you could be reasonable.\pI can clearly see a future in\nwhich we pretend as if this all\lnever happened.\p[.]\c\h08ó\nDo you?
+
+#org @TMget
+= [player] received TM29 from\nMr. Psychic!
+
+#org @noTalk
+= Ah! I sensed you would say that!\pWell[.] I hate to have to do this,\nbut it seems I have no choice!\pCome at me!\nI have seen that I will win!
+
+#org @defeat
+= I lied!
+
+#org @after
+= Ouch! Ouch!\nWhat do you want?\p[.]Wait! Don't say it!\nAh[.] what?\pYou want me to stop giving out TMs\nto passerby Trainers?\pF-fine, I'll stop! Geez, okay!\nJust please don't hurt me!\p[.]\pBut you can't stop me reporting\nyour assault to the police!
+
+#org @postBeatUpTalk
+= [.]Wait! Don't say a word!\pYou came to intimidate me some\nmore! Waah!
+
+#org @postTMtalk
+= We're friends now[.] right?

@@ -1,0 +1,139 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GUARD1 0x4
+#define _GUARD2 0x5
+#define _GUARD3 0x6
+#define _BOSS 0x7
+#define _LEFTGUY1 0x8
+#define _LEFTGUY2 0x9
+#define _RIGHTGUY1 0xA
+#define _RIGHTGUY2 0xB
+#define _JULIEN 0xC
+
+#org @main
+lockall
+faceplayer
+compare 0x4033 0x6
+if 0x4 goto @postFriendly
+checkflag 0x27E // if Player accepted his bribe before
+if 0x1 goto @friendly
+checkflag 0x27F // if Player fought him and drove him away before
+if 0x1 goto @angry
+
+
+#org @friendly
+msgbox @friendlyTalk 0x6
+lockall
+pause 0x25
+spriteface _JULIEN FACE_DOWN
+pause 0x30
+faceplayer
+pause 0x10
+msgbox @friendlyTalk2 0x6
+lockall
+setvar 0x4033 0x6
+releaseall
+end
+
+#org @postFriendly
+msgbox @postFriendlyTalk 0x6
+releaseall
+end
+
+#org @angry
+msgbox @angryTalk 0x6
+lockall
+pause 0x25
+spriteface _JULIEN FACE_DOWN
+pause 0x30
+faceplayer
+pause 0x10
+msgbox @angryTalk2 0x6
+lockall
+compare 0x4034 0x0
+if 0x1 call @1stBattle
+compare 0x4034 0x1
+if 0x1 call @2ndBattle
+compare 0x4034 0x2
+if 0x1 call @3rdBattle
+compare 0x4034 0x3
+if 0x1 call @4thBattle
+lockall
+checkflag 0x2A4
+if 0x1 call POKESTEAL
+textcolor 0x0
+msgbox @angryTalk3 0x6
+lockall
+fadescreen 0x1
+hidesprite _JULIEN
+setflag 0x2A9
+sound 0x9
+checksound
+// TODO: Rearrange all Bottoms to appear shocked
+movesprite _BOSS 0xD 0x9
+spriteface _BOSS FACE_LEFT
+movesprite _GUARD1 0xC 0x6
+spriteface _GUARD1 FACE_DOWN
+movesprite _GUARD2 0xB 0x7
+spriteface _GUARD2 FACE_DOWN
+movesprite _GUARD3 0xD 0x7
+spriteface _GUARD3 FACE_DOWN
+movesprite _LEFTGUY1 0x9 0x9
+spriteface _LEFTGUY1 FACE_RIGHT // look right
+movesprite _LEFTGUY2 0x9 0xA
+movesprite _RIGHTGUY1 0x10 0x8
+spriteface _RIGHTGUY1 FACE_LEFT
+movesprite _RIGHTGUY2 0x10 0xA
+spriteface _RIGHTGUY2 FACE_LEFT
+fadescreen 0x0
+sound 0x15 // exclamation
+applymovement _BOSS @exclamation
+waitmovement 0x0
+setvar 0x4033 0x7
+releaseall
+end
+
+#org @1stBattle
+trainerbattle 0x3 0x1D 0x0 @defeatText
+return
+
+#org @2ndBattle
+trainerbattle 0x3 0x1E 0x0 @defeatText
+return
+
+#org @3rdBattle
+trainerbattle 0x3 0x1F 0x0 @defeatText
+return
+
+#org @4thBattle
+trainerbattle 0x3 0x20 0x0 @defeatText
+return
+
+#org @friendlyTalk
+= Why[.]\nI know you, bud!\pWe had ourselves a nice talk in my\njoint in the Underground Path!\pYou know, I'm real glad we came to\nan understanding that time!\pSo[.] what's my gig and what am I\ndoing hanging with these hotshot\lBottoms?\pHaha! Kanto's underworld is small,\nlet me tell ya. Connections!\pWell, you'd know all about it,\nwouldn't you, Rocket?\p[.]\pHm?\pOh, those Tops sent you down here,\ndid they?\p[.]\pHahaha[.]\pYeah, I know all about the gig\nthese Bottoms are pulling on them.
+
+#org @friendlyTalk2
+= Look, I[.]\pThese Bottoms are my trusted\npartners, see, and I don't like to\lbust on nobody, but[.]\pYou're my homeboy, so I'll say I\ncan make an exception, eh?\p[.]\pThey've got an impostor going.\pOne of the Bottoms bought a\ndifferent kind of jacket, drove\lon up to Route 16 and pretended to\lbe a rookie so he'd join the Tops!\pNow he's there in among them,\nmessing with their bikes and with\ltheir swagger when they're not\llooking, and those Tops are none\lthe wiser!\p[.]\pYou'll know who the poor kid is\n'cause he'll be the one twitching\llike mad trying to fit in!\pYou go up to Route 16 and unmask\nthat little mole, and I think\lthose Tops will find their\lproblems suddenly going away[.]\pHahaha[.]\nHey, you're welcome, Rocket.
+
+#org @postFriendlyTalk
+= Hey, you're welcome, Rocket.\pYou'll know who the impostor on\nRoute 16 is 'cause he'll be the\lone twitching like mad trying to\lfit in!
+
+#org @angryTalk
+= Hey[.]\nI know you!\pYou're that Rocket dude who came\nand made trouble up in my joint in\lthe Underground Path!\pDon't you go thinking I'd forget a\nthing like that, now!\p[.]\pOh[.] hah! So that's what you're\ndoing here, is it?\pTrying to help these Tops up here\nwith some gang dispute?\l(Snigger[.])\pKid, I got enough influence in the\nKanto underworld to end a strife\llike this with the flick of my\lwrist, you know that?
+
+#org @angryTalk2
+= But see[.]\nI don't feel like doing that.\pI got a deal going with these\nBottoms, and if they want to keep\lmessing with those Tops of yours,\lI say they're welcome to!\pMatter of fact, I think[.]\nTroublemaker like you[.]\pDeserves to get taught lesson that\nyou ought to have learned last\ltime you meddled in my affairs!\c\h0B[Ke]À\pThis time it's all out, kid.\nI'll have you in the ground!
+
+#org @defeatText
+= Disgusting!
+
+#org @angryTalk3
+= Gah!\nYou never learn, do you..?\pI'm done with you for good now,\nyou got that?\p[.]\pAnd what else?\nOh, yeah[.]\pI think on my way outta here, I'll\nstop by those Tops and tell 'em\lthe Bottoms member that's been\lmessing with them all this time[.]\pIs this little pink-haired Rocket\npunk!\pTrusted businessman like me[.]\nIt's your word against mine, pal.\pHahaha[.]\nSee you in hell, Rocket.
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

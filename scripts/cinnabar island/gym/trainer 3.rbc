@@ -1,0 +1,9 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+call EXEC_STEAL
+checkflag 0x267
+if 0x0 call 0x816DABC
+release
+end

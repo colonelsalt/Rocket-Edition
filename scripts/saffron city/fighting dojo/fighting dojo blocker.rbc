@@ -1,0 +1,51 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define CHAMP 0x5
+
+#org @main
+lock
+sound 0x15 // exclamation
+pause 0x15
+applymovement CHAMP @approach
+waitmovement 0x0
+pause 0x10
+textcolor 0x0
+checkflag 0x286
+if 0x1 goto @enemy
+msgbox @talk 0x6
+pause 0x10
+setflag 0x284
+checkflag 0x208
+if 0x1 goto @postCerulean
+warp 0x3 0xA 0xFF 0x28 0xD
+waitstate
+end
+
+#org @postCerulean
+warp 0x3 0xA 0xFF 0x27 0xD
+waitstate
+end
+
+#org @enemy
+msgbox @talk2 0x6
+pause 0x10
+warp 0x3 0xA 0xFF 0x28 0xD
+waitstate
+end
+
+#org @approach
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0x4A
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Hooh-ha!\nWhat's this?\pA criminal has entered our dojo!\nThey warned us about you! Hwah!\pYou! Rocket!\nAre not welcome here!\pBe gone! Leave us!\nDon't come back! Ha-yah!
+
+#org @talk2
+= You!\nHooh-ha!\pDouble-crosser!\nEvil Rocket! Haaah!\pYou cannot enter! My Dojo!\nBe gone! Chaaa-yah!

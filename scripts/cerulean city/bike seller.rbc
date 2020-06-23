@@ -1,0 +1,85 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkitem 0x168 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @postSteal
+msgbox @talk MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @continue
+msgbox @no1 0x6
+release
+end
+
+#org @continue
+msgbox @talk2 MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @continue2
+msgbox @no2 0x6
+release
+end
+
+#org @continue2
+msgbox @talk3 MSG_YESNO
+compare LASTRESULT 0x0
+if 0x1 goto @continue3
+msgbox @yes3 0x6
+release
+end
+
+#org @continue3
+msgbox @talk4 0x6
+trainerbattle 0x3 0xD 0x0 @defeat
+call EXEC_STEAL
+textcolor 0x0
+msgbox @after 0x6
+additem 0x168 0x1
+fanfare 0x10D
+loadpointer 0x0 @bikeGet
+giveitem2 0x168 0x1 0x10D
+waitfanfare
+pause 0x10
+closeonkeypress
+release
+end
+
+#org @postSteal
+msgbox @postStealTalk 0x6
+release
+end
+
+#org @talk
+= What in the..?\pDo you think you can just waltz on\nin here and steal yourself one of\lour expertly, painstakingly\lcrafted top-grade Bicycles?
+
+#org @no1
+= No? Oh, okay, then.\nCarry on.
+
+#org @talk2
+= Who do you think you are?\p[.]\c\h08ó\nOh, a Rocket, is that it?\pYou think it's cool, do you?\pYou think stealing the fruits of\nother men's labor is cool?\pYou think that gluttonously taking\nwhatever your greedy hands can\lreach, without regard for the\lwell-being or the needs of this\lregion's people, let alone the\lprosperity of its fledgling\leconomy--is COOL?
+
+#org @no2
+= Wha--\c\h08ó no, did you say?\nUm[.] why, that's exactly right.\pNot cool in the slightest.
+
+#org @talk3
+= [.]\c\h08ó\nYou!\pYou are the embodiment of\neverything that is wrong with the\lworld!\pYou, immoral youngsters, walking\naround like you own everything you\lsee, like everything is owed you\lby virtue of your having been\lborn!\pI fought in the war for your sort,\nyou know!\pDoes that give you something\nworthwhile to think about, huh?
+
+#org @yes3
+= Hmm? Yes..? I-it does?\nWahaha! I mean, I bet it does!\pWell, you go on home and you think\nabout that real good, now!
+
+#org @talk4
+= Gah!\pImpossible to get to through to\nyou with words, is it?\pWell, f-fine!\nYou asked for it, bandit!\pIf I could defend my region in\nwar, I can defend myself in\lbattle against crooks like you!
+
+#org @defeat
+= Positively inconceivable!
+
+#org @after
+= [.]\c\h08ó\nWhat has the world come to..?\pDisarmed[.] defeneseless[.]\pAt the hands of some pink-haired,\ncostume-wearing punk[.]\pNo..!\c\h08ó Hey, no! Please don't!\c\h08ó\nI won't allow--\c\h08ó m-my Bicycles..!
+
+#org @bikeGet
+= [player] stole the Bicycle from the\nBike Shop!
+
+#org @postStealTalk
+= You[.] fiend..!\nEvil[.] ungrateful[.] vile..!

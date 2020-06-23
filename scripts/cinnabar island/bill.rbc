@@ -1,0 +1,41 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x3
+
+#org @main
+lock
+faceplayer
+compare 0x4016 0x10
+if _GREATER_EQ goto @postMissingno
+msgbox @talk 0x6
+pause 0x10
+spriteface _BILL FACE_UP
+pause 0x15
+setdooropened 0x8 0x9
+doorchange
+pause 0x5
+applymovement _BILL @moveUp
+waitmovement 0x0
+hidesprite _BILL
+setdoorclosed 0x8 0x9
+doorchange
+setflag 0xA8
+clearflag 0xA9
+release
+end
+
+#org @postMissingno
+msgbox @talk2 0x6
+release
+end
+
+
+#org @talk
+= Bill: There you are, [player].\pCome on, no time to waste!\nThey're waiting inside!
+
+#org @talk2
+= Bill: Come on, [player]!\nGo on to Oak's lab in Pallet Town!\pI don't care if the door is bolted\nshut, we've got to break in!\pThey must have taught you how to\ndeal with something like that in\lTeam Rocket, didn't they?
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE

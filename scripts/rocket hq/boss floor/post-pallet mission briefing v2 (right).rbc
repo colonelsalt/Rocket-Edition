@@ -1,0 +1,128 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x1
+#define _RONNIE 0x2
+
+#org @main
+lockall
+textcolor 0x0
+msgbox @bossTalk 0x6
+showsprite _RONNIE
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+applymovement _RONNIE @stepU
+waitmovement 0x0
+msgbox @ronnieTalk 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_LEFT
+pause 0x25
+msgbox @bossTalk2 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+msgbox @bossTalk3 0x6
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk4 0x6
+pause 0x30
+applymovement 0x7F @panBack
+applymovement _RONNIE @ronnieLeave1
+waitmovement 0x0
+pause 0x10
+spriteface _RONNIE FACE_RIGHT
+spriteface 0xFF FACE_LEFT
+pause 0x15
+msgbox @ronnieTalk2 0x6
+applymovement _RONNIE @ronnieLeave2
+waitmovement 0x0
+sound 0x9
+hidesprite _RONNIE
+special 0x114
+pause 0x25
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+pause 0x10
+goto MISSIONBRIEFING // 0x8433F1
+
+#org @bossTalk
+= Giovanni: You did what?!
+
+#org @ronnieTalk
+= Ronnie: Well, Boss[.]\c\h08ó me and\n[player] are best buds, you know,\land I figured he'd use some help!
+
+#org @bossTalk2
+= Giovannni: [.]\pThis girl was clearly connected to\nthese Red and Blue twerps.\pYet you not only interfere with\none of my Admins' investigation[.]\pBut proceed to openly reveal the\npurpose of his mission!\pHow could a dimwit like you pass\nthrough our initiation proce--
+
+#org @bossTalk3
+= Hang on[.]\pYou're that grunt who got the\npolice on our backs with the\lCerulean scandal, aren't you?\pIn Arceus's name[.]
+
+#org @bossTalk4
+= Out of my sight, grunt!\pYou're damn lucky I don't let a\npack of wild Arcanine on you right\lthis second!\pScram!
+
+#org @ronnieTalk2
+= Ronnie: Gee, [player].\c\h08ó\nBoss is real grumpy-like today.\pGuess I'll have to wait for him to\npromote me till he chills it[.]\pIf he'd only seen me at my best,\nthat'd show him something else!\p[.]\pWell, anyway[.] I got him all good\nand warmed up for you in there!\pHaha!\nCatch ya later, man.
+
+#org @cameraPan
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @panBack
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @ronnieLeave1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @ronnieLeave2
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @playerApproach
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE

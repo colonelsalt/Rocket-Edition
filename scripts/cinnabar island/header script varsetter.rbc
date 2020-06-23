@@ -1,0 +1,31 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x3
+#define _BLUE 0x6
+#define _BLAINE 0x7
+
+#org @main
+setworldmapflag 0x898
+compare 0x4016 0x10 // if post-MissingNo scene has happened
+if _GREATER_EQ call @moveScientistsMaybe
+compare 0x4016 0xF // if MissingNo released or just caught
+if 0x1 call @varResetter
+end
+
+#org @varResetter
+setvar 0x4014 0x7 // activate 0x2-level script for warp
+movesprite2 0x1 0x5 0x5
+spritebehave 0x1 0x9 // move this distracting bitch away
+return
+
+#org @moveScientistsMaybe
+compare 0x4016 0x14 // if Oak's secret lab not entered
+if _LESS call @moveScientists
+return
+
+#org @moveScientists
+movesprite2 _BILL 0x16 0x9
+spritebehave _BILL 0x7
+movesprite2 _BLAINE 0x15 0x7
+movesprite2 _BLUE 0x16 0x6
+return

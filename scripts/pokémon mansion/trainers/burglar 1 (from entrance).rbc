@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xD8 0x0 0x8177498 0x81774CB EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= And here I always thought Rockets\nwere much too high-brow criminals\lto hang out in places like this[.]

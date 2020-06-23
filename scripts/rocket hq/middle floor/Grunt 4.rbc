@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Does it ever strike you as funny\nthat TMs use optical media?\pLike, you'd think flash drives\nwould work so much faster[.]

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Imagine what we can pull off with\nthis Master Ball in our hands[.]\pMaybe we'll finally have the power\nto stage a coup against Lance?

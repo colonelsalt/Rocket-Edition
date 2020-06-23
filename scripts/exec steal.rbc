@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+checkflag 0x2A4 // if Player is Executive, let them steal
+if 0x1 call POKESTEAL
+return

@@ -1,0 +1,192 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x7
+#define _MOM 0x8
+
+#org @main
+lock
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x20
+textcolor 0x0
+compare 0x4046 0x1
+if 0x1 goto @second
+msgbox @talk 0x6
+fadeout 0x0
+pause 0x10
+spriteface _OAK FACE_DOWN
+pause 0x30
+preparemsg @talk2
+pause 0x29
+sound 0xEC // A6 B9 CA
+checksound
+waitmsg
+waitkeypress
+closeonkeypress
+pause 0x20
+applymovement _OAK @walk
+waitmovement 0x0
+pause 0x15
+msgbox @talk3 0x6
+pause 0x25
+spriteface _OAK FACE_DOWN
+pause 0x25
+applymovement _OAK @walk2
+waitmovement 0x0
+pause 0x25
+msgbox @talk4 0x6
+pause 0x30
+spriteface _OAK FACE_RIGHT
+pause 0x30
+applymovement _OAK @walk3
+waitmovement 0x0
+pause 0x40
+spriteface _OAK FACE_DOWN
+pause 0x30
+msgbox @talk5 0x6
+fadein 0x0
+pause 0x2C
+setvar 0x4016 0x27
+setvar 0x4014 0xF
+setflag 0x200
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x75 0xFF 0x7 0x17
+release
+end
+
+#org @second
+msgbox @2talk 0x6
+pause 0x20
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @2talk2 0x6
+pause 0x25
+applymovement _OAK @2walk
+applymovement 0xFF @2walkPlayer
+waitmovement 0x0
+pause 0x30
+msgbox @2talk3 0x6
+pause 0x20
+spriteface _MOM FACE_RIGHT
+pause 0x30
+applymovement _OAK @2walk2
+waitmovement 0x0
+pause 0x30
+msgbox @2talk4 0x6
+pause 0x30
+spriteface _OAK FACE_LEFT
+pause 0x30
+msgbox @2talk5 0x6
+pause 0x40
+compare 0x4045 0x2
+if 0x1 call @hideDitto
+compare 0x4045 0x1
+if _LESS call @showItem
+setvar 0x4014 0xF
+setvar 0x4016 0x29
+setvar 0x4046 0x0
+setflag 0x200
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x75 0xFF 0x11 0x7
+release
+end
+
+
+#org @hideDitto
+setflag 0x1BB
+return
+
+#org @showItem
+clearflag 0x1EC
+return
+
+
+#org @talk
+= Let's do away with all prior\nassumptions.\pWhat if those genes we synthesized\nwere instead manifest[.]
+
+#org @talk2
+= In a genetic clone[.]\c\h08ó\nOf a human boy?
+
+#org @talk3
+= Yes[.]\pA boy with those unique and\nunwavering qualities, raised for\lPokémon battle[.]\pHe would not be subject to the\nsame limitations as a normal human\lTrainer.
+
+#org @talk4
+= Coldly and objectively he could\ndevise his battle strategies, push\lhis Pokémon to their limits[.]\pLike a dispassionate puppet master,\ndirectly controlling the actions\lof his Pokémon from afar[.]\pAs if by the click of a button[.]
+
+#org @talk5
+= Fuji and Shigeki have taught me\nall I need.\pI will create this superhuman\nTrainer on my own.\pAnd nobody is to know.
+
+#org @2talk
+= Initial tests appear promising[.]\pBut I cannot recreate the body of\na full-grown, living boy of\lbattling age.
+
+#org @2talk2
+= For the clone to resemble a human\nwell enough to fool the world[.]\pI will create my master Trainer as\nan embryo and let nature take its\lcourse.
+
+#org @2talk3
+= A sterile local widow, blindly\ndevoted to me since our youth,\lwill happily agree to adopt him as\lhis mother.
+
+#org @2talk4
+= Of course[.]\pHe will need little nurturing for\nhis genetic code to bloom as\lintended.\pThe purpose of his childhood will\nbe to imprint only a single lesson[.]
+
+#org @2talk5
+= That I am a father figure he can\ntrust[.]\pAnd that my word, for his own\ngood, is law.
+
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @walk
+#raw STEP_L
+#raw 0xFE
+
+#org @walk2
+#raw STEP_D
+#raw 0xFE
+
+#org @walk3
+#raw STEP_R
+#raw STEP_U
+#raw 0xFE
+
+#org @2walk
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @2walkPlayer
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @2walk2
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+
+
+
+
+
+

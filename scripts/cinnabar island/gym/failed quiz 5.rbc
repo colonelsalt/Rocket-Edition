@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4001 0x0
+if 0x1 call 0x816E017
+compare 0x4001 0x1
+if 0x1 call 0x816E029
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox 0x8199A7F MSG_KEEPOPEN '"I've been to many Gyms, but this\n..."
+trainerbattle 0x3 0xD7 0x0 0x8199AB9
+call EXEC_STEAL
+checkflag 0x26A
+if 0x1 goto 0x816DC68
+call 0x816DFBD
+releaseall
+end

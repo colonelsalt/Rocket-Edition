@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Hmm?\nYou're a Rocket?\pWell[.] catching you guys[.]\nThat's somebody else's job.\pI'm just a gate guard, okay?\nNobody can blame me!

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x20D
+if 0x0 call @hideladder
+end
+
+#org @hideladder
+setmaptile 0x1 0x2 0x2EE 0x0
+return

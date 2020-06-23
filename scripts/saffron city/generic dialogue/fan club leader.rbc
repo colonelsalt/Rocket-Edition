@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @main
+= All of us gathered here are fans\nof Pokémon Trainers.\pThe way they look in battle[.]\nThey are the picture of coolness.\pHah! But we'll never talk about\npetty Rockets like you.

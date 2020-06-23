@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x94 0x0 0x8184844 0x818487E POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9E1C
+msgbox 0x8184890 MSG_NORMAL '"Keep walking!"
+end

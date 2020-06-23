@@ -1,0 +1,36 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BLAINE 0x7
+
+#org @main
+lock
+spriteface _BLAINE FACE_RIGHT
+pause 0x5
+sound 0x15 // exclamation
+applymovement _BLAINE @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @intro 0x6
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto MAINSCRIPT // 0x844713
+
+#org @intro
+= Blaine: Argh!\pSo you've come for me at last,\nhave you? Giovanni's pet.
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @playerApproach
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE

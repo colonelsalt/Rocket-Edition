@@ -1,0 +1,58 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x22E
+if 0x1 goto @postPallet
+checkflag 0x227
+if 0x1 goto @postRed
+checkflag 0x20C
+if 0x1 goto @missionReceived
+checkflag 0x205
+if 0x1 goto @postmtmoon
+msgbox @talk1 0x6
+spriteface 0x5 FACE_DOWN
+release
+end
+
+#org @postmtmoon
+msgbox @talk2 0x6
+spriteface 0x5 FACE_DOWN
+release
+end
+
+#org @missionReceived
+msgbox @talk3 0x6
+spriteface 0x5 FACE_DOWN
+release
+end
+
+#org @postRed
+msgbox @talk4 0x6
+spriteface 0x5 FACE_DOWN
+release
+end
+
+#org @postPallet
+msgbox @talk5 0x6
+spriteface 0x5 FACE_DOWN
+release
+end
+
+#org @talk1
+= Shoo!\pBoss has enough on his mind\nwithout little grunts like you\lcoming in and bothering him.
+
+#org @talk2
+= You be good now, grunt!\pIf we find out you've insulted\nBoss in any way, shape or form,\lwe'll have you kicked out of Team\lRocket before you can say\l"Rattata"!
+
+#org @talk3
+= Hmph! Well, you better not\ndissapoint Boss now, you hear?
+
+#org @talk4
+= He was just too strong[.]\pMaybe I'm not fit to guard Boss\nafter all[.]
+
+#org @talk5
+= Even though we sometimes fail in\nour guardkeeping[.]\pWe must press on! No little kids\ncan kill our motivation!
+
+

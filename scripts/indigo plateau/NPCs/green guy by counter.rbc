@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= So that's how quickly the region\ncan be taken over by an eleven-\lyear-old.\pI suppose no one anticipated this\nin the constitution?
+

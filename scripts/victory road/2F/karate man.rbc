@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x145 0x0 @pre 0x81748B4 EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @pre
+= I've trained all my life for this!\nI'll get to see Bruno's up close!
+
+#org @after
+= Victory Road is no place to be a\nsore loser.

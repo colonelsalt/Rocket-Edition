@@ -1,0 +1,63 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x2
+
+#org @main
+lock
+applymovement 0xFF @playerMove
+waitmovement 0x0
+applymovement _BILL @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x10
+applymovement _BILL @leave
+pause 0x30
+fadescreen 0x1
+movesprite _BILL 0x7 0x6
+spriteface _BILL FACE_LEFT
+movesprite2 _BILL 0x7 0x6
+spritebehave _BILL _LOOK_LEFT
+showsprite _BILL
+pause 0x10
+fadescreen 0x0
+setvar 0x404F 0x4
+release
+end
+
+
+#org @talk
+= Bill: Agatha too[.]\c\h08ó\nGod, that kid is fast[.]\pWe have to hurry, [player]!
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_U
+#raw 0xFE
+
+#org @leave
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+

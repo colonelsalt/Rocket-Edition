@@ -1,0 +1,110 @@
+#dynamic 0x800000
+
+#org @main
+special 0x187
+compare LASTRESULT 0x2
+if 0x1 goto @error
+special 0x188
+lock
+faceplayer
+msgbox @introTalk 0x6
+showmoney 0x0 0x0 0x0
+msgbox @moneyTalk MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck
+goto @noBranch
+
+#org @moneyCheck
+checkmoney 0xBB8 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @notEnough
+goto @pokemonSelect
+
+#org @error
+release
+end
+
+#org @noBranch
+hidemoney 0x0 0x0
+msgbox @noTalk MSG_KEEPOPEN
+release
+end
+
+#org @pokemonSelect
+msgbox @whichPokemon MSG_KEEPOPEN
+special 0xDB
+waitstate
+compare 0x8004 0x6
+if 0x4 goto @noBranch
+special 0x148
+compare LASTRESULT 0x1
+if 0x1 goto @egg
+compare 0x8005 0x0
+if 0x1 goto @noMoves
+goto @teachMove
+
+#org @egg
+msgbox @eggTalk MSG_KEEPOPEN '"Hunh? There isn't a single move\nt..."
+goto @pokemonSelect
+
+#org @noMoves
+msgbox @noMovesTalk MSG_KEEPOPEN '"Sorry[.]\pIt doesn't appear as if ..."
+goto @pokemonSelect
+
+#org @teachMove
+hidemoney 0x0 0x0
+msgbox @whichMove MSG_KEEPOPEN '"Which move should I teach?"
+special 0xE0
+waitstate
+compare 0x8004 0x0
+if 0x1 goto @pokemonSelect
+release
+showmoney 0x0 0x0 0x0
+pause 0x10
+goto @payMoney
+
+#org @payMoney
+paymoney 0xBB8 0x0
+sound 0x41
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x10
+hidemoney 0x0 0x0
+call @copyVars
+release
+end
+
+#org @notEnough
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+release
+end
+
+#org @copyVars
+copyvar 0x8012 0x8013
+return
+
+
+#org @introTalk
+= I'm the Pokémon Move Maniac.\pI know every single move that\nPokémon learn growing up.\pI'm also a capital maniac.\pBring me some cold, hard dough and\nI'll teach your Pokémon a move!
+
+#org @moneyTalk
+= It's [$]3,000 a pop.\nHow about it, brother?
+
+#org @noTalk
+= Hey, if your Pokémon need to learn\na move, I need compensation.
+
+#org @whichPokemon
+= Which Pokémon needs tutoring?
+
+#org @eggTalk
+= Hunh? There isn't a single move\nthat I can teach an Egg.
+
+#org @noMovesTalk
+= Sorry[.]\pIt doesn't appear as if I have a\nmove I can teach that Pokémon.
+
+#org @whichMove
+= Which move should I teach?
+
+#org @notEnoughTalk
+= Ha, you poor loser!\nYou're not fooling me!\pGo get a job and get me some more\ndough before you see me again.

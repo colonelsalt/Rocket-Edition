@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1D2 0x0 0x8185B12 0x8185B48 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I wish Carbos could have sped me\nup enough to run away from you!

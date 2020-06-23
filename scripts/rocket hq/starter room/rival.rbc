@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @start
+lock
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Man, I'm loving the gangster life\nalready.

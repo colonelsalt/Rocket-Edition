@@ -1,0 +1,24 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x2D7 // if ghosts not unmasked
+if 0x1 call @blockMovement
+checkflag 0x39 // if Red has become Champion
+if 0x1 call @closeDoorMaybe
+end
+
+
+#org @blockMovement
+setmaptile 0x6 0xC 0x3BE 0x1
+setmaptile 0x6 0xA 0x3E6 0x1
+return
+
+#org @closeDoorMaybe
+checkflag 0x2EB // if Hall of Fame door not broken down
+if 0x0 call @closeDoor
+return
+
+#org @closeDoor
+setmaptile 0x6 0x2 0x293 0x1
+setmaptile 0x6 0x1 0x3EA 0x1
+return

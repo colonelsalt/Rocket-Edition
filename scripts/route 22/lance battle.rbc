@@ -1,0 +1,261 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LANCE 0x1
+
+#org @main
+lock
+textcolor 0x0
+sound 0x26
+pause 0x10
+msgbox @talk 0x6
+checksound
+setdooropened 0x8 0x5
+doorchange
+clearflag 0x200
+showsprite _LANCE
+sound 0x9
+applymovement 0xFF @playerMove
+applymovement _LANCE @walk1
+waitmovement 0x0
+setdoorclosed 0x8 0x5
+doorchange
+pause 0xA
+sound 0x15 // exclamation
+applymovement _LANCE @exclamation
+waitmovement 0x0
+msgbox @talk2 0x6
+pause 0x15
+applymovement _LANCE @walk2
+waitmovement 0x0
+pause 0x20
+msgbox @talk3 0x6
+pause 0x25
+spriteface _LANCE FACE_RIGHT
+pause 0x30
+msgbox @talk4 0x6
+fadeout 0x1
+spriteface _LANCE FACE_LEFT
+pause 0x30
+msgbox @talk5 0x6
+pause 0x25
+applymovement _LANCE @walk3
+waitmovement 0x0
+pause 0x35
+msgbox @talk6 0x6
+pause 0x40
+spriteface _LANCE FACE_RIGHT
+pause 0x25
+msgbox @talk7 0x6
+pause 0x25
+applymovement _LANCE @walk4
+waitmovement 0x0
+pause 0x25
+msgbox @talk8 0x6
+pause 0x40
+spriteface _LANCE FACE_LEFT
+pause 0x10
+playsong 0x156 0x0
+msgbox @hey 0x6
+applymovement _LANCE @walk5
+waitmovement 0x0
+pause 0x10
+msgbox @talk9 0x6
+pause 0x15
+applymovement _LANCE @stepL
+waitmovement 0x0
+msgbox @talk10 0x6
+copyvar 0x8000 0x401F // save bounty
+setflag 0x200
+// TODO: set appropriate levels
+// special 0x3B
+// playsong 0x128 0x0
+trainerbattle 0x3 0x19D 0x0 @defeatText 
+call POKESTEAL
+clearflag 0x200
+textcolor 0x0
+comparevars 0x8000 0x401F // if bounty increased, has stolen
+if _NOT_EQ call @stolen
+pause 0x15
+applymovement _LANCE @walk6
+waitmovement 0x0
+pause 0x20
+msgbox @talk11 0x6
+fadeout 0x2
+spriteface _LANCE FACE_LEFT
+pause 0x30
+msgbox @talk12 0x6
+pause 0x15
+applymovement _LANCE @walk7
+waitmovement 0x0
+pause 0x25
+msgbox @talk13 0x6
+pause 0x25
+applymovement _LANCE @walk3
+waitmovement 0x0
+pause 0x30
+msgbox @talk14 0x6
+pause 0x25
+applymovement _LANCE @walk8
+waitmovement 0x0
+pause 0x25
+msgbox @talk15 0x6
+pause 0x30
+spriteface _LANCE FACE_DOWN
+pause 0x25
+msgbox @talk16 0x6
+pause 0x25
+setvar 0x8000 0x95
+compare 0x4084 0x95
+if 0x1 call @dragoniteStolen
+cry 0x8000 0x0
+applymovement _LANCE @flyStep
+waitmovement 0x0
+pause 0x40
+setanimation 0x0 0x1
+doanimation 0x1E
+pause 0xF
+hidesprite _LANCE
+checkanimation 0x1E
+setvar 0x4016 0x33
+setflag 0x200
+fadein 0x2
+release
+end
+
+#org @stolen
+pause 0x10
+sound 0x15 // exclamation
+applymovement _LANCE @exclamation
+waitmovement 0x0
+bufferpokemon 0x1 0x4084
+msgbox @stolenTalk 0x6
+return
+
+// if Dragonite stolen, play Aerodactyl cry on flight
+#org @dragoniteStolen
+setvar 0x8000 0x8E
+return
+
+
+
+#org @talk
+= Out of my way if you know what's\ngood for you!
+
+#org @talk2
+= Lance: Giovanni?!
+
+#org @talk3
+= No[.]\c\h08ó You're just one of his more\nwell-dressed goons, aren't you?\pOff to loot some exotic Pokémon from\ntravelling Victory Road Trainers?\pI'll say[.]\c\h08ó that's a real menace to\nsafety for League challengers!
+
+#org @talk4
+= And most decidedly[.]\c\h08ó\nNot my problem anymore!
+
+#org @talk5
+= [.]\c\h08ó\nWell..?\pHaven't you heard, bum?\c\h08ó\nHa!\pThen I'll spare you the effort of\nburgling the newsstand tomorrow!
+
+#org @talk6
+= It's over!\c\h08ó\nI'm no longer Champion!
+
+#org @talk7
+= A decade of unchallenged reign[.]\c\h08ó\nGone, in an instant!\pBy some[.]\pGod, I can't even say it!\c\h08ó\nWhat will my grandfather think..?!\pSome little kid from some middle-\nof-nowhere town!
+
+#org @talk8
+= It's[.]\c\h08ó\nPositively absurd[.]
+
+#org @hey
+= Hey!
+
+#org @talk9
+= And what are you so smug about it\nfor?\pDon't you go thinking this is\nsome political victory for you\lsilly bunch of anarchists, now!\pEntitled, delusional delinquents\nis all Team Rocket ever was..!\pThis changes nothing!
+
+#org @talk10
+= Agh[.] I thought nothing could\naggravate me any further today,\lbut you've done it, punk!\pI don't care if the region\nsoon breaks apart now this\lfarmboy is Champion[.]\pI'll show you how a real leader\ndeals with criminals like you!\c\h0B[Ke]À
+
+#org @defeatText
+= I'm hallucinating!
+
+#org @stolenTalk
+= M-my [buffer2]!\c\h08ó\nHow could this happen..?\pI'll need to have it replaced..!
+
+#org @talk11
+= Unbelievable[.]\c\h08ó\nPunk like you[.]\pAh[.]\c\h08ó\nI need to find my composure again[.]\pI'm letting my emotions ruin my\nbattle strategy[.]
+
+#org @talk12
+= [.]\c\h08ó\nI'll have you know, Mr. Mafioso[.]\pI could've taken you all out long\nago.\pI knew about your little Game\nCorner hideout.\pIt's not as if my new anti-crime\nlaws did anything to stop you.\p[.]\c\h08ó\nI didn't mean them to.
+
+#org @talk13
+= I wanted to wait. For you to cause\na real public spectacle.\pArrest and punish you as headline\nnews, to make a statement[.]\pTo please the crowds, restore their\nfaith in me.\pAnd to show my doubters just how\nmad all gangs like yours are[.]\pThat still long for returning to a\npre-war Kanto..!
+
+#org @talk14
+= Your Silph Co. invasion was the\nperfect opportunity[.]\pI was going to rush in at the last\nminute, give your boss a beating\land save the day[.]\pBut by the time I arrived[.]\pIt seemed someone had already\nbeaten me to it[.]
+
+#org @talk15
+= Well!\c\h08ó\nWhat's done is done.\pI'm not finished with Kanto yet.\nI still have a position to defend.\pI'm a member of the Elite Four now,\nyou see. New responsibilities.
+
+#org @talk16
+= [.]\c\h08ó\nHmph!\pSo excuse me while I go change the\nnew Champion's diapers..!
+
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @walk1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @walk2
+#raw STEP_U
+#raw STEP_U
+#raw FACE_L
+#raw 0xFE
+
+#org @walk3
+#raw STEP_D
+#raw 0xFE
+
+#org @walk4
+#raw STEP_R
+#raw 0xFE
+
+#org @walk5
+#raw STEP_L
+#raw STEP_U
+#raw FACE_L
+#raw 0xFE
+
+#org @walk6
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @walk7
+#raw STEP_L
+#raw 0xFE
+
+#org @walk8
+#raw STEP_U
+#raw STEP_L
+#raw 0xFE
+
+#org @flyStep
+#raw 0x25
+#raw 0xFE
+

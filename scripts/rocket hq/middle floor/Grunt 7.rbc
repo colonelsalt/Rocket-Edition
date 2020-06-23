@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= My ass.\pYou couldn't even steal a thing\nfrom a Cooltrainer if he was\lblind, deaf and dead.\pYou got that from some spoiled\nlittle Youngster kid who had it\lfrom his dad, don't even try me.

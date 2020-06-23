@@ -1,0 +1,207 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define RONNIE 0x5
+#define SUPERNERD 0x3
+
+#org @main
+lock
+pause 0x10
+sound 0xA
+applymovement RONNIE @jump
+waitmovement 0x0
+sound 0xA
+applymovement RONNIE @jump
+waitmovement 0x0
+textcolor 0x0
+msgbox @rontalk 0x6
+spriteface RONNIE FACE_DOWN
+applymovement 0xFF @playermove
+waitmovement 0x0
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk1 0x6
+spriteface RONNIE FACE_LEFT
+pause 0x10
+msgbox @rontalk2 0x6
+applymovement RONNIE @ronmove
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+msgbox @rontalk3 0x6
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+spriteface RONNIE FACE_UP
+spriteface 0xFF FACE_UP
+msgbox @nerdtalk3 0x6
+spriteface RONNIE FACE_LEFT
+spriteface 0xFF FACE_RIGHT
+applymovement RONNIE @stepL
+waitmovement 0x0
+msgbox @rontalk4 0x6
+applymovement RONNIE @fakeleave
+waitmovement 0x0
+msgbox @rontalk5 0x6
+applymovement RONNIE @ronreturn
+waitmovement 0x0
+msgbox @rontalk6 0x6
+applymovement SUPERNERD @stepR
+waitmovement 0x0
+msgbox @nerdtalk4 0x6
+applymovement SUPERNERD @symbolicmove
+waitmovement 0x0
+msgbox @nerdtalk5 0x6
+pause 0x10
+spriteface SUPERNERD FACE_UP
+pause 0x10
+msgbox @nerdtalk6 0x6
+pause 0x10
+spriteface SUPERNERD FACE_DOWN
+pause 0x10
+msgbox @nerdtalk7 0x6
+applymovement RONNIE @stepL
+waitmovement 0x0
+msgbox @rontalk7 0x6
+pause 0x15
+spriteface RONNIE FACE_RIGHT
+pause 0x10
+msgbox @rontalk8 0x6
+pause 0x15
+applymovement RONNIE @walk2player
+waitmovement 0x0
+msgbox @rontalk9 0x6
+applymovement RONNIE @stepL
+waitmovement 0x0
+msgbox @rontalk10 0x6
+applymovement RONNIE @ronleave
+waitmovement 0x0
+sound 0x9
+hidesprite RONNIE
+setflag 0x20B
+setvar 0x401A 0x2
+release
+end
+
+#org @jump
+#raw 0x52
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0xFE
+
+#org @rontalk
+= Ronnie: [player], [player]!\nI found the Super Nerd guy!\pAnd guess what?\pHe says he's found some mother-\nflippin' Pokémon fossils!\pHow cool is this?
+
+#org @playermove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @nerdtalk1
+= Easy, now.\pI've only been able to find these\ntwo fossils here, and they're\lhardly anything to brag about.\pFrankly, this whole fossil frenzy\nhas been quite blown out of\lproportion, if you ask me.
+
+#org @rontalk2
+= Yeah, yeah; whatever you say.
+
+#org @ronmove
+#raw STEP_D2
+#raw 0x6
+#raw 0xFE
+
+#org @rontalk3
+= Dude! [player]!\nThis is awesome!\pI told you we were gonna find\nsomething, didn't I?
+
+#org @nerdtalk3
+= Er-hem! Let's not go forgetting\nwho did most of the finding here[.]
+
+#org @rontalk4
+= Oh man, oh man, oh man!\pGuess who's going to be the first\nto report this spectacular finding\lto Petrel, eh?\pMan, I can't wait to see the faces\non those whimpy-ass grunts out by\lthe Pokémon Center when they see\lhow I salvaged the mission for all\lof us!
+
+#org @fakeleave
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @rontalk5
+= Hang on, that reminds me[.]
+
+#org @ronreturn
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x6
+#raw 0xFE
+
+#org @rontalk6
+= Ronnie: Mr. Nerd guy, did you\nhappen to see some little kid\lTrainer come through here?\pSomeone with spiky hair and a\ncocky attitude, maybe?
+
+#org @nerdtalk4
+= Yes, I did. Funny you'd ask.
+
+#org @symbolicmove
+#raw 0x0
+#raw 0x1C
+#raw 0xFE
+
+#org @nerdtalk5
+= In fact, he came right through\nhere not too long ago, walking\laround with his Wartortle outside\lits Poké Ball like some big show-\loff.\pI think he's all gone now, though.
+
+#org @nerdtalk6
+= Anyway. At least he didn't seem to\ncare about the fossils.\pI just told him I wasn't a Trainer\nand he just walked on past.
+
+#org @nerdtalk7
+= The kid had a Wartortle, for\ncrying out loud!
+
+#org @rontalk7
+= Ronnie: Huh.\pWell, I guess we won't have to\nworry about him anymore.
+
+#org @rontalk8
+= (Still[.] you never know if some\nopportunistic little prick could\lswoop in and ruin my chance for\lglory while I'm gone[.])
+
+#org @walk2player
+#raw STEP_D
+#raw 0x2
+#raw 0xFE
+
+#org @rontalk9
+= Say, [player], how about you stand\nguard here for a little bit while\lI go get Petrel?\pI doubt there'll be any trouble,\nbut just in case any Trainers\lstroll past here-- that includes\lany of those wussies from\lupstairs, you beat the crap out of\lthem and make sure they don't get\lany of the credit for finding the\lfossils, okay?
+
+#org @rontalk10
+= That's the spirit. Be right back.
+
+#org @ronleave
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE

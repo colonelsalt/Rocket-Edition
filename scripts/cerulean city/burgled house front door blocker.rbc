@@ -1,0 +1,19 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+spriteface 0xFF FACE_UP
+msgbox @sign MSG_KEEPOPEN
+closeonkeypress
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+release
+end
+
+#org @sign
+= The door is locked[.]
+
+#org @movePlayer
+#raw STEP_D
+#raw 0xFE

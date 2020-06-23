@@ -1,0 +1,31 @@
+#dynamic 0x800000
+
+#org @main
+lockall
+checkflag 0x827
+if 0x1 goto @youBeat
+checkflag 0x2AE // if boss promotion happened
+if 0x1 goto @redBeat
+msgbox @text MSG_KEEPOPEN
+releaseall
+end
+
+#org @redBeat
+msgbox @text2 MSG_KEEPOPEN
+releaseall
+end
+
+#org @youBeat
+msgbox @text3 MSG_KEEPOPEN
+releaseall
+end
+
+
+#org @text
+= Viridian Pokémon Gym\nLeader: ?\pWinning Trainers:
+
+#org @text2
+= Viridian Pokémon Gym\nLeader: ?\pWinning Trainers:\nBlue, Red
+
+#org @text3
+= Viridian Pokémon Gym\nLeader: ?\pWinning Trainers:\nBlue, Red, Mohammed Smith

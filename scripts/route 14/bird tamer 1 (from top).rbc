@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x139 0x0 0x8185E4D 0x8185E81 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Of course, if you keep on being a\nno-good criminal, nobody's going\lto want to sell you any TMs!

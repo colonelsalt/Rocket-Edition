@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1E0 0x0 @challenge 0x8186612 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= I'm afraid of Bikers[.]\nAre you friendlier, mister?
+
+#org @postBattle
+= Wahh!\pThose Bikers were nothing compared\nto you[.]

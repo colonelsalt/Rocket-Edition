@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= These guys have got beds in the\noffice! Talk about dedication[.]\pWhy would anyone work that hard at\na job, when you can just steal\lwhat you like and be a gangster?\pSome things I guess I'll never\nunderstand.

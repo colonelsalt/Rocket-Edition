@@ -1,0 +1,31 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+checkflag 0x20C
+if 0x1 goto @endOfTheLine
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveaway
+waitmovement 0x0
+release
+end
+
+#org @endOfTheLine
+textcolor 0x0
+msgbox @talk2 0x6
+applymovement 0xFF @moveaway
+waitmovement 0x0
+release
+end
+
+#org @talk
+= I'm on guard duty.\nGee, I'm thirsty, though!\pOh, wait there, the road's closed.
+
+#org @talk2
+= Congratulations! You've reached\nthe end of the line. If you want\lto move on to Saffron you'll have\lto wait for the next beta release.\lSorry about that! In the\lmeantime, I suggest you keep an\leye out for more updates at\lbit.ly/pkmfrrocketed. Thanks\lfor playing!
+
+#org @moveaway
+#raw STEP_L
+#raw 0xFE

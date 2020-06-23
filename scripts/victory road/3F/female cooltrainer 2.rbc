@@ -1,0 +1,11 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x194 0x0 0x8174BCA 0x8174BF4 EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @after
+= And criminals live to find\nstronger victims, is that it?!
+

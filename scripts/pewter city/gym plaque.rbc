@@ -1,0 +1,7 @@
+#dynamic 0x800000
+
+#org @text1
+= Pewter Pokémon Gym\nLeader: Brock\pWinning Trainers:\nBlue, Red
+
+#org @text2
+= Pewter Pokémon Gym\nLeader: Brock\pWinning Trainers:\nBlue, Red, Mohammed Smith

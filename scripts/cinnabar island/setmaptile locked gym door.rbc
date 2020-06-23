@@ -1,0 +1,17 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+checkflag 0x2EA
+if 0x0 call @lockDoorMaybe
+end
+
+#org @lockDoorMaybe
+// if post-Missingno scene, need door to be normal
+compare 0x4018 0x7
+if _NOT_EQ call @lockDoor
+return
+
+#org @lockDoor
+setmaptile 0x14 0x4 0x22B 0x1
+return

@@ -1,0 +1,70 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4012 0x1
+if 0x1 goto @merchantintro
+lock
+faceplayer
+compare 0x4012 0x2
+if 0x1 goto @merchant2
+msgbox @merchanttalk4 0x6
+release
+end
+
+#org @merchant2
+msgbox @merchanttalk2 0x6
+sound 0x15
+applymovement 0x2 @exclamation
+waitmovement 0x0
+msgbox @merchanttalk3 0x6
+setvar 0x4012 0x3
+release
+end
+
+#org @merchantintro
+lock
+applymovement 0x2 @stepU
+waitmovement 0x0
+msgbox @merchanttalk 0x6
+applymovement 0x1 @stepD
+waitmovement 0x0
+msgbox @guardtalk 0x6
+setvar 0x4012 0x2
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @merchanttalk
+= Hello, friend. Would you like-eh\nto buy some of my-eh salty snacks?\pVery nice, very crispy, very\nhomemade, yes?
+
+#org @guardtalk
+= Well, I guess a few couldn't\nhurt[.]\p[.]\c\h08ó\n(Munch-munch)\p[.]\nHmm[.] not bad.
+
+#org @merchanttalk2
+= Hello, my friend!\pWould you like-eh some special\nhomemade extra salty snacks?\pIt is special recipe from-eh my\nhome count--
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @merchanttalk3
+= Oh no!\nYou are bad man!\pIt is not good. I do not sell\nmy-eh snacks to you.\pGoodbye please.
+
+#org @merchanttalk4
+= Team Rocket is-eh bad for\nbusiness. People no like.

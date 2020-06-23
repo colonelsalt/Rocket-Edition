@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= The ghosts that now plague our\nPokémon Tower[.]\pThey're all your fault, aren't\nthey, Rocket?\pJust wait till Mr. Fuji gets his\nhands on you! He'll make you pay!

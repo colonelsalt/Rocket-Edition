@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I've heard many rumors about you\nRockets from Lavender.\pIs it all true? Are you really the\nroot of all evil?

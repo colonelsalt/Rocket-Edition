@@ -1,0 +1,82 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+applymovement RONNIE @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @ronTalk1 0x6
+pause 0x15
+spriteface GRUNT1 FACE_UP
+pause 0x15
+msgbox @gruntTalk1 0x6
+pause 0x10
+spriteface GRUNT1 FACE_RIGHT
+pause 0x15
+applymovement GRUNT2 @stepU
+waitmovement 0x0
+msgbox @gruntTalk2 0x6
+pause 0x15
+spriteface GRUNT3 FACE_LEFT
+pause 0x15
+msgbox @gruntTalk3 0x6
+pause 0x10
+applymovement GRUNT1 @stepR
+waitmovement 0x0
+msgbox @gruntTalk4 0x6
+pause 0x10
+applymovement ARCHER @stepD
+waitmovement 0x0
+msgbox @adminTalk1 0x6
+pause 0x20
+spriteface ARCHER FACE_RIGHT
+pause 0x20
+msgbox @adminTalk2 0x6
+pause 0x20
+spriteface ARCHER FACE_DOWN
+pause 0x20
+msgbox @adminTalk3 0x6
+sound 0x46 // "wooden smash"
+spriteface ARCHER FACE_RIGHT
+msgbox @gruntYell 0x6
+applymovement ARCHER @exclamation
+waitmovement 0x0
+
+
+#org @ronTalk1
+= Ronnie: You guys! You're not gonna\nbelieve this:\pThe cops are in town!\pThey're up by the old TM\ncollector's house-- I swear, we\lonly 
+barely got away before they\lhad us in cuffs just now!
+
+#org @gruntTalk1
+= No kidding, man-- what do you\nthink we're all so worked up over?
+
+#org @gruntTalk2
+= Jeez, what are we going to do?\nYou think they're onto us?
+
+#org @gruntTalk3
+= But they couldn't have seen us!\nWe were real stealth-like!\pThey've got no reason to think it\nwas us and not some other old\lburglar, have they?
+
+#org @gruntTalk4
+= Come on! You can't know if at\nleast one of us didn't slip up and\lget spotted at some point!\pI mean, I'm sure it doesn't take a\ngenius of a bystander 
+to spot a\lcrew of Rocket grunts walking\laround and a house being robbed\land somehow connect the two, does\lit?
+
+#org @adminTalk1
+= Archer: That's enough.\nPlease be quiet, all.\pThere should be no reason for\nalarm.\pThe police have arrived at the\nscene a lot quicker than they\lusually do, but there's no reason\lfor them to suspect us in\lparticular just yet.
+
+#org @adminTalk2
+= And, even if they did, well[.]\pWe've got enough influence in the\nKanto police department to ensure\lthe repercussions for us will be\lminimal.
+
+#org @adminTalk3
+= No, this is a far too\nlow-impact episode for them to\ltake any definite action.\p[.]\pUnless, of course--
+
+#org @gruntYell
+= Hey, guys! Check this out!\nIt's on the TV!\pGet over here, quick!
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

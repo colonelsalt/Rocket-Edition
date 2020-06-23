@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Er-hem!\nHello there, Rocket!\pI work at the Poké Mart in\nViridian City!\pAnd I'll have you know[.]\pOur employees are specially\ntrained to deter robberies!\pSo don't you even think about\ngoing there and snatching\lsomething you didn't pay for!\pIt won't work!\nNo, sir!

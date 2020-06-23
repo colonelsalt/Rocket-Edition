@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= All right, stay cool everyone!\pDon't nobody get the funny idea of\ncalling someone for help..!

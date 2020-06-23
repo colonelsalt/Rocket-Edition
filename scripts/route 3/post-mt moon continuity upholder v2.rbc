@@ -1,0 +1,70 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+sound 0x15
+applymovement 0xA @exclamation
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x10
+spriteface 0xA FACE_DOWN
+pause 0x10
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+pause 0x10
+msgbox @talk2 0x6
+pause 0x10
+applymovement 0x7F @cameraBack
+waitmovement 0x0
+special 0x114
+spriteface 0xA FACE_RIGHT
+msgbox @talk3 0x6
+applymovement 0xFF @playerMove
+waitmovement 0x0
+release
+end
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= Hey, man-- you're not a Rocket,\nare you?\pDude, you probably want to stay\naway from here for a little while.
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @talk2
+= Looks like the cops got tipped off\nabout you guys having some sort of\loperation going here earlier.\pThink they're interviewing\nwitnesses or something. I dunno.
+
+#org @cameraBack
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @talk3
+= Just thought I'd give you a heads\nup, man-- those cops can be pesky\las hell, know what I'm saying?\pProbably nothing to worry about,\nreally, but you never know[.]
+
+#org @playerMove
+#raw STEP_U
+#raw 0xFE

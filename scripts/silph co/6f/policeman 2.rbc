@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x17D 0x0 @challenge @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= What will become of all of our\nPoké Balls if Silph goes under?
+
+#org @defeat
+= Stupid criminal!
+
+#org @postBattle
+= Think before you act, Rocket!\nThis is a silly operation[.]

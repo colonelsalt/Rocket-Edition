@@ -1,0 +1,52 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x2
+
+#org @main
+lock
+applymovement 0xFF @moveUp
+waitmovement 0x0
+applymovement _BILL @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x10
+applymovement _BILL @leave
+waitmovement 0x0
+hidesprite _BILL
+sound 0x9
+checksound
+setflag 0xA9
+setvar 0x402E 0xC
+clearflag 0xAA
+release
+end
+
+#org @talk
+= Over here in the Testing room on\nthe far right. Quickly!\pDon't worry about the snooty\nresearchers. They won't bite.
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE
+
+#org @leave
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE

@@ -1,0 +1,121 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2E8
+if 0x1 goto @postSale
+msgbox @talk 0x6
+lock
+showmoney 0x0 0x0 0x0
+msgbox @yesNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+release
+end
+
+#org @postSale
+msgbox @postSaleTalk 0x6
+release
+end
+
+#org @moneyCheck
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @hasEnough
+msgbox @notEnoughTalk 0x6
+goto @transaction
+end
+
+#org @hasEnough
+msgbox @hasEnoughTalk 0x6
+goto @transaction
+end
+
+#org @transaction
+lock
+sound 0x41
+paymoney 0x3E8 0x0 // test: will this overflow?
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+pause 0x8
+givepokemon 0x76 0x14 0x0 0x0 0x0 0x0
+fanfare 0x101
+textcolor 0x2
+preparemsg @goldeenGet
+waitmsg
+waitfanfare
+bufferpokemon 0x1 0x76
+setvar 0x8007 0x0
+compare LASTRESULT 0x1
+if 0x1 call @sent2pc
+msgbox @nicknameorno 0x5
+compare LASTRESULT 0x1
+if 0x1 call @giveNick
+closeonkeypress
+compare 0x8007 0x69
+if 0x1 call @pcbox
+setflag 0x2E8
+release
+end
+
+#org @sent2pc
+setvar 0x8007 0x69
+copyvar 0x8008 0x4037
+addvar 0x8008 0x1
+return
+
+#org @giveNick
+compare 0x8007 0x69
+if 0x1 goto @pcnick
+countpokemon
+subvar LASTRESULT 0x1
+copyvar 0x8004 LASTRESULT
+call 0x1A74EB // nickname function
+return
+
+#org @pcnick
+fadescreen 0x1
+special 0x166
+waitstate
+lock
+faceplayer
+return
+
+#org @pcbox
+buffernumber 0x2 0x8008
+msgbox @pcmsg 0x6
+return
+
+
+#org @talk
+= I don't know what to make of this\nmadness, really.\p[.]but if by any chance you need a\nPokémon with Surf to face that\lshadow by the shore[.]
+
+#org @yesNo
+= [.]I'll sell you one that can learn\nit for [$]1,000. Eh?
+
+#org @noTalk
+= Ah[.] worth a shot, though?\pA crisis is the best time to make\nsome profit, hehehe[.]
+
+#org @notEnoughTalk
+= Hm[.] you're out of cash?\nGeez! Unprepared, aren't you?\pFine-- I'll take what you have and\nleave it at that.
+
+#org @hasEnoughTalk
+= Much obliged. You go face that\nthing at your own risk, I say.
+
+#org @goldeenGet
+= [player] obtained a Goldeen!
+
+#org @nicknameorno
+= Would you like to give a nickname\nto Goldeen?
+
+#org @pcmsg
+= [buffer2] was sent to Box [buffer3]\nin Bill's PC.
+
+#org @postSaleTalk
+= Now you go deal with that creepy\nbeast by the shore!\pThose freaky mirage-people outside\ndon't make for good customers!
+

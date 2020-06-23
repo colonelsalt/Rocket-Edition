@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= My parents keep telling me I'm not\nallowed to go through the\lUnderground Path.\pBut they just won't tell me why[.]

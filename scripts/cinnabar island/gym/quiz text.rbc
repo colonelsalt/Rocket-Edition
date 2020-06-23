@@ -1,0 +1,19 @@
+#dynamic 0x800000
+
+#org @q1
+= Gastly and its evolutions are the\nonly known Ghost/Poison Pokémon?
+
+#org @q2
+= Jigglypuff was originally planned\nas the official mascot of Pokémon?
+
+#org @q3
+= Jynx is the only Pokémon that can\nlearn Lovely Kiss?
+
+#org @q4
+= Saffron is the most populous city\nin Kanto?
+
+#org @q5
+= Mewtwo is the first Pokémon shown\nin the Pokémon opening theme?
+
+#org @q6
+= Celadon Gym is the only Gym in\nKanto without a Gym guide present?

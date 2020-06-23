@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1E2 0x0 0x8173D63 0x8173D92 POKESTEAL
+msgbox 0x8173DB6 MSG_NORMAL '"Fifteen years ago, I would\nhave w..."
+end

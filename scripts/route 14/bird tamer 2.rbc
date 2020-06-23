@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x13A 0x0 0x8185EDF 0x8185F0B EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Keep your fingers off of my birds,\nRocket!

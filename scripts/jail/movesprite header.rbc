@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _POLICE 0x4
+
+#org @main
+checkflag 0x2DC
+if 0x1 call @movePolice
+end
+
+#org @movePolice
+movesprite2 _POLICE 0xB 0xA
+spritebehave _POLICE _LOOK_LEFT
+return

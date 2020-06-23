@@ -1,0 +1,30 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x7
+#define _ROBOT 0x1
+
+#org @main
+compare 0x4046 0x1
+if 0x1 call @moveOak
+compare 0x4016 0x26 // if video diary not active
+if _NOT_EQ call @moveRobotMaybe
+end
+
+#org @moveOak
+movesprite2 _OAK 0x11 0x6
+return
+
+#org @moveRobotMaybe
+compare 0x4016 0x25
+if _GREATER_EQ call @moveRobot
+return
+
+#org @moveRobot
+movesprite2 _ROBOT 0x3 0x19
+spritebehave _ROBOT 0xA
+return
+
+
+
+
+

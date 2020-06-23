@@ -1,0 +1,53 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIRL 0x1
+
+#org @main
+lockall
+textcolor 0x1
+msgbox @eek 0x6
+movesprite _GIRL 0x6 0xC
+movesprite2 _GIRL 0x6 0xC
+showsprite _GIRL
+applymovement _GIRL @runDown
+waitmovement 0x0
+pause 0x10
+msgbox @talk 0x6
+pause 0x10
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @allowEntry
+warp 0x3 0x6 0xFF 0xB 0x1F
+waitstate
+end
+
+#org @allowEntry
+msgbox @talk2 0x6
+fadescreen 0x1
+pause 0x30
+movesprite _GIRL 0x3 0xB
+movesprite2 _GIRL 0x3 0xB
+showsprite _GIRL
+spriteface _GIRL FACE_RIGHT
+fadescreen 0x0
+setvar 0x402B 0x1
+releaseall
+end
+
+#org @eek
+= Eeeeek!
+
+#org @talk
+= There's a Rocket in our Gym!\nAnd a[.] man, no less..!\pUnbelievable!\nI say we kick him out right away!
+
+#org @talk2
+= Wait[.] huh?\nYou're actually a real Trainer..?\p[.]\pWell, that sure looks like a real\nTrainer Card, anyway[.]\pYou're just[.] wearing a costume\nfor fun?\p[.]\pThat's[.] really funny!\pOh, all right, Trainer!\nCome in, then!
+
+#org @runDown
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+

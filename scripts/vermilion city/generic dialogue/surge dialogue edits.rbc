@@ -1,0 +1,16 @@
+#dynamic 0x800000
+
+#org @talk
+= Well, have it your way, Rocket!\pYou won't live long in combat!\nNot with your puny power!\pI tell you, kid, electric Pokémon\nsaved me during the war!\pThey zapped my enemies into\nparalysis!\pThe same as I'll do to you!\c\h0B[Ke]À
+
+#org @talk2
+= Now that's a shocker!\pYou're the real deal, Rocket!\pFine, then, take the Thunderbadge!
+
+#org @talk3
+= Well, what can I say, Rocket?\nYou done shocked me!
+
+#org @talk4
+= The Thunderbadge cranks up your\nPokémon's Speed!\pYou're special, Rocket!\nTake this!
+
+#org @talk5
+= Yo, bud, make room in your Bag!

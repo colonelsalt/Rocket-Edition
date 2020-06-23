@@ -1,0 +1,21 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xCC 0x0 @challenge @defeat @after
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Hey, better watch it!\pI'm a falcon from the Bottoms gang\non Route 18!
+
+#org @defeat
+= Disrespect!
+
+#org @postBattle
+= You Rockets have no clue what real\ngang life is like.
+
+#org @after
+addvar 0x4033 0x1
+call EXEC_STEAL
+end

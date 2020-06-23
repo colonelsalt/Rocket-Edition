@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= This Underground Path[.] I never\nnoticed it as a child, but[.]\pIt has got to be the shadiest\nplace in this whole region[.]

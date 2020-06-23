@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= They say Silph Co. has been\nputting many local Apricot farmers\lout of business.\pBut so what? Somebody has to\nsuffer in the name of progress!

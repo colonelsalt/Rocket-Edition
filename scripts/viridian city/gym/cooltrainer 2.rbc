@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= You're ten thousand light years\naway from facing Giovanni!\p[.]\pHmmm[.]\nHow does that line sound?
+
+#org @talk2
+= Wait[.]\pNow the game is up, do I have to\nget rid of my Cooltrainer outfit?\pAnd here people were starting to\nshow me respect for once[.]

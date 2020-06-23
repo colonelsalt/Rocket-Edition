@@ -1,0 +1,13 @@
+#dynamic 0x800000
+
+#org @talk
+= Eeek!\nNo! Stop! Help!\pI'll do anything if you'll let me\nbe, okay?\pI-I'll even teach your Pokémon\nThunder Wave..!\pI'm sure you Rockets like\nparalyzing foes, don't you?
+
+#org @talk2
+= Wh-which Pokémon should learn\nThunder Wave?
+
+#org @talk3
+= Y-you said you'd leave me alone!
+
+#org @talk4
+= Eeeek!\pI'm sorry I don't have a better\nmove to teach!

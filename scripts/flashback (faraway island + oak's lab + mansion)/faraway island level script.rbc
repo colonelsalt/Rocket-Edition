@@ -1,0 +1,137 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define FUJI 0x2
+#define FUJI2 0x3
+#define _MEW 0x4
+#define BOAT 0x1
+#define _M2 0x5
+
+#org @main
+checkflag 0x28F // if Mewtwo escape has happened, jump to Cerulean Cave part
+if 0x1 goto @script3
+checkflag 0x28E
+if 0x1 goto @script2
+sound 0x4C // boat travel sound
+applymovement BOAT @moveToLand
+waitmovement 0x0
+sound 0x4D // boat stop sound
+checksound
+pause 0x15
+sound 0x9 // shuffle
+showsprite FUJI
+applymovement FUJI @stepOnLand
+waitmovement 0x0
+pause 0x20
+spriteface FUJI FACE_LEFT
+pause 0x25
+spriteface FUJI FACE_RIGHT
+pause 0x25
+applymovement FUJI @walk
+waitmovement 0x0
+setflag 0x28E
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @script2
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x30
+sound 0x9
+showsprite FUJI2
+checksound
+sound 0x15 // exclamation
+applymovement _MEW @exclamation
+waitmovement 0x0
+checksound
+cry 0x97 0x0
+waitcry
+pause 0x25
+warpmuted 0x3 0x11 0xFF 0x6 0x8 // To Champion Room
+waitstate
+end
+
+#org @script3
+pause 0x15
+cry 0x96 0x0
+pause 0x15
+sound 0x9C // water rushing sound
+pause 0x20
+showsprite _M2
+applymovement _M2 @enterCave
+waitmovement 0x0
+sound 0x9 // shuffle
+hidesprite _M2
+pause 0x25
+textcolor 0x0
+msgbox @bossTalk 0x6
+warpmuted 0x21 0x0 0xFF 0xB 0x7 // to transition map
+waitstate
+end
+
+#org @moveToLand
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @stepOnLand
+#raw STEP_U
+#raw 0x1C
+#raw STEP_U
+#raw 0xFE
+
+#org @walk
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @enterCave
+#raw 0x38
+#raw 0x38
+#raw 0x38
+#raw 0x38
+#raw 0x38
+#raw 0x38
+#raw 0x38
+#raw 0x38
+#raw 0x36
+#raw 0x36
+#raw 0x36
+#raw 0x36
+#raw 0xFE
+
+#org @bossTalk
+= As far as I know, that's where it\nstill hides to this day.\pNo capture expedition since--\nnot by the government, by us or\lany other party for that matter,\lhas been successful.

@@ -1,0 +1,64 @@
+#dynamic 0x800000
+#define _LEADER 0xF
+#define _GRUNT1 0x10
+#define _GRUNT2 0x11 // guard
+#define _GRUNT3 0xE // guard
+#define _KID 0x12
+
+#org @main
+setworldmapflag 0x891
+setflag 0x2B3
+compare 0x4016 0x2E
+if 0x1 call @blockShortcut
+compare 0x401F 0x78 // if bounty >= 100,000
+if 0x4 call @showGruntsMaybeMaybe
+compare 0x403B 0x1
+if 0x1 call @robberyStarted
+compare 0x403B 0x6
+if 0x1 call @postRobberyMaybe
+end
+
+#org @showGruntsMaybeMaybe
+compare 0x403B 0x7 // if robbery not done
+if 0x0 call @showGruntsMaybe
+return
+
+#org @showGruntsMaybe
+compare 0x4016 0x31 // if this is not the Boss promotion script
+if 0x0 call @showGrunts
+return
+
+#org @showGrunts
+clearflag 0x2B3
+spritebehave _LEADER 0x13
+return
+
+#org @robberyStarted
+movesprite2 _GRUNT2 0x23 0x14
+spritebehave _GRUNT2 0xE // look left and right
+movesprite2 _GRUNT3 0x25 0x14
+spritebehave _GRUNT3 0x16 // look down, left, right
+movesprite2 _LEADER 0x0 0x27
+movesprite2 _GRUNT1 0x1 0x27
+return
+
+#org @postRobberyMaybe
+compare 0x4016 0x31 // if this is not the Boss promotion script
+if 0x0 call @postRobbery
+return
+
+#org @postRobbery
+movesprite2 _LEADER 0x24 0x15
+spritebehave _LEADER 0x7 // look up
+movesprite2 _GRUNT1 0x22 0x14
+movesprite2 _GRUNT2 0x25 0x14
+spritebehave _GRUNT2 0x9 // look left
+movesprite2 _GRUNT3 0x23 0x16
+return
+
+#org @blockShortcut
+movesprite2 _KID 0x8 0x5
+return
+
+
+

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Proton: It's about time we did an\noperation against Silph.\pThat company president is so deep\nin with Lance and his government[.]\lIt's sickening.

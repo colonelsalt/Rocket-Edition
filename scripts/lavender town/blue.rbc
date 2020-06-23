@@ -1,0 +1,292 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x1
+
+#org @main
+lock
+spriteface BLUE FACE_RIGHT
+playsong 0x13B 0x0
+textcolor 0x0
+msgbox @heyYou 0x6
+spriteface 0xFF FACE_LEFT
+goto @mainScript
+end
+
+#org @mainScript
+applymovement BLUE @stepR
+waitmovement 0x0
+msgbox @talk 0x6
+applymovement BLUE @stepR
+waitmovement 0x0
+msgbox @ellipses MSG_KEEPOPEN
+fadeout 0x0
+pause 0x12
+closeonkeypress
+pause 0x15
+spriteface BLUE FACE_LEFT
+pause 0x20
+msgbox @talk2 0x6
+applymovement BLUE @wander1
+waitmovement 0x0
+msgbox @talk3 0x6
+applymovement BLUE @wander2
+waitmovement 0x0
+msgbox @talk4 0x6
+applymovement BLUE @wander3
+playsong 0x132 0x0
+waitmovement 0x0
+msgbox @talk5 0x6
+pause 0x25
+spriteface BLUE FACE_DOWN
+pause 0x25
+msgbox @talk5.5 0x6
+applymovement BLUE @wander4
+waitmovement 0x0
+msgbox @talk6 0x6
+pause 0x20
+spriteface BLUE FACE_DOWN
+pause 0x20
+msgbox @talk7 0x6
+applymovement BLUE @wander5
+waitmovement 0x0
+msgbox @talk8 0x6
+pause 0x20
+spriteface BLUE FACE_LEFT
+pause 0x20
+msgbox @ellipses 0x6
+pause 0x20
+spriteface BLUE FACE_RIGHT
+pause 0x15
+applymovement BLUE @stepR
+waitmovement 0x0
+msgbox @talk9 0x6
+applymovement BLUE @wander6
+waitmovement 0x0
+msgbox @talk10 0x6
+pause 0x20
+spriteface BLUE FACE_RIGHT
+pause 0x15
+applymovement BLUE @stepR
+waitmovement 0x0
+msgbox @talk11 0x6
+applymovement BLUE @wander7
+waitmovement 0x0
+msgbox @talk12 0x6
+applymovement BLUE @stepD
+waitmovement 0x0
+msgbox @talk13 0x6
+pause 0x20
+spriteface BLUE FACE_LEFT
+pause 0x25
+msgbox @ellipses 0x6
+applymovement BLUE @moveToPlayer
+waitmovement 0x0
+applymovement BLUE @stepR
+waitmovement 0x0
+msgbox @talk14 0x6
+pause 0x25
+spriteface BLUE FACE_LEFT
+pause 0x25
+spriteface BLUE FACE_RIGHT
+pause 0x25
+msgbox @talk15 0x6
+applymovement BLUE @halfLeave
+waitmovement 0x0
+msgbox @talk16 0x6
+applymovement BLUE @fullLeave
+waitmovement 0x0
+sound 0x9
+hidesprite BLUE
+setflag 0x222
+setvar 0x401B 0x4
+checksound
+release
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @heyYou
+= Blue: Hey, you!
+
+#org @talk
+= What are you looking at? Go mind\nyour own dead Pokémon, I say!\pOh, you're the Rocket from before,\naren't you?\pWhat?\nWant a piece of me, pal?\pI'll have you know I'm way\nstronger than I was back on Nugget\lBridge, you can bet on it!\pI'll take you on, right here,\nright now! Bring it!
+
+#org @ellipses
+= [.]
+
+#org @talk2
+= Ah[.]\c\h08ó what's the use?
+
+#org @wander1
+#raw 0x1C
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk3
+= I really don't want to battle you\nright now, okay? It's a bad time.
+
+#org @wander2
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @talk4
+= Do you want to know why I came\nhere, Rocket?\pBecause my Pokémon died.\nThat's why.
+
+#org @talk5
+= See, there's this guy I know from\nPallet Town, where I grew up.\pHis name's Red.\pA lot of grown-ups think he's\namazing, but he's a bit of a\lloser, really.
+
+#org @talk5.5
+= Anyway, we became Pokémon Trainers\nat the same time, you see, and we\lbattle each other now and again.
+
+#org @talk6
+= Just a little while ago I fought\nhim aboard the S.S. Anne in\lVermilion.\pHe beat me-- he always does, to\ntell you the truth.\pBut, see, this time was\ndifferent[.]\pRed hurt my Raticate really bad in\nthat battle-- \c\h08óreally bad.
+
+#org @talk7
+= It was weeping and bleeding all\nover-- I mean, I could barely get\lit into its Poké Ball!\pSo I rushed out to get it to the\nPokémon Center as soon as I\lcould, but there was all this\lcommotion going on aboard the\lship, and I kept losing my way,\land taking all this time, and[.]
+\pAnd[.]\c\h08ó by the time I got there[.]\c\h08ó\c\h08ó\nthe nurse told me it was no use.\pRaticate was done for.\c\h08ó\nJust like that.
+
+#org @wander3
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @wander4
+#raw 0x1C
+#raw STEP_D
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @wander5
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @talk8
+= He's a murderer, you know.\c\h08ó\nA stinker, a loser and a murderer.\pI hate Red-- I hate his guts, and\nI always have!
+
+#org @talk9
+= Do you know Prof. Oak?\pYeah, he's my grandfather, but you\nsure wouldn't think so!\pHe's the one who licensed me and\nRed to become Pokémon Trainers.\pAnd let me tell you, ever since\nI was little, way before we were\leven Trainers, he always did like\lRed so much better than he ever\ldid me!
+
+#org @wander6
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk10
+= Everything I did, all the things I\naccomplished, and no matter how\lstrong I got[.] grandpa always\lseemed to think Red somehow did it\lbetter.\pLike Red's some special snowflake\nprodigy and I'm just[.] nobody.
+
+#org @talk11
+= [.]\pI called him, you know. Grandpa.\nRight after it happened.\pTold him about how I couldn't save\nRaticate, and how sad I was.\pAnd do you know what he told me?\p"Oh, that's too bad, son.\pHow about you catch a new one, a\nstronger one instead?"
+
+#org @wander7
+#raw 0x1C
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @talk12
+= He doesn't care about me one bit!\p[.]\pBut do you want to know another\nthing? I'm over it now.\pI'm done being Red's runner-up.\nIt's over.\pI've decided:\c\h08ó\I'm going to be the\nPokémon Champion!\pI don't care what or how long it's\ngoing to take, because that's what\lI'm going to do!
+
+#org @talk13
+= And when I stand atop the Indigo\nPlateau as the strongest Trainer\lin all of Kanto[.]\pGrandpa will finally see that he\nwas wrong about me all this time.\p[.]And nobody will care about Red\nand his stupid accomplishments\lanymore!
+
+#org @moveToPlayer
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0x1C
+#raw 0xFE
+
+#org @talk14
+= You know[.] you're alright,\nMr. Rocket man.\pGrandpa always told me to be\ncautious around you people, but I\ldon't think you're all bad.\pYou seem like the good, quiet,\nlistening type at least.\pThanks for hearing me out.
+
+#org @talk15
+= You going up top?\c\h08ó\nHow about we tag along?\pI was unsure before if I had the\nguts to climb all the way, what\lwith the ghosts up there and all.\pBut now[.]\c\h08ó now there's nothing in\nthe world that can scare me.\pI'll take anything at all!
+
+#org @halfLeave
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @talk16
+= I'll see you around, Mr. Rocket!
+
+#org @fullLeave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE

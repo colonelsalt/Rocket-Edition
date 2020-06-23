@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x133 0x0 0x8187640 0x8187672 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I wish I had the guts to steal me\na bike like you, Rocket.

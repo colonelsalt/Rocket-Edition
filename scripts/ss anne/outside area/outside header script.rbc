@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#define PROTON 0x2
+
+#org @main
+setworldmapflag 0x8A6
+checkflag 0x219
+if 0x1 call @postCaptain
+end
+
+#org @postCaptain
+checkflag 0x220
+if 0x0 call @varSetter
+movesprite2 PROTON 0x20 0x6
+return
+
+#org @varSetter
+setvar 0x4018 0x2
+return

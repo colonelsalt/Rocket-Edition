@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= This Old Amber, let me tell you!\nIt comes from a much stronger\lPokémon than these puny fossils[.]\pI've been handing them out to all\nmy co-workers and even a few\lpasserby kids to make them see!\p[.]\nMmmmh!\pBut you're fooling yourself if you\nthink I'd ever give a Rocket one!

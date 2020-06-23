@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= The Cascadebadge gets you one step\ncloser to the Pokémon League!\p[.]And surely that's where you\naspire to go, Trainer?\pYou can also have my favorite TM.

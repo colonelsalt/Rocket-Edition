@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x205
+if 0x1 call @check2
+end
+
+#org @check2
+compare 0x4016 0x3
+if 0x1 call @moveMe
+return
+
+#org @moveMe
+movesprite2 0xF 0x13 0x6
+return

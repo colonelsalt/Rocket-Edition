@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @start
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Come on, get moving already! I\nwant to steal me some Pokémon!

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+call EXEC_STEAL
+checkflag 0x269
+if 0x0 call 0x816DAF5
+release
+end
+
+
+#org @postBattle
+= All right, weirdo, I'll tell you!\pOur Leader, Blaine, became lost\nin the mountains but good.\pNight fell when a fiery bird\nPokémon appeared.\pIts light allowed Blaine to find\nhis way down safely.

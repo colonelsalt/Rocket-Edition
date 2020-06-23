@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+setflag 0x2F2
+checkflag 0x2F0 // if game complete
+if 0x1 call @showBoulder
+end
+
+#org @showBoulder
+clearflag 0x2F2
+return

@@ -1,0 +1,30 @@
+#dynamic 0x800000
+
+#org @main
+lockall
+checkflag 0x821
+if 0x1 goto @mistyBeat
+checkflag 0x219
+if 0x1 goto @redBeat
+msgbox @sign1 MSG_KEEPOPEN
+releaseall
+end
+
+#org @redBeat
+msgbox @sign2 MSG_KEEPOPEN
+releaseall
+end
+
+#org @mistyBeat
+msgbox @sign3 MSG_KEEPOPEN
+releaseall
+end
+
+#org @sign1
+= Cerulean Pokémon Gym\nLeader: Misty\pWinning Trainers:\nBlue
+
+#org @sign2
+= Cerulean Pokémon Gym\nLeader: Misty\pWinning Trainers:\nBlue, Red
+
+#org @sign3
+= Cerulean Pokémon Gym\nLeader: Misty\pWinning Trainers:\nBlue, Red, Mohammed Smith

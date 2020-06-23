@@ -1,0 +1,36 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0xE
+if 0x1 goto @midMission1
+compare 0x402E 0xD
+if 0x1 goto @beta3Continuity
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Eh?\pYou better not be up to any\nfunny business, Rocket!
+
+#org @beta3Continuity
+msgbox @beta3Talk 0x6
+setvar 0x402E 0xC
+warpmuted 0xC 0x4 0xFF 0x7 0x9
+release
+end
+
+#org @beta3Talk
+= Eh?\nYou're back?\pWe need to take this from the\nstart, my memory is a bit foggy.
+
+#org @midMission1
+msgbox @talk2 0x6
+spriteface 0x5 FACE_RIGHT
+release
+end
+
+#org @talk2
+= All right, Rocket[.]\pI'll accept your help, given\nwhat's at stake[.]\pBut once we're done here I want\nnothing more to do with you!
+
+

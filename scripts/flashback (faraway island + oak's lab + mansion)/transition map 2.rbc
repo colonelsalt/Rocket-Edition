@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+textcolor 0x0
+pause 0x15
+msgbox @oakTalk 0x6
+pause 0x25
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x1 0x76 0xFF 0x7 0x7
+waitstate
+end
+
+#org @oakTalk
+= I will return with a vengeance.

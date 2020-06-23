@@ -1,0 +1,187 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x13
+#define _RONNIE 0xE
+
+#org @main
+lock
+compare 0x4014 0x19
+if 0x1 goto @missingnoCheck
+compare 0x4016 0x35
+if 0x1 goto @postKnockOut
+compare 0x4014 0x16
+if 0x1 goto @secondTalk
+msgbox @talk 0x6
+pause 0x15
+setvar 0x4014 0x16
+movesprite2 _RONNIE 0x3 0xA
+movesprite _RONNIE 0x3 0xA
+spritebehave _RONNIE _LOOK_UP
+spriteface _RONNIE FACE_UP
+showsprite _RONNIE
+goto @secondTalk
+
+#org @secondTalk
+faceplayer
+msgbox @talk2 0x6
+spriteface _BILL FACE_UP
+release
+end
+
+#org @postKnockout
+faceplayer
+msgbox @2talk1 0x6
+pause 0x25
+call @faceOther
+pause 0x25
+msgbox @2talk2 0x6
+pause 0x25
+faceplayer
+pause 0x20
+msgbox @2talk3 0x6
+setvar 0x4014 0x19 
+// missingno check
+setvar 0x8004 0x198
+special2 LASTRESULT 0x17C
+compare LASTRESULT 0x1
+if _NOT_EQ goto @end
+// --------------
+pause 0x10
+call @talkStep
+msgbox @2talk4 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @enter
+msgbox @noTalk 0x6
+release
+end
+
+#org @missingnoCheck
+faceplayer
+setvar 0x8004 0x198
+special2 LASTRESULT 0x17C
+compare LASTRESULT 0x1
+if 0x1 goto @entryQuestion
+msgbox @noMissingnoTalk 0x6
+release
+end
+
+#org @entryQuestion
+msgbox @questionTalk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @enter
+msgbox @noTalk 0x6
+release
+end
+
+#org @enter
+msgbox @entryTalk 0x6
+pause 0x15
+spriteface _BILL FACE_UP
+pause 0x25
+applymovement _BILL @entryWalk
+waitmovement 0x0
+hidesprite _BILL
+setflag 0x241
+sound 0x9
+release
+end
+
+#org @end
+release
+end
+
+#org @faceOther
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x3
+if 0x1 call @faceRight
+compare 0x8000 0x4
+if _GREATER_EQ call @faceLeft
+return
+
+#org @faceRight
+spriteface _BILL FACE_RIGHT
+return
+
+#org @faceLeft
+spriteface _BILL FACE_LEFT
+return
+
+#org @talkStep
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x3
+if 0x1 call @stepLF
+compare 0x8000 0x4
+if 0x1 call @stepDF
+compare 0x8000 0x5
+if 0x1 call @stepRF
+return
+
+#org @stepLF
+applymovement _BILL @stepL
+waitmovement 0x0
+return
+
+#org @stepDF
+applymovement _BILL @stepD
+waitmovement 0x0
+return
+
+#org @stepRF
+applymovement _BILL @stepR
+waitmovement 0x0
+return
+
+#org @talk
+= Bill: What are you talking about,\n"challengers only"?\pYou just let that psychopath of a\nProfessor in, didn't you?!\pThis is important, woman!
+
+#org @talk2
+= It's no use, [player]..!\c\h08ó\nWe've got to get in somehow!\pLook, whatever dirty tricks you\nhave up your sleeve, or violent\lbrutes you can call up[.]\pIf there was ever a time we'd need\nthem, it's now!
+
+#org @2talk1
+= Bill: Well[.]\c\h08ó\nThis is it, [player]!\pI don't know what's going to\nhappen when we go through those\ldoors behind me[.]\pBut I think it's safe to say you\nmight face some of the toughest\lbattles of your life.
+
+#org @2talk2
+= So[.]\c\h08ó\nMake sure you're ready.\pIf you have preparations to make[.]\c\h08ó\nMake them now!
+
+#org @2talk3
+= I would strongly urge you to bring\nMissingNo. along as well.\pYou're going to need it.
+
+#org @2talk4
+= With that out of the way[.]\c\h08ó\nAre you ready, [player]?
+
+#org @entryTalk
+= Here we go, then.\c\h08ó\n[.]I've said my prayers already.
+
+#org @noTalk
+= Then get on with it, quick!\nRed won't wait for us!
+
+#org @questionTalk
+= Bill: Well!\nAll set, [player]?
+
+#org @noMissingnoTalk
+= If you have preparations to make[.]\c\h08ó\nMake them now!\pI would strongly urge you to bring\nMissingNo. along as well.\pYou're going to need it.
+
+#org @entryWalk
+#raw STEP_U
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+
+

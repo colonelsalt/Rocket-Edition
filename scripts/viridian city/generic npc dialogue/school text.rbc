@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= Pokémon Journal\pSpecial Feature: Prof. Oak,\nthe Pokémon Researcher!\pProf. Oak reportedly lives with his\ngrandchildren Daisy and Blue.

@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I want to ride my Bicycle, I want\nto ride my biiiike!\pI want to ride my BICYCLE, I want\nto ride it where I liiiiiike!

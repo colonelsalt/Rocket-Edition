@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+compare 0x403B 0x1
+if 0x1 goto @guarding 
+msgbox @talk 0x6
+release
+end
+
+#org @guarding
+msgbox @guardTalk 0x6
+release
+end
+
+#org @talk
+= You can't be a real Rocket if you\nain't ever robbed nothing before!\pLet's get this show on the road!
+
+#org @guardTalk
+= Get inside, quick!\nWe've got you covered here!

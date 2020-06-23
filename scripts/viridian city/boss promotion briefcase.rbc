@@ -1,0 +1,133 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BRIEFCASE 0x15
+
+#org @main
+lock
+textcolor 0x2
+msgbox @text MSG_SIGN
+pause 0x10
+fanfare 0x101
+// showmoney 0x12 0x0 0x0
+showmoney 0x14 0x0 0x0
+msgbox @text2 0x4
+pause 0x20
+sound 0x41
+givemoney 0x2710 0x0
+updatemoney 0x14 0x0 0x0
+checksound
+pause 0x15
+hidemoney 0x0 0x0
+pause 0x25
+closeonkeypress
+fadeout 0x0
+msgbox @text3 MSG_SIGN
+pause 0x20
+sound 0x35
+hidesprite _BRIEFCASE
+checksound
+pause 0x35
+applymovement 0xFF @promotionTwirl
+pause 0x5
+sound 0x85
+pause 0x55
+setflag 0x3D
+setflag 0x2AE // Rocket Boss flag
+setvar 0x4016 0x31
+copyvar 0x404C 0x403B // if player hasn't done robbery, need to save their current state
+setvar 0x403B 0x6 // activate viridian level script
+setvar 0x4054 0x8C // change walking sprite to #140
+setvar 0x4055 0x8B // change bike sprite to #139
+setvar 0x4056 0x64 // change sitting sprite to #100
+setvar 0x4057 0x63 // change poke ball sprite to #99
+setvar 0x4062 0x3 // set backsprite to Boss
+setvar 0x4075 0x1
+getplayerpos 0x8000 0x8001
+warpmuted 0x3 0x1 0xFF 0x8000 0x8001
+waitstate
+end
+
+
+
+#org @text
+= [player] opened the briefcase.\pInside was[.]\c\h08ó a sack of money!
+
+#org @text2
+= [player] obtained [$]10,000!
+
+#org @text3
+= [.]\c\h08ó\nA letter is attached.\p"Dear [player],\pI am not fit to lead Team Rocket\nany longer.\pMy criminal dignity will not allow\nit. I've failed you.\pBut you, [player][.]\c\h08ó You've grown\nmuch stronger than any of us.\pAs a Pokémon Trainer there's not a\nRocket in Kanto who measures up.\pAnd your honor is still intact.\c\h08ó\nSo with my blessing[.]\pDo the things I should have done\nlong ago.\pGo westwards to the Indigo Plateau,\nand take on the Elite Four.\pDeliver our revenge on Red[.]\c\h08ó\nLance[.]\c\h08ó and Oak.\pLeave Team Rocket a lasting legacy\nin Kanto.\c\h08ó Let them remember us.\pUse our infamy to its fullest[.]\c\h08ó then\ndisband the organization for good.\p[.]\pThe contents of this briefcase are\nyours to keep.\pI am giving you all the power and\nprestige the criminal world has\lto offer.\pThe power to steal from Gym\nLeaders, the Elite Four and the\lPokémon Champion.\pThis is to be your final promotion.\pRegards,\c\h08ó\nGiovanni"
+
+#org @promotionTwirl
+#raw FACE_U
+#raw 0x1B
+#raw FACE_R
+#raw 0x1B
+#raw FACE_D
+#raw 0x1B
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw 0xFE
+

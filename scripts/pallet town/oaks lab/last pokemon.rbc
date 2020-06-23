@@ -1,0 +1,36 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+pause 0x10
+spriteface 0x1 FACE_UP
+sound 0x15 // exclamation
+applymovement 0x1 @exclamation
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Oh, now!\nStop right there, Rocket!\pI may be a mere research aid, but\nI know better than to let you put\lyour dirty fingers on the\lProfessor's rarest Pokémon!\pGet off! Or I'll put all the aides\non you!
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE

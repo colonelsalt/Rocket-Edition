@@ -1,0 +1,18 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @move
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Hey, you! Weren't you supposed to\nbe my guard?\pI could use some help up here!
+
+#org @move
+#raw STEP_U
+#raw 0xFE

@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @text
+= Have you noticed the skinny trees\non the roadside?\pThis wild man who looks like a\nsailor keeps jumping out of the\lwoodworks offering to Cut them!

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define _BLAINE 0x8
+#include stdmoves.rbh
+
+#org @main
+compare 0x4016 0x14 // if Oak's secret lab not entered
+if _LESS call @hideBlaine
+return
+
+#org @hideBlaine
+movesprite2 _BLAINE 0xB 0x3
+return

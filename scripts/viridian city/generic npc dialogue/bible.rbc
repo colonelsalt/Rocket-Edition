@@ -1,0 +1,41 @@
+#dynamic 0x800000
+
+#org @main
+lockall
+msgbox @page1 MSG_KEEPOPEN '"Let's check out the notebook.\pFir..."
+msgbox 0x818FF19 MSG_YESNO '"Turn the page?"
+compare LASTRESULT 0x0
+if 0x1 goto @end
+msgbox @page2 MSG_KEEPOPEN '"Second page[.]\pA healthy Pokémon ..."
+msgbox 0x818FF19 MSG_YESNO '"Turn the page?"
+compare LASTRESULT 0x0
+if 0x1 goto @end
+msgbox @page3 MSG_KEEPOPEN '"Third page[.]\pPokémon Trainers se..."
+msgbox 0x818FF19 MSG_YESNO '"Turn the page?"
+compare LASTRESULT 0x0
+if 0x1 goto @end
+msgbox @page4 MSG_KEEPOPEN '"Fourth page[.]\pThe ultimate goal ..."
+applymovement 0x2 0x81A75E9
+waitmovement 0x0
+textcolor 0x1
+msgbox 0x818FF28 MSG_KEEPOPEN '"Girl: Hey!\nDon't look at my notes..."
+releaseall
+end
+
+
+#org @end
+releaseall
+end
+
+#org @page1
+= Religious studies, chapter 7.\pFirst page[.]\pIf in the capture of a legendary\nmonster thy holdest down B[.]\pYe are blessed, o child.\nFor the Lord hath heard thy prayer.
+
+#org @page2
+= Second page[.]\pAnd Arceus spoke thus to Adam and\nEve[.]\p"Thou shalt not eat of the tree of\nthe knowledge of super and\lnot-very effective, lest ye die."
+
+#org @page3
+= Third page[.]\pThou shalt not enter a grave\nbattle lest prior ye hast savest\lthy progress.\pThou shalt consult no website if\nthy puzzle is simple.\pThou shalt not TURN OFF THY POWER\nwhile thine monsters are traded.
+
+#org @page4
+= Fourth page[.]\pBlessed is the Son of Arceus[.]\pFor he died to atone for our cheat\ncodes.
+

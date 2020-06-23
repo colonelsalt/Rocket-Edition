@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= The island seemed to suddenly\ntwist and transform[.]\lI can't tell up from down anymore!\pAnd it all seems to be coming from\nthat shadow by the eastern shore[.]

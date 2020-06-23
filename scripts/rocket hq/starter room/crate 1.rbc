@@ -1,0 +1,20 @@
+#dynamic 0x800000
+
+#org @main
+lock
+checkflag 0x204
+if 0x1 goto @noCrate
+msgbox @talk 0x6
+release
+end
+
+#org @noCrate
+msgbox @nothing 0x6
+release
+end
+
+#org @nothing
+= There's nothing here[.]
+
+#org @talk
+= This crate has already been\nopened[.]

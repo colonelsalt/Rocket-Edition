@@ -1,0 +1,11 @@
+#dynamic 0x800000
+#define ARCHER 0x3
+
+#org @main
+checkflag 0x226
+if 0x1 call @moveAdmin
+end
+
+#org @moveAdmin
+movesprite2 ARCHER 0xB 0x5
+return

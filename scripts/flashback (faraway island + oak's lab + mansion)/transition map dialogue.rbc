@@ -1,0 +1,336 @@
+#dynamic 0x800000
+
+#org @main
+textcolor 0x0
+pause 0x15
+compare 0x402E 0x19
+if 0x1 goto @shigeki4
+compare 0x402E 0x18
+if 0x1 goto @shigeki3
+compare 0x402E 0x17
+if 0x1 goto @shigeki2
+checkflag 0x2E6
+if 0x1 goto @shigeki
+compare 0x402E 0x15
+if 0x1 goto @mewtwo3
+compare 0x402E 0x14 // if second part of Mewtwo flashback
+if 0x1 goto @mewtwo2
+compare 0x402E 0x13 // if Mewtwo defeated
+if 0x1 goto @mewtwo
+compare 0x402D 0x12 // if Giovanni leaving scene done
+if 0x1 goto @19thPass
+compare 0x402D 0x11 // if Shigeki disappearance scene done
+if 0x1 goto @18thPass
+compare 0x402D 0x10 // if Blaine and Bill surrender scene done
+if 0x1 goto @17thPass
+compare 0x402D 0xF // if Fuji surrender scene done
+if 0x1 goto @16thPass
+compare 0x402D 0xE // if Oak surrender scene done
+if 0x1 goto @15thPass
+compare 0x402D 0xD // if Mewtwo entering Cerulean Cave scene done
+if 0x1 goto @14thPass
+compare 0x402D 0xC // if Mewtwo escape scene (Pkmn mansion) done
+if 0x1 goto @13thPass
+compare 0x402D 0xB // if Mewtwo introduction scene (Pkmn mansion) done
+if 0x1 goto @12thPass
+compare 0x402D 0xA // if pre-Mewtwo Pokémon Mansion transitions done
+if 0x1 goto @11thPass
+compare 0x402D 0x9 // if Missingno escape transition done (Pkmn mansion)
+if 0x1 goto @10thPass
+compare 0x402D 0x8 // if 2nd Pokémon Mansion transition done
+if 0x1 goto @9thPass
+compare 0x402D 0x7 // if 1st Pokémon Mansion transition done
+if 0x1 goto @8thPass
+compare 0x402D 0x6 // if 1st Cinnabar Island (outside) transition done
+if 0x1 goto @7thPass
+compare 0x402D 0x5 // if Oak's Lab transition done
+if 0x1 goto @6thPass
+compare 0x402D 0x4 // if second Champion room transition done
+if 0x1 goto @5thPass
+compare 0x402D 0x3 // if first Faraway Island transition done
+if 0x1 goto @4thPass
+compare 0x402D 0x2 // If 1st Champion room transition done
+if 0x1 goto @3rdPass
+compare 0x402D 0x1 // If Indigo Plataeu transition done
+if 0x1 goto @2ndPass
+msgbox @bossTalk 0x6
+pause 0x20
+setvar 0x402D 0x1
+warpmuted 0x3 0xC 0xFF 0xB 0x7 // To Indigo Plataeu
+waitstate
+end
+
+#org @2ndPass
+msgbox @bossTalk2 0x6
+setvar 0x402D 0x2
+setflag 0x290 // IDs of Champion Room sprites
+warpmuted 0x3 0x11 0xFF 0x6 0xE // To Champion Room
+waitstate
+end
+
+#org @3rdPass
+msgbox @bossTalk3 0x6
+setvar 0x402D 0x3
+warpmuted 0x1 0x79 0xFF 0xE 0x17 // To Faraway Island (harbor)
+waitstate
+end
+
+#org @4thPass
+msgbox @bossTalk4 0x6
+setvar 0x402D 0x4
+warpmuted 0x1 0x79 0xFF 0x2F 0x16 // To Faraway Island (jungle)
+waitstate
+end
+
+#org @5thPass
+msgbox @bossTalk5 0x6
+setvar 0x402D 0x5
+warpmuted 0x2 0x23 0xFF 0x6 0x8 // To Oak's lab
+waitstate
+end
+
+#org @6thPass
+msgbox @bossTalk6 0x6
+setvar 0x402D 0x6
+warpmuted 0x3 0x31 0xFF 0x8 0x5 // To Cinnabar Island (outside)
+waitstate
+end
+
+#org @7thPass
+msgbox @bossTalk7 0x6
+setvar 0x402D 0x7
+clearflag 0x28E
+clearflag 0x28F
+warpmuted 0x1 0x63 0xFF 0x6 0xE // To Pokémon Mansion
+waitstate
+end
+
+#org @8thPass
+msgbox @bossTalk8 0x6
+setvar 0x402D 0x8
+warpmuted 0x1 0x63 0xFF 0x6 0x13 // To Pokémon Mansion (2nd scene)
+waitstate
+end
+
+#org @9thPass
+msgbox @bossTalk9 0x6
+setvar 0x402D 0x9
+warpmuted 0x1 0x63 0xFF 0x6 0xF // To Pokémon Mansion (3rd scene)
+waitstate
+end
+
+#org @10thPass
+msgbox @bossTalk10 0x6
+setvar 0x402D 0xA
+warpmuted 0x1 0x63 0xFF 0x6 0xF // To Pokémon Mansion (Fuji suggestion scene)
+waitstate
+end
+
+#org @11thPass
+msgbox @bossTalk11 0x6
+setvar 0x402D 0xB
+warpmuted 0x1 0x63 0xFF 0x6 0xD // To Pokémon Mansion (Mewtwo test tube scene)
+waitstate
+end
+
+#org @12thPass
+msgbox @bossTalk12 0x6
+setvar 0x402D 0xC
+clearflag 0x28F
+warpmuted 0x1 0x63 0xFF 0x6 0xD // To Pokémon Mansion (Mewtwo escape scene)
+waitstate
+end
+
+#org @13thPass
+msgbox @bossTalk13 0x6
+setvar 0x402D 0xD
+warpmuted 0x1 0x79 0xFF 0x7 0x7 // To Faraway Island / Cerulean Cave
+waitstate
+end
+
+#org @14thPass
+pause 0x10
+msgbox @bossTalk14 0x6
+pause 0x15
+setvar 0x402D 0xE
+clearflag 0x290
+warpmuted 0x3 0x11 0xFF 0x6 0x8 // To Champion Room (Oak surrender)
+waitstate
+end
+
+#org @15thPass
+msgbox @bossTalk15 0x6
+setvar 0x402D 0xF
+warpmuted 0x3 0x11 0xFF 0x6 0x8 // To Champion Room (Fuji surrender)
+waitstate
+end
+
+#org @16thPass
+msgbox @bossTalk16 0x6
+setvar 0x402D 0x10
+warpmuted 0x3 0x11 0xFF 0x6 0x8 // To Champion room (Blaine and Bill surrender)
+waitstate
+end
+
+#org @17thPass
+msgbox @bossTalk17 0x6
+setvar 0x402D 0x11
+warpmuted 0x3 0x31 0xFF 0x8 0x5 // To Cinnabar Island (outside)
+waitstate
+end
+
+#org @18thPass
+msgbox @bossTalk18 0x6
+setvar 0x402D 0x12
+warpmuted 0x3 0x11 0xFF 0x6 0x9 // To Champion room (Giovanni surrender)
+waitstate
+end
+
+#org @19thPass
+msgbox @bossTalk19 0x6
+pause 0x20
+setvar 0x402D 0x13
+setvar 0x4016 0xA
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+warpmuted 0x1 0x71 0xFF 0x13 0x7
+waitstate
+end
+
+#org @mewtwo
+textcolor 0x2
+pause 0x10
+msgbox @mewTalk 0x6
+setvar 0x402E 0x14
+warpmuted 0x3 0x31 0xFF 0x8 0x5 // To Cinnabar Island (outside)
+waitstate
+end
+
+#org @mewtwo2
+textcolor 0x2
+msgbox @mewTalk2 0x6
+clearflag 0x200
+setvar 0x402E 0x15
+warpmuted 0x5 0x0 0xFF 0x4 0x4 // To Shigeki's house
+waitstate
+end
+
+#org @mewtwo3
+textcolor 0x2
+msgbox @mewTalk3 0x6
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+warpmuted 0x26 0x0 0xFF 0x8 0x5 // To Viridian City (outside)
+waitstate
+end
+
+#org @shigeki
+msgbox @shigekiTalk1 0x6
+clearflag 0x28F
+setvar 0x402E 0x17
+warpmuted 0x1 0x63 0xFF 0x6 0xF // To Pokémon Mansion (MissingNo. escape)
+waitstate
+end
+
+#org @shigeki2
+msgbox @shigekiTalk2 0x6
+setvar 0x402E 0x18
+setflag 0x28F
+warpmuted 0x1 0x63 0xFF 0x9 0x12 // To Pokémon Mansion (MissingNo. escape)
+waitstate
+end
+
+#org @shigeki3
+msgbox @shigekiTalk3 0x6
+setvar 0x402E 0x19
+warpmuted 0x3 0xD 0xFF 0x8 0xB // To Cinnabar Island 3 (outside)
+waitstate
+end
+
+#org @shigeki4
+msgbox @shigekiTalk4 0x6
+writebytetooffset 0x0 0x02036E28 // deactivate grayscale tint effect
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+setvar 0x402E 0x15 // temp. reset to 0x15 to change Shigeki's house music
+setvar 0x4014 0xB
+warpmuted 0x5 0x0 0xFF 0x4 0x5 // Back to Shigeki's house
+waitstate
+end
+
+#org @bossTalk
+= It was eleven years ago[.]
+
+#org @bossTalk2
+= But we had something that Lance\nand his boys did not[.]\pSomething we knew was the key to\nvictory[.]
+
+#org @bossTalk3
+= One so rare most laymen thought it\njust a legend[.]
+
+#org @bossTalk4
+= But legends don't win wars.\nOak knew better.
+
+#org @bossTalk5
+= But Mew could not be brandished\nlike artillery on the battlefield\lthe way Lance did his Johto dogs.\pAnd nor did Oak expect it could.
+
+#org @bossTalk6
+= They called it[.]\c\h08ó\n"The Mewtwo Project".
+
+#org @bossTalk7
+= An impressive team was assembled.
+
+#org @bossTalk8
+= But[.]
+
+#org @bossTalk9
+= One of these early failures[.]\c\h08ó\nwas particularly nasty.
+
+#org @bossTalk10
+= Luckily, however[.]\pDr. Fuji soon gave new hope to the\nproject.
+
+#org @bossTalk11
+= Ironically, however[.]\c\h08ó\nFuji's theory proved correct.
+
+#org @bossTalk12
+= Before anyone could prepare it for\nthe field, however[.]\pThe Mewtwo Project[.]\c\h08ó reached its\nnatural conclusion.
+
+#org @bossTalk13
+= Driven, we believe, by a desire to\nfind worthy Pokémon opponents, it\lsought refuge in the depths of a\lnotoriously dangerous cave outside\lCerulean City.
+
+#org @bossTalk14
+= Soon after Mewtwo's escape[.]\c\h08ó\nIt was all over.
+
+#org @bossTalk15
+= We had done our best to destroy\nall evidence of the project.\pBut there was no hiding the team's\ninvolvement in some kind of\lmilitary research.
+
+#org @bossTalk16
+= Blaine and Bill were more\nreluctant[.]
+
+#org @bossTalk17
+= Now, as to this Shigeki[.]
+
+#org @bossTalk18
+= And me?
+
+#org @bossTalk19
+= Then I would cripple him from\ninside.\pI never looked back.
+
+#org @mewTalk
+= Shigeki, you see[.]\pWas an old man in the days when\nthey gave birth to me.
+
+#org @mewTalk2
+= He abandoned all his ties to his\npast life as a scientist[.]\pFar away from the public eye[.]
+
+#org @mewTalk3
+= Hehehehe[.]\c\h08ó\nYes[.]\pThese days, you see[.]\c\h08ó\nShigeki is[.]
+
+#org @shigekiTalk1
+= Until the first specimen was ready\nbefore our eyes.
+
+#org @shigekiTalk2
+= Thankfully, I had wireless safety\nmechanisms in place to stop it.
+
+#org @shigekiTalk3
+= I was just too scared to admit, to\nall these powerful people[.]\pThat "The Catastrophe" was hiding\nright under our noses[.]
+
+#org @shigekiTalk4
+= But[.]\c\h08ó\nIt still hasn't.
+
+

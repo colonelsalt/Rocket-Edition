@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0x10
+if _GREATER_EQ goto @postApricorn
+msgbox @talk 0x6
+release
+end
+
+#org @postApricorn
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= When I grow up, I'm gonna work at\nSilph!\pEverybody here knows that's the\nway to get super rich!
+
+#org @talk2
+= Ha-ha, Rocket!\pI knew you bad guys would be no\nmatch for Silph!

@@ -1,0 +1,17 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x219
+if 0x1 goto @postScene
+msgbox @sign1 MSG_SIGN
+end
+
+#org @postScene
+msgbox @sign2 MSG_SIGN
+end
+
+#org @sign1
+= It's empty[.]
+
+#org @sign2
+= Chunks of sauteed Magikarp lie\nfloating in a pile of vomit[.]\pThe sight would surely make a\nyounger person squirm in disgust!

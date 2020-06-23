@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xA7 0x0 @pre 0x817482C EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @pre
+= I came all this way to look at the\npretty Kanto bird. It's majestic!
+
+#org @after
+= Shame about that policeman.\nYou're so uptight in this region.

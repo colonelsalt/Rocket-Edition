@@ -1,0 +1,157 @@
+#dynamic 0x800000
+#define _MEWTWO 0x3
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+fadeout 0x0
+msgbox @talk 0x6
+pause 0x25
+applymovement _MEWTWO @moveUp
+waitmovement 0x0
+pause 0x25
+msgbox @talk2 0x6
+pause 0x25
+spriteface _MEWTWO FACE_LEFT
+pause 0x20
+msgbox @talk3 0x6
+pause 0x20
+spriteface _MEWTWO FACE_DOWN
+pause 0x15
+msgbox @talk4 0x6
+pause 0x20
+applymovement _MEWTWO @moveDown
+waitmovement 0x0
+pause 0x20
+msgbox @talk5 0x6
+pause 0x25
+spriteface _MEWTWO FACE_UP
+pause 0x20
+msgbox @talk6 0x6
+pause 0x25
+applymovement _MEWTWO @quickMove
+waitmovement 0x0
+cry 0x96 0x0
+waitcry
+msgbox @talk7 0x6
+pause 0x20
+spriteface _MEWTWO FACE_UP
+pause 0x15
+msgbox @talk8 0x6
+pause 0x25
+sound 0x21
+applymovement _MEWTWO @moveDownFast
+waitmovement 0x0
+checksound
+cry 0x96 0x2
+preparemsg @challengeText
+waitmsg
+waitcry
+playsong 0x156 0x0
+pause 0x25
+waitkeypress
+goto @battle
+
+#org @flee
+cry 0x96 0x2
+pause 0x10
+msgbox @runawayText 0x6
+pause 0x10
+goto @battle
+
+#org @battle
+setvar 0x8004 0x69 // disables Poké Balls
+setvar 0x8006 0x69 // disables runaway
+// TODO: set proper level
+setwildbattle 0x96 0x46 0x0
+special 0x138
+waitstate
+cry 0x96 0x2
+special2 LASTRESULT 0xB4
+compare LASTRESULT 0x1
+if _NOT_EQ goto @flee
+msgbox @talk9 0x6
+pause 0x25
+applymovement _MEWTWO @quickMove
+waitmovement 0x0
+pause 0x20
+msgbox @talk10 0x6
+fadeout 0x0
+spriteface _MEWTWO FACE_UP
+pause 0x20
+msgbox @talk11 0x6
+pause 0x25
+spriteface _MEWTWO FACE_DOWN
+pause 0x20
+playsong 0x121 0x0
+msgbox @talk12 0x6
+pause 0x20
+setvar 0x8004 0x0 // re-enable Poké Balls
+setvar 0x8006 0x0 // re-enable runaway
+setvar 0x402E 0x13
+setvar 0x4016 0x9 // temporarily activate flashback maps again
+setvar 0x4054 0x61 // changes player's OW sprite to #97 (blank sprite)
+writebytetooffset 0x1 0x02036E28 // Activate greyscale tint effect
+warpmuted 0x21 0x0 0xFF 0x6 0xB // to transition map
+waitstate
+end
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE
+
+#org @quickMove
+#raw STEP_U2
+#raw FACE_D
+#raw 0xFE
+
+#org @moveDownFast
+#raw STEP_D2
+#raw 0xFE
+
+#org @talk
+= Mewtwo: So you've come[.]
+
+#org @talk2
+= I was waiting for you[.]\c\h08ó\n[player].
+
+#org @talk3
+= The scientists who sent you\nhere[.]\pWho thought my psychic powers\nweakened in the years passed[.]
+
+#org @talk4
+= They are wildly mistaken.\pI'm stronger, sharper, deadlier[.]\c\h08ó\nThan I ever was.
+
+#org @talk5
+= You've nothing to threaten me\nwith.\pEven if the Master Ball you wield\ncould work against me[.]\pI could cut off the arm you'd\nthrow it with before the first\lcontraction of your muscles.
+
+#org @talk6
+= [.]\pBut that would give me little\npleasure.\pInstead[.]\pGive me an engaging, forceful[.]\c\h08ó\nfair[.]\c\h08ó Pokémon battle.\p[.]\pAnd I will tell you what you came\nhere to find out.
+
+#org @talk7
+= Oh, how I long for a challenging\nbattle!\pLike an infant craving its\nmother's milk, [player][.]
+
+#org @talk8
+= These impulses I was given[.]\pThey make a decade an eternity[.]\pWith no worthy enemies to put my\ndormant powers to bear against.
+
+#org @challengeText
+= On your guard, Trainer!\nGive me your all!
+
+#org @runawayText
+= Mewtwo: No, no, no, [player]!\nThat sort of trickery won't do!\pAgain!\c\h0B[Ke]À
+
+#org @talk9
+= Mewtwo: Hahahahaha[.]\c\h08ó\nHahaha!\pYes[.]\c\h08ó\nYes, that's it.
+
+#org @talk10
+= Ah!\c\h08ó\nVery well, [player].\pYou've humored me better than I\nthought you capable.\pI'll tell you what you want to\nknow.
+
+#org @talk11
+= The Pokémon my creators seek[.]\pIs the one they call\n"The Catastrophe".\pAnd Shigeki indeed knows where\nit's hiding.
+
+#org @talk12
+= [.]and where is Shigeki hiding?\p[.]\pIn plainer sight than any of his\nformer colleagues would believe.

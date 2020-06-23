@@ -1,0 +1,22 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x208
+if 0x1 goto @postTV
+textcolor 0x0
+msgbox @talk 0x6
+release
+end
+
+#org @postTV
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Archer: Yes, [player]?\pPick up the package, and head on\nnorth to Bill's house now!
+
+#org @talk2
+= Archer: You've done well, [player].\pNow pick up the drugs from the\nscientists and head on over to\lVermilion with you!

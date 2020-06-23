@@ -1,0 +1,6 @@
+#dynamic 0x800000
+
+#org @main
+giveitem 0xB3 0x1 MSG_FIND
+setvar 0x4045 0x1
+end

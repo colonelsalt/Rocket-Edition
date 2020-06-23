@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x226
+if 0x1 goto @postOak
+msgbox @talk 0x6
+release
+end
+
+#org @postOak
+msgbox @talk2 0x6
+release
+end
+
+#org @talk2
+= That old man[.]\nWas that Samuel Oak?\pWhy did he leave in such a hurry?\nI've always wanted to meet him[.]
+
+#org @talk
+= Argh! No!\nHave you returned?\pWe were so happy when we thought\nyou Rockets had finally left our\ltown for good[.]

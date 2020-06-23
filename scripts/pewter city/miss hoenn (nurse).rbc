@@ -1,0 +1,24 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x1
+compare 0x4035 0x5
+if 0x4 goto @postGift
+msgbox @talk 0x6
+giveitem 0x156 0x1 0x0
+setvar 0x4035 0x5
+release
+end
+
+#org @postGift
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Oh, Rocket!\pI can't even begin to tell you how\ngrateful I am to be here!\pI feel so much better about every-\nthing now that I'm out of there[.]\pGosh[.]\nHow can I ever possibly repay you?\pLook, I don't have much of\nanything to give you, but[.]\lI want you to have this.\pIt used to be my mother's. I kept\nit around for all these years[.]\pI guess I thought it was symbolic.\nTake it, Rocket.
+
+#org @talk2
+= It's a new life I'm living.\pI'll carry on with Strength,\nRocket. Will you do the same?

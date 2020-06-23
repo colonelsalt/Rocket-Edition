@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x13C 0x0 0x8186021 0x818607C EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= All right, all right, I get it!\nFly is old news for you!\pYou had the balls to steal a bird\nPokémon from the start, all right!

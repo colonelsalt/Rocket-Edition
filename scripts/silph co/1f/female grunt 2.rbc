@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= After this takeover is done, I say\nwe take this big fountain and put\lit in HQ.\pI mean, how majestic!\nDon't you think?

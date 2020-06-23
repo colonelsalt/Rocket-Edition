@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xF6 0x0 0x81884D4 0x81884F0 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Where'd you steal those Pokémon?

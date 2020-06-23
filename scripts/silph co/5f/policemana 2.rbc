@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x17A 0x0 @challenge @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Silph works for the good of the\npeople!\pYou cannot just swoop in and take\nwhat you want from them!
+
+#org @defeat
+= It's unjust!
+
+#org @postBattle
+= There's no stopping you pack of\nlunatics, is there..?

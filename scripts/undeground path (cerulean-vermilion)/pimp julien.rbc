@@ -1,0 +1,160 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define JULIEN 0x2
+#define MISSHOENN 0x3
+
+#org @main
+lock
+checkflag 0x27E
+if 0x1 goto @postBribe
+checkflag 0x27D
+if 0x1 goto @continue
+msgbox @talk 0x6
+faceplayer
+spriteface JULIEN FACE_LEFT
+msgbox @talk2 0x6
+release
+end
+
+#org @continue
+faceplayer
+msgbox @talk2 0x6
+pause 0x10
+msgbox @talk3 0x6
+pause 0x20
+spriteface JULIEN FACE_RIGHT
+pause 0x25
+faceplayer
+pause 0x20
+msgbox @talk4 0x6
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @agree
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+playsong 0x11B 0x0
+msgbox @noTalk2 0x6
+trainerbattle 0x3 0xC 0x0 @defeat
+checkflag 0x2A4
+if 0x1 call @pimpSteal
+textcolor 0x0
+msgbox @afterTalk 0x6
+pause 0x15
+fadescreen 0x1
+applymovement MISSHOENN @missRun
+waitmovement 0x0
+pause 0x5
+sound 0x9
+checksound
+pause 0x10
+hidesprite JULIEN
+setflag 0x27F
+applymovement MISSHOENN @playerFace
+fadescreen 0x0
+textcolor 0x1
+msgbox @ladyTalk 0x6
+pause 0x20
+spriteface MISSHOENN FACE_RIGHT
+pause 0x25
+applymovement MISSHOENN @playerFace
+pause 0x20
+msgbox @ladyTalk2 0x6
+pause 0x10
+fadescreen 0x1
+pause 0x5
+sound 0x9
+checksound
+pause 0x10
+hidesprite MISSHOENN
+setflag 0x280
+fadescreen 0x0
+release
+end
+
+#org @agree
+sound 0x41
+givemoney 0x1388 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+msgbox @yesTalk 0x6
+setflag 0x27E
+release
+end
+
+#org @postBribe
+faceplayer
+msgbox @postBribeTalk 0x6
+release
+end
+
+#org @pimpSteal
+call POKESTEAL
+compare LASTRESULT 0x0
+if 0x1 call @stoleSandslash
+compare LASTRESULT 0x1
+if 0x1 call @stoleRhyhorn
+compare LASTRESULT 0x2
+if 0x1 call @stolePidgeotto
+return
+
+#org @stoleSandslash
+setvar 0x4034 0x1
+return
+
+#org @stoleRhyhorn
+setvar 0x4034 0x2
+return
+
+#org @stolePidgeotto
+setvar 0x4034 0x3
+return
+
+#org @talk
+= Yeah, whatever, hon.\pYou be good and I'll take care of\nyou real nice.
+
+#org @talk2
+= What do you want, pal?\nYou know the drill.\pAny of these ladies cause you any\ntrouble, come talk to me.\pThis one here's occupied for the\ntime being, 'kay?
+
+#org @talk3
+= [.]\pPersistent, ain't ya?\c\h08ó\n[.]\pOh, the old bald man sent you, did\nhe?\pLook, man.\pDon't try to get involved with\nstuff that you got nothing with.\pLady came here of her own free\nwill, 'kay?\pI'm helping her put her life\nback together-- is that what the\lold guy's planning on doing, huh?
+
+#org @talk4
+= [.]\nTell you what.\pI'll give you [$]5,000 straight\nright now and we'll leave this all\lbehind us, 'kay?
+
+#org @yesOrNo
+= It'll be like nothing ever\nhappened.
+
+#org @yesTalk
+= There you go.\nNo trouble at all.\pI'm glad we could see eye to eye,\nbuddy.\pYou're cool. Keep it classy, man.\nBe seeing you around.
+
+#org @noTalk
+= No?\pWell, you sure like to get real\nloyal real fast, don't you?\pLook, I didn't want no trouble,\nbut you're really asking for it,\lyou know!
+
+#org @noTalk2
+= You got no business coming here,\nand now you made me mad!\pI won't have it!
+
+#org @defeat
+= You meddling idiot!
+
+#org @afterTalk
+= Grr[.]\pWhat the hell do you think you're\ndoing, pal?\pYou think any good's gonna come of\nthis, huh?\pThis isn't the last you've heard\nfrom me, punk! You remember that!\pAnd when I see you again, you bet\nyour ass I won't be taking it easy\lon you!
+
+#org @missRun
+#raw STEP_L2
+#raw 0xFE
+
+#org @playerFace
+#raw 0x4A
+#raw 0xFE
+
+#org @ladyTalk
+= Oh no..!\nHow could he leave me like this?\pI thought he was going to[.]\c\h08ó\nOh, who am I fooling?\p[.]\pWell, what do I do now?\nI can't make it on my own!\pI-- I'll just have to go back to\nthe old guy.\pThat's what he wanted, right?\nLeast he paid me okay[.]
+
+#org @ladyTalk2
+= [.]\pI know this is stupid, but[.]\pC-can you help me somehow, Rocket?\nI got nobody, and[.] I-I can't get\la job anywhere[.]\p[.]\nPlease. Anything at all.\pCome see me in the other\nUnderground Path if you find\lsomething for me, okay?
+
+#org @postBribeTalk
+= Hey there, buddy. We're doing just\nfine here. You enjoying yourself?

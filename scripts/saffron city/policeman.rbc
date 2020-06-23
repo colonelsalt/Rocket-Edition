@@ -1,0 +1,472 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define POLICEMAN 0x1
+// each stolen Pokémon adds $3000 to bounty
+
+#org @main
+lock
+faceplayer
+checkflag 0x229
+if 0x0 goto @1stTime
+checkflag 0x22D
+if 0x1 call @preCheck
+msgbox @preItemTalk 0x6
+goto @infamyCheck
+end
+
+#org @preCheck
+compare 0x401F 0x0
+if 0x1 goto @itemCheck
+goto @postItem
+return
+
+#org @postItem
+msgbox @postItemTalk 0x6
+goto @infamyCheck
+end
+
+#org @1stTime
+msgbox @1stTalk 0x6
+msgbox @1stTalk2 0x6
+setflag 0x229
+goto @infamyCheck
+end
+
+#org @infamyCheck
+buffernumber 0x0 0x401F
+compare 0x401F 0x3C // if stolen >= 20
+if 0x4 goto @veryBad 
+compare 0x401F 0x1E // if stolen >= 10
+if 0x4 goto @prettyBad  
+compare 0x401F 0xF // if stolen >= 5
+if 0x4 goto @moderatelyBad 
+compare 0x401F 0x1 // if stolen >= 1
+if 0x4 goto @notBad 
+goto @innocent
+end
+
+#org @veryBad
+sound 0x15 // exclamation
+applymovement POLICEMAN @exclamation
+waitmovement 0x0
+msgbox @vBadTalk 0x6
+textcolor 0x0
+preparemsg @vBadText
+pause 0x15
+goto @choices
+end
+
+#org @prettyBad
+msgbox @pBadTalk 0x6
+textcolor 0x0
+preparemsg @pBadText
+pause 0x15
+goto @choices
+end
+
+#org @moderatelyBad
+msgbox @mBadTalk 0x6
+textcolor 0x0
+preparemsg @mBadText
+pause 0x15
+goto @choices
+end
+
+#org @notBad
+msgbox @nBadTalk 0x6
+textcolor 0x0
+preparemsg @nBadText
+pause 0x15
+goto @choices
+end
+
+#org @innocent
+msgbox @iTalk 0x6
+checkflag 0x22E // if Pallet mission complete
+if 0x1 goto @itemCheck
+msgbox @notYetItem 0x6
+release
+end
+
+#org @itemCheck
+checkflag 0x22D // if item not yet received
+if 0x0 goto @itemGet
+msgbox @itemAlreadyGot 0x6
+end
+
+#org @itemGet
+msgbox @itemTalk 0x6
+checkitemroom 0xB6 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+setflag 0x22D
+fanfare 0x101
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+additem 0xB6 0x1
+msgbox @putAway MSG_KEEPOPEN
+release
+end
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @choices
+multichoice 0x0 0x0 0x2C 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @handIn
+compare LASTRESULT 0x1
+if 0x1 goto @bribe
+compare LASTRESULT 0x2
+if 0x1 goto @cancel
+compare LASTRESULT 0x7F
+if 0x1 goto @cancel
+end
+
+#org @handIn
+countpokemon
+compare LASTRESULT 0x1
+if 0x1 goto @only1Poke
+msgbox @handInTalk 0x6
+msgbox @handInTalk1.5 0x6
+special 0x9F // Pkmn select-screen
+waitstate
+copyvar 0x8005 0x8004
+compare 0x8004 0x7
+if 0x1 goto @cancel
+callasm 0x827981 // GETLEVEL
+compare 0x8000 0x64
+if 0x1 goto @EQ100
+compare 0x8000 0x5A
+if 0x4 goto @GT90
+compare 0x8000 0x50
+if 0x4 goto @GT80
+compare 0x8000 0x46
+if 0x4 goto @GT70
+compare 0x8000 0x3C
+if 0x4 goto @GT60
+compare 0x8000 0x32
+if 0x4 goto @GT50
+compare 0x8000 0x28
+if 0x4 goto @GT40
+compare 0x8000 0x1E
+if 0x4 goto @GT30
+compare 0x8000 0x14
+if 0x4 goto @GT20 // if lvl >= 20, remove $3000
+compare 0x8000 0xA
+if 0x4 goto @GT10 // if lvl >= 10, remove $2000
+goto @LT10 // else (lvl < 10) remove $1000
+end
+
+#org @only1Poke
+msgbox @1pokeMsg 0x6
+release
+end
+
+#org @EQ100
+buffernumber 0x0 0x32
+setvar 0x8002 0x32
+goto @handIn2
+
+#org @GT90
+buffernumber 0x0 0xA
+setvar 0x8002 0xA
+goto @handIn2
+
+#org @GT80
+buffernumber 0x0 0x9
+setvar 0x8002 0x9
+goto @handIn2
+
+#org @GT70
+buffernumber 0x0 0x8
+setvar 0x8002 0x8
+goto @handIn2
+
+#org @GT60
+buffernumber 0x0 0x7
+setvar 0x8002 0x7
+goto @handIn2
+
+#org @GT50
+buffernumber 0x0 0x6
+setvar 0x8002 0x6
+goto @handIn2
+
+#org @GT40
+buffernumber 0x0 0x5
+setvar 0x8002 0x5
+goto @handIn2
+
+#org @GT30
+buffernumber 0x0 0x4
+setvar 0x8002 0x4
+goto @handIn2
+
+#org @GT20
+buffernumber 0x0 0x3
+setvar 0x8002 0x3
+goto @handIn2
+
+#org @GT10
+buffernumber 0x0 0x2
+setvar 0x8002 0x2
+goto @handIn2
+
+#org @LT10
+buffernumber 0x0 0x1
+setvar 0x8002 0x1
+goto @handIn2
+
+#org @handIn2
+special 0x6 // JPAN's Pkmn-decrypt special
+special2 0x8001 0x18 // JPAN's check-species special
+special 0x6 // re-encrypt Pkmn
+compare 0x8001 0x198
+if 0x1 goto @missingno
+bufferpokemon 0x1 0x8001
+msgbox @handInTalk2 MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @deletePkmn
+goto @cancel
+end
+
+#org @missingno
+sound 0x15 // exclamation
+applymovement POLICEMAN @exclamation
+waitmovement 0x0
+msgbox @missingnoTalk 0x6
+release
+end
+
+#org @deletePkmn
+copyvar 0x8004 0x8005
+special 0x62 // JPAN's delete-Pkmn special (Pkmn selected by 0x8004)
+cry 0x8001 0x0
+waitcry
+pause 0x8
+fanfare 0x10E
+textcolor 0x2
+msgbox @pkmnDeleted 0x4
+waitfanfare
+closeonkeypress
+call @lowerBounty
+compare LASTRESULT 0x1
+if 0x1 goto @bountyReset // if difference is negative, reset var 0x401F
+buffernumber 0x0 0x401F
+textcolor 0x0
+msgbox @postDeletion 0x6
+release
+end
+
+#org @lowerBounty // subtracts value set in 0x8002 from 0x401F (diff. stored in latter)
+writebytetooffset 0x1F 0x0203f4d8
+writebytetooffset 0x40 0x0203f4d9
+writebytetooffset 0x02 0x0203f4da
+writebytetooffset 0x80 0x0203f4db
+special2 LASTRESULT 0x3F // JPAN's subtraction special
+return
+
+#org @bountyReset
+setvar 0x401F 0x0
+textcolor 0x0
+msgbox @noMoreBounty 0x6
+checkflag 0x22E // if Pallet mission complete
+if 0x1 goto @itemCheck
+msgbox @notYetItem 0x6
+release
+end
+
+#org @bribe
+msgbox @bribeTalk 0x6
+buffernumber 0x1 0x401F
+textcolor 0x0
+preparemsg @howMuch
+pause 0x40
+showmoney 0xE 0x0 0x0
+multichoice 0x0 0x0 0x2D 0x0
+closeonkeypress
+compare LASTRESULT 0x0
+if 0x1 goto @bribe1k
+compare LASTRESULT 0x1
+if 0x1 goto @bribe10k
+compare LASTRESULT 0x2
+if 0x1 goto @moneyCancel
+goto @moneyCancel
+end
+
+#org @bribe1k
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @notEnoughMoney
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0xE 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0xE 0x0
+setvar 0x8002 0x1
+call @lowerBounty
+compare LASTRESULT 0x1
+if 0x1 goto @bountyWiped
+buffernumber 0x0 0x401F
+msgbox @postBribeTalk 0x6
+release
+end
+
+#org @bribe10k
+checkmoney 0x2710 0x0
+compare LASTRESULT 0x0
+if 0x1 goto @notEnoughMoney
+sound 0x41
+paymoney 0x2710 0x0
+updatemoney 0xE 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0xE 0x0
+setvar 0x8002 0xA
+call @lowerBounty
+compare LASTRESULT 0x1
+if 0x1 goto @bountyWiped
+buffernumber 0x0 0x401F
+msgbox @postBribeTalk 0x6
+release
+end
+
+#org @notEnoughMoney
+hidemoney 0xE 0x0
+msgbox @noMoneyTalk 0x6
+release
+end
+
+#org @bountyWiped
+setvar 0x401F 0x0
+msgbox @postBribeTalk2 0x6
+release
+end
+
+#org @moneyCancel
+hidemoney 0xE 0x0
+goto @cancel
+
+#org @cancel
+msgbox @goodBye 0x6
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @1stTalk
+= Well, well, well!\pIf it isn't one of you Rockets\nI've heard so much about!\pI am a special officer, sent by\nLance to bring you to justice!\p[.]\pWha--\c\h08ó [.]no, I won't be arresting\nyou; those aren't my orders.\pI am here to "facilitate your\nrehabilitation"!\pI have this here Exp. Share, that\ncan become yours if you keep your\lcriminal record clean long enough!
+
+#org @1stTalk2
+= Now, then[.]\nWhat's your name, scoundrel?\p[.]\c\h08ó\n[player]?\pWell, let me check my registry\nhere for a second[.]
+
+#org @preItemTalk
+= My, my, what have we here?\nA Rocket bandit in the flesh!\pI'm to give you this Exp. Share if\nyou keep your record clean for\llong enough, so keep it cool!\p[player], is it?\c\h08ó\nWell, let me see here[.]
+
+#org @postItemTalk
+= My, my, what have we here?\nA Rocket bandit in the flesh!\p[player], is it?\c\h08ó\nWell, let me see here[.]
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @vBadTalk
+= My goodness!\c\h08ó Y-you're one of the\nmost infamous criminals in Kanto!\pThe price on your head is a\nwhooping [$][buffer1],000!\pGrr[.] what could you possibly want\nwith me, you filthy outlaw?!\pIt will take a lot more than a\ncouple of Pokémon trades to atone\lfor your sins, I'll tell you!
+
+#org @vBadText
+= [blue_fr][.]well?
+
+#org @pBadTalk
+= Oh, my!\nYou're quite the villain!\pThe bounty on your head stands at\n[$][buffer1],000!\pThat's nothing to joke about, son.\pUnless you plan to spend the rest\nof your days in jail, I suggest\lyou change your ways soon, before\lit's all too late!
+
+#org @pBadText
+= [blue_fr]How can I help you t[blue_fr]urn things\n[blue_fr]around?
+
+#org @mBadTalk
+= Hm[.] Well, I've seen worse in my\ndays, but you're on a dangerous\lpath, Rocket!\pThe bounty on your head stands at\n[$][buffer1],000.\pCome back into the light while you\nstill can!
+
+#org @mBadText
+= [blue_fr]What can I help you [blue_fr]with?
+
+#org @nBadTalk
+= Well, you're not so bad, are you?\pThe bounty on your head is a mere\n[$][buffer1],000.\pOh, a few slip-ups here and there\nhappen to the best of us, right?\pI'm glad you came to me to set\nthings straight again[.]\c\h08ó right?
+
+#org @nBadText
+= [blue_fr]What can I do for yo[blue_fr]u, son?
+
+#org @iTalk
+= Oh, wow! What's this? There's no\nbounty on your head at all!\pThat's what I like to see.\pThe moral road is a narrow one,\nbut you walk it all the same!
+
+#org @itemTalk
+= I like you, son.\pHere is a token of appreciation\nfrom the government for embracing\lyour new life as a law-abiding\lcitizen!
+
+#org @notYetItem
+= Keep up this behavior, and this\nExp. Share will be yours before\llong!
+
+#org @noRoomTalk
+= Why, but you've no space left for\nit, do you? Make some room!
+
+#org @itemMsg
+= [player] received the Exp. Share\nfrom the policeman!
+
+#org @putAway
+= [player] put the Exp. Share in the\nItems pocket.
+
+#org @itemAlreadyGot
+= Go seek out the officers in the\nother cities, son.\pIf you keep up your good behavior,\nthey'll reward you as I have!
+
+#org @1pokeMsg
+= But[.] surely you can't turn in\nyour only Pokémon?\pThat would cause all sorts of\nweird question marks and humbug.\pI'm not having it!
+
+#org @handInTalk
+= Fair enough!\pYou hand in one of your stolen\nPokémon to me, and we agree to\llower the bounty on your head in\lproportion to the Pokémon's level.
+
+#org @handInTalk1.5
+= The bounty on you is [$][buffer1],000.\nWhich Pokémon will you hand in?
+
+#org @handInTalk2
+= Fine. I'll lower your bounty by\n[$][buffer1],000 for this [buffer2].
+
+#org @pkmnDeleted
+= [player] turned [buffer2] in to the\npoliceman.
+
+#org @postDeletion
+= You made the right choice, Rocket.\nCongratulations.\pYour bounty has now been lowered\nto [$][buffer1],000.\pKeep it up and you'll be a free\nman in no time at all!
+
+#org @noMoreBounty
+= Well, I'll be!\nYou did the right thing, Rocket.\pYour bounty has now been\ncompletely wiped.\pIt touches me to see that I could\nhelp you become a free man again!
+
+#org @bribeTalk
+= What's that?\c\h08ó\nMy god! The idea!\pI am unwavering in my adherence to\nmy moral principles, I assure you!\p[.]\c\h08ó\n(Shh[.] not so loud, now.)
+
+#org @howMuch
+= (How much are we talking?)\n(The bounty is [blue_fr]at [$][buffer1],000[blue_fr].)
+
+#org @noMoneyTalk
+= Gah!\p(Come back when you actually have\nthe money, and we'll talk!)
+
+#org @postBribeTalk
+= Mmmm!\pWell, in times like these[.]\nwhat can you do..?\p(Your bounty has been lowered to\n[$][buffer1],000, all right?)\p(But remember, son-- I sure as\nheck didn't do it!)
+
+#org @postBribeTalk2
+= Mmmm!\pWell, in times like these[.]\nwhat can you do..?\p(The bounty on your head has now\nbeen completely wiped.)\p(But I know nothing about it,\nyou hear me?)
+
+#org @goodBye
+= No? Well, have it your way.\nGood day, Rocket.
+
+#org @missingnoTalk
+= What in Arceus's name is that\nPokémon..?!\pI don't know where you got that\nfrom, but I'll want nothing to do\lwith it!\pHand in a normal Pokémon, won't\nyou?!

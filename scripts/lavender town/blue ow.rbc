@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#define BLUE 0x1
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface BLUE FACE_DOWN
+release
+end
+
+#org @talk
+= Blue: I hope I'll see you again\nsometime, Mr. Rocket.

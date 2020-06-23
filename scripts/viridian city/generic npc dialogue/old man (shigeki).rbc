@@ -1,0 +1,172 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SHIGEKI 0x4
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0x15
+if 0x1 goto @shigekiReveal
+msgbox @talk MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox @noTalk 0x6
+release
+end
+
+#org @saidYes
+msgbox @yesTalk 0x6
+release
+end
+
+#org @shigekiReveal
+msgbox @talk2 0x6
+pause 0x10
+sound 0x15 // exclamation
+applymovement _SHIGEKI @exclamation
+waitmovement 0x0
+fadeout 0x0
+spriteface _SHIGEKI FACE_LEFT
+pause 0x20
+msgbox @talk3 0x6
+pause 0x20
+faceplayer
+pause 0x15
+msgbox @talk4 0x6
+getplayerpos 0x8000 0x8001
+pause 0x15
+call @move
+setdooropened 0x19 0xB
+doorchange
+applymovement _SHIGEKI @stepInside
+waitmovement 0x0
+hidesprite _SHIGEKI
+setdoorclosed 0x19 0xB
+doorchange
+setvar 0x402E 0x16
+setflag 0x2E6
+warp 0x5 0x0 0xFF 0x4 0x5
+waitstate
+release
+end
+
+#org @move
+compare 0x8001 0x9
+if 0x1 call @fromAbove
+compare 0x8001 0xA
+if 0x1 call @fromRight
+compare 0x8001 0xB
+if 0x1 call @fromBelow
+return
+
+#org @fromAbove
+applymovement _SHIGEKI @FAWalk1
+waitmovement 0x0
+pause 0x15
+msgbox @talk5 0x6
+pause 0x15
+applymovement _SHIGEKI @FAWalk2
+waitmovement 0x0
+return
+
+#org @fromRight
+applymovement _SHIGEKI @FRWalk1
+waitmovement 0x0
+spriteface 0xFF FACE_DOWN
+pause 0x15
+msgbox @talk5 0x6
+pause 0x15
+applymovement _SHIGEKI @FRWalk2
+waitmovement 0x0
+return
+
+#org @fromBelow
+applymovement _SHIGEKI @FBWalk1
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+pause 0x15
+msgbox @talk5 0x6
+pause 0x15
+applymovement _SHIGEKI @FBWalk2
+waitmovement 0x0
+return
+
+
+#org @FAWalk1
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @FAWalk2
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @FRWalk1
+#raw STEP_D
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @FRWalk2
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @FBWalk1
+#raw STEP_R
+#raw STEP_D
+#raw FACE_L
+#raw 0xFE
+
+#org @FBWalk2
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @talk
+= It's my j-- *hic!*\nMy job to teach the little[.]\pThe little youngsters how to be a\ngood Pokémon Trainer!\p[.]\pSay, do you need me to teach you\nthe basics too, young man?
+
+#org @noTalk
+= Bahahaha!\pOf course you don't, young man, or\nyou wouldn't be here!
+
+#org @yesTalk
+= Kehehehe! Then you picked the\nwrong adventure, son!
+
+#org @talk2
+= He-he-hey, young man! You need\nsome help catching Pokémon, do y--\p[.]\c\h08ó\n[.]\c\h08ón-now what's that, son..?
+
+#org @talk3
+= [.]\c\h08ó\nGiratina take me[.]\pI knew this day would come sooner\nor later[.]
+
+#org @talk4
+= That's right, young man.\nMy name is Shigeki.\pAlthough it's been a decade since\nanybody called me by that name[.]
+
+#org @talk5
+= Come inside, if you would.\pYou never know who might be\nlistening in[.]
+
+
+#org @stepInside
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

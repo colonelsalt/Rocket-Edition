@@ -1,0 +1,98 @@
+#dynamic 0x800000
+#define _SHIGEKI 0x3
+#include stdmoves.rbh
+
+#org @main
+textcolor 0x0
+msgbox @talk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @releaseMissingno
+msgbox @waitTalk 0x6
+release
+end
+
+#org @releaseMissingno
+msgbox @releaseTalk1 0x6
+getplayerpos 0x8000 0x8001
+compare 0x8001 0x4 // if Player approached from below or left side
+if 0x4 call @fromBelow
+compare 0x8001 0x3 // if Player approached from above
+if 0x1 call @fromAbove
+pause 0x5
+fadeout 0x0
+sound 0x4
+pause 0x10
+setmaptile 0x5 0x1 0x61 0x1
+special 0x8E // screen refresh
+checksound
+pause 0x15
+sound 0x2
+pause 0x25
+sound 0xA
+checksound
+pause 0x25
+sound 0xFD
+checksound
+pause 0x20
+sound 0x69
+checksound
+pause 0x20
+// need a "release" sound with some finality
+sound 0x13
+checksound
+pause 0x5
+sound 0x21
+checksound
+pause 0x2A
+setmaptile 0x5 0x1 0x35 0x1
+pause 0x28
+spriteface _SHIGEKI FACE_DOWN
+playsong 0x0 0x0
+fadein 0x0
+pause 0x10
+msgbox @releaseTalk2 0x6
+setvar 0x4016 0xF
+setflag 0x2E7
+release
+end
+
+#org @fromBelow
+applymovement _SHIGEKI @walkToComp
+waitmovement 0x0
+return
+
+#org @fromAbove
+pause 0x10
+special 0x113
+applymovement 0xFF @stepAway
+applymovement 0x7F @stepAway
+pause 0x5
+applymovement _SHIGEKI @walkToComp
+waitmovement 0x0
+special 0x114
+return
+
+
+#org @talk
+= [.]\c\h08ó\nSo.\pAre you ready to capture\n"The Catastrophe", Rocket?
+
+#org @waitTalk
+= Indeed.\pI've waited almost eleven years[.]\nI can wait a little longer.\pCome back to me when you're\nready.
+
+#org @releaseTalk1
+= Very well.\pI will deactivate the software\nthat's keeping it frozen.\pMay Arceus be with us.
+
+#org @releaseTalk2
+= Shigeki: Now go, Rocket!\pFly to Cinnabar Island and Surf\nalong its eastern shore!\pCapture that vile creature, and\nlay this matter to rest once and\lfor all!
+
+
+#org @walkToComp
+#raw STEP_U
+#raw STEP_R
+#raw STEP_U
+#raw 0xFE
+
+#org @stepAway
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE

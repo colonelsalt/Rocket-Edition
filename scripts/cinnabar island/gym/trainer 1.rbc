@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @postBattle
+call EXEC_STEAL
+checkflag 0x265
+if 0x0 call 0x816DB4D
+release
+end
+
+#org @text1
+= I was a thief, but I went straight\nas a Trainer.\p[.]\pWhat about you?

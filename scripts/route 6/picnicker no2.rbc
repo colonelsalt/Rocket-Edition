@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x98 0x0 0x8183F90 0x8183FAB POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9AF6
+msgbox 0x8183FC4 MSG_NORMAL '"I want to get stronger.\nWhat's yo..."
+end

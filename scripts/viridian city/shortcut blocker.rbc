@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Boy, did you see that strange kid\nwho just entered the gym?\pHe had such an evil gaze[.]\nI had to run away and hide!

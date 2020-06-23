@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Those Poké Balls at my waist!\p[.]\pP-please let me keep them!\nI don't want any trouble, really!

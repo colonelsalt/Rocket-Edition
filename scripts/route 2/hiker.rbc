@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= I went inside Rock Tunnel, but it's\npitch-black and scary in there.\p[.]\pBut I don't want to learn Flash!\nIt's such a useless move[.]

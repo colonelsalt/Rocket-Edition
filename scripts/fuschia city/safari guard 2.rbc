@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk 0x6
+end
+
+#org @talk
+= Old Warden Slowpoke is quite a\nstrict boss, gotta say.\pBut[.]\c\h08ó tell you something funny[.]\c\h08ó\nHe's real jumpy-like!\pI bet you could just sneak on up\nbehind the old guy and scare him\lright senseless!\pHa-ha!\c\h08ó Not that I'd ever have the\nguts for a prank like that[.]

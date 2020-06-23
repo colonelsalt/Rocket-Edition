@@ -1,0 +1,5 @@
+#dynamic 0x800000
+
+#org @main
+spriteface 0xFF FACE_RIGHT
+end

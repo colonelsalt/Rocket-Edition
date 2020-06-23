@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x2 0x6E 0x0 0x818901B 0x818908C @defeat
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A965C
+msgbox @after MSG_NORMAL
+end
+
+#org @defeat
+= Hang on[.] you're not a Rocket, are\nyou?
+
+#org @after
+= B-but[.] the challenge wasn't meant\nfor bad guys[.]

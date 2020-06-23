@@ -1,0 +1,33 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2F0
+if 0x1 goto @postGame
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @postGame
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Petrel: Well hello there,\n[player].\pBoss suspended field missions to\nconcentrate on mobilizing the Gym.\pI never thought, when I first heard\nabout that kid up on Mt. Moon[.]\pThat he'd bring us to this point.\n[.]did you, [player]?
+
+#org @talk2
+= Petrel: Well, now!\nDo I laugh or cry, [player]?\pI guess you really got in close\nwith Giovanni[.]\pFor him to give you a promotion\nlike that.\pNot that it means much anymore[.]\p[.]\c\h08Û\nHmm?\pHe told you to follow Red up to the\nElite Four and challenge them?\pThat would be quite the challenge,\neven for you.\pBut if that's what he wanted[.]\c\h08Û\nI suggest you follow his command.
+
+#org @talk3
+= Petrel: You really did it, eh,\n[player]?\pCongratulations.\n\c\h08ÛJust between the two of us[.]\pI didn't think it would ever happen\nwhen I first told you, but[.]\pI think you did rise to become as\npowerful as me.
+
+

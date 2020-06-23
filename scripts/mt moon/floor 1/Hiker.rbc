@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xB5 0x0 @before @beaten EXEC_STEAL
+msgbox @afterwards 0x6
+end
+
+#org @before
+= WHOA!\nYou shocked me!\l[.]Oh, you're one of them Rockets!
+
+#org @beaten
+= Wow!\nShocked again!
+
+#org @afterwards
+= Criminals like you shouldn't be\nwandering around here in the dark.

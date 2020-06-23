@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I hear they've sent security on us\nin the floors above.\pSeems to be quite a few of those\nguards, but we'll knock them!

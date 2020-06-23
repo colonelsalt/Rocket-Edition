@@ -1,0 +1,380 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GIOVANNI 0x1
+#define _ARIANA 0xA
+#define _FAKE_PLAYER 0xB
+
+#org @main
+lock
+checkflag 0x21E
+if 0x1 goto @script2
+pause 0x25
+textcolor 0x0
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk 0x6
+pause 0x35
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x35
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+msgbox @bossTalk2 0x6
+pause 0x15
+applymovement _ARIANA @stepL
+waitmovement 0x0
+textcolor 0x1
+msgbox @arianaTalk 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_UP
+pause 0x20
+applymovement _GIOVANNI @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk3 0x6
+pause 0x30
+textcolor 0x1
+spriteface _ARIANA FACE_UP
+pause 0x30
+msgbox @arianaTalk2 0x6
+pause 0x25
+applymovement _ARIANA @arianaLeave
+waitmovement 0x0
+sound 0x9 // shuffle
+hidesprite _ARIANA
+pause 0x35
+textcolor 0x0
+msgbox @bossSigh 0x6
+pause 0x30
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk4 0x6
+pause 0x15
+applymovement _GIOVANNI @bossStep
+waitmovement 0x0
+msgbox @bossTalk5 0x6
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk6 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_LEFT
+pause 0x20
+applymovement _GIOVANNI @stepL
+waitmovement 0x0
+msgbox @bossTalk7 0x6
+pause 0x20
+spriteface _GIOVANNI FACE_DOWN
+pause 0x25
+msgbox @bossTalk8 0x6
+pause 0x15
+applymovement _GIOVANNI @bossApproach
+waitmovement 0x0
+spriteface _FAKE_PLAYER FACE_LEFT
+pause 0x25
+applymovement _FAKE_PLAYER @promotionTwirl
+special 0x16F // activates National Dex
+setvar 0x4054 0x59 // change walking OW sprite to index 89
+setvar 0x4056 0x8E // change sitting OW sprite to index 142
+setvar 0x4062 0x1 // changes Player's backsprite to Admin one
+setvar 0x4057 0x8D // changes Poké Ball OW sprite to index 141
+setvar 0x4055 0x6A // change bike OW sprite to index 106
+pause 0x5
+sound 0x85
+pause 0x55
+setflag 0x21E
+warpmuted 0x1 0x71 0xFF 0x13 0x7
+waitstate
+end
+
+#org @script2
+sound 0x7B
+applymovement 0xFF @promotionTwirl2
+waitmovement 0x0
+pause 0x15
+msgbox @promotionMsg 0x6
+pause 0x10
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk9 0x6
+pause 0x25
+spriteface _GIOVANNI FACE_LEFT
+pause 0x30
+spriteface _GIOVANNI FACE_RIGHT
+pause 0x25
+msgbox @bossTalk10 0x6
+textcolor 0x2
+pause 0x20
+additem 0x175 0x1
+loadpointer 0x0 @pagerMsg
+giveitem2 0x175 0x1 0x13E
+closeonkeypress
+pause 0x20
+applymovement _GIOVANNI @bossWalk
+waitmovement 0x0
+textcolor 0x0
+msgbox @bossTalk11 0x6
+applymovement _GIOVANNI @bossWalk2
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+pause 0x15
+applymovement _GIOVANNI @stepD
+waitmovement 0x0
+msgbox @bossTalk12 0x6
+pause 0x20
+applymovement _GIOVANNI @bossWalk3
+waitmovement 0x0
+msgbox @bossTalk13 0x6
+setvar 0x4016 0xB
+setvar 0x403F 0x1 // activates Leto the Cutter script around Pewter/Viridian
+release
+end
+
+#org @bossTalk
+= Giovanni: So now you see,\n[player][.]\pWhy recent developments have me\nvery concerned indeed[.]
+
+#org @bossTalk2
+= Ariana, darling.\pI need you to leave for Viridian.\nWe have no time to waste.\pWith this Red twerp running\naround, we can't leave the Gym\lunmanned.\pYou will guard it in my absence.
+
+#org @arianaTalk
+= Ariana: [.]\c\h08ó\nIf that's what you want, Giovanni.\pBut[.]\c\h08ó He won't like it.\c\h08ó\nOur--\c\h08ó our[.] boy.
+
+#org @bossTalk3
+= Giovanni: Nonsense.\pMy son will come with you to\nViridian if need be. It will do\lhim good.
+
+#org @arianaTalk2
+= Ariana: [.]\c\h08ó\nVery well, Giovanni.\pI'll be on my way.
+
+#org @bossSigh
+= Giovanni: [.]\c\h08ó\n(Sigh[.])
+
+#org @bossTalk4
+= Listen, [player].\pOak must despise everyone who\nworked on the Mewtwo Project.\pIf all of a sudden he has business\nwith Fuji after all these years[.]\pIt can't be good news.
+
+#org @bossTalk5
+= I can't imagine he still believes\nhe can find some way to get at\lMewtwo after all these years[.]\pBut[.] supposing he did[.]\c\h08ó\nWe have to know.
+
+#org @bossTalk6
+= That's why, [player], I want you to\ngo to Pallet Town yourself.\pConfront Oak in his lab and get to\nthe bottom of what he's up to.\pIf that means resorting to force[.]\c\h08ó\nthen so be it.\pThe old guy is banned from Pokémon\nbattle, so he's not likely to\lput up much of a fight anyway.
+
+#org @bossTalk7
+= And, while you're there[.]\pDo see if you can gather any more\ninformation about this Red kid or\lhis family from the locals.\pAny key information-- any\nweaknesses of his that we can\lexploit[.] would be of great help.
+
+#org @bossTalk8
+= All clear, [player]?\c\h08ó\nVery good.\p[.]\pJust[.]\c\h08ó one more thing before you go.
+
+#org @promotionMsg
+= \c\h17[player] was promoted to\c\h0BÇÀ\nRocket Admin!\c\h08\n\c\h08[Ke]\c\h18
+
+#org @bossTalk9
+= I'll say it was about time.\nYou've earned my trust, [player].
+
+#org @bossTalk10
+= With this rise in rank, I think\nyou'll have no trouble stealing\lPokémon from teenagers or women\lTrainers.\pYou'll also be obliged to carry\none of these.
+
+#org @pagerMsg
+= [player] received the Rocket Pager!
+
+#org @bossTalk11
+= This device will beep whenever I\nwant one or all of my Admins to\lreport back to HQ.\pWhenever it goes off, I expect you\nto be make your way here as soon\las you possibly can.
+
+#org @bossTalk12
+= That is all. You've shown a lot of\npromise, [player].\pThat's why I've chosen to invest\nin you like this.\pDo not let it go to waste.\nIs that understood?
+
+#org @bossTalk13
+= Now off with you, Admin!\nNo time to waste!
+
+#org @arianaLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @bossStep
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bossApproach
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @promotionTwirl
+#raw FACE_U
+#raw 0x1B
+#raw FACE_R
+#raw 0x1B
+#raw FACE_D
+#raw 0x1B
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw 0xFE
+
+#org @promotionTwirl2
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw FACE_L
+#raw 0xFE
+
+#org @bossWalk
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @bossWalk2
+#raw STEP_U
+#raw STEP_U
+#raw STEP_R
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0xFE
+
+#org @bossWalk3
+#raw STEP_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE

@@ -1,0 +1,60 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2BB
+if 0x1 goto @postSale
+msgbox @talk 0x6
+checkitem 0x161 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @sell
+release
+end
+
+#org @sell
+msgbox @talk2 0x6
+showmoney 0x0 0x0 0x0
+msgbox @talk3 MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+release
+end
+
+#org @saidYes
+removeitem 0x161 0x1
+sound 0x41
+givemoney 0x1388 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+msgbox @yesTalk 0x6
+setflag 0x2BB
+release
+end
+
+#org @postSale
+msgbox @postSaleTalk 0x6
+release
+end
+
+#org @talk
+= Heeeeeeey, man[.]\c\h08ó\nDude, I'm looking for some gold.\pGold is so[.]\c\h08ó sparkly, nice[.]\c\h08ó\nJust like your soul, man[.]\pHave you got anything golden?\c\h08ó\nMaaaaaan[.]\c\h08ó I'll suck yo--\p[.]\pI mean, I'll pay anything you\nwant, man!
+
+#org @talk2
+= Oh, dude! Those teeth you got\nthere, man!\pSooooo shiny[.]\c\h08ó sparkly[.]\c\h08ó\nSo nice[.]
+
+#org @talk3
+= Sell them to me, man!\n[$]5,000, cold cash, no jokes!
+
+#org @noTalk
+= But maaaaan[.]\c\h08ó\nI[.] I need that stuff, man!\pYou can't just stand there and\nlook at my gold cravings, man..!
+
+#org @yesTalk
+= YES, YES, YES!\c\h08ó\nGold, god damn it!\c\h08ó GOLD!\pAhahahahahahaha!\c\h08ó\nFinally, it's within my grasp[.]
+
+#org @postSaleTalk
+= Oh, man[.] It's so niiiiiiice[.]\p[.]\pNothing in the world can make me\nlose this gold, you know[.]\pNot even if some scary-looking\nlittle kid Trainer should stop by\land make me run away scared[.]\pNo, never! Me and my precious\nshall never part[.]

@@ -1,0 +1,28 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x2F0
+if 0x0 call @bountyCheck
+special 0x187
+compare LASTRESULT 0x2
+if 0x1 goto 0x81A7AE0
+lock
+faceplayer
+preparemsg 0x81A6211 '"Hi, there!\nMay I help you?"
+waitmsg
+pokemart 0x816BB74
+msgbox 0x81A5190 MSG_KEEPOPEN '"Please come again!"
+release
+end
+
+#org @tooBad
+msgbox @talk MSG_FACE
+end
+
+#org @bountyCheck
+compare 0x401F 0xF
+if 0x4 goto @tooBad
+return
+
+#org @talk
+= Imagine what they would say of us\nif we let you shop here freely!\pNo sur-rey!\nBe gone, criminal!

@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x189 0x0 @pre @post EXEC_STEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @pre
+= I heard rumors about a criminal\nintruder.
+
+#org @post
+= I'm sure it's just talk..!
+
+#org @after
+= Keep your hands to yourself,\nmister!

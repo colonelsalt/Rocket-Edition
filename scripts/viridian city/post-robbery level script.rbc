@@ -1,0 +1,117 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LEADER 0xF
+#define _GRUNT1 0x10
+#define _GRUNT2 0x11
+#define _GRUNT3 0xE
+
+#org @main
+lockall
+compare 0x4016 0x31
+if 0x1 goto @promotion
+textcolor 0x0
+applymovement _LEADER @stepU
+waitmovement 0x0
+msgbox @talk 0x6
+lockall
+pause 0x15
+spriteface _LEADER FACE_LEFT
+pause 0x25
+spriteface _LEADER FACE_RIGHT
+pause 0x25
+spriteface _LEADER FACE_DOWN
+pause 0x15
+applymovement _LEADER @stepD
+waitmovement 0x0
+msgbox @talk2 0x6
+lockall
+fadescreen 0x1
+setvar 0x403B 0x7
+pause 0x20
+hidesprite _GRUNT1
+hidesprite _GRUNT2
+hidesprite _GRUNT3
+movesprite _LEADER 0x24 0x1C
+movesprite2 _LEADER 0x24 0x1C
+showsprite _LEADER
+setflag 0x2B3
+sound 0x9
+checksound
+fadescreen 0x0
+releaseall
+end
+
+#org @promotion
+sound 0x7B
+applymovement 0xFF @promotionTwirl2
+waitmovement 0x0
+pause 0x15
+msgbox @promotionMsg 0x6
+fadein 0x0
+setvar 0x4016 0x32
+copyvar 0x403B 0x404C // restore previous state of robbery quest
+pause 0x20
+playsong 0x13A 0x0
+releaseall
+end
+
+
+#org @talk
+= Wooo-hooo, dude!\nTalk about a heist!\pI wonder what my bounty'll rise to\nonce they report that operation!\pOh, the badder the better, isn't\nthat right, [player]?
+
+#org @talk2
+= Well, enjoy your share of the\nloot, gentlemen!\pHahahaha[.]\nUntil our paths cross again!
+
+#org @promotionMsg
+= \c\h17[player] was promoted to\c\h0BÇÀ\nRocket Boss!\c\h08\n\c\h08[Ke]\c\h18
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @promotionTwirl2
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1C
+#raw FACE_D
+#raw 0xFE
+

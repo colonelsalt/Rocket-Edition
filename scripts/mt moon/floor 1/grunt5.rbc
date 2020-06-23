@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I think the other Trainers here\nare scared of me 'cause I'm\lwearing this suit.\pHeh. If only they knew what a\nwhimp I really am on the inside[.]

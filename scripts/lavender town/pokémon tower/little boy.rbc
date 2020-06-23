@@ -1,0 +1,17 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xA 0x0 @challenge @defeat POKESTEAL
+msgbox @after MSG_NORMAL
+end
+
+
+#org @challenge
+= These Channelers are so weird!\pThey're way creepier than any of\nthe ghosts. I even caught a few!
+
+#org @defeat
+= At least my Pokémon didn't die!
+
+#org @after
+= Did you bad guys send my Nidoran\nto heaven?\pThat's what mommy told me.

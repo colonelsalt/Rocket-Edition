@@ -1,0 +1,6 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @faceRight
+#raw FACE_R
+#raw 0xFE

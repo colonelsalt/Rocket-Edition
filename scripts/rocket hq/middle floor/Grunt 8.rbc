@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Aw, man[.] I lost my Coin Case\naround here somewhere.\pWhat am I going to do?\nI want that Porygon so bad, man!

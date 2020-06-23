@@ -1,0 +1,36 @@
+#dynamic 0x800000
+
+#org @main
+textcolor 0x0
+pause 0x15
+compare 0x4044 0x3
+if 0x1 goto @playerTrial
+compare 0x4044 0x2
+if 0x1 goto @oakTrial
+msgbox @redTrialTalk 0x6
+warpmuted 0x1 0x77 0xFF 0x7 0xA
+waitstate
+end
+
+#org @oakTrial
+msgbox @oakTrialTalk 0x6
+warpmuted 0x1 0x77 0xFF 0x7 0x5
+waitstate
+end
+
+#org @playerTrial
+msgbox @playerTrialTalk 0x6
+warpmuted 0x1 0x77 0xFF 0x7 0x5
+waitstate
+end
+
+#org @redTrialTalk
+= Will the defendant please rise.\pWe are prepared to deliver our\nverdict.
+
+#org @oakTrialTalk
+= Professor Samuel Oak.
+
+#org @playerTrialTalk
+= [player].\c\h08ó\nPlease approach the bench.
+
+

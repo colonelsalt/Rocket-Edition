@@ -1,0 +1,302 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define LETO 0x13
+#define TREE 0xD
+#define TREE2 0xB
+#define TREE3 0xE
+
+#org @main
+lockall
+pause 0x8
+textcolor 0x0
+msgbox @greetings 0x6
+lockall
+getplayerpos 0x8000 0x8001
+compare 0x8001 0x11
+if 0x1 goto @fromBottom
+goto @fromTop
+
+#org @fromBottom
+clearflag 0x200
+movesprite2 LETO 0x20 0xA
+showsprite LETO
+pause 0x10
+applymovement LETO @approach
+waitmovement 0x0
+pause 0x15
+spriteface 0xFF FACE_UP
+pause 0x10
+msgbox @talk 0x6
+lockall
+applymovement LETO @stepD
+waitmovement 0x0
+msgbox @talk2 0x6
+lockall
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck
+goto @reject
+
+#org @moneyCheck
+lockall
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @accept
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+lockall
+pause 0x10
+spriteface LETO FACE_UP
+pause 0x10
+applymovement LETO @leave
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4041 0x1
+releaseall
+end
+
+#org @accept
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+applymovement LETO @stepD
+waitmovement 0x0
+msgbox @yesTalk 0x6
+lockall
+pause 0x15
+applymovement LETO @stepDquick
+waitmovement 0x0
+sound 0x79 // "slash attack"
+applymovement TREE @cutting
+waitmovement 0x0
+hidesprite TREE
+hidesprite TREE2
+hidesprite TREE3
+setflag 0x2B6
+checksound
+pause 0x25
+msgbox @goodBye 0x6
+lockall
+spriteface LETO FACE_UP
+pause 0x15
+applymovement LETO @leave
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4041 0x1
+releaseall
+end
+
+#org @reject
+lockall
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+lockall
+pause 0x10
+spriteface LETO FACE_UP
+pause 0x10
+applymovement LETO @leave
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4041 0x1
+releaseall
+end
+
+#org @fromTop
+clearflag 0x200
+movesprite2 LETO 0x20 0x17
+showsprite LETO
+pause 0x10
+applymovement LETO @topApproach1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @topApproach2
+waitmovement 0x0
+pause 0x15
+msgbox @talk 0x6
+lockall
+applymovement LETO @stepU
+waitmovement 0x0
+msgbox @talk2 0x6
+lockall
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck2
+goto @reject2
+
+#org @moneyCheck2
+lockall
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @accept2
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+pause 0x10
+spriteface LETO FACE_DOWN
+pause 0x10
+applymovement LETO @topLeave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @topLeave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4041 0x1
+releaseall
+end
+
+#org @accept2
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+applymovement LETO @stepU
+waitmovement 0x0
+msgbox @yesTalk 0x6
+lockall
+pause 0x15
+applymovement LETO @stepUquick
+waitmovement 0x0
+sound 0x79 // "slash attack"
+applymovement TREE @cutting
+waitmovement 0x0
+hidesprite TREE
+hidesprite TREE2
+hidesprite TREE3
+setflag 0x2B6
+checksound
+pause 0x25
+msgbox @goodBye 0x6
+lockall
+spriteface LETO FACE_DOWN
+pause 0x15
+applymovement LETO @topLeave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @topLeave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4041 0x1
+releaseall
+end
+
+#org @reject2
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+lockall
+pause 0x10
+spriteface LETO FACE_DOWN
+pause 0x10
+applymovement LETO @topLeave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @topLeave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4041 0x1
+releaseall
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @greetings
+= Do trees obscure the path to your\ndestiny? Do not fear, Trainer!
+
+#org @approach
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @topApproach1
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @topApproach2
+#raw 0x15
+#raw STEP_U2
+#raw 0xFE
+
+#org @talk
+= I am here, sir, and forever at\nyour service!\pThe one and only[.]\nLeto, master Cutter! \c\h08ó([.]almost.)
+
+#org @talk2
+= I Cut, dear Trainer, therefore I\nam!\pWhere I see distraught travellers\nundermined by trees in their path,\lmy giving heart fills with desire\lto set things right anew!\pLet me Cut for you the trees\naround Fuchsia and ease the weight\loff your burdened shoulders!
+
+#org @yesOrNo
+= [.]\c\h08ófor a modest fee of [$]1000,\nnaturally.
+
+#org @yesTalk
+= Ah! Sir, I daresay you made an\nexcellent choice!\pNow, if you'll allow me[.]
+
+#org @cutting
+#raw 0x69
+#raw 0xFE
+
+#org @stepUquick
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0xFE
+
+#org @stepDquick
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0xFE
+
+#org @noTalk
+= No?\c\h08ó\nWhy, f-fine, then.\pI can see that this region is not\nyet cultured enough to appreciate\lthe fine art of a proper Cut!\pWell, should the good sir ever\nchange his mind, I will never be\lfar away from any of this region's\lexquisite trees, rest assured!\pHmph! Good day.
+
+#org @notEnoughTalk
+= What?\nInsufficient funds?\pSir, my asking price is akin to\ngiving it away, I assure you!\pBut[.] if the uncultured folk of\nKanto find it too great an expense\lfor witnessing the finest of fine\lart, then what is a man to do?\pWell, should the good sir ever\nearn the necessary means to afford\lmy services, I will never be\lfar away from any of this region's\lexquisite trees, rest assured!\pHmph! Good day.
+
+#org @goodBye
+= Oh!\nWhat pleasure..!\pA Cut as splendid as this is a\nare sight in times like these,\leven to eyes such as mine!\pWell[.] should you ever be in need\nof my Cutting expertise again,\ldear Trainer, you can be sure to\lfind me by this region's most\lbeautiful trees.\pUntil we meet again!
+
+#org @leave
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @topLeave1
+#raw STEP_D2
+#raw 0xFE
+
+#org @topLeave2
+#raw 0x14
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE

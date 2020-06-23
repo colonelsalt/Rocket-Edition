@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x219
+if 0x1 call @moveCapn
+end
+
+#org @moveCapn
+movesprite2 0x1 0x5 0x4
+return

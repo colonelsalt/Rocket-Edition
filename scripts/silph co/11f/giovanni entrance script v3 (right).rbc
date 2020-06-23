@@ -1,0 +1,29 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PRESIDENT 0x1
+#define _GIOVANNI 0x3
+
+#org @start
+lock
+spriteface _PRESIDENT FACE_RIGHT
+textcolor 0x0
+msgbox @talk 0x6
+special 0x113
+applymovement 0x7F @paceL
+applymovement 0xFF @moveToPres
+waitmovement 0x0
+special 0x114
+goto MAIN // 0x84984F
+
+
+#org @talk
+= President: Eh?\c\h08ó\nAnother unannounced visitor?\pI guess today is no-appointments\nday, is it?\pLook, kid, time is money.\nLet's cut to the chase!
+
+#org @moveToPres
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @paceL
+#raw STEP_L
+#raw 0xFE

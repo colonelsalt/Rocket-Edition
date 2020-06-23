@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Are you happy now, Rocket?\pWill the money from your Cubone\nskulls buy you forgiveness from\lall the Pokémon you murdered?

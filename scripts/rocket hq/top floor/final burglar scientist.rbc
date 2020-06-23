@@ -1,0 +1,70 @@
+#dynamic 0x800000
+#define _BURGLAR 0x13
+#include stdmoves.rbh
+
+#org @main
+textcolor 0x0
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x11
+if 0x1 call @shout
+compare 0x8000 0x11
+if _NOT_EQ call @standing
+trainerbattle 0x3 0x33 0x0 @defeat
+call EXEC_STEAL
+textcolor 0x0
+msgbox @postBattleTalk 0x6
+setflag 0x1F2
+fadescreen 0x1
+hidesprite _BURGLAR
+fadescreen 0x0
+setvar 0x405A 0x2
+release
+end
+
+#org @standing
+faceplayer
+playsong 0x11B 0x0
+msgbox @standingTalk 0x6
+return
+
+#org @shout
+sound 0x15 // exclamation
+spriteface _BURGLAR FACE_DOWN
+applymovement _BURGLAR @exclamation
+waitmovement 0x0
+playsong 0x11B 0x0
+msgbox @shoutTalk 0x6
+applymovement 0xFF @movePlayer
+waitmovement 0x0
+msgbox @shoutTalk2 0x6
+return
+
+#org @standingTalk
+= Hey! Hands off!\nI saw it first!
+
+#org @shoutTalk
+= Hey, you!
+
+#org @shoutTalk2
+= Hands off!\nI saw it first!
+
+#org @defeat
+= All right, all right!\nTake it then, Mr. tough guy!
+
+#org @postBattleTalk
+= (Snivel[.])\c\h08ó\nYou spoiled Executives[.]\pI've been here for years and they\nnever gave me as much as an HM[.]
+
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @movePlayer
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+

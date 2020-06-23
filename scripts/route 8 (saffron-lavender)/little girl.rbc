@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x8 0x0 @challenge @defeat POKESTEAL
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= I'm waiting for my sister to get\nhere. I'm bored!
+
+#org @defeat
+= No!\nI want to be bored again[.]
+
+#org @after
+= You're a bad man. I'm going to\ntell my sister about you.

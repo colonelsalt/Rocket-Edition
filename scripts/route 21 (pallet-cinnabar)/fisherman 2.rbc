@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xE7 0x0 0x81883C6 0x81883E9 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I seem to only catch Magikarp!\pAnd here I thought the Rod I got\nfrom the Guru in Vermillion was\lthe very best Rod there is[.]

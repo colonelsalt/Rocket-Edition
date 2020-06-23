@@ -1,0 +1,20 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x5D 0x0 @challenge @defeat POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9792
+msgbox @after MSG_NORMAL
+end
+
+
+#org @challenge
+= My mommy told me to stay away from\nRockets!
+
+#org @defeat
+= Well, look at me now, mommy!
+
+#org @after
+= Screw my parents.\nI regret nothing.

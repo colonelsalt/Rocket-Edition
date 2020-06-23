@@ -1,0 +1,220 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RED 0x3 // position 0x18 0x21, ID 0x200
+
+#org @main
+lockall
+checkflag 0x2DC
+if 0x1 goto @shigekiScript
+fadeout 0x1
+pause 0x40
+clearflag 0x200
+sound 0x9
+checksound
+pause 0x20
+showsprite _RED
+applymovement _RED @walk1
+waitmovement 0x0
+sound 0x7
+pause 0x25
+msgbox @redTalk 0x6
+lockall
+pause 0x25
+applymovement 0xFF @playerMove
+applymovement _RED @walk2
+waitmovement 0x0
+setdooropened 0x21 0x1E
+doorchange
+applymovement _RED @walk2
+waitmovement 0x0
+hidesprite _RED
+setflag 0x200
+setdoorclosed 0x21 0x1E
+doorchange
+sound 0x9
+checksound
+pause 0x30
+fadein 0x1
+pause 0x30
+fadeout 0x1
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x8
+cry 0x19A 0x0
+waitcry
+pause 0x14
+textcolor 0x0
+msgbox @phoneTalk 0x6
+lockall
+sound 0x19
+checksound
+fadein 0x1
+setvar 0x402E 0xB
+clearflag 0xA8 // makes Fuji, Bill and Blaine visible in Pkmn Lab
+releaseall
+end
+
+#org @redTalk
+= ...
+
+#org @phoneTalk
+= Bill: [player].\c\h08ó\nDrop whatever you're doing.\pMeet me at the Pokémon Lab at\nCinnabar Island.\pThat's the POKÉMON LAB at\nCINNABAR ISLAND.\pThe building just west of the\nCinnabar Pokémon Center.\pCome.\pAs soon as conceivably possible,\n[player].\c\h08ó No time to explain.
+
+#org @walk1
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_U3
+#raw FACE_U
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @walk2
+#raw STEP_U3
+#raw 0xFE
+
+// ---------------------------------------------------------
+
+#define _SHIGEKI 0x11
+
+#org @shigekiScript
+spriteface 0xFF FACE_LEFT
+pause 0x15
+applymovement _SHIGEKI @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @shigekiTalk 0x6
+pause 0x25
+spriteface _SHIGEKI FACE_DOWN
+pause 0x25
+msgbox @shigekiTalk2 0x6
+pause 0x25
+spriteface _SHIGEKI FACE_RIGHT
+pause 0x20
+msgbox @shigekiTalk3 0x6
+checkitem 0x172 0x1
+compare LASTRESULT 0x0
+if 0x1 call @kogaHint
+compare 0x401F 0x0
+if 0x1 call @nuggetGift
+textcolor 0x0
+pause 0x15
+applymovement _SHIGEKI @shigekiMove
+waitmovement 0x0
+applymovement _SHIGEKI @faceUp
+spriteface 0xFF FACE_DOWN
+pause 0x20
+msgbox @shigekiTalk4 0x6
+pause 0x25
+spriteface _SHIGEKI FACE_DOWN
+pause 0x20
+cry 0x8E 0x0
+applymovement _SHIGEKI @flyStep
+waitmovement 0x0
+pause 0x40
+setanimation 0x0 0x1
+doanimation 0x1E
+pause 0xF
+hidesprite _SHIGEKI
+checkanimation 0x1E
+setflag 0x200
+setvar 0x402E 0x19
+setvar 0x401E 0x2
+releaseall
+end
+
+#org @kogaHint
+pause 0x10
+applymovement _SHIGEKI @stepR
+waitmovement 0x0
+msgbox @kogaTalk 0x6
+return
+
+#org @nuggetGift
+pause 0x10
+applymovement _SHIGEKI @stepR
+waitmovement 0x0
+msgbox @nuggetTalk 0x6
+checkitemroom 0x6E 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+fanfare 0x101
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+additem 0x6E 0x1
+msgbox @putAway MSG_KEEPOPEN
+setvar 0x4089 0x2
+pause 0x10
+release
+return
+
+#org @noRoom
+msgbox @noRoomTalk 0x6
+setvar 0x4089 0x1
+return
+
+
+#org @shigekiTalk
+= Shigeki: Well!\pThere's freedom for you,\n[player].\pHow do you plan on using it?
+
+#org @shigekiTalk2
+= I expect your Rocket friends have\nall but dispersed by now.\pLance has let off his extra police\nofficers, so they shouldn't bother\lyou much anymore.
+
+#org @shigekiTalk3
+= How about simply taking on the Gym\nLeaders like a normal Trainer, eh?
+
+#org @kogaTalk
+= You haven't had a chat with Koga\ndown in Fuschia City, have you?\pFwahaha[.]\c\h08ó He might be able to help\nyou out with that[.]
+
+#org @nuggetTalk
+= One more thing, [player].\pI was prepared to deplete all my\nsavings to get you out.\pBut there wasn't even a bounty to\nyour name!\pI planned to sell this off, but now\nI guess you can have it instead.
+
+#org @noRoomTalk
+= Eh? You haven't got room for it?\nWhat a mess.\pCome see me in Viridian, and I'll\ngive it to you some other time.
+
+#org @shigekiTalk4
+= Well, phew! That's enough action\nfor me this decade.\pBe good, [player].\c\h08ó\nI'm grateful for all you've done.
+
+#org @itemMsg
+= [player] received a Nugget!
+
+#org @putAway
+= [player] put the Nugget in the\nItems pocket.
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @faceUp
+#raw 0x2E
+#raw 0xFE
+
+#org @shigekiMove
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @flyStep
+#raw 0x25
+#raw 0xFE
+

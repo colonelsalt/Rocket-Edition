@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x186 0x0 @challenge 0x81772E7 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Halt!\pI doubt very much you have an\nappointment with the President!
+
+#org @postBattle
+= It doesn't matter!\pOur President never negotiates\nwith terrorists!\p[.]\p(Well, unless they offer him a LOT\nof money[.])

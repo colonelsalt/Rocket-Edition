@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Ey there, bruh!\nThis here's my ladder.\pI found it first, ya hear me?\pShoo!\nGo find your own.

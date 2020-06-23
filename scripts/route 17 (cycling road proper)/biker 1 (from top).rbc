@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xFD 0x0 @challenge 0x8187254 EXEC_STEAL
+msgbox 0x818725A 0x6
+end
+
+#org @challenge
+= I'm mighty proud of my bod,\nRocket! Come on!

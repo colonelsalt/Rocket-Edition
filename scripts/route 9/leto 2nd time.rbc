@@ -1,0 +1,342 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define LETO 0xD
+#define TREE 0xA
+
+#org @main
+checkflag 0x221
+if 0x0 goto @normalT
+goto @posCheck
+end
+
+#org @normalT
+lockall
+msgbox 0x81BDFE3 MSG_SIGN
+releaseall
+end
+
+#org @posCheck
+lock
+textcolor 0x0
+msgbox @talk 0x6
+clearflag 0x200
+showsprite LETO
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x3
+if 0x1 goto @fromRight
+goto @fromLeft
+end
+
+#org @fromLeft
+pause 0x10
+applymovement LETO @approach
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @jumpLeft
+waitmovement 0x0
+pause 0x15
+spriteface 0xFF FACE_DOWN
+spriteface LETO FACE_UP
+pause 0x10
+msgbox @talk2 0x6
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheckL
+goto @rejectL
+release
+end
+
+#org @moneyCheckL
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @acceptL
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+pause 0x10
+spriteface LETO FACE_LEFT
+pause 0x10
+applymovement LETO @noLeave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @noLeave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4026 0x2
+release
+end
+
+#org @acceptL
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+applymovement LETO @stepU
+waitmovement 0x0
+msgbox @yesTalk 0x6
+applymovement LETO @cutStepL
+applymovement 0xFF @playerMoveL
+waitmovement 0x0
+pause 0x15
+applymovement LETO @stepRquick
+waitmovement 0x0
+sound 0x79 // "slash attack"
+applymovement TREE @cutting
+waitmovement 0x0
+hidesprite TREE
+setflag 0x21A
+checksound
+pause 0x20
+spriteface LETO FACE_LEFT
+pause 0x10
+msgbox @goodBye 0x6
+spriteface LETO FACE_RIGHT
+pause 0x15
+applymovement LETO @yesLeave
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4026 0x2
+release
+end
+
+#org @rejectL
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+pause 0x10
+spriteface LETO FACE_LEFT
+pause 0x10
+applymovement LETO @noLeave1
+waitmovement 0x0
+sound 0xA // jump sound
+applymovement LETO @noLeave2
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4026 0x2
+release
+end
+
+#org @fromRight
+pause 0x20
+applymovement LETO @approach
+waitmovement 0x0
+pause 0x15
+spriteface 0xFF FACE_DOWN
+spriteface LETO FACE_UP
+pause 0x10
+msgbox @talk2 0x6
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheckR
+goto @rejectR
+release
+end
+
+#org @moneyCheckR
+checkmoney 0x3E8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @acceptR
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+pause 0x10
+spriteface LETO FACE_RIGHT
+pause 0x10
+applymovement LETO @noLeaveR
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4026 0x2
+release
+end
+
+#org @acceptR
+sound 0x41
+paymoney 0x3E8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+pause 0x8
+hidemoney 0x0 0x0
+applymovement LETO @stepU
+waitmovement 0x0
+msgbox @yesTalk 0x6
+applymovement LETO @cutStepR
+applymovement 0xFF @playerMoveR
+waitmovement 0x0
+pause 0x15
+applymovement LETO @stepLquick
+waitmovement 0x0
+sound 0x79 // "slash attack"
+applymovement TREE @cutting
+waitmovement 0x0
+hidesprite TREE
+setflag 0x21A
+checksound
+pause 0x20
+spriteface LETO FACE_RIGHT
+pause 0x10
+msgbox @goodBye 0x6
+spriteface LETO FACE_DOWN
+pause 0x15
+applymovement LETO @Dstep
+waitmovement 0x0
+applymovement LETO @yesLeave
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4026 0x2
+release
+end
+
+#org @rejectR
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+pause 0x10
+spriteface LETO FACE_RIGHT
+pause 0x10
+applymovement LETO @noLeaveR
+waitmovement 0x0
+hidesprite LETO
+setflag 0x200
+setvar 0x4026 0x2
+release
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @talk
+= My-my, what's this? Did the good\nTrainer change his mind? Haha!
+
+#org @approach
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @jumpLeft
+#raw 0x16
+#raw 0xFE
+
+#org @talk2
+= Behold!\nI have returned!\pLeto, aspiring master Cutter, at\nyour service!\pDid you wish for me to Cut down\nall the trees around Cerulean?
+
+#org @yesOrNo
+= A mere [$]1000, and you will bear\nwitness to my Cutting prowess!
+
+#org @yesTalk
+= Ah! Sir, I daresay you made an\nexcellent choice!\pNow, if you'll allow me[.]
+
+#org @cutStepL
+#raw STEP_U
+#raw FACE_R
+#raw 0xFE
+
+#org @cutStepR
+#raw STEP_U
+#raw FACE_L
+#raw 0xFE
+
+#org @cutting
+#raw 0x69
+#raw 0xFE
+
+#org @playerMoveL
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @playerMoveR
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @stepRquick
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0xFE
+
+#org @stepLquick
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0xFE
+
+#org @noTalk
+= No?\c\h08ó\nWhy, f-fine, then.\pI can see that this region is not\nyet cultured enough to appreciate\lthe fine art of a proper Cut!\pWell, should the good sir ever\nchange his mind, I will never be\lfar away from any of this region's\lexquisite trees, rest assured!\pHmph! Good day.
+
+#org @notEnoughTalk
+= What?\nInsufficient funds?\pSir, my asking price is akin to\ngiving it away, I assure you!\pBut[.] if the uncultured folk of\nKanto find it too great an expense\lfor witnessing the finest of fine\lart, then what is a man to do?\pWell, should the good sir ever\nearn the necessary means to afford\lmy services, I will never be\lfar away from any of this region's\lexquisite trees, rest assured!\pHmph! Good day.
+
+#org @goodBye
+= Ah[.] yes..!\pThere is no sight more magnificent\nthan a tree immaculately Cut!\pWell[.] should you ever be in need\nof my Cutting expertise again,\ldear Trainer, you can be sure to\lfind me by this region's most\lbeautiful trees.\pUntil we meet again!
+
+#org @yesLeave
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @Dstep
+#raw STEP_D2
+#raw 0xFE
+
+#org @noLeave1
+#raw STEP_L
+#raw STEP_L
+#raw FACE_R
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @noLeave2
+#raw 0x17
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @noLeaveR
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE

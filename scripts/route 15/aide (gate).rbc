@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Just to avoid all this ridicule, I\nkeep telling Prof. Oak to start\lcalling me his "assistant".\pNo use! For ever I will be just\none of Prof. Oak's AIDES!

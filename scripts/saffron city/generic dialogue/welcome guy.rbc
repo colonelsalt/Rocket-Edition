@@ -1,0 +1,23 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0x10
+if _GREATER_EQ goto @postApricorn
+msgbox @talk 0x6
+release
+end
+
+#org @postApricorn
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Welcome to Saffron City!\pThe city everybody runs through to\nget somewhere else.
+
+#org @talk2
+= Aaah!\nYou're back!\pP-please don't invade us again,\nRocket!
+

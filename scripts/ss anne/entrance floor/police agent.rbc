@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= [.]\n!!!\pOh, never mind me, I'm just a\lregular old man going about my\lregular old man business! Haha!

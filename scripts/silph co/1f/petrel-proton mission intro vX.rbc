@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PETREL 0xD
+
+#org @main
+lockall
+textcolor 0x0
+msgbox @petrelTalk 0x6
+spriteface _PETREL FACE_DOWN
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto MAINSCRIPT // 0x8462B0
+
+#org @petrelTalk
+= Petrel: Well, hey there, [player]!\pLet's get this show on the road,\nshall we?
+
+#org @playerApproach
+#raw STEP_D
+#raw STEP_R
+#raw FACE_U
+#raw 0x1C
+#raw 0xFE

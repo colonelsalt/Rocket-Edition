@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x12F 0x0 0x81860D9 0x818610A EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Well, it doesn't matter if you've\nheard of them or not!\pLance would never let a thug like\nyou come near a Legendary Bird!

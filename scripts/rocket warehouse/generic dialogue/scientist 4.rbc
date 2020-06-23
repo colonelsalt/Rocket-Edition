@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I am taking my revenge on all the\nkids who picked on me in high\lschool by becoming the ultimate\levil scientist!

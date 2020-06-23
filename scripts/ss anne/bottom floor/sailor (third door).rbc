@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x0 0x8B 0x0 @challenge @defeat
+msgbox @after MSG_NORMAL
+end
+
+#org @challenge
+= Mmmmmh!\nI like feisty guys like you!
+
+#org @defeat
+= No homo!
+
+#org @after
+= Sea Pokémon live in deep water.\nYou'll need a Rod to fish them up!\p[.] wha-- no[.] not like that. You\nknow what kind of Rod I mean..!

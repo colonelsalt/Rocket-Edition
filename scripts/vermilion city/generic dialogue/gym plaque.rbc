@@ -1,0 +1,40 @@
+#dynamic 0x800000
+
+#org @main
+lockall
+checkflag 0x822
+if 0x1 goto @surgeBeat
+checkflag 0x221
+if 0x1 goto @redBeat
+checkflag 0x220
+if 0x1 goto @blueBeat
+msgbox @sign1 MSG_KEEPOPEN
+releaseall
+end
+
+#org @blueBeat
+msgbox @sign2 MSG_KEEPOPEN
+releaseall
+end
+
+#org @redBeat
+msgbox @sign3 MSG_KEEPOPEN
+releaseall
+end
+
+#org @surgeBeat
+msgbox @sign4 MSG_KEEPOPEN
+releaseall
+end
+
+#org @sign1
+= Vermilion Pokémon Gym\nLeader: Lt. Surge\pWinning Trainers:\n
+
+#org @sign2
+= Vermilion Pokémon Gym\nLeader: Lt. Surge\pWinning Trainers:\nBlue
+
+#org @sign3
+= Vermilion Pokémon Gym\nLeader: Lt. Surge\pWinning Trainers:\nBlue, Red
+
+#org @sign4
+= Vermilion Pokémon Gym\nLeader: Lt. Surge\pWinning Trainers:\nBlue, Red, Mohammed Smith

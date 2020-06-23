@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Dang! I was hoping to challenge\nSabrina when I came here.\pBut that promoter at the door\nstill won't let me in!\pThere's got to be some shady guy\nwho can make me a fake Trainer\lCard somewhere[.]

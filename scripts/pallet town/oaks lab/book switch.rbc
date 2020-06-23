@@ -1,0 +1,45 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+compare 0x4016 0x13
+if _NOT_EQ goto @standard
+msgbox @switch MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @showLadder
+msgbox @noText MSG_KEEPOPEN
+releaseall
+end
+
+#org @showLadder
+sound 0x26
+msgbox @yesText MSG_KEEPOPEN
+checksound
+pause 0x5
+sound 0x83 // "loud swipe"
+setmaptile 0x7 0x2 0x333 0x0
+fadescreen 0x2
+special 0x8E // screen refresh
+setflag 0xA8 // Bill in Cinnabar
+setvar 0x4016 0x14
+checksound
+releaseall
+end
+
+#org @standard
+msgbox @standardText MSG_KEEPOPEN
+releaseall
+end
+
+#org @standardText
+= It's crammed full of Pokémon\nbooks.
+
+#org @switch
+= It's crammed full of Pokémon\nbooks.\c\h08ó.\c\h08ó.\p[.]but behind one is a secret\nswitch! Press it?
+
+#org @yesText
+= Who wouldn't?
+
+#org @noText
+= Not quite yet!

@@ -1,0 +1,14 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+movesprite 0x1 0x0 0x21
+movesprite2 0x1 0x0 0x21
+release
+end
+
+#org @talk
+= i dont know\nwat heppen here\pwhat isthisssssssssssssssssssssssssssssssssssssssssssss\pH E  LP ! ! ! !!!    !! ! ! ! !! !! ! ! ! ! !!! PP P P  P PP

@@ -1,0 +1,113 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @introTalk MSG_YESNO '"Uh[.]\nOh, yes, I'm the Move Delet..."
+compare LASTRESULT 0x1
+if 0x1 goto @selection
+goto @end
+
+#org @selection
+msgbox @whichPokemon MSG_KEEPOPEN '"Which Pokémon should forget a\nmov..."
+special 0x9F
+waitstate
+compare 0x8004 0x6
+if 0x4 goto @end
+call @speciesCheck
+compare 0x8001 0x198
+if 0x1 goto @missingnoBranch
+special 0x148
+compare LASTRESULT 0x1
+if 0x1 goto @egg
+special 0xDF
+compare LASTRESULT 0x1
+if 0x1 goto @lastMove
+msgbox @whichMove MSG_KEEPOPEN '"Which move should be forgotten?"
+fadescreen 0x1
+special 0xDC
+fadescreen 0x0
+compare 0x8005 0x4
+if 0x1 goto @selection
+special 0xDE
+msgbox @confirmMove MSG_YESNO '"Hm! [buffer1]'s [buffer2]?\nThat m..."
+compare LASTRESULT 0x1
+if 0x1 goto @deletion
+goto @end
+
+#org @speciesCheck
+special 0x6 // JPAN's Pkmn-decrypt special
+special2 0x8001 0x18 // JPAN's check-species special
+special 0x6 // re-encrypt Pkmn
+return
+
+#org @missingnoBranch
+sound 0x15 // exclamation
+applymovement 0x1 @exclamation
+waitmovement 0x0
+msgbox @missingnoTalk 0x6
+release
+end
+
+
+#org @end
+msgbox @endTalk MSG_KEEPOPEN '"Come again if there are other\nmov..."
+release
+end
+
+#org @egg
+msgbox @eggTalk MSG_KEEPOPEN '"What?\nNo Egg should know any move..."
+release
+end
+
+#org @lastMove
+special 0xDE
+msgbox @lastMoveTalk MSG_KEEPOPEN '"[buffer1] seems to know only one\n..."
+release
+end
+
+#org @deletion
+special 0xDD
+fanfare 0x10E
+waitfanfare
+msgbox @deleteTalk MSG_KEEPOPEN '"It worked to perfection!\p[buffer1..."
+release
+end
+
+
+
+#org @introTalk
+= Uh[.]\nOh, yes, I'm the Move Deleter.\pI can make Pokémon forget their\nmoves.\pWould you like me to do that?
+
+#org @whichPokemon
+= Which Pokémon should forget a\nmove?
+
+#org @whichMove
+= Which move should be forgotten?
+
+#org @confirmMove
+= Hm! [buffer1]'s [buffer2]?\nThat move should be forgotten?
+
+#org @endTalk
+= Come again if there are other\nmoves to be forgotten.
+
+#org @eggTalk
+= What?\nNo Egg should know any moves.
+
+#org @lastMoveTalk
+= [buffer1] seems to know only one\nmove[.]
+
+#org @deleteTalk
+= It worked to perfection!\p[buffer1] has forgotten\n[buffer2] completely.
+
+#org @missingnoTalk
+= W-what is that Pokémon..?!\nPlease don't make me touch it!\p[.]\pP-please bring me a normal Pokémon\ninstead, OK?
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

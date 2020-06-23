@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Fuji: Aaaaaah!\pD-d-d-arn it[.]\c\h08ó\nTh-those\c\h08ó g-g-g-ghosts[.]\pC-c-can't\c\h08ó m-move[.]\c\h08ó\nW-w-wish\c\h08ó I-I had those\c\h08ó g-goggles[.]\pI-if only I c-could\c\h08ó s-s-see[.]\c\h08ó\nAaaaaaaaaaah!

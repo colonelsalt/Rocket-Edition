@@ -1,0 +1,11 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+compare 0x4016 0x14
+if _GREATER_EQ call @showLadder
+end
+
+#org @showLadder
+setmaptile 0x7 0x2 0x333 0x0
+return

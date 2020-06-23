@@ -1,0 +1,486 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RED 0x1
+#define _JUDGE 0x2
+#define _BLUE 0x3
+#define _LANCE 0x8
+
+#org @main
+lockall
+pause 0x30
+compare 0x4044 0x2
+if 0x1 goto @oakTrial
+compare 0x4044 0x3
+if 0x1 goto @playerTrial
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+pause 0x40
+applymovement _JUDGE @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x25
+spriteface _JUDGE FACE_RIGHT
+pause 0x25
+msgbox @talk2 0x6
+pause 0x25
+spriteface _JUDGE FACE_DOWN
+pause 0x20
+msgbox @talk3 0x6
+pause 0x25
+spriteface _JUDGE FACE_LEFT
+pause 0x25
+msgbox @talk4 0x6
+pause 0x20
+applymovement 0xFF @cameraLeft
+waitmovement 0x0
+pause 0x15
+applymovement _BLUE @stepR
+waitmovement 0x0
+msgbox @blueTalk 0x6
+pause 0x25
+spriteface _BLUE FACE_DOWN
+pause 0x25
+msgbox @blueTalk2 0x6
+pause 0x25
+applymovement 0xFF @cameraRight
+pause 0x15
+spriteface _BLUE FACE_RIGHT
+waitmovement 0x0
+pause 0x20
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk5 0x6
+pause 0x15
+applymovement 0xFF @cameraDown
+waitmovement 0x0
+sound 0x15
+applymovement _LANCE @exclamation
+waitmovement 0x0
+spriteface _LANCE FACE_RIGHT
+pause 0x20
+spriteface _LANCE FACE_UP
+pause 0x25
+msgbox @lanceTalk 0x6
+pause 0x25
+applymovement 0xFF @cameraUp
+waitmovement 0x0
+applymovement _JUDGE @stepD
+waitmovement 0x0
+msgbox @talk6 0x6
+pause 0x25
+applymovement _JUDGE @faceUp
+pause 0x25
+msgbox @talk7 0x6
+pause 0x25
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk8 0x6
+pause 0x25
+spriteface _JUDGE FACE_LEFT
+pause 0x25
+msgbox @talk9 0x6
+pause 0x25
+spriteface _JUDGE FACE_DOWN
+pause 0x20
+applymovement _JUDGE @stepD
+waitmovement 0x0
+msgbox @talk10 0x6
+pause 0x40
+setvar 0x4044 0x2
+setflag 0x23D
+clearflag 0x200
+warpmuted 0x22 0x4 0xFF 0x7 0x5
+waitstate
+end
+
+#org @oakTrial
+applymovement _JUDGE @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk11 0x6
+pause 0x25
+spriteface _JUDGE FACE_RIGHT
+pause 0x25
+msgbox @talk12 0x6
+pause 0x15
+applymovement _JUDGE @stepR
+waitmovement 0x0
+msgbox @talk13 0x6
+pause 0x25
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk14 0x6
+pause 0x15
+applymovement _JUDGE @stepD
+waitmovement 0x0
+msgbox @talk15 0x6
+pause 0x30
+spriteface _JUDGE FACE_LEFT
+pause 0x25
+msgbox @talk16 0x6
+pause 0x30
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk17 0x6
+pause 0x25
+spriteface _JUDGE FACE_UP
+pause 0x25
+msgbox @talk18 0x6
+pause 0x15
+applymovement _JUDGE @stepU
+waitmovement 0x0
+msgbox @talk19 0x6
+pause 0x15
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk20 0x6
+pause 0x40
+setflag 0x200
+setflag 0x23E
+clearflag 0x201
+setvar 0x4044 0x3
+warpmuted 0x22 0x4 0xFF 0x7 0x5
+waitstate
+end
+
+#org @playerTrial
+applymovement _JUDGE @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk21 0x6
+pause 0x25
+spriteface _JUDGE FACE_UP
+pause 0x25
+compare 0x401F 0x0
+if 0x1 call @innocentBeginning
+compare 0x401F 0x0
+if _GREATER call @guiltyBeginning
+pause 0x25
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk23 0x6
+pause 0x20
+compare 0x403B 0x6
+if _GREATER_EQ call @robbery
+checkitem 0x168 0x1
+compare LASTRESULT 0x1
+if 0x1 call @bicycle
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 call @pokemonLicense
+checkflag 0x35
+if 0x0 call @police
+checkflag 0x27D
+if 0x1 call @pimps
+pause 0x20
+applymovement _JUDGE @faceLeft
+pause 0x25
+compare 0x401F 0x0
+if 0x1 call @innocentBranch
+compare 0x401F 0x0
+if _GREATER call @guiltyBranch
+pause 0x25
+spriteface _JUDGE FACE_LEFT
+pause 0x25
+msgbox @talk24 0x6
+pause 0x15
+applymovement _JUDGE @stepL
+waitmovement 0x0
+msgbox @talk25 0x6
+pause 0x25
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @talk26 0x6
+pause 0x20
+applymovement _JUDGE @stepD
+waitmovement 0x0
+msgbox @talk27 0x6
+pause 0x50
+setflag 0x201
+clearflag 0x23D
+clearflag 0x23E
+setvar 0x4044 0x4
+warpmuted 0x22 0x0 0xFF 0x7 0x5
+waitstate
+end
+
+
+#org @guiltyBeginning
+msgbox @talk22 0x6
+return
+
+#org @innocentBeginning
+msgbox @innocent22 0x6
+return
+
+#org @innocentBranch
+msgbox @innocentTalk 0x6
+pause 0x10
+applymovement _JUDGE @stepL
+waitmovement 0x0
+msgbox @innocentTalk2 0x6
+pause 0x25
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @innocentTalk3 0x6
+pause 0x15
+applymovement _JUDGE @stepD
+waitmovement 0x0
+msgbox @innocentTalk4 0x6
+return
+
+
+#org @guiltyBranch
+buffernumber 0x0 0x401F
+msgbox @guiltyTalk 0x6
+pause 0x10
+applymovement _JUDGE @stepL
+waitmovement 0x0
+msgbox @guiltyTalk2 0x6
+pause 0x25
+applymovement _JUDGE @faceDown
+pause 0x25
+msgbox @guiltyTalk3 0x6
+pause 0x15
+applymovement _JUDGE @stepD
+waitmovement 0x0
+copyvar 0x8000 0x401F
+setvar LASTRESULT 0x7
+callasm 0x0888A38D // division
+buffernumber 0x0 LASTRESULT
+msgbox @guiltyTalk4 0x6
+return
+
+
+#org @robbery
+msgbox @robberyTalk 0x6
+return
+
+#org @bicycle
+msgbox @bicycleTalk 0x6
+return
+
+#org @pokemonLicense
+msgbox @licenseTalk 0x6
+return
+
+#org @police
+msgbox @policeTalk 0x6
+return
+
+#org @pimps
+msgbox @pimpTalk 0x6
+return
+
+
+#org @talk
+= Red.\pThe results of the genetic tests\npresented to the court[.]\pAnd the counsel of our leading\nmedical professionals[.]\pHave left little doubt in the\nminds of our jurors.
+
+#org @talk2
+= You've clearly suffered from\nsevere birth defects.\pWhatever you are, you are not a\nhuman being of upstanding physical\lor mental health.
+
+#org @talk3
+= You have no birth certificate, and\nyou are not a legal citizen of\lKanto-Johto.\pIn short, you are not fit to be\nChampion of the Indigo League.
+
+#org @talk4
+= Consequently, the position falls\nto your predecessor[.]\c\h08ó Blue Oak.
+
+#org @blueTalk
+= Blue: Your honor, I[.]\pI don't think[.]\c\h08ó\c\h08ó\nI want to be Champion anymore.\pLet someone else take it.
+
+#org @blueTalk2
+= After what I've learned about\ngranpda[.]\pI don't need his approval anymore.\c\h08ó\nI[.]\c\h08ó have other stuff I need to do.
+
+#org @talk5
+= Judge: Very well.\pThen the position defaults to\nLance.
+
+#org @lanceTalk
+= Lance: Oh, your honor!\pI'll gladly accept the burden of\nresuming my position!
+
+#org @talk6
+= Judge: Then the matter is settled.
+
+#org @talk7
+= Red[.]\c\h08ó\nYour case is unprecedented.\pWe've tried our best to treat you\nwith sympathy.\pBut we must take the safety of the\npublic into account.
+
+#org @talk8
+= Your Pokémon license will be\nrevoked with immediate effect.\pAn unstable person like you cannot\nbe allowed to wield lethally\lpowerful Pokémon in battle.
+
+#org @talk9
+= Out in the wilderness, perhaps[.]\c\h08ó\nIn the name of self-defense.\pNot in civilized society.
+
+#org @talk10
+= That is all.\c\h08ó\nYou are excused.
+
+#org @talk11
+= You've been accused of voluntary\nmanslaughter[.]\pAnd of conspiring to upend the\ngovernment through[.]\p(Ahem!)\c\h08ó\nPlease excuse me[.]
+
+#org @talk12
+= Through engineering a genetically\nmodified clone of a human boy[.]\pGroomed from birth to be blood-\nthristy and obedient to authority[.]\pUniquely suited to take down the\nIndigo League Champion[.]\pCreated all as part of an eleven-\nyear plan to return to power[.]\pIn a secret laboratory, hidden\nfrom public view.
+
+#org @talk13
+= [.]\c\h08ó\nBut the lab in question is empty.
+
+#org @talk14
+= For a charge this implausible to\nhold any weight we'd have to be\lpresented with substantial evidence.
+
+#org @talk15
+= No such evidence has surfaced.\c\h08ó\nThe charge is dismissed.
+
+#org @talk16
+= Moreover[.]\pNo reliable eyewitness testimonies\ncould be brought forth about your\linvolvement in Agatha's death.\pIn good faith we can only conclude\nthat she died in an unfortunate\laccident of Pokémon battle.
+
+#org @talk17
+= On the other hand[.]\pThe jury unanimously declares you\nguilty of violating your ban on\lPokémon battle.
+
+#org @talk18
+= In summary, professor[.]
+
+#org @talk19
+= You do not appear to pose a threat\nto the public's well-being[.]\pBut you have shown a terrible\nlack of regard for Kanto's laws.
+
+#org @talk20
+= No official anywhere will grant\nyou another Pokémon license.\pYour research will not be funded.\pProfessor Oak, you are hereby\nbanished from the Kanto region.\pSeek your fortunes elsewhere!
+
+#org @talk21
+= As member of crime syndicate\n"Team Rocket"[.]\pWith honorable title[.]\c\h08ó\n"Boss"[.]
+
+#org @talk22
+= You stand accused of countless\nalleged and confirmed counts of\lPokémon theft[.]
+
+#org @innocent22
+= You stand accused of several\nconfirmed counts of Pokémon theft.
+
+#org @talk23
+= Violent coercion and\nintimidation[.]\pComplicity in Pokémon smuggling\nand violence towards women[.]
+
+#org @robberyTalk
+= Armed robbery[.]
+
+#org @bicycleTalk
+= Bicycle theft[.]
+
+#org @licenseTalk
+= Possession and use of a forged\nPokémon license[.]
+
+#org @policeTalk
+= Threatening and attacking a police\nofficer[.]
+
+#org @pimpTalk
+= And assisting the operations of\na pair of unlicensed procurers\loperating in the Underground Path.
+
+#org @guiltyTalk
+= [player], there is a bounty on your\nhead of [$][buffer1],000.
+
+#org @guiltyTalk2
+= You will owe the region of Kanto\nthis amount in reparations for\lyour crimes.
+
+#org @guiltyTalk3
+= Finally, the jury declares your\nsentence to be[.]
+
+#org @guiltyTalk4
+= [buffer1] years served in regional\npenitentary.
+
+#org @innocentTalk
+= That being said[.]\pThere is no bounty on your head at\nall, despite your high position.
+
+#org @innocentTalk2
+= This seems to me to be a promising\nsign[.]\pThat your conscience is intact.\pThe corruption hasn't seeped in\ntoo deep.
+
+#org @innocentTalk3
+= Nevertheless, the jury declares\nyour sentence to be[.]
+
+#org @innocentTalk4
+= 1 year served in regional\npenitentary.
+
+#org @talk24
+= I can only hope you've enjoyed your\ntime in the criminal underworld,\l[player].
+
+#org @talk25
+= It's plain to see why living beyond\nthe law attracted you.\pIn a gang like Team Rocket it may\nseem as if you can get away with\lany depravity you like.
+
+#org @talk26
+= But eventually[.]\c\h08ó\nThe chickens come home to roost.\pYou've had your thrills, and now\nI'm afraid it's time we brought\lyou back to the real world.
+
+#org @talk27
+= [player][.]\c\h08ó\c\h08ó\nI declare you guilty as charged!
+
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @faceDown
+#raw 0x2D
+#raw 0xFE
+
+#org @faceUp
+#raw 0x2E
+#raw 0xFE
+
+#org @faceLeft
+#raw 0x2F
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw 0xFE
+
+#org @cameraLeft
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw 0xFE
+
+#org @cameraRight
+#raw STEP_R3
+#raw STEP_R3
+#raw STEP_R3
+#raw 0xFE
+
+#org @cameraDown
+#raw STEP_D3
+#raw STEP_D3
+#raw 0xFE
+
+#org @cameraUp
+#raw STEP_U3
+#raw STEP_U3
+#raw 0xFE
+
+
+
+

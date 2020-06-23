@@ -1,0 +1,1294 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BLUE 0x1
+#define _OAK 0x2
+#define _RED 0x3
+#define _BILL 0x4
+#define _AGATHA 0x5
+#define _BLAINE 0x6
+#define _FUJI 0x7
+#define _RONNIE 0x8
+#define _RIGHT_GHOST 0xA
+#define _MIDDLE_GHOST 0xB
+#define _LEFT_GHOST 0xC
+
+#org @main
+lock
+sound 0x15 // exclamation
+applymovement 0xFF @exclamation
+waitmovement 0x0
+special 0x113
+applymovement 0x7F @cameraPan1
+waitmovement 0x0
+playsong 0x159 0x0
+applymovement _OAK @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @oakTalk1 0x6
+applymovement _OAK @oakEnter
+applymovement 0x7F @cameraPan2
+applymovement _RED @redFace
+applymovement _BLUE @blueFace
+waitmovement 0x0
+pause 0x35
+msgbox @oakTalk2 0x6
+pause 0x25
+applymovement _OAK @faceRight
+waitmovement 0x0
+pause 0x15
+msgbox @oakTalk3 0x6
+pause 0x20
+applymovement _OAK @faceDown
+waitmovement 0x0
+pause 0x15
+msgbox @oakTalk4 0x6
+pause 0x15
+applymovement _OAK @oakLeave
+applymovement _RED @redLeave
+pause 0x60
+sound 0x9
+applymovement 0xFF @playerMove
+applymovement 0x7F @cameraPan3
+pause 0x70
+sound 0x9
+waitmovement 0x0
+pause 0x6A
+sound 0x26 // door slam
+setmaptile 0x6 0x2 0x293 0x1
+setmaptile 0x6 0x1 0x3EA 0x1
+special 0x8E
+sound 0x0
+pause 0x40
+applymovement 0x7F @panBack
+waitmovement 0x0
+
+pause 0x25
+applymovement _BLUE @faceUp
+pause 0x15
+applymovement _BLUE @faceLeft
+pause 0x20
+applymovement _BLUE @faceUp
+pause 0x25
+msgbox @blueTalk 0x6
+pause 0x25
+applymovement _BLUE @moveRight
+waitmovement 0x0
+pause 0x25
+spriteface _BLUE FACE_UP
+pause 0x25
+msgbox @blueTalk2 0x6
+pause 0x25
+spriteface _BLUE FACE_LEFT
+pause 0x25
+msgbox @blueTalk3 0x6
+pause 0x35
+movesprite2 _BILL 0x5 0xF
+movesprite _BILL 0x5 0xF
+showsprite _BILL
+sound 0x9
+pause 0x30
+applymovement _BILL @billEntry
+waitmovement 0x0
+pause 0x10
+applymovement _BILL @faceRight
+spriteface 0xFF FACE_LEFT
+pause 0x10
+msgbox @billTalk 0x6
+pause 0x25
+applymovement _BILL @moveLeft
+waitmovement 0x0
+pause 0x25
+msgbox @billTalk2 0x6
+pause 0x25
+spriteface _BILL FACE_UP
+pause 0x25
+msgbox @billTalk3 0x6
+pause 0x25
+applymovement _BILL @faceRight
+pause 0x25
+msgbox @billTalk4 0x6
+pause 0x20
+applymovement 0x7F @cameraPan4
+waitmovement 0x0
+applymovement _BILL @moveRight
+pause 0x10
+sound 0x42
+pause 0x12
+spriteface _BILL FACE_UP
+spriteface 0xFF FACE_UP
+spriteface _BLUE FACE_UP
+checksound
+playsong 0x138 0x0
+pause 0x20
+msgbox @announcement 0x6
+pause 0x15
+applymovement 0x7F @panBack
+waitmovement 0x0
+pause 0x10
+applymovement _BILL @faceRight
+spriteface 0xFF FACE_LEFT
+pause 0x15
+msgbox @billTalk5 0x6
+pause 0x15
+applymovement _BILL @wander
+
+
+fadescreendelay 0x1 0x10
+clearflag 0x5A
+movesprite2 _BILL 0x5 0x9
+movesprite _BILL 0x5 0x9
+movesprite2 _BLUE 0x8 0x9
+movesprite _BLUE 0x8 0x9
+applymovement 0xFF @refreshWalk
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+spriteface _BILL FACE_UP
+special 0x8E
+playsong 0x11E 0x0
+call @showSprites
+setflag 0x2
+
+
+fadescreendelay 0x0 0x10
+sound 0x62
+pause 0x40
+applymovement 0x7F @slowPan1
+waitmovement 0x0
+pause 0x10
+applymovement 0x1B @stepL
+waitmovement 0x0
+textcolor 0x1
+msgbox @tvTalk 0x6
+pause 0x20
+applymovement 0x1B @faceUp
+applymovement 0x1C @faceUp
+pause 0x10
+applymovement 0x7F @slowPan2
+waitmovement 0x0
+pause 0x20
+sound 0x26
+setmaptile 0x6 0x1 0x3F2 0x1
+setmaptile 0x6 0x2 0x296 0x1
+special 0x8E
+checksound
+pause 0x10
+hidesprite _RED
+movesprite2 _RED 0x6 0x2
+movesprite _RED 0x6 0x2
+showsprite _RED
+applymovement _RED @moveDown
+sound 0x62
+pause 0x50
+applymovement _RED @redToStage
+pause 0x20
+hidesprite _OAK
+movesprite2 _OAK 0x6 0x2
+movesprite _OAK 0x6 0x2
+showsprite _OAK
+applymovement _OAK @moveDown
+pause 0x20
+applymovement 0x7F @slowPanBack
+applymovement _OAK @oakToStage
+waitmovement 0x0
+pause 0x40
+applymovement _OAK @faceLeft
+pause 0x15
+spriteface _RED FACE_RIGHT
+pause 0x25
+spriteface _OAK FACE_DOWN
+pause 0x25
+textcolor 0x0
+applymovement _OAK @stepD
+waitmovement 0x0
+msgbox @oakTalk5 0x6
+pause 0x25
+applymovement _OAK @faceLeft
+pause 0x25
+msgbox @oakTalk6 0x6
+sound 0x62
+msgbox @oakRed MSG_KEEPOPEN
+pause 0x10
+closeonkeypress
+pause 0x25
+applymovement _RED @faceDown
+pause 0x30
+textcolor 0x2
+msgbox @redYes 0x6
+pause 0x30
+applymovement _OAK @faceDown
+pause 0x20
+textcolor 0x0
+preparemsg @oakTalk7
+waitmsg
+fadeout 0x0
+pause 0x10
+closeonkeypress
+pause 0x15
+applymovement _OAK @moveRight
+waitmovement 0x0
+pause 0x25
+msgbox @oakTalk8 0x6
+pause 0x30
+applymovement _OAK @faceDown
+pause 0x25
+msgbox @oakTalk9 0x6
+pause 0x30
+applymovement _OAK @moveLeft
+waitmovement 0x0
+pause 0x30
+msgbox @oakTalk10 0x6
+pause 0x25
+spriteface _OAK FACE_DOWN
+pause 0x25
+msgbox @oakTalk11 0x6
+pause 0x25
+spriteface _OAK FACE_LEFT
+pause 0x20
+applymovement _OAK @moveLeft
+waitmovement 0x0
+applymovement _OAK @moveDown
+waitmovement 0x0
+pause 0x25
+msgbox @oakTalk12 0x6
+pause 0x30
+applymovement _OAK @moveUp
+waitmovement 0x0
+applymovement _OAK @faceLeft
+spriteface _RED FACE_RIGHT
+pause 0x15
+msgbox @oakTalk13 0x6
+pause 0x30
+textcolor 0x2
+msgbox @redYes 0x6
+pause 0x30
+applymovement _OAK @faceDown
+waitmovement 0x0
+pause 0x30
+textcolor 0x0
+preparemsg @oakTalk14
+waitmsg
+playsong 0x121 0x0
+pause 0x15
+closeonkeypress
+pause 0x25
+applymovement _OAK @moveDown
+waitmovement 0x0
+pause 0x25
+msgbox @oakTalk15 0x6
+pause 0x25
+applymovement _OAK @moveLeft
+waitmovement 0x0
+pause 0x25
+msgbox @oakTalk16 0x6
+pause 0x30
+applymovement _OAK @faceDown
+pause 0x25
+msgbox @oakTalk17 0x6
+pause 0x25
+applymovement _OAK @moveRight
+waitmovement 0x0
+pause 0x25
+msgbox @oakTalk18 0x6
+pause 0x25
+applymovement _OAK @faceDown
+pause 0x25
+msgbox @oakTalk19 0x6
+pause 0x15
+applymovement _OAK @stepD
+waitmovement 0x0
+msgbox @oakTalk20 0x6
+pause 0x25
+applymovement _OAK @oakWander
+waitmovement 0x0
+pause 0x30
+msgbox @oakTalk21 0x6
+pause 0x25
+applymovement _OAK @faceDown
+pause 0x15
+msgbox @oakTalk22 0x6
+pause 0x25
+applymovement _OAK @moveDown
+waitmovement 0x0
+applymovement _OAK @faceLeft
+pause 0x20
+msgbox @oakTalk23 0x6
+pause 0x20
+textcolor 0x2
+preparemsg @redYesEllipses
+waitmsg
+fadeout 0x0
+pause 0x10
+closeonkeypress
+
+// Blaine + Fuji reveal
+textcolor 0x0
+sound 0x46
+msgbox @blaineTalk 0x6
+pause 0x10
+call @npcFaceDown
+clearflag 0xA3
+showsprite _BLAINE
+showsprite _FUJI
+pause 0x25
+applymovement 0x7F @panBack3
+waitmovement 0x0
+playsong 0x113 0x0
+pause 0x15
+applymovement _BLAINE @stepU
+waitmovement 0x0
+msgbox @blaineTalk2 0x6
+pause 0x15
+spriteface _FUJI FACE_LEFT
+pause 0x20
+applymovement _FUJI @faceUp
+pause 0x15
+msgbox @fujiTalk 0x6
+pause 0x25
+applymovement _BLAINE @moveUp
+pause 0x20
+msgbox @blaineTalk3 0x6
+pause 0x15
+
+// Oak + Red runaway
+hidesprite _OAK
+movesprite2 _OAK 0x6 0x5
+movesprite _OAK 0x6 0x5
+showsprite _OAK
+spriteface _OAK FACE_DOWN
+hidesprite _RED
+movesprite2 _RED 0x5 0x5
+movesprite _RED 0x5 0x5
+showsprite _RED
+spriteface _RED FACE_DOWN
+applymovement 0x7F @cameraPan4
+waitmovement 0x0
+call @npcFaceUp
+pause 0x10
+sound 0x15 // exclamation
+applymovement _OAK @exclamation
+waitmovement 0x0
+msgbox @oakTalk24 0x6
+pause 0x20
+applymovement _OAK @faceLeft
+spriteface _RED FACE_RIGHT
+pause 0x25
+applymovement _OAK @faceDown
+pause 0x20
+msgbox @oakTalk25 0x6
+pause 0x25
+applymovement _OAK @faceRight
+pause 0x15
+applymovement _OAK @faceUp
+pause 0x20
+msgbox @oakTalk26 0x6
+pause 0x20
+applymovement _OAK @faceDown
+pause 0x25
+msgbox @oakTalk27 0x6
+pause 0x15
+applymovement _OAK @faceLeft
+pause 0x25
+applymovement _OAK @oakLeave2
+applymovement _RED @redLeave2
+setflag 0x39
+
+applymovement _BLAINE @blaineToCrowd
+applymovement _FUJI @fujiToCrowd
+
+pause 0x25
+sound 0x9
+pause 0x30
+sound 0x26 // door slam
+setmaptile 0x6 0x2 0x293 0x1
+setmaptile 0x6 0x1 0x3EA 0x1
+special 0x8E
+
+pause 0x30
+hidesprite _OAK
+hidesprite _RED
+movesprite _OAK 0x0 0x13
+movesprite2 _OAK 0x0 0x13
+movesprite _RED 0x0 0x13
+movesprite2 _RED 0x0 0x13
+sound 0x62
+applymovement 0x7F @panBack4
+waitmovement 0x0
+pause 0x25
+call @permutation1
+pause 0x30
+call @permutation2
+pause 0x20
+msgbox @crowdTalk1 0x6
+pause 0x20
+call @permutation3
+pause 0x15
+msgbox @crowdTalk2 0x6
+pause 0x10
+msgbox @crowdTalk3 0x6
+pause 0x25
+call @permutation4
+pause 0x35
+
+// Agatha monologue
+setflag 0x3
+setflag 0x5
+sound 0x0
+sound 0x33
+fadescreen 0x2
+textcolor 0x1
+msgbox @agathaTalk 0x6
+applymovement 0x7F @panLeft
+waitmovement 0x0
+pause 0x10
+applymovement _AGATHA @faceDown
+waitmovement 0x0
+pause 0x15
+msgbox @agathaTalk2 0x6
+pause 0x10
+setflag 0x4
+special 0x8E
+playsong 0x156 0x0
+clearflag 0x3
+clearflag 0x5
+applymovement _AGATHA @agathaToStage
+applymovement 0x7F @agathaToStage
+waitmovement 0x0
+call @npcFaceUp
+spriteface _AGATHA FACE_DOWN
+pause 0x20
+msgbox @agathaTalk3 0x6
+pause 0x15
+spriteface _AGATHA FACE_UP
+pause 0x20
+msgbox @agathaTalk4 0x6
+pause 0x25
+applymovement _AGATHA @agathaWalk2
+waitmovement 0x0
+msgbox @agathaTalk5 0x6
+
+// Poké Balls + ghost entry
+special 0x8E
+sound 0x0
+sound 0x36
+clearflag 0x200
+hidesprite _OAK
+hidesprite _RED
+hidesprite 0x10
+hidesprite 0x11
+hidesprite 0x12
+call @showsprites
+showsprite 0xF
+showsprite 0xD
+showsprite 0xE
+pause 0x10
+sound 0xF // Poké ball open
+fadescreen 0x2
+setflag 0x200
+hidesprite 0xD
+hidesprite 0xE
+hidesprite 0xF
+clearflag 0x2D6
+call @showsprites
+hidesprite _LEFT_GHOST
+showsprite _LEFT_GHOST
+hidesprite _RIGHT_GHOST
+showsprite _RIGHT_GHOST
+hidesprite _MIDDLE_GHOST
+showsprite _MIDDLE_GHOST
+checksound
+pause 0x10
+cry 0x5D 0x0
+pause 0x5
+sound 0x15 // exclamation
+applymovement 0x1C @exclamation
+applymovement 0x1B @exclamation
+applymovement 0x15 @exclamation
+waitmovement 0x0
+pause 0x10
+setweather 0x6
+doweather
+sound 0xCC
+pause 0x15
+applymovement 0x1C @cameraManMove
+applymovement 0x1B @interviewerMove
+applymovement 0x15 @lanceMove
+applymovement _BILL @billMove
+applymovement 0x7F @middleGhostMove
+applymovement _MIDDLE_GHOST @middleGhostMove
+applymovement _RIGHT_GHOST @rightGhostMove
+applymovement _LEFT_GHOST @leftGhostMove
+pause 0x20
+waitmovement 0x0
+spriteface _BLUE FACE_RIGHT
+applymovement 0x7F @moveDown
+waitmovement 0x0
+fadesong 0x118
+pause 0x20
+
+spritebehave _LEFT_GHOST _LOOK_LEFT
+spritebehave _RIGHT_GHOST _LOOK_RIGHT
+movesprite2 _LEFT_GHOST 0x3 0x9
+movesprite2 _MIDDLE_GHOST 0x6 0xA
+movesprite2 _RIGHT_GHOST 0x9 0x9
+
+movesprite2 _BLAINE 0x4 0xA
+movesprite2 _FUJI 0x7 0xB
+spritebehave _AGATHA _LOOK_DOWN
+movesprite2 _AGATHA 0x6 0x5
+spritebehave _BLUE _LOOK_RIGHT
+movesprite2 _BILL 0x5 0xA
+spritebehave _BILL _LOOK_RIGHT
+movesprite2 0x15 0xA 0xA
+spritebehave 0x1B _LOOK_LEFT
+movesprite2 0x1B 0xA 0x9
+movesprite2 0x1C 0x2 0x9
+spritebehave 0x1C _LOOK_RIGHT
+
+special 0x114
+setmaptile 0x8 0x13 0x8 0x1
+setmaptile 0x7 0x13 0x8 0x1
+setmaptile 0x6 0x13 0x8 0x1
+setmaptile 0x5 0x13 0x8 0x1
+setmaptile 0x4 0x13 0x8 0x1
+// setmaptile 0x6 0xC 0x38F 0x1 (should happen in lvl script)
+special 0x8E
+setvar 0x4016 0x36
+setvar 0x4011 0x2
+release
+end
+
+
+#org @showSprites
+showsprite 0x1
+showsprite 0x4
+showsprite 0x5
+showsprite 0x8
+showsprite 0x9
+//showsprite 0x13
+//showsprite 0x14
+showsprite 0x15
+showsprite 0x16
+//showsprite 0x17
+showsprite 0x18
+//showsprite 0x19
+//showsprite 0x1A
+showsprite 0x1B
+showsprite 0x1C
+// showsprite 0x1D
+return
+
+#org @npcFaceDown
+spriteface 0xFF FACE_DOWN
+spriteface 0x1 FACE_DOWN
+spriteface 0x2 FACE_DOWN
+spriteface 0x3 FACE_DOWN
+spriteface 0x4 FACE_DOWN
+spriteface 0x5 FACE_DOWN
+spriteface 0x8 FACE_DOWN
+spriteface 0x9 FACE_DOWN
+// spriteface 0x13 FACE_DOWN
+// spriteface 0x14 FACE_DOWN
+spriteface 0x15 FACE_DOWN
+spriteface 0x16 FACE_DOWN
+// spriteface 0x17 FACE_DOWN
+spriteface 0x18 FACE_DOWN
+// spriteface 0x19 FACE_DOWN
+// spriteface 0x1A FACE_DOWN
+spriteface 0x1B FACE_DOWN
+spriteface 0x1C FACE_DOWN
+return
+
+#org @npcFaceUp
+spriteface 0xFF FACE_UP
+spriteface 0x1 FACE_UP
+spriteface 0x4 FACE_UP
+spriteface 0x5 FACE_UP
+spriteface 0x6 FACE_UP
+spriteface 0x7 FACE_UP
+spriteface 0x8 FACE_UP
+spriteface 0x9 FACE_UP
+// spriteface 0x13 FACE_UP
+// spriteface 0x14 FACE_UP
+spriteface 0x15 FACE_UP
+spriteface 0x16 FACE_UP
+// spriteface 0x17 FACE_UP
+spriteface 0x18 FACE_UP
+// spriteface 0x19 FACE_UP
+// spriteface 0x1A FACE_UP
+spriteface 0x1B FACE_UP
+spriteface 0x1C FACE_UP
+return
+
+
+#org @permutation1
+spriteface 0x1 FACE_LEFT
+spriteface 0x2 FACE_RIGHT
+spriteface 0x3 FACE_UP
+spriteface 0x4 FACE_DOWN
+spriteface 0x5 FACE_LEFT
+spriteface 0x6 FACE_LEFT
+spriteface 0x7 FACE_RIGHT
+spriteface 0x8 FACE_RIGHT
+spriteface 0x9 FACE_UP
+// spriteface 0x13 FACE_DOWN
+// spriteface 0x14 FACE_LEFT
+spriteface 0x15 FACE_RIGHT
+spriteface 0x16 FACE_UP
+// spriteface 0x17 FACE_DOWN
+spriteface 0x18 FACE_LEFT
+// spriteface 0x19 FACE_RIGHT
+// spriteface 0x1A FACE_RIGHT
+spriteface 0x1B FACE_DOWN
+spriteface 0x1C FACE_LEFT
+return
+
+#org @permutation2
+spriteface 0x1 FACE_LEFT
+spriteface 0x2 FACE_DOWN
+spriteface 0x3 FACE_RIGHT
+spriteface 0x4 FACE_LEFT
+spriteface 0x5 FACE_LEFT
+spriteface 0x6 FACE_LEFT
+spriteface 0x7 FACE_DOWN
+spriteface 0x8 FACE_DOWN
+spriteface 0x9 FACE_UP
+// spriteface 0x13 FACE_UP
+// spriteface 0x14 FACE_LEFT
+spriteface 0x15 FACE_LEFT
+spriteface 0x16 FACE_LEFT
+// spriteface 0x17 FACE_UP
+spriteface 0x18 FACE_RIGHT
+// spriteface 0x19 FACE_RIGHT
+// spriteface 0x1A FACE_UP
+spriteface 0x1B FACE_DOWN
+spriteface 0x1C FACE_LEFT
+return
+
+
+#org @permutation3
+spriteface 0x1 FACE_UP
+spriteface 0x2 FACE_DOWN
+spriteface 0x3 FACE_LEFT
+spriteface 0x4 FACE_UP
+spriteface 0x5 FACE_LEFT
+spriteface 0x6 FACE_LEFT
+spriteface 0x7 FACE_DOWN
+spriteface 0x8 FACE_DOWN
+spriteface 0x9 FACE_RIGHT
+// spriteface 0x13 FACE_RIGHT
+// spriteface 0x14 FACE_UP
+spriteface 0x15 FACE_LEFT
+spriteface 0x16 FACE_LEFT
+// spriteface 0x17 FACE_DOWN
+spriteface 0x18 FACE_DOWN
+// spriteface 0x19 FACE_UP
+// spriteface 0x1A FACE_DOWN
+spriteface 0x1B FACE_RIGHT
+spriteface 0x1C FACE_DOWN
+return
+
+
+#org @permutation4
+spriteface 0x1 FACE_RIGHT
+spriteface 0x2 FACE_UP
+spriteface 0x3 FACE_DOWN
+spriteface 0x4 FACE_LEFT
+spriteface 0x5 FACE_RIGHT
+spriteface 0x6 FACE_RIGHT
+spriteface 0x7 FACE_UP
+spriteface 0x8 FACE_UP
+spriteface 0x9 FACE_DOWN
+// spriteface 0x13 FACE_RIGHT
+// spriteface 0x14 FACE_RIGHT
+spriteface 0x15 FACE_UP
+spriteface 0x16 FACE_DOWN
+// spriteface 0x17 FACE_LEFT
+spriteface 0x18 FACE_UP
+// spriteface 0x19 FACE_UP
+// spriteface 0x1A FACE_UP
+spriteface 0x1B FACE_LEFT
+spriteface 0x1C FACE_RIGHT
+return
+
+
+
+#org @oakTalk1
+= Oak: Red!
+
+#org @oakTalk2
+= Oak: So, you've won!\c\h08ó\nSincerely, congratulations!\pYou're the new Pokémon League\nChampion!\pYou've grown up so much since you\nfirst left with Charmander to work\lon the Pokédex.\pRed, you have come of age!
+
+#org @oakTalk3
+= Blue[.]\c\h08ó\nI'm disappointed in you.\pI came when I heard you'd beaten\nthe Elite Four.\pBut, when I got here, you had\nalready lost!\pBlue, do you understand why\nyou lost?\pYou have forgotten to treat your\nPokémon with love and trust.\pWithout them, you will never\nbecome a Champ again!
+
+#org @oakTalk4
+= Red.\pYou understand that your victory\nwas not just your own doing.\pThe bond you share with your\nPokémon is marvelous.\pRed!\c\h08ó\nCome with me!
+
+#org @blueTalk
+= Blue: [.]\c\h08ó\nI-I[.]\c\h08ó I[.]\c\h08ó don't understand[.]
+
+#org @blueTalk2
+= Grandpa..!\pI treated my Pokémon with respect[.]\c\h08ó\nAlways[.]\pGave them the rest and the love\nthey needed[.]\c\h08ó I-I did[.]\pI swear I did everything right..!\c\h08ó\nI was[.]\c\h08ó so sure of it[.]
+
+#org @blueTalk3
+= I thought[.]\c\h08ó\nWhen I was finally Champion[.]\pThat you would at least stop and[.]\c\h08ó\nSay you were proud[.]
+
+#org @billTalk
+= Bill: [.]\c\h08ó\nAh..!\pSo much for nothing,\n[player][.]
+
+#org @billTalk2
+= I'll be damned[.]\c\h08ó\nIt's actually true, then[.]\lThe kid really did it[.]\p[.]\pOh, that slimy, scheming\nProfessor[.]
+
+#org @billTalk3
+= [.]\c\h08ó\nHmmm[.]\pThe crowds will arrive any minute[.]\c\h08ó\nNot ideal at all.\pI was really hoping we could solve\nthis in private[.]
+
+#org @billTalk4
+= Not to worry, [player][.]\pWe're just going to have to fall\nback to another solution[.]
+
+#org @announcement
+= PA: Ladies and gentlemen!\c\h08ó\nChampion Blue has been defeated!\pIt's my honor to announce that the\nnew Champion of Kanto-Johto is[.]\pRed from Pallet Town!\pPlease stand by for further\ncomments by the new Champion.
+
+#org @billTalk5
+= Bill: [.]\pThere's nothing we can do now but\nwait.\p[.]\pI'm going to have to make a phone\ncall[.]
+
+#org @tvTalk
+= We can barely believe our eyes,\nviewers!\pNo sooner have we received a new\nChampion than the title changes\lhands yet again!\pThis extraordinary new young Champ\nhas just finished his Hall of Fame\lceremony and will return to give\lhis inaugural speech.\pWho's to say what happens next?\c\h08ó\nWe are trembling with anticipation!
+
+#org @oakTalk5
+= Oak: My, how good it is to see\nyou, people of Kanto!\pThis is Professor Samuel Oak\nspeaking.
+
+#org @oakTalk6
+= I stand before you with our new\nChampion[.]\pA uniquely talented young boy whom\nI've had the privilege to raise\las my own in our little town[.]
+
+#org @oakRed
+= Red!
+
+#org @redYes
+= Red: ...\c\h08ó\c\h08ó\nYes.
+
+#org @oakTalk7
+= Oak: Marvelous, marvelous!\c\h08ó\n[.]now, then!
+
+#org @oakTalk8
+= I know some of you may remember the\nlast time I stood in this room[.]\pAnd have mixed feelings about seeing\nme here again.\pBut rest assured[.]\pI address you now as Red's care-\ntaker, not as a former Champion.
+
+#org @oakTalk9
+= Moreover[.]\pI'm embarrassed to bring this matter\nto public attention this way[.]\pBut since it concerns our new\nChampion I see no real alternative.
+
+#org @oakTalk10
+= [.]\c\h08ó\nEr-hem!\pYou've all witnessed Red's unmatched\ntalents for Pokémon battle.\p[.]\pI'm sorry to say that this unique\ngift of his has come at a price[.]
+
+#org @oakTalk11
+= Red unfortunately suffers from\ncertain[.]\c\h08ó social disabilities.\pHe cannot speak in public without\npangs of debilitating terror[.]\pAnd he struggles to communicate\nwith the outside world.
+
+#org @oakTalk12
+= So for that reason I'm taking on\na special responsibility[.]\pI will be Red's[.]\c\h08ó right-hand man.\c\h08ó\nHis main political advisor.\pAnd I will communicate his wishes\nto you, the people.
+
+#org @oakTalk13
+= Do you agree with this arrangement,\nRed? Have I understood you right?
+
+#org @oakTalk14
+= Oak: Very well.\c\h08ó\nThen let's begin.
+
+#org @oakTalk15
+= It's clear to me--\c\h08ó\nand to Red as well, of course[.]\pThat some changes are in order for\nthe region of Kanto.\pThe previous government has been\nreckless with public safety.
+
+#org @oakTalk16
+= What do we make of the ever-growing\ncases of violent gang crime?\lCorruption amongst our Gym Leaders?\pWhen nothing Lance has done seems\nto be slowing their growth..?\l[.]And what of this Giovanni?
+
+#org @oakTalk17
+= It's clear as day[.]\c\h08ó\nHarsher methods are in order!\pWe'll bring all these criminals to\njustice, dead or alive!
+
+#org @oakTalk18
+= And what else..?
+
+#org @oakTalk19
+= Tell me[.]\pHow can we allow our Legendary\nBirds to roam freely throughout\lthe region?\pWhat of the various Legendary beasts\nrumored to be hiding in the remote\lcorners of our caves and islands?\pWhat if they should fall into\ncriminal hands?\lWhat if they should run away?
+
+#org @oakTalk20
+= We must dedicate all our resources\nto capturing them[.]\pBring them under government\ncontrol[.]\pFor public safety[.]\c\h08ó And to preserve\nour cultural heritage!
+
+#org @oakTalk21
+= Yes[.]\c\h08ó\nDear Kantoneans[.]\pLance has done us a great\ndisservice, there's no question.
+
+#org @oakTalk22
+= So I believe[.]\pOnly because I agree with Red's\nreasoning, of course[.]\pThat nothing the but the strictest\npunishment is in order!\pLance should be brought in at once!
+
+#org @oakTalk23
+= Do you agree with these motions,\nRed?
+
+#org @redYesEllipses
+= Red: ...\c\h08ó\c\h08ó\nY--
+
+#org @blaineTalk
+= STOP!
+
+#org @blaineTalk2
+= Blaine: This meeting cannot be\nallowed to continue!\pEveryone, listen!\nRed cannot be Champion!
+
+#org @fujiTalk
+= Fuji: He's no real Pokémon Trainer!\nHe's not even a human being!\pJust some creature[.]\nSome laboratory experiment[.]\pCreated by Oak to do his bidding!
+
+#org @blaineTalk3
+= Blaine: It's all a sham!\pWe have proof!\nIrrefutable proof!
+
+#org @oakTalk24
+= Oak: ..!\c\h08ó\nNonsense!
+
+#org @oakTalk25
+= Look, you'll trigger the poor boy's\nanxiety with such aggressive,\lbaseless accusations!\pI daresay he's been through enough\nemotional stress for one day..!
+
+#org @oakTalk26
+= I--\c\h08ó he[.]
+
+#org @oakTalk27
+= He's going to need a safe space\nto retreat to for the moment..!\pApologies, but we will hear more\nfrom Champion Red at a later time!
+
+
+#org @crowdTalk1
+= What is going on?\nWe demand an explanation!
+
+#org @crowdTalk2
+= Let us into the Hall of Fame room!
+
+#org @crowdTalk3
+= Hear, hear!
+
+#org @agathaTalk
+= [.]\c\h08ó\nWait[.]
+
+#org @agathaTalk2
+= Agatha: Samuel[.]\pIs it true..?\c\h08ó\nThat's what it was all these years?\pNot cowardice[.]\c\h08ó\nBut cunning?!\pHow could I have failed to see..?!\pThe Kanto we wanted[.]\c\h08ó\nWe could have it again[.]
+
+#org @agathaTalk3
+= Agatha: Hold it!\pYou're not going anywhere, you\npuny peasants!
+
+#org @agathaTalk4
+= This man[.]\c\h08ó Is someone you could\nnever measure up to!\pHe will create the perfect Kanto[.]\c\h08ó\nA place for the strong to prosper[.]\pDon't you understand?!
+
+#org @agathaTalk5
+= If you want to get in between[.]\c\h08ó\nYou get through me first!
+
+#org @refreshwalk
+#raw STEP_D
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @moveLeft
+#raw STEP_L
+#raw 0xFE
+
+#org @moveRight
+#raw STEP_R
+#raw 0xFE
+
+#org @moveDown
+#raw STEP_D
+#raw 0xFE
+
+#org @moveUp
+#raw STEP_U
+#raw 0xFE
+
+#org @cameraPan1
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @cameraPan2
+#raw 0x1C
+#raw 0x1C
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @cameraPan3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw 0xFE
+
+#org @cameraPan4
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @cameraPan5
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+
+#org @panBack
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @panBack2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @panBack3
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @panBack4
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @faceRight
+#raw 0x30
+#raw 0xFE
+
+#org @faceLeft
+#raw 0x2F
+#raw 0xFE
+
+#org @faceDown
+#raw 0x2D
+#raw 0xFE
+
+#org @faceUp
+#raw 0x2E
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @oakEnter
+#raw 0x1C
+#raw 0x1C
+#raw 0x11
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x12 
+#raw 0x11 
+#raw 0x11 
+#raw 0x2D 
+#raw 0x1C
+#raw 0xFE
+
+#org @blueFace
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x2F 
+#raw 0xFE
+
+#org @redFace
+#raw 0x1B 
+#raw 0x2D 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x1C 
+#raw 0x2F 
+#raw 0xFE
+
+#org @oakLeave
+#raw 0x11 
+#raw 0x11 
+#raw 0x13 
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x1B 
+#raw 0x60 
+#raw 0xFE
+
+#org @redLeave
+#raw 0x1C
+#raw 0x1C
+#raw 0x12
+#raw 0x1C
+#raw 0x1C 
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x13 
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x11 
+#raw 0x1B 
+#raw 0x60 
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @billEntry
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @wander
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @slowPan1
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw 0xFE
+
+#org @slowPan2
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw STEP_U3
+#raw 0xFE
+
+#org @redToStage
+#raw STEP_D
+#raw STEP_D
+#raw 0x1C
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE
+
+#org @oakWander
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @oakToStage
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @slowPanBack
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw STEP_D3
+#raw 0xFE
+
+#org @oakLeave2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x19 
+#raw 0x60
+#raw 0xFE
+
+#org @redLeave2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x19 
+#raw 0x60
+#raw 0xFE
+
+#org @panLeft
+#raw STEP_L3
+#raw STEP_L3
+#raw STEP_L3
+#raw 0xFE
+
+#org @agathaToStage
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw FACE_D
+#raw 0xFE
+
+#org @agathaWalk2
+#raw STEP_U2
+#raw FACE_D
+#raw 0xFE
+
+#org @leftGhostMove
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_D
+#raw STEP_D
+#raw FACE_L
+#raw 0xFE
+
+#org @middleGhostMove
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @rightGhostMove
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw FACE_R
+#raw 0xFE
+
+#org @cameraManMove
+#raw 0x1C
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw FACE_U
+#raw 0x1C
+#raw STEP_D2
+#raw STEP_L2
+#raw FACE_R
+#raw 0xFE
+
+#org @interviewerMove
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw FACE_L
+#raw 0x1C
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_D2
+#raw FACE_L
+#raw 0xFE
+
+#org @lanceMove
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw STEP_D2
+#raw STEP_D2
+#raw FACE_U
+#raw 0xFE
+
+#org @billMove
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D2
+#raw FACE_U
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
+
+#org @blaineToCrowd
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+
+#org @fujiToCrowd
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0xFE
+ 
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+compare 0x402F 0x1
+if 0x3 call @resetSight
+end
+
+#org @resetSight
+setvar 0x402F 0x0
+return

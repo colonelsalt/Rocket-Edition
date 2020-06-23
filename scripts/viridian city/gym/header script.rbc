@@ -1,0 +1,41 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _ARIANA 0x5
+#define _GRUNT1 0x2
+#define _FEMALE_GRUNT 0x1
+#define _MART_GRUNT 0xB
+#define _MARKET_GRUNT 0xA
+#define _GYM_GUY 0xC
+#define _GIOVANNI 0xD
+#define _KARATE_MAN 0x9
+#define _COOLTRAINER1 0x8
+#define _COOLTRAINER2 0x7
+#define _TAMER 0x6
+#define _PETREL 0xE
+#define _PROTON 0xF
+
+#org @main
+compare 0x402E 0x11 // before Celadon HQ evacuation
+if _LESS call @hideExtraGrunts
+checkflag 0x2AE // if Boss promotion has happened
+if 0x1 call @moveAriana
+end
+
+#org @hideExtraGrunts
+// hide Giovanni
+movesprite2 _GIOVANNI 0x0 0x8
+movesprite2 _FEMALE_GRUNT 0x0 0x8
+movesprite2 _COOLTRAINER1 0x0 0x8
+movesprite2 _KARATE_MAN 0x0 0x8
+movesprite2 _GYM_GUY 0x0 0x8
+movesprite2 _COOLTRAINER2 0x0 0x8
+movesprite2 _TAMER 0x0 0x8
+movesprite2 _PETREL 0x0 0x8
+movesprite2 _PROTON 0x0 0x8
+return
+
+#org @moveAriana
+// note: Giovanni already hidden by flag
+movesprite2 _ARIANA 0x2 0x2
+movesprite2 _PETREL 0x10 0x10
+return

@@ -1,0 +1,76 @@
+
+All-instrument voicegroup: 0xB30C5C
+Improved audio mixer routine: 0x876F68
+
+Sappy song replacements:
+#290 (End credits) -> Double Trouble
+#331 (Mount Ember) -> Cinnabar Island Glitched
+#334 (Tanoby Ruins) -> Courtroom / ending scene theme
+#335 (Islands 1-3) -> Oak's Secret Lab
+#336 (Islands 4-5) -> Hall of Fame room
+#337 (Islands 6-7) -> Oak's battle theme
+#344 (Trainer Tower) -> A Day in the Life outro
+#343 (Deoxys Encounter) -> A Day in the Life final chord
+
+
+
+Pokésteal multichoice boxes:	(all point to 0x0203F4A0 [free RAM space])
+2-choice: #0x36 (@0x083E0660)
+3-choice: #0x37 (@0x083E0668)
+4-choice: #0x38 (@0x083E0670)
+5-choice: #0x39 (@0x083E0678)
+6-choice: #0x3A (@0x083E0680)
+		(Note: string pointers are seperated by four 00-bytes)
+
+Multi-purpose script offsets:
+Pokésteal (v3.0): 0x81FCA7
+Pokésteal v3 (bypassing yes/no prompt): 0x81FEFD
+Steal if Admin: 0x804009
+Steal if Executive: 0x838106
+Steal if Boss: 0x804C35
+Playerface fix: 0x806A20
+Flashlight: 0x835DFD
+Crowbar: 0x87C300
+Silph Scope: 0x8877C1 (now 0x8279A4)
+
+
+ASM offsets:
+Pokésteal (parse trainer data): 0x802338
+Load level from var: 0x8022B0
+Getname (trainer class and name strings): 0x8023B8
+Instant movecamera: 0x802304
+Playerface fix: 0x806AE0
+Dynamic map music: 0x81B100
+Getlevel: 0x827980
+Flashlight: 0x836B00
+Random Number Generator: 0x851530
+Shiny Pkmn Generator: 0x851560
+Uncatchable toggle: 0x878280 (activated by setting var 0x8004 to 0x69)
+Runaway from wild battle toggle: 0x8782D0 (activated by setting var 0x8006 to 0x69)
+Crowbar: 0x87D400
+Expand-event-objects: 0x8A0000
+Silph Scope: 0x889D6C
+Class-based trainer music: 0x88A3B0
+Class-based victory music: 0x88A53C
+Variable division: 0x88A38C
+Reset game: 0x800D44
+
+
+Other tables:
+Repointed OW Palette table (pointers): 0x814000
+2nd OW sprite table (pointer index): 0x1C68F4
+2nd table OW data: 0x90D800
+2nd table frame pointers: 0x916800
+2nd table frame art data: 0x91B000 - 0x920000
+			  0x9232B0 - 0x92FAB0
+			  0x93B800 - 0x94D190 -
+			  [REMEMBER TO STOP BEFORE 0x950000 -- OTHER DATA THERE!]
+			  
+Dynamic map music table: 0x81B000
+Class-based battle music table: 0x88A340
+Class-based victory music table: 0x88A4E0
+
+
+
+
+

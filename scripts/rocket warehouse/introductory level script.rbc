@@ -1,0 +1,815 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define DCMAN 0x1A
+#define ARCHER 0x17
+#define NIDORAN 0x1B
+
+// for whatever reason, the level script here always replaces
+// the one at Mt. Moon (1.1); so I just have to include both in
+// the same script to prevent one overwriting the other
+
+#org @main
+checkflag 0x205 // checks if Mt. Moon mission completed
+if 0x0 goto @mtMoonScript
+checkflag 0x213 // checks if Ronnie police scene has passed
+if 0x1 goto @2ndScript
+lockall
+spriteface 0xFF FACE_RIGHT
+applymovement DCMAN @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @DCtalk 0x6
+pause 0x15
+applymovement ARCHER @stepR
+waitmovement 0x0
+msgbox @adminEllipses 0x6
+pause 0x15
+spriteface ARCHER FACE_LEFT
+pause 0x15
+applymovement ARCHER @adminLeft
+applymovement DCMAN @DCmoveaway
+waitmovement 0x0
+pause 0x20
+msgbox @adminTalk 0x6
+applymovement DCMAN @stepD
+waitmovement 0x0
+msgbox @DCtalk2 0x6
+pause 0x20
+applymovement ARCHER @walkLeft
+pause 0x20
+msgbox @adminTalk2 0x6
+waitmovement 0x0
+pause 0x20
+spriteface ARCHER FACE_DOWN
+pause 0x20
+msgbox @adminTalk3 0x6
+applymovement 0x1C @stepU
+waitmovement 0x0
+msgbox @yessir 0x6
+applymovement 0x1C @gruntWalk
+waitmovement 0x0
+pause 0x10
+spriteface NIDORAN FACE_DOWN
+pause 0x15
+cry 0x20 0x0
+pause 0x15
+sound 0xA
+applymovement NIDORAN @jump
+waitmovement 0x0
+sound 0xA
+applymovement NIDORAN @jump
+waitmovement 0x0
+pause 0x15
+applymovement 0x1C @gruntDrag1
+applymovement NIDORAN @nidoDrag1
+waitmovement 0x0
+cry 0x20 0x0
+waitcry
+applymovement 0x1C @gruntDrag2
+applymovement NIDORAN @nidoDrag2
+waitmovement 0x0
+cry 0x20 0x0
+waitcry
+hidesprite 0x1C
+hidesprite NIDORAN
+pause 0x15
+applymovement DCMAN @stepD
+waitmovement 0x0
+msgbox @DCtalk3 0x6
+applymovement DCMAN @DCleave1
+waitmovement 0x0
+applymovement 0xFF @playermove
+waitmovement 0x0
+applymovement DCMAN @DCleave2
+waitmovement 0x0
+sound 0x9
+setflag 0x20F
+hidesprite DCMAN
+pause 0x25
+spriteface ARCHER FACE_LEFT
+pause 0x25
+applymovement ARCHER @stepL
+waitmovement 0x0
+msgbox @adminTalk4 0x6
+pause 0x15
+applymovement 0xFF @playerStep
+waitmovement 0x0
+pause 0x27
+msgbox @adminTalk5 0x6
+applymovement ARCHER @stepL
+waitmovement 0x0
+msgbox @admintalk6 0x6
+pause 0x25
+spriteface ARCHER FACE_RIGHT
+pause 0x25
+spriteface ARCHER FACE_LEFT
+pause 0x25
+msgbox @admintalk7 0x6
+pause 0x10
+spriteface ARCHER FACE_UP
+pause 0x10
+msgbox @adminTalk7.5 0x6
+pause 0x10
+spriteface ARCHER FACE_LEFT
+pause 0x15
+applymovement ARCHER @stepL
+waitmovement 0x0
+msgbox @adminTalk8 0x6
+spriteface ARCHER FACE_DOWN
+clearflag 0x20E
+setvar 0x4016 0x4
+releaseall
+end
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @DCtalk
+= Greetings, sir.\pSome fresh meat here for you, in\nmore ways than one.
+
+#org @adminEllipses
+= Archer: [.]
+
+#org @DCmoveaway
+#raw STEP_U
+#raw FACE_D
+#raw 0xFE
+
+#org @adminLeft
+#raw STEP_L
+#raw 0xFE
+
+#org @adminTalk
+= Archer: What have we got here?\nA male Nidoran, is it?\pWell, it may be cute, but it\ncertainly won't be of any use for\lmanual labor, hmm?
+
+#org @DCtalk2
+= No, indeed.\pBut if I recall correctly it\nshould be pretty-- er[.]\lversatile in the breeding\ldepartment.
+
+#org @walkLeft
+#raw STEP_L
+#raw 0xFE
+
+#org @adminTalk2
+= Archer: That so?
+
+#org @adminTalk3
+= You, grunt!\pGo throw this little fella in the\nbreeding pit.\pTry get it close to that Cubone\nwe've got there too-- we could\luse a few more Cubone eggs.
+
+#org @yessir
+= Yes, sir!
+
+#org @gruntWalk
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw FACE_U
+#raw 0xFE
+
+#org @jump
+#raw 0x52
+#raw 0xFE
+
+#org @gruntDrag1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @nidoDrag1
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @gruntDrag2
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @nidoDrag2
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @DCtalk3
+= Well, I'll be on my way.
+
+#org @DCleave1
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @playermove
+#raw STEP_D
+#raw FACE_U
+#raw 0xFE
+
+#org @DCleave2
+#raw STEP_L
+#raw 0xFE
+
+#org @adminTalk4
+= Archer: Well, then!\n[.]and you are..?
+
+#org @playerStep
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @adminTalk5
+= Archer: [.]\c\h08ó\nAh, so you're [player].\pWelcome to Cerulean-- the city of\nbeautiful flowing water, or\lwhatever the hell it is.\pMake yourself at home in our\nhumble little Rocket base, but\lplease don't feed the Pokémon, if\lyou'd be so kind.
+
+#org @adminTalk6
+= I got the message from Boss about\nyour mission.\pBill's house is just north of the\ncity along Route 25, right on the\lother side of Nugget Bridge.\pIt's pretty big-- you won't miss\nit.
+
+#org @adminTalk7
+= I had a box of a few rarities put\ntogether per Boss's request.\pHonestly, if I were Bill, I'd take\nthe job in a heartbeat if the\lstuff in there was what I was\lbeing offered, but then I've heard\lhe is a bit of a picky weirdo.
+
+#org @adminTalk7.5
+= You can go collect the parcel up\nin the storage room over there.
+
+#org @adminTalk8
+= Now if you'll excuse me, I'll have\nto give these rookies here a crash\lcourse in the art of a good\lburglery.\pThis part is always good fun.
+
+
+//-------------------------------------------------------------------------------------------
+
+#define RONNIE 0x1E
+#define GRUNT1 0x15
+#define GRUNT2 0x19
+#define GRUNT3 0x18
+#define GRUNT4 0x1D
+#define SCIENTIST 0xE
+
+#org @2ndScript
+lock
+applymovement 0xFF @playerWalk
+waitmovement 0x0
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+applymovement RONNIE @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @ronTalk1 0x6
+pause 0x15
+spriteface GRUNT1 FACE_UP
+pause 0x15
+msgbox @gruntTalk1 0x6
+pause 0x10
+spriteface GRUNT1 FACE_RIGHT
+pause 0x15
+applymovement GRUNT2 @stepU
+waitmovement 0x0
+msgbox @gruntTalk2 0x6
+pause 0x15
+spriteface GRUNT3 FACE_LEFT
+pause 0x15
+msgbox @gruntTalk3 0x6
+pause 0x10
+applymovement GRUNT4 @stepL
+waitmovement 0x0
+spriteface GRUNT3 FACE_UP
+textcolor 0x1
+msgbox @gruntTalk4 0x6
+pause 0x10
+applymovement ARCHER @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @ARTalk1 0x6
+pause 0x20
+spriteface ARCHER FACE_RIGHT
+pause 0x20
+msgbox @ARTalk2 0x6
+pause 0x20
+spriteface ARCHER FACE_DOWN
+pause 0x20
+msgbox @ARTalk3 0x6
+setmaptile 0x10 0xA 0x61 0x1 // sets TV screen to be flashing "on"
+applymovement 0x7F @cameraToNerd
+waitmovement 0x0
+spriteface SCIENTIST FACE_LEFT
+sound 0x46 // "wooden smash"
+msgbox @yell 0x6
+applymovement GRUNT1 @rightFacer
+applymovement GRUNT3 @rightFacer
+applymovement GRUNT4 @rightFacer
+applymovement RONNIE @rightFacer
+spritebehave ARCHER 0xA
+spritebehave GRUNT2 0xA
+applymovement GRUNT2 @rightFacer
+applymovement ARCHER @rightFacer
+applymovement 0x7F @cameraBack
+waitmovement 0x0
+sound 0x15 // exclamation
+applymovement ARCHER @exclamation
+waitmovement 0x0
+applymovement ARCHER @adminRunToNerd
+applymovement RONNIE @ronRunToNerd
+applymovement GRUNT3 @3gruntRunToNerd
+applymovement GRUNT1 @1gruntRunToNerd
+applymovement GRUNT2 @2gruntRunToNerd
+applymovement GRUNT4 @4gruntRunToNerd
+pause 0x25
+sound 0x7 // "thud"
+pause 0x4
+sound 0xA // jump sound
+waitmovement 0x0
+pause 0x40
+applymovement 0x7F @cameraToPlayer
+waitmovement 0x0
+movesprite GRUNT1 0x10 0xE
+special 0x114
+movesprite2 RONNIE 0xF 0xC
+movesprite2 ARCHER 0x11 0xC
+movesprite2 GRUNT3 0xF 0xD
+movesprite2 GRUNT1 0x10 0xE
+movesprite2 GRUNT4 0x11 0xE
+movesprite2 GRUNT2 0x12 0xE
+spritebehave RONNIE 0x7
+spritebehave ARCHER 0x7
+spritebehave GRUNT3 0x7
+spritebehave GRUNT1 0x7
+spritebehave GRUNT4 0x7
+spritebehave GRUNT2 0x7
+setvar 0x4016 0x4
+setvar 0x401D 0x5
+release
+end
+
+#org @playerWalk
+#raw STEP_D
+#raw STEP_R
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @ronTalk1
+= Ronnie: You guys! You're not gonna\nbelieve this:\lThe cops are in town!\pThey're up by the old TM\ncollector's house-- I swear, we\lonly barely got away before they\lhad us in cuffs just now!
+
+#org @gruntTalk1
+= No kidding, man-- what do you\nthink we're all so worked up over?
+
+#org @gruntTalk2
+= Jeez, what are we going to do?\nYou think they're onto us?
+
+#org @gruntTalk3
+= But they couldn't have seen us!\nWe were real stealth-like!\pThey've got no reason to think it\nwas us and not some other old\lburglar, have they?
+
+#org @gruntTalk4
+= Come on!\pYou can't know if at least one of\nus didn't slip up and get spotted\lat some point!\pI mean, I'm sure it doesn't take a\ngenius of a bystander to spot a\lcrew of Rockets running around and\la house being robbed and somehow\lconnect the two, does it?
+
+#org @ARTalk1
+= Archer: That's enough.\c\h08ó\nPlease be quiet, all.\pThere should be no reason for\nalarm.\pThe police have arrived at the\nscene a lot quicker than they\lusually do, granted, but there's\lno reason for them to suspect us\lin particular just yet.
+
+#org @ARTalk2
+= And, even if they did, well[.]\pWe've got enough influence in the\nKanto police department to ensure\lthe repercussions for us will be\lminimal.
+
+#org @ARTalk3
+= No, this is a far too\nlow-impact episode for them to\ltake any definite action.\p[.]\pUnless, of course--
+
+#org @yell
+= Hey, guys! Check this out!\nIt's on the TV!\pGet over here, quick!
+
+#org @cameraToNerd
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @rightFacer
+#raw FACE_R
+#raw 0xFE
+
+#org @cameraBack
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminRunToNerd
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw FACE_U
+#raw 0xFE
+
+#org @ronRunToNerd
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw FACE_U
+#raw 0xFE
+
+#org @3gruntRunToNerd
+#raw 0x1C
+#raw 0x19
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_U2
+#raw 0xFE
+
+#org @1gruntRunToNerd
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0x16 // "jump2 left"
+#raw FACE_R
+#raw 0x1C
+#raw 0x19
+#raw FACE_L
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw STEP_R
+#raw STEP_D
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @2gruntRunToNerd
+#raw 0x1C
+#raw 0x1B
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0x19
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_U2
+#raw FACE_U
+#raw 0xFE
+
+#org @4gruntRunToNerd
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw FACE_U
+#raw 0xFE
+
+#org @cameraToPlayer
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+
+// ----------------------------------------------------------------
+
+#org @mtMoonScript
+lock
+spriteface 0xFF FACE_RIGHT
+applymovement 0x17 @stepL
+waitmovement 0x0
+textcolor 0x0
+msgbox @rivalTalk 0x6
+applymovement 0x17 @rivalWalk
+applymovement 0xFF @playerwalkie
+waitmovement 0x0
+applymovement 0x11 @stepL
+waitmovement 0x0
+msgbox @gruntOneTalk 0x6
+applymovement 0x12 @stepR
+waitmovement 0x0
+msgbox @gruntTwoTalk 0x6
+pause 0x10
+spriteface 0x12 FACE_DOWN
+pause 0x10
+msgbox @gruntTwoTalkExtra 0x6
+spriteface 0x12 FACE_RIGHT
+applymovement 0x17 @stepD
+waitmovement 0x0
+msgbox @rivalTalk2 0x6
+applymovement 0x17 @disbelief
+waitmovement 0x0
+msgbox @rivalTalk3 0x6
+pause 0x7
+spriteface 0x17 FACE_LEFT
+pause 0x4
+msgbox @rivalTalk4 0x6
+spriteface 0x17 FACE_DOWN
+applymovement 0x17 @stepD
+waitmovement 0x0
+msgbox @rivalTalk5 0x6
+applymovement 0x11 @stepL
+waitmovement 0x0
+msgbox @gruntOneTalkTwo 0x6
+applymovement 0x12 @stepR
+waitmovement 0x0
+msgbox @gruntTwoTalkTwo 0x6
+applymovement 0x11 @gruntOneLeave
+applymovement 0x12 @gruntTwoLeave
+spriteface 0x16 FACE_UP
+pause 0x70
+applymovement 0x16 @stepU
+waitmovement 0x0
+textcolor 0x1
+msgbox @gruntThreeTalk 0x6
+applymovement 0x16 @gruntThreeLeave
+waitmovement 0x0
+sound 0x9
+pause 0x30
+spriteface 0x17 FACE_LEFT
+textcolor 0x0
+msgbox @rivalTalk6 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @rivalYes
+goto @rivalNo
+
+#org @rivalYes
+msgbox @rivalTalkYes 0x6
+goto @scriptend
+
+#org @rivalNo
+msgbox @rivalTalkNo 0x6
+goto @scriptend
+
+#org @scriptend
+applymovement 0x17 @stepL
+waitmovement 0x0
+msgbox @rivalTalk7 0x6
+applymovement 0x17 @rivalLeave
+waitmovement 0x0
+sound 0x9
+movesprite 0x17 0x0 0x0
+setflag 0x203
+setvar 0x4019 0x4
+setvar 0x4016 0x1 // to remedy the level script glitch
+release
+end
+
+#org @rivalWalk
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_R
+#raw 0x0
+#raw 0xFE
+
+#org @playerwalkie
+#raw STEP_R
+#raw STEP_R
+#raw STEP_R
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0x3
+#raw 0xFE
+
+#org @rivalTalk
+= Ronnie: There you are, [player]!\nDude, you better get over here!\pEverybody's all in a frenzy about\nsome strong-ass Trainer that came\lin here just now.\pI just got here, so I haven't got\na clue what happened, but it\lsounds pretty darn exciting.\pCome on!
+
+#org @gruntOneTalk
+= I'm telling you, he beat me\nstraight out without even breaking\la sweat!\pIt's like I barely got the chance\nto even make a move before he was\lall up in my face demanding I give\lhim prize money!
+
+#org @gruntTwoTalk
+= Tell me about it. That spiky-\nhaired kid was ruthless, man.\pWhere do you think he came from?\pMust have been some rich little\nchild prodigy who ran away from\lPokémon school or something.\lDisgusting.
+
+#org @gruntTwoTalkExtra
+= And where the hell did he get all\nthose uber-powerful Pokémon?\pThat's some irresponsible\nparenting right there if you ask\lme.
+
+#org @rivalTalk2
+= Ronnie: What?
+
+#org @rivalTalk3
+= You guys are telling me you got\nyour asses handed to you by some\lkid?\pWho taught you guys how to battle,\nhuh? Your moms?
+
+#org @disbelief
+#raw 0x1A
+#raw STEP_D
+#raw 0x1C
+#raw 0x1A
+#raw 0x3
+#raw 0x1C
+#raw 0x1A
+#raw 0x2
+#raw 0x1C
+#raw 0x0
+#raw 0x1C
+#raw 0xFE
+
+#org @rivalTalk4
+= I'm not buying this, [player].
+
+#org @rivalTalk5
+= I'll go hunt down this twerp and\nwe'll see who's the real prodigy\laround here. Geez.
+
+#org @gruntOneTalkTwo
+= Suit yourself, pal.\pI'm gonna go hit the Pokémon\nCenter for a while.\pCan't find any damn fossils\naround here anyway.
+
+#org @gruntTwoTalkTwo
+= Roger that.
+
+#org @gruntOneLeave
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x60
+#raw 0xFE
+
+#org @gruntTwoLeave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x60
+#raw 0xFE
+
+#org @gruntThreeTalk
+= I-I think the Pokémon Center\nsounds pretty nice right about\lnow.
+
+#org @gruntThreeLeave
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0x60
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @rivalTalk6
+= Talk about a bunch of wussies.\pYou're not scared of some little\nkid Trainer, are you, [player]?
+
+#org @rivalTalkYes
+= [.]\pDude, stop contradicting me; this\nis not very productive!\pAnyway, you better harden up,\nthen!\pSee, [player], a true gangster is\nicy and fearless like a renegade!\pYou could learn a thing or two\nfrom me, I'm telling you.
+
+#org @rivalTalkNo
+= See, that's what I'm talking\nabout, man!\pI knew you were a cool dude like\nthat.
+
+#org @rivalTalk7
+= Come on!\pSpiky-haired little twerpy kids or\nancient old Pokémon bones-- I'm\lnot leaving this damn cave till I\lfind something that'll make Petrel\lsee me for the dedicated master\lcriminal that I am!\pLet's go, damn it!
+
+#org @rivalLeave
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_U2
+#raw 0x60
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

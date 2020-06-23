@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Yo!\nRocket!\pI can see plainly what you are,\nbut I'm not gonna stop you.\pKoga's my boss, and he says he\nneeds a Rocket's help, so fine..!\p[.]\pBy the way, if you're going in to\ntalk business, the other Trainers\lwon't challenge you unprovoked.\pBut if you go up and talk to them,\nthey won't turn down a battle!

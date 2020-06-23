@@ -1,0 +1,35 @@
+#dynamic 0x800000
+#define _GIOVANNI 0x1
+#define _ARIANA 0xA
+#define _RONNIE 0x2
+
+#org @main
+checkflag 0x227 // if Red invasion has happened
+if 0x1 call @varChecker
+checkflag 0x22E // if Pallet Tow mission complete
+if 0x1 call @ronnieMover
+compare 0x4014 0x8 // if Cinnabar mission complete
+if 0x1 call @showAdmins
+end
+
+#org @varChecker
+compare 0x4018 0x4
+if 0x1 call @bossMover
+return
+
+#org @bossMover
+movesprite2 _GIOVANNI 0x13 0x7
+spritebehave _GIOVANNI 0xA
+movesprite2 _ARIANA 0x15 0x7
+spritebehave _ARIANA 0x9
+return
+
+#org @ronnieMover
+movesprite2 _RONNIE 0x13 0x7
+spritebehave _RONNIE 0x7
+return
+
+#org @showAdmins
+clearflag 0x0A6
+movesprite2 _GIOVANNI 0x13 0x7
+return

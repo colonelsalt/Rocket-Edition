@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Gah!\pWhy are barging into my house,\nRocket? I won't have it!\pIs this acceptable behavior where\nyou're from?!

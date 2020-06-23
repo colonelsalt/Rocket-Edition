@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+textcolor 0x1
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= N-n-now I'm n-n-not\c\h08ó on c-c-camera\nI guess it's\c\h08ó ooooo-okay to\c\h08ó l-look\ls-ssss-scared[.]\pWaaaaaah!!!!!!\c\h08ó\nWaaaah!!!\c\h08ó Ahhhhh!\c\h08ó H-H-HEEEEEEELP!

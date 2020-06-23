@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Did you meet Ariana yet?\pShe's the Executive who hangs\naround Boss's office all the time.\pRumor has it she and him had a\nbaby a few years back, but I don't\lknow what to believe.\pAnyway[.] you didn't hear it from\nme!

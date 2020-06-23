@@ -1,0 +1,23 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+
+#org @talk
+= Man, I'm digging this new costume!\nNobody'll suspect I'm a Rocket!\p[.]\pMakes me think about why we didn't\ndo this all along[.]
+
+#org @talk2
+= Huh..?!\nYou're the new Boss?\pHey, now..!\pIt's going to take a lot to\nconvince me you're as cool as\lGiovanni!

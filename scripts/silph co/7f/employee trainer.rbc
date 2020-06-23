@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x156 0x0 @challenge 0x817660C EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= No!\nI came here to hide from you!
+
+#org @postBattle
+= There's no escaping you people, is\nthere..?

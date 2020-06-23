@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1E1 0x0 0x81869BA 0x81869E6 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= Not stealing Pokémon!

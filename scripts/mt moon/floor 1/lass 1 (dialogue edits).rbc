@@ -1,0 +1,8 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @text
+= Hiya! Did you guys come to look\nfor fossils too?
+
+#org @after
+= Hey!\nWhat are you trying at?\pI'm no kid-- I'll be fourteen next\nweek!

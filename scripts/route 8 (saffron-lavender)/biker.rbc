@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @after
+= I respect you Rockets, man. You\nguys don't take crap from nobody.

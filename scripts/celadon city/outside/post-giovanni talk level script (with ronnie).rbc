@@ -1,0 +1,65 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define RONNIE 0x11
+
+#org @main
+lock
+pause 0x7
+spriteface RONNIE FACE_LEFT
+pause 0x7
+textcolor 0x0
+msgbox @ronintro 0x6
+applymovement 0xFF @moveplayer
+waitmovement 0x0
+applymovement RONNIE @stepL
+waitmovement 0x0
+msgbox @rontalk1 0x6
+pause 0x10
+spriteface RONNIE FACE_RIGHT
+pause 0x25
+spriteface RONNIE FACE_LEFT
+pause 0x15
+msgbox @rontalk2 0x6
+applymovement RONNIE @eagerRon
+waitmovement 0x0
+msgbox @rontalk3 0x6
+applymovement RONNIE @rontalk4
+waitmovement 0x0
+setvar 0x401A 0x6
+release
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @ronintro
+= Ronnie: Ah, [player]! Good\nriddance.
+
+#org @rontalk1
+= Guess who just got a brand new\nbadass mission from Petrel just\lnow? That's right, we're going to\lgo steal this crazy rare TM from\lthis old collector guy up in\lCerulean! It's going to be sick!
+
+#org @moveplayer
+#raw 0x1C
+#raw STEP_R
+#raw 0xFE
+
+#org @rontalk2
+= Yeah, um[.] sorry I got all worked\nup over the whole fossil thing\learlier-- but hey, it's all good\lnow. Why should I care about some\lstupid old fossils when I've got a\lreal robbery to take care of now,\lright? Yeah, my time has come has\lnow, I can feel it.\l
+[.]\pOh, what's that? You've got a\nmission in Cerulean too? Damn,\lright on. Maybe you'll even to get\lto see me in action as I break\linto the old guy's house, then,\leh?
+
+#org @eagerRon
+#raw 0x1C
+#raw STEP_R
+#raw STEP_R
+#raw 0x1C
+#raw FACE_L
+#raw 0xFE
+
+#org @rontalk3
+= Well, I guess we better head on\neast of here through Saffron and\lthen north from there to get to\lCerulean. Did you hear, they made\la secret Rocket base in the\lDay-Care Center south of the\lcity-- how cool is that? How about\lI meet you there?
+
+#org @rontalk4
+= God, I'm itching to do me some\nburglarizing! Talk to you later,\lman!

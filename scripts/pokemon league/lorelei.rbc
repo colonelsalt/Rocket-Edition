@@ -1,0 +1,46 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _LORELEI 0x1
+
+#org @main
+lock
+faceplayer
+compare 0x404C 0x1
+if 0x1 goto @secondtime
+getplayerpos 0x8000 0x8001
+msgbox @talk 0x6
+pause 0x20
+compare 0x8001 0x5
+if _GREATER_EQ call @faceUp
+compare 0x8001 0x4
+if 0x1 call @faceDown
+pause 0x25
+msgbox @talk2 0x6
+pause 0x25
+faceplayer
+pause 0x15
+setvar 0x404C 0x1
+goto @secondTime
+
+#org @secondTime
+msgbox @talk3 0x6
+spriteface _LORELEI FACE_DOWN
+release
+end
+
+#org @faceUp
+spriteface _LORELEI FACE_UP
+return
+
+#org @faceDown
+spriteface _LORELEI FACE_DOWN
+return
+
+#org @talk
+= Lorelei: Who are you, then?\c\h08ó\nFirst Oak, then Bill[.]\pNow this swanky fellow who looks\nhe might be Giovanni's nephew.\pThis is a big happy reunion,\nfinally?\pWell, what fitting timing.\c\h08ó\nAfter all these years[.]\pIt looks to me like Kanto is about\nto radically change again.
+
+#org @talk2
+= That child who just passed[.]\c\h08ó\nHe's something to be reckoned with.\pI was prepared for a challenge,\nnot a one-sided slaughter[.]\pCold and calculated[.]\c\h08ó\nNot a sign of emotion.\pCan't imagine the others will fare\nany better against him[.]
+
+#org @talk3
+= Well, what are you gawking at?\nRun along!\pI'm not going to humor you with\nany tricks now my Pokémon are\lknocked out.

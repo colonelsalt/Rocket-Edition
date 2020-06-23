@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= All these corporate schmucks[.]\pThe moment anything happens\noutside of their plan, they freak!\pWe should've invaded them much\nsooner. Would've done them good.

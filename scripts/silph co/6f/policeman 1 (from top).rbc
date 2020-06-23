@@ -1,0 +1,16 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x17C 0x0 @challenge @defeat EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Team Rocket, you're my favorite\nbrand of criminals.\pWhy?\nYou're so damned easy to spot!
+
+#org @defeat
+= Ruined!
+
+#org @postBattle
+= I've guarded Silph since I was a\nyoung man.\pBut never have I seen an attack\nthis violent!

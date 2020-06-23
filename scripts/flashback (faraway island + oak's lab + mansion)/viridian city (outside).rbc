@@ -1,0 +1,25 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+applymovement 0xFF @cameraPan
+waitmovement 0x0
+sound 0xB9
+checksound
+msgbox @talk 0x6
+pause 0x30
+setvar 0x4054 0x91 // change walking OW sprite back to normal
+warpmuted 0x3 0x3D 0xFF 0x7 0xE // to Cerulean Cave
+waitstate
+end
+
+#org @cameraPan
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @talk
+= An inconspicuous old citizen of\nViridian City.\p[.]\pNotable to his neighbors only for\nhis frequent drunken bouts[.]\pAnd[.]\c\h08ó his habit of keenly showing\npasserby youngsters how to catch\ltheir first Pokémon.

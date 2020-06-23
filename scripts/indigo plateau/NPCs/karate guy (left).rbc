@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Hoo-ah!\pI am now adapting my training\nstyle after Red and Blue!\pI was wrong to study Bruno all\nthese years..!

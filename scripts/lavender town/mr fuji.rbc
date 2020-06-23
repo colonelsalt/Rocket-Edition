@@ -1,0 +1,425 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define FUJI 0x1
+#define BLUE 0x2
+#define ARCHER 0x3
+
+#org @main
+lock
+spriteface BLUE FACE_UP
+applymovement FUJI @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @fuTalk 0x6
+trainerbattle 0x3 0x7 0x0 @defeat
+copyvar 0x8000 0x401F
+call 0x81FCA7 // POKESTEAL
+applymovement FUJI @stepD
+waitmovement 0x0
+comparevars 0x401F 0x8000
+if 0x5 goto @stolen
+textcolor 0x0
+msgbox @innocentTalk 0x6
+goto @MAINSCRIPT
+end
+
+#org @stolen
+textcolor 0x0
+msgbox @stealTalk 0x6
+goto @MAINSCRIPT
+end
+
+#org @MAINSCRIPT
+applymovement FUJI @belowWander1
+waitmovement 0x0
+msgbox @fuTalk2 0x6
+applymovement FUJI @belowWander2
+waitmovement 0x0
+msgbox @fuTalk3 0x6
+applymovement FUJI @belowWander3
+waitmovement 0x0
+msgbox @fuTalk4 0x6
+pause 0x25
+spriteface FUJI FACE_RIGHT
+pause 0x20
+msgbox @fuTalk5 0x6
+applymovement FUJI @belowWander4
+waitmovement 0x0
+msgbox @fuTalk6 0x6
+pause 0x20
+spriteface FUJI FACE_DOWN
+pause 0x10
+applymovement FUJI @stepD
+waitmovement 0x0
+msgbox @ellipses MSG_KEEPOPEN
+fadeout 0x0
+spriteface 0xFF FACE_LEFT
+closeonkeypress
+pause 0x22
+msgbox @fuTalk7 0x6
+pause 0x10
+sound 0x9
+checksound
+pause 0x20
+msgbox @adminTalk 0x6
+spriteface BLUE FACE_DOWN
+pause 0x15
+clearflag 0x225
+showsprite ARCHER
+playsong 0x112 0x0
+pause 0x25
+applymovement ARCHER @adminApproach1
+waitmovement 0x0
+applymovement BLUE @faceAdmin
+applymovement ARCHER @adminApproach2
+waitmovement 0x0
+pause 0xF
+sound 0x15 // exclamation
+applymovement FUJI @exclamation
+waitmovement 0x0
+msgbox @youTalk 0x6
+pause 0x15
+spriteface ARCHER FACE_LEFT
+pause 0x15
+msgbox @adminTalk2 0x6
+pause 0x15
+spriteface ARCHER FACE_UP
+spriteface 0xFF FACE_DOWN
+pause 0x20
+msgbox @adminTalk3 0x6
+pause 0x20
+spriteface ARCHER FACE_LEFT
+pause 0x10
+applymovement ARCHER @stepL
+waitmovement 0x0
+msgbox @adminTalk4 0x6
+applymovement ARCHER @adminBelowWalk
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+msgbox @adminTalk5 0x6
+pause 0x15
+spriteface ARCHER FACE_LEFT
+pause 0x20
+spriteface ARCHER FACE_UP
+pause 0x15
+msgbox @adminTalk6 0x6
+applymovement ARCHER @stepU
+waitmovement 0x0
+msgbox @adminTalk7 0x6
+pause 0x20
+spriteface FUJI FACE_RIGHT
+pause 0x20
+spriteface FUJI FACE_DOWN
+pause 0x10
+applymovement FUJI @stepD
+waitmovement 0x0
+msgbox @fuTalk8 0x6
+pause 0x20
+spriteface FUJI FACE_RIGHT
+pause 0x25
+spriteface FUJI FACE_DOWN
+pause 0x20
+msgbox @fuTalk9 0x6
+applymovement ARCHER @adminBelowWalk2
+waitmovement 0x0
+msgbox @adminTalk8 0x6
+applymovement ARCHER @adminBelowWalk3
+waitmovement 0x0
+msgbox @adminTalk9 0x6
+pause 0x20
+spriteface ARCHER FACE_RIGHT
+pause 0x25
+spriteface ARCHER FACE_UP
+pause 0x20
+msgbox @adminTalk10 0x6
+applymovement ARCHER @adminBelowWalk4
+waitmovement 0x0
+msgbox @adminTalk11 0x6
+pause 0x20
+spriteface FUJI FACE_UP
+pause 0x10
+applymovement FUJI @stepU
+waitmovement 0x0
+msgbox @fuTalk10 0x6
+pause 0x20
+applymovement ARCHER @stepL
+waitmovement 0x0
+msgbox @adminTalk12 0x6
+pause 0x20
+spriteface ARCHER FACE_UP
+spriteface 0xFF FACE_DOWN
+msgbox @adminTalk13 0x6
+pause 0x20
+spriteface ARCHER FACE_LEFT
+pause 0x10
+applymovement ARCHER @stepL
+waitmovement 0x0
+msgbox @adminTalk14 0x6
+applymovement ARCHER @adminBelowWalk5
+waitmovement 0x0
+pause 0x30
+spriteface 0xFF FACE_LEFT
+pause 0x35
+spriteface 0xFF FACE_DOWN
+pause 0x30
+special 0x113
+applymovement 0xFF @playerLeave1
+waitmovement 0x0
+applymovement BLUE @bluLeave
+applymovement 0xFF @playerLeave2
+waitmovement 0x0
+pause 0x45
+clearflag 0x222
+setvar 0x4016 0x6
+warp 0x1 0x59 0xFF 0xF 0x5
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @fuTalk
+= Mr. Fuji: Eh?\c\h08ó\nWho are you? Why have you come?\p[.]\c\h08ó\nNo! That uniform..!\pGah!\nYou filthy Rockets!\pWhy can't you leave me and my poor\nlittle town alone?!\pI refuse to leave this tower, and\nyou can't make me, scoundrel!
+
+#org @defeat
+= Argh!\nI will not stand for this!
+
+#org @stealTalk
+= Mr. Fuji: You disgusting hooligan!\nHave you no shame?\pNot only do you have the nerve--\nthe audacity, to come in here and\lstop me on my noble mission to\lcalm the spirit of a murdered\lPokémon[.]\pBut your incessant greed even\nprompts you to snatch my innocent\lPokémon from right under my nose!
+
+#org @innocentTalk
+= Mr. Fuji: [.]\pDefeated at the hands of a bandit\nwhose Pokémon were stolen from the\lhands of innocent young Trainers[.]\pSo this is what it's come to[.]
+
+#org @belowWander1
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0xFE
+
+#org @fuTalk2
+= Why are you here?\nTo detain me? To kick me out?\pMaybe to have me suffer the same\nfate as these Cubone, is that it?\pMy own skull, hanging in\nGiovanni's office as some trophy?\pWouldn't surprise me!\nThat greedy, immoral crook!
+
+#org @belowWander2
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @fuTalk3
+= [.]\pHe's living in the past, you know.\nYour boss. He's bound to fail!\pHe couldn't bring down Lance back\nwhen he had the entire Kanto army\lon his side, and now he thinks\lhe's going to do it through some\lunderground pseudo-mafia?\pHe's mad! Loony!
+
+#org @belowWander3
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw STEP_L
+#raw STEP_L
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @fuTalk4
+= But you know[.] I'd let Giovanni\nrun his delusional crime-ring in\lcircles ten times over if he'd\ljust stop meddling with me and the\linnocent affairs of this town!\pKeep me out-- I want nothing to do\nwith you!
+
+#org @fuTalk5
+= [.]\pI left my work on the Mewtwo\nProject behind me eleven years\lago, do you hear me?\pI'm a different man now, and those\nwere different times[.]
+
+#org @belowWander4
+#raw 0x1C
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0xFE
+
+#org @fuTalk6
+= Oh, if you'd only seen the things\nI've seen, young man[.] you'd turn\land leave your Boss's service\lwithout a second thought!
+
+#org @ellipses
+= Mr Fuji: [.]
+
+#org @fuTalk7
+= I swear[.]\c\h08ó\when I stood before it\nthat evening in the Lab[.]\pThat thing[.]\c\h08ó\\n"The Catastrophe"[.]\pWhen I saw the abomination that\nwe had created with our own bare\lhands[.]\pI thought I'd seen the root of all\nevil itself[.]\pI'm telling you!\c\h08ó\\nIt looked like[.]\c\h08ó\c\h08ó like--
+
+#org @adminTalk
+= Like something not very nice?\nYeah, we get the picture, old man.
+
+#org @adminApproach1
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @faceAdmin
+#raw FACE_L
+#raw 0x1C
+#raw FACE_U
+#raw 0xFE
+
+#org @adminApproach2
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @youTalk
+= Mr. Fuji: You!
+
+#org @adminTalk2
+= Archer: Nice to finally see you\nagain, Fuji. How have you been?
+
+#org @adminTalk3
+= Archer: Good job incapacitating\nthe guy, [player]-- I was afraid\lI'd have to do it myself.\pI'll take it from here, if you\ndon't mind.
+
+#org @adminTalk4
+= Archer: That's a nice little rant\nyou made there, Fuji but we've\lheard it before, haven't we?
+
+#org @adminBelowWalk
+#raw 0x1C
+#raw STEP_L
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk5
+= I suppose you've also told\n[player] here of how you rushed to\lpledge your allegience to Lance to\lsave your own skin the moment Oak\lcalled for surrender?
+
+#org @adminTalk6
+= How you willingly gave away\nconfidential scientific\linformation in return for a state-\lsponsored retirment fund and a\lsafe little small-town home for\lyourself?
+
+#org @adminTalk7
+= Your little do-good, innocent\nold-man act that you've put on in\lthis town is fooling no one, Fuji:\pBesides Oak, you're the biggest\ncoward traitor this region has\lever seen!
+
+#org @fuTalk8
+= Mr. Fuji: B-but[.] you're insane,\nRocket!\pShould I have kept fighting?\nWhat for?\pLance.\c\h08ó\nKanto-Johto.\pI saw that it was inevitable-- I\nwas merely being realistic!
+
+#org @fuTalk9
+= And look at you Rockets!\pStealing innocent Trainers'\nPokémon!\pSlaughtering Cubone and flipping\ntheir skulls for profit!\pHow in the world can you pretend\nto be morally superior?
+
+#org @adminBelowWalk2
+#raw 0x1C
+#raw STEP_D
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk8
+= Archer: Hehehe[.]\pTeam Rocket pretends to be nothing\nthat it's not, Fuji.
+
+#org @adminBelowWalk3
+#raw 0x1C
+#raw 0x1C
+#raw FACE_U
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk9
+= But consider this:\pHeard of Lance's grand new "anti-\ncrime program"?\pHis promises to bring us to\njustice?
+
+#org @adminTalk10
+= Well[.]\pHow many resources has he\ndedicated to stop us killing\lCubone here, huh?\pWhere is he now to save your ass\nfrom us evil bandits?\pAnd do you know that he intends\nto wreck this precious Tower of\lyours apart and let a private\lentertainment enterprise set up\lshop here in its place?
+
+#org @adminBelowWalk4
+#raw 0x1C
+#raw 0x1C
+#raw STEP_U
+#raw STEP_R
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk11
+= Defending old Kanto's honor may\nbe no walk in the park, but you're\lsure as hell not getting any more\lsecurity by sucking up to Lance if\lthat's what you think.
+
+#org @fuTalk10
+= Mr. Fuji: Lies! All lies!
+
+#org @adminTalk12
+= Archer: [.]\nI've had enough of this.
+
+#org @adminTalk13
+= Special orders from Boss,\n[player]-- I'm to take over\ldetaining Fuji here for the time\lbeing.\pI've got plenty of reinforcement\ngrunts heading in in just a\lmoment, so I'll be A-OK for now.
+
+#org @adminTalk14
+= You're free to head back to HQ, in\nother words.\pNice work here, kid.
+
+#org @adminBelowWalk5
+#raw 0x1C
+#raw STEP_L
+#raw FACE_U
+#raw 0x1C
+#raw 0xFE
+
+#org @playerLeave1
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @bluLeave
+#raw FACE_L
+#raw 0x1C
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @playerLeave2
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE

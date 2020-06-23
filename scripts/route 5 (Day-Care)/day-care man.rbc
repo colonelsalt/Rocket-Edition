@@ -1,0 +1,31 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x208
+if 0x1 goto @postTV
+checkflag 0x213
+if 0x1 goto @postPolice
+msgbox @talk 0x6
+release
+end
+
+#org @postPolice
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= I daresay you guys in Celadon\ncould learn a thing or two from us\labout the art of camouflaging\lsecret hideouts.
+
+#org @talk2
+= You might want to make your way\nrather quickly downstairs[.]\pThere's[.]\c\h08ó a slight degree of\nagitation going on there.
+
+#org @talk3
+= How do you do, Mr. Rocket?\pWould you like to raise one of\nyour Pokémon with us?\p[.]\pHa-ha!\nI only jest, young man.

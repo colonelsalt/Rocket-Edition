@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x68 0x0 0x81723D4 0x8172402 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= The stress of being a criminal got\nyou in a hurry?\pThat should be the least of your\npunishment, really!

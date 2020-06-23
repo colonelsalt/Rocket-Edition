@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Woo-hoo!\nWe're taking over this city!\pIf you see a local out in the\nstreets, tell them to get lost!

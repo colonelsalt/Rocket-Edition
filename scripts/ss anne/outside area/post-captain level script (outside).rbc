@@ -1,0 +1,119 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define PROTON 0x2
+
+#org @main
+lock
+spriteface 0xFF FACE_UP
+applymovement PROTON @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @adminTalk 0x6
+pause 0x25
+spriteface PROTON FACE_RIGHT
+pause 0x27
+msgbox @adminTalk2 0x6
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+pause 0x20
+msgbox @adminTalk3 0x6
+spriteface 0xFF FACE_RIGHT
+spriteface PROTON FACE_DOWN
+applymovement 0x7F @cameraBack
+waitmovement 0x0
+special 0x114
+applymovement PROTON @stepD
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+msgbox @adminTalk4 0x6
+applymovement PROTON @adminLeave
+waitmovement 0x0
+sound 0x9
+hidesprite PROTON
+setflag 0x220
+setvar 0x4018 0x3
+checksound
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @adminTalk
+= Proton: Well, that's the last one.\pI'll have the Pokémon moved to the\nappropriate location on my own.\pFor now I'm just happy to be off\nthis ship-- pretentious parties\land "people of influence" make me\lalmost as sick as the swaying of\lthe waves.
+
+#org @adminTalk2
+= Speaking of meaningless things[.]\c\h08ó\nHave a look at that.
+
+#org @cameraPan
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw 0xFE
+
+#org @adminTalk3
+= Whose bright idea was it to put\nsome great big truck out on this\ltiny island out in the ocean?\p[.]\pWell, I suppose it makes for a\ngreat place to hide something in\lplain sight that's out of people's\lreach.\pGo figure.
+
+#org @cameraBack
+#raw STEP_D2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw STEP_L2
+#raw 0xFE
+
+#org @adminTalk4
+= Proton: Well, what are you\nstanding around for, grunt?\pMission's over.\nNothing more to see here.\pI figure Boss will have some other\nmission for you by now, starboy.\pHead back to HQ in Celadon.\nI'm off.
+
+#org @adminLeave
+#raw 0x1C
+#raw 0x1C
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

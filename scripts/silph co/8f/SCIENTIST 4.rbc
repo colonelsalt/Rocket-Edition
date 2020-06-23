@@ -1,0 +1,58 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SCIENTIST 0x3
+#define _NPC 0x4
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+trainerbattle 0x3 0x15 0x0 @defeatText
+msgbox @talk2 0x6
+fadescreen 0x1
+// moves characters and camera to new position
+special 0x113
+setvar 0x8002 0x8
+setvar 0x8003 0xA
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0x8 0xA
+movesprite _SCIENTIST 0x8 0x7
+movesprite _NPC 0x2 0x5
+spriteface 0xFF FACE_UP
+spriteface _SCIENTIST FACE_DOWN
+special 0x114
+fadescreen 0x0
+textcolor 0x2
+msgbox @swipe 0x4
+lockall
+sound 0x19
+checksound
+pause 0x10
+closeonkeypress
+lockall
+pause 0x10
+sound 0x26
+setmaptile 0x7 0x8 0x3B0 0x1
+setmaptile 0x8 0x8 0x3B1 0x1
+setmaptile 0x7 0x9 0x3B8 0x1
+setmaptile 0x8 0x9 0x3B9 0x1
+setmaptile 0x7 0xA 0x335 0x0
+special 0x8E
+checksound
+setflag 0x2A1
+subvar 0x402E 0x1
+release
+end
+
+#org @talk
+= Oh, lord[.]\nWhat's all this commotion?\pI just want to work on my\ninventions in peace[.]\pWhat's the point of a brilliant\nmind if I can't ever get the space\land time to use it?!\pDamn it! I don't need you hoodlums\ndisturbing me!
+
+#org @defeatText
+= Argh!\nNever any peace and quiet[.]
+
+#org @talk2
+= Wait[.]\c\h08ó\nYou're going to[.]\pLock me up?\c\h08ó All alone..?\nAway from everybody else[.]\p[.]\pWhy, that's[.]\c\h08ó\nExactly what I always wanted..!
+
+#org @swipe
+= [player] swiped the Card Key.

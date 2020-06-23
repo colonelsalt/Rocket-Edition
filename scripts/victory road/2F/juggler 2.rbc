@@ -1,0 +1,7 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x122 0x0 0x8174995 0x81749B0 EXEC_STEAL
+msgbox 0x81749BB MSG_NORMAL '"Many Trainers give up their\nchall..."
+end

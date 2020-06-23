@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @talk MSG_FACE
+end
+
+#org @talk
+= Come, child! I sealed this space\nwith white magic!\pYou can rest here!

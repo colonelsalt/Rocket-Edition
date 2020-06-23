@@ -1,0 +1,92 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lockall
+faceplayer
+compare 0x4033 0xB
+if 0x1 goto @postQuest
+compare 0x4033 0xA
+if 0x1 goto @postImpostor
+compare 0x4033 0x7
+if 0x4 goto @postJulien
+compare 0x4033 0x5 
+if 0x4 goto @postBoss
+checkflag 0x2AA
+if 0x1 goto @midQuest
+checkflag 0x27E
+if 0x1 goto @postPimpQuest
+checkflag 0x27F
+if 0x1 goto @postPimpQuest
+msgbox @preTalk 0x6
+releaseall
+end
+
+#org @postQuest
+msgbox @postQuestTalk 0x6
+releaseall
+end
+
+#org @postImpostor
+msgbox @postImpostorTalk 0x6
+lockall
+giveitem 0x156 0x1 0x0
+setvar 0x4033 0xB
+releaseall
+end
+
+#org @postPimpQuest
+msgbox @talk MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @saidYes
+msgbox @noTalk 0x6
+releaseall
+end
+
+#org @saidYes
+msgbox @yesTalk 0x6
+setflag 0x2AA
+releaseall
+end
+
+#org @midQuest
+msgbox @midQuestTalk 0x6
+releaseall
+end
+
+#org @postBoss
+msgbox @postBossTalk 0x6
+releaseall
+end
+
+#org @postJulien
+msgbox @postJulienTalk 0x6
+releaseall
+end
+
+#org @preTalk
+= I'm the boss of the Tops, you got\nthat, man?\pYou're a Rocket, ain't ya?\p[.]\pYeah, I don't got no business with\nyou lot right now.\pBut I respect you people.\nMaybe sometime down the line.
+
+#org @talk
+= Hey, you one of them Team Rockets,\nain't ya, bud?\pLook, if you got the guts, there's\na thing you can do for us.\pGot some conflict with the other\ngang down here.\pHelp us out, we'll pay you back\nbig-time. Eh?
+
+#org @yesTalk
+= That's what I'm talking about,\nman.\pSo there's this gang of nobodies,\nright, down on Route 18.\pCall themselves the "Bottoms".\nI mean, get a load of that, eh?\pAnyway, so usually we don't give\nhalf a crap about those losers.\pLately, though these Bottoms have\nbeen showin' us some serious\ldisrespect!\pI mean, they been gettin' on our\nturf, talkin' smack about us[.]\pReal threats to[.]\nTo our brotherhood here, you know?\pI tell ya what's worse[.]\nI don't know how they do it, but[.]\pLately there's been all this\ntrouble with our bikes not\lworking, then somebody put paint\lin our hairspray cans, and stuff[.]\pThose freaking Bottoms, they got\nsome sabotaging effort against us\lgoing, I know it!\pI want you to go down to Route 18\nand teach those loonies to show us\lsome respect!\pShow them if they don't stop\nmessin' with us Tops[.]\lThere's gonna be hell to pay!
+
+#org @noTalk
+= Hah! I guess you Rockets were just\na bunch of cowards after all[.]
+
+#org @midQuestTalk
+= Well, man?\pDid you go confront those good-\nfor-nothing Bottoms down on Route\l18?
+
+#org @postBossTalk
+= Oh, there you are, Rocket!\nSo how'd it go?\pYou teach those Bottoms a lesson?\p[.]\pYou're the man, dude!\nThat's what it's about.\p[.]\c\h08ó\nOh, huh..?\pHe went all smug-looking and\nlaughed real giddy to himself\lafter you beat him?\p[.]\pAh! It's just as I thought! Those\ncronies are hiding something!\pWe gotta get to the bottom of how\nthey've been sabotaging us[.]\pIt's really getting on my nerves!
+
+#org @postJulienTalk
+= Ah..!\nIt's you!\pDamn it all, this guy Julien came\nup here just a while ago and told\lus you're no good, Rocket!\pHe told us you're the one who's\nbeen messin' with us in secret!\p[.]\pHell, man[.]\nI don't know what to believe.\pBut[.] When a powerful guy like\nthat Julien says to stay away from\lyou no matter what[.]\pI ain't gonna be one to take no\nchances!\pYou're not welcome here among us\nTops, you got that? Scram!
+
+#org @postImpostorTalk
+= Well, I'll be!\pThat new guy[.] He was one of the\nBottoms all along?\pNo wonder we couldn't see where\nthat sabotage was comin' from[.]\pThose lousy, cheatin' Bottoms[.]\nThey're in for it now!\p[.]\pOh, but we owe you one big-time,\nbuddy!\pThe way you helped us set things\nstraight[.] You've damn well earned\lour resepct.\pTake this, Rocket. It's quite a[.]\nsymbolic posession of ours.
+
+#org @postQuestTalk
+= HM04 is Strength, ya know!\pA move one badass like you oughtta\nknow, I think!\pYou know[.]\pWe never did manage to find any\nheavy things 'round parts to push\laround[.]\pHahaha[.]\nBut I bet you will, eh?

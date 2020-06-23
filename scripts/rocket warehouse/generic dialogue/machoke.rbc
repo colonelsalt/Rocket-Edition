@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+lock
+checksound
+cry 0x43 0x0
+msgbox @talk MSG_KEEPOPEN
+closeonkeypress
+waitcry
+release
+end
+
+
+#org @talk
+= Machoke: Gwawah[.]

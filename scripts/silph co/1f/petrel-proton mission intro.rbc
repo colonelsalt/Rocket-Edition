@@ -1,0 +1,85 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PETREL 0xD
+#define _PROTON 0xC
+
+#org @main
+lockall
+applymovement _PETREL @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @petrelTalk 0x6
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+goto @mainScript
+
+#org @mainScript
+msgbox @petrelTalk2 0x6
+pause 0x20
+spriteface _PROTON FACE_LEFT
+pause 0x15
+msgbox @ellipses 0x6
+pause 0x15
+applymovement _PROTON @protonApproach
+waitmovement 0x0
+spriteface 0xFF FACE_RIGHT
+pause 0x10
+msgbox @protonTalk 0x6
+pause 0x10
+applymovement _PROTON @stepL
+waitmovement 0x0
+msgbox @protonTalk2 0x6
+additem 0x163 0x1
+loadpointer 0x0 @keyGet
+giveitem2 0x163 0x1 0x13E
+closeonkeypress
+applymovement _PROTON @stepL
+waitmovement 0x0
+msgbox @protonTalk3 0x6
+setvar 0x4014 0xA
+setvar 0x402E 0x6 // how many scientists remain to capture
+releaseall
+end
+
+#org @petrelTalk
+= Petrel: Well, hey there, [player]!\pLet's get this show on the road,\nshall we?
+
+#org @petrelTalk2
+= Seems like Boss is tasking you\nwith the main hostage-taking\lbusiness!\pI don't know what you did to get\nhim so confident in your battling\lskills, but I sure am jealous!
+
+#org @ellipses
+= Proton: [.]
+
+#org @protonTalk
+= We're targeting Silph's six\nhighest-ranked R&D staff.\pThese scientists have offices all\nthroughout the building.\pYour job will be to locate them\nand to lock them up behind the\lnearest set of electrically-\lpowered steel doors available.
+
+#org @protonTalk2
+= Our spies managed to get us hold\nof this. Don't lose it!
+
+#org @keyGet
+= [player] received the Card Key!
+
+#org @protonTalk3
+= Use that to imprison each of the\nsix scientists as you find them.\pAnd if some of them happen to need\na bit of extra convincing[.]\lYou know what to do.
+
+#org @playerApproach
+#raw FACE_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @protonApproach
+#raw STEP_D
+#raw STEP_L
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE

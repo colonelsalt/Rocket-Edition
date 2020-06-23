@@ -1,0 +1,253 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define SURGE 0x1
+#define YOUNGSTER 0x6
+#define BUGCATCHER 0x7
+#define PROTON 0x8
+
+#org @main
+lockall
+pause 0x10
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+applymovement YOUNGSTER @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @youngTalk 0x6
+applymovement BUGCATCHER @stepU
+waitmovement 0x0
+msgbox @bugTalk 0x6
+applymovement SURGE @stepD
+waitmovement 0x0
+msgbox @gymTalk 0x6
+pause 0x10
+spriteface YOUNGSTER FACE_RIGHT
+spriteface BUGCATCHER FACE_LEFT
+pause 0x10
+applymovement YOUNGSTER @stepR
+waitmovement 0x0
+msgbox @youngTalk2 0x6
+applymovement BUGCATCHER @stepL
+waitmovement 0x0
+msgbox @bugTalk2 0x6
+pause 0x10
+applymovement YOUNGSTER @youngLeave
+applymovement BUGCATCHER @bugLeave
+waitmovement 0x0
+sound 0x9
+hidesprite YOUNGSTER
+hidesprite BUGCATCHER
+setflag 0x217
+pause 0x15
+applymovement 0x7F @cameraBack
+waitmovement 0x0
+special 0x114
+applymovement PROTON @adminApproach
+applymovement 0xFF @playerApproach
+waitmovement 0x0
+applymovement SURGE @stepD
+waitmovement 0x0
+msgbox @gymTalk2 0x6
+applymovement PROTON @stepU
+waitmovement 0x0
+msgbox @adminTalk 0x6
+applymovement SURGE @gymStroll
+waitmovement 0x0
+msgbox @gymTalk3 0x6
+pause 0x15
+textcolor 0x3
+fanfare 0x105
+preparemsg @steroidDelivery
+waitmsg
+waitfanfare
+removeitem 0x171 0x1
+closeonkeypress
+releaseall
+applymovement PROTON @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @adminTalk2 0x6
+applymovement SURGE @gymStroll2
+waitmovement 0x0
+msgbox @gymTalk4 0x6
+pause 0x15
+spriteface PROTON FACE_LEFT
+pause 0x20
+spriteface PROTON FACE_UP
+pause 0x15
+msgbox @adminTalk3 0x6
+pause 0x15
+spriteface SURGE FACE_LEFT
+pause 0x20
+spriteface SURGE FACE_DOWN
+pause 0x15
+msgbox @gymTalk5 0x6
+applymovement SURGE @stepD
+waitmovement 0x0
+msgbox @gymTalk6 0x6
+applymovement PROTON @stepU
+waitmovement 0x0
+msgbox @adminTalk4 0x6
+pause 0x20
+spriteface PROTON FACE_LEFT
+pause 0x25
+msgbox @adminTalk5 0x6
+applymovement PROTON @adminLeave
+waitmovement 0x0
+pause 0x10
+hidesprite PROTON
+sound 0x9
+setflag 0x215
+setvar 0x401B 0x3
+releaseall
+end
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @cameraPan
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @youngTalk
+= Oh, Lt. Surge, you're so strong!\nWe don't stand a chance against\lyou!
+
+#org @bugTalk
+= Yeah! You're wicked powerful!\pOh, please, Surge, can't you\ntell us how you and your Pokémon\lgot so strong?\pWe want to be like you too!
+
+#org @gymTalk
+= Lt. Surge: Hahaha!\nWell, I'll tell ya, kids!\pExercise your body by pushing\nyourself a little harder every\lday!\pMake sure you and your Pokémon\nboth are taking your vitamins and\lgetting a good night's sleep every\lnight!\pAnd remember: It's real important\nthat you always eat your meats and\lyour veggies!\pHahaha! That's the way to do it,\nkids! Good luck!
+
+#org @youngTalk2
+= Did you hear that?\nWe can be strong like Surge!\pCome on, let's go work out!
+
+#org @bugTalk2
+= Yeah!\nMan, I can't wait!\pI think I have some vitamins at\nhome-- we can go take them right\laway!
+
+#org @youngLeave
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @bugLeave
+#raw STEP_L2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw 0xFE
+
+#org @cameraBack
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @adminApproach
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw 0xFE
+
+#org @playerApproach
+#raw 0x1C
+#raw 0x1A
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @gymTalk2
+= Lt. Surge: Well, if it isn't my\nfavorite little Rocket man!\pHow are ya?\pNot scared lifeless from ol'\nLance's paranoid new crime-\lfighting measures, I hope? Haha!\pAnyway, I take it you brought\nthe regular goodies..?
+
+#org @adminTalk
+= Proton: Yes. As a matter of fact,\nthis grunt here has brought a\lparticularly strong yield straight\lfrom our top chemists.\pIt's as promised, Surge.
+
+#org @gymStroll
+#raw 0x1C
+#raw FACE_L
+#raw 0x1C
+#raw STEP_L
+#raw FACE_D
+#raw 0x1C
+#raw 0xFE
+
+#org @gymTalk3
+= Lt. Surge: Well, I'll be!\nYou guys are really something!\pLet's have it then, little buddy.
+
+#org @steroidDelivery
+= [player] delivered the Steroids to\nLt. Surge.
+
+#org @adminTalk2
+= Proton: Now, Surge-- the Pokémon,\nif you'd be so kind.
+
+#org @gymStroll2
+#raw FACE_R
+#raw 0x1C
+#raw STEP_R
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @gymTalk4
+= Lt. Surge: Oh yeah, that's right!\nThe Johto beasts, right?\pYeah, I had my guys stack them in\ncrates and hide them somewhere\laboard the ship.\pDon't worry one bit about getting\nyourselves aboard!\pThe doormen all happen to be my\nfolks too-- they'll let you in as\llong as I drop them a word.\pSound all right?
+
+#org @adminTalk3
+= Proton: [.]\c\h08ó\pSo you're telling me the crates\nare all still aboard the ship?\pYou couldn't have done us the\ncourtesy of carrying them on land?
+
+#org @gymTalk5
+= Lt. Surge: Now, Proton, easy!\pDo you know how heavy those darn\nthings are?\pIf I was to go carry those all by\nmyself, my whole back would snap\lin half, I tell ya!
+
+#org @gymTalk6
+= Anyway, don't you get all worked\nup just yet-- you gotta look at\lthings from the bright side!\pI don't know if you heard, but\nthey're throwing this exclusive\lparty right on board tonight!\pRumor has it some powerful\npolitical figures might even be\lattending, so if you're lucky you\lcould end up in some quite\lexciting company, how's that?
+
+#org @adminTalk4
+= Proton: Yes, going out to party\nwith government officials is\ljust what we Rockets should be\ldoing right now, isn't it?
+
+#org @adminTalk5
+= [.]\n\c\h08ó(Sigh)\pWell, I don't suppose we've got\nmuch choice.\pLet's get going, grunt.\pNo use sitting around being\nbummed out about it.
+
+#org @adminLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE

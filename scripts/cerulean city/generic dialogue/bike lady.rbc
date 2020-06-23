@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Every time I try to ride my bike\nindoors, it's as if there's this\lvoice that goes off in my head,\lcompelling me to stop.\pIt's pretty weird.\nI hope I'm not going crazy.

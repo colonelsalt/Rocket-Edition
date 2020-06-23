@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+lock
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Blaine: I\c\h08ó kn-n-n-new I should\c\h08ó\nn-n-never have \c\h08óg-g-gotten\linvooolved\c\h08ó with T-t\c\h08ó-team R-rocket!\pThere w-w-was\c\h08ó b-bound to be\c\h08ó\nt-t-trooooouuuubleeee!\pAaaaaaaah!\c\h08ó\nI want to g-g-go h-h-hoooome!

@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+trainerbattle 0x2 0x6C 0x0 @challenge @defeat 0x8022EC
+msgbox @after 0x6
+end
+
+#org @challenge
+= Suspicious men are in the cave.\nWhat about you?
+
+#org @defeat
+= Hey, wait[.] are you one of them?
+
+#org @after
+= Darn it, I never should have come\nhere.

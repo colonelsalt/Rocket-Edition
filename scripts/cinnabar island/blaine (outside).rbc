@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Blaine: My God[.]\nThis hidden lab of Oak's[.]\pCould it have been right under our\nnoses all this time..?\pYou've got to go investigate,\n[player]!

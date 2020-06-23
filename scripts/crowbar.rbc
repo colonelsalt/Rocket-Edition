@@ -1,0 +1,115 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+comparefarbytetobyte 0x0203F3A8 0x3 // if we are in bank 3
+if 0x1 goto @mapCheck
+comparefarbytetobyte 0x0203F3A8 0x1 // if we are in bank 1
+if 0x1 goto @mapCheck2
+goto @notNow
+end
+
+#org @mapCheck
+comparefarbytetobyte 0x0203F3A9 0x0
+if 0x1 goto @PalletPosCheck // if we are in Pallet Town
+comparefarbytetobyte 0x0203F3A9 0x8
+if 0x1 goto @cinnabarPosCheck // if we are in Cinnabar Island
+goto @notNow
+end
+
+#org @mapCheck2
+comparefarbytetobyte 0x0203F3A9 0x4F
+if 0x1 goto @championPosCheck // if we are in Champion room
+goto @notNow
+end
+
+#org @palletPosCheck
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x10
+if _NOT_EQ goto @notNow
+compare 0x8001 0xE
+if _NOT_EQ goto @notNow
+checkflag 0x2E9
+if 0x1 goto @alreadyOpen
+msgbox @successText MSG_KEEPOPEN
+sound 0x26
+msgbox @successText2 MSG_KEEPOPEN
+checksound
+setmaptile 0x10 0xD 0x2AC 0x1 // real door
+special 0x8E
+setdooropened 0x10 0xD
+doorchange
+pause 0x10
+setflag 0x2E9
+setmaptile 0x10 0xD 0x22D 0x0 // open door tile
+special 0x8E
+closeonkeypress
+end
+
+#org @cinnabarPosCheck
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x14
+if _NOT_EQ goto @notNow
+compare 0x8001 0x5
+if _NOT_EQ goto @notNow
+checkflag 0x2EA
+if 0x1 goto @alreadyOpen
+msgbox @successText MSG_KEEPOPEN
+sound 0x26
+msgbox @successText2 MSG_KEEPOPEN
+checksound
+setmaptile 0x14 0x4 0x15B 0x1 // real door
+special 0x8E
+setdooropened 0x14 0x4
+doorchange
+pause 0x10
+setmaptile 0x14 0x4 0x236 0x0
+special 0x8E
+setflag 0x2EA
+closeonkeypress
+end
+
+#org @championPosCheck
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x6
+if _NOT_EQ goto @notNow
+compare 0x8001 0x3
+if _NOT_EQ goto @notNow
+checkflag 0x2EB
+if 0x1 goto @alreadyOpen
+msgbox @successText MSG_KEEPOPEN
+sound 0x26
+msgbox @successText2 MSG_KEEPOPEN
+checksound
+setmaptile 0x6 0x2 0x296 0x0
+setmaptile 0x6 0x1 0x28E 0x0
+sound 0x8
+special 0x8E
+checksound
+setflag 0x2EB
+closeonkeypress
+end
+
+#org @notNow
+sound 0x80
+msgbox @notNowText MSG_KEEPOPEN
+checksound
+closeonkeypress
+end
+
+#org @alreadyOpen
+msgbox @alreadyOpenText MSG_KEEPOPEN
+closeonkeypress
+end
+
+#org @successText
+= [player] applied the Crowbar to\npry the door open[.]\p[.]\c\h08ó[.]\c\h08ó[.]
+
+#org @successText2
+= [.]ah!\c\h08ó It gave!
+
+#org @notNowText
+= [player] swung the Crowbar through\nthe air[.]\c\h08ó no regrets, Mr. Freeman..!
+
+#org @alreadyOpenText
+= [player] took out the Crowbar[.]\c\h08ó\n[.]but this door is already open!

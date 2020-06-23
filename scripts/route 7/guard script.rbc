@@ -1,0 +1,107 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+textcolor 0x0
+msgbox @talk 0x6
+checkflag 0x20C
+if 0x1 goto @postMtmoon
+msgbox @sorry 0x6
+goto @playerMove
+end
+
+#org @postMtmoon
+call @directionCheck
+spriteface 0xFF FACE_UP
+pause 0x25
+msgbox @talk2 0x6
+showmoney 0x0 0x0 0x0
+msgbox @yesOrNo MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @moneyCheck
+hidemoney 0x0 0x0
+msgbox @noTalk 0x6
+goto @playerMove
+end
+
+#org @directionCheck
+setvar 0x8000 FACE_RIGHT
+comparefarbytetobyte 0x0203F3AA 0xA // if prev. bank was 10 (Saffron City)
+if 0x1 call @facingLeft
+comparefarbytetobyte 0x0203F3AA 0x19 // if prev. bank was 25 (Route 7)
+if 0x1 call @facingRight
+return
+
+#org @facingLeft
+setvar 0x8000 FACE_LEFT
+return
+
+#org @facingRight
+setvar 0x8000 FACE_RIGHT
+return
+
+#org @moneyCheck
+checkmoney 0xC8 0x0
+compare LASTRESULT 0x1
+if 0x1 goto @letThrough
+hidemoney 0x0 0x0
+msgbox @notEnoughTalk 0x6
+goto @playerMove
+end
+
+#org @letThrough
+sound 0x41
+paymoney 0xC8 0x0
+updatemoney 0x0 0x0 0x0
+checksound
+hidemoney 0x0 0x0
+msgbox @yesTalk 0x6
+setvar 0x4028 0x1
+setvar 0x4029 0x2
+setvar 0x402A 0x2
+release
+end
+
+#org @playerMove
+compare 0x8000 FACE_LEFT
+if 0x1 goto @moveToRight
+applymovement 0xFF @playerMoveLeft
+waitmovement 0x0
+release
+end
+
+#org @moveToRight
+applymovement 0xFF @playerMoveRight
+waitmovement 0x0
+release
+end
+
+#org @talk
+= Hey there!\pI'm to tell you that the road\nthrough here is just about to\lclose, so I'm not really supposed\lto let any more people through.
+
+#org @sorry
+= Sorry!\nJust following orders, is all.
+
+#org @playerMoveLeft
+#raw STEP_L
+#raw 0xFE
+
+#org @playerMoveRight
+#raw STEP_R
+#raw 0xFE
+
+#org @talk2
+= [.]\c\h08ó\nPersistent, aren't you?\pWell, I don't know[.] there's this\ncranny right here in my pocket\lthat's just about the size of\la [$]200 bill, and[.]\pWell, of course I'm not one to go\nagainst what my superiors tell me,\lno sir, but you know[.]\pMistakes and slip-ups happen all\nthe time, and, well[.]
+
+#org @yesOrNo
+= [.]\c\h08ó\n[.]Hmm?
+
+#org @noTalk
+= No?\pWhy, how can you be saying no to\nsomething when I haven't asked you\lanything?\pHa-ha! You sure are a weird\nfellow. Good day.
+
+#org @yesTalk
+= Oh, what's this?\pI think I've been struck by a\nsudden momentary blindness!\pOh well, it happens from time to\ntime[.]\pYou know[.] I think this affliction\nmight be contagious.\pIt'll probably spread to the other\nguards. My, my[.] what can you do?
+
+#org @notEnoughTalk
+= (For goodness sakes[.] this is a\nbribery, not a charity[.])\pWhat a pity we could find nothing\nto fill that cranny of mine.\pOh, well.\nGood day.

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9D 0x0 0x8184E04 0x8184E3B POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81AA00C
+msgbox @after MSG_NORMAL '"The Pokémon here in the mountains\..."
+end
+
+#org @after
+= Did you come here to kill Cubone?\nYou should be ashamed of yourself.

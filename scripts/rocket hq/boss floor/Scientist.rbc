@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Do I look important to you?\nI'm not, really.\pI basically just sit around here\nall day looking at Internet\lforums.\pI just come in in the mornings and\nleave when they tell me.\pThe pay is pretty crap, though.

@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I just want ya to know, homie.\pWhen you step into Route 16, my\nman[.]\pYou stepped into the territory\nof the Tops.\pHere we go by Tops' rules, and\nwe keep it real!\pBetter recognize!

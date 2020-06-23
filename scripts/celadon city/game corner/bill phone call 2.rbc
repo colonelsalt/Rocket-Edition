@@ -1,0 +1,28 @@
+#dynamic 0x800000
+
+#org @main
+lock
+fadeout 0x0
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x10
+cry 0xFB 0x0
+waitcry
+pause 0x8
+cry 0x19A 0x0
+waitcry
+pause 0x14
+textcolor 0x0
+msgbox @talk 0x6
+sound 0x19
+checksound
+setvar 0x4016 0xD
+fadein 0x0
+release
+end
+
+#org @talk
+= Bill: Hi there, [player].\nIt's been a while.\pFill me in on the latest Rocket\nnews, if you would.\pOh, now!\c\h08ó The little autistic kid\nknocked you all senseless?\pHahahaha! Sorry, but I find that\nrather humorous. Some kid!\pOh, and what?\c\h08ó Giovanni finally\nrevealed his wartime secrets?\pGood. Then we're fully on the same\npage, now, aren't we?\pI suppose he told you about[.]\c\h08ó\n"The Catastrophe" as well, then?\p[.]\pYes, yes, that Mewtwo is well shut\noff in Cerulean Cave.\pBut I'm curious[.]\c\h08ó did he happen to\nknow what became of Mew after the\lproject was shut down?\p[.]\c\h08ó\nNo? Very well.\pKeep up the good work, [player].\nYou're a good friend to have.\pI'll talk to you later.

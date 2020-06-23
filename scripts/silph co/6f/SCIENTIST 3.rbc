@@ -1,0 +1,65 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _SCIENTIST 0x7
+#define _NPC1 0x5
+#define _NPC2 0x6
+#define _POKE_BALL1 0x8
+#define _POKE_BALL2 0x9
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+trainerbattle 0x3 0x14 0x0 @defeatText
+msgbox @talk2 0x6
+fadescreen 0x1
+// moves characters and camera to new position
+special 0x113
+setvar 0x8002 0x7
+setvar 0x8003 0x7
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0x7 0x7
+movesprite _SCIENTIST 0x4 0x7
+movesprite _NPC1 0xE 0x9
+movesprite _NPC2 0x10 0xC
+movesprite _POKE_BALL1 0x2 0xE
+movesprite _POKE_BALL2 0x1 0x11
+spriteface 0xFF FACE_LEFT
+spriteface _SCIENTIST FACE_RIGHT
+special 0x114
+fadescreen 0x0
+textcolor 0x2
+msgbox @swipe 0x4
+lockall
+sound 0x19
+checksound
+pause 0x10
+closeonkeypress
+lockall
+pause 0x10
+sound 0x26
+setmaptile 0x5 0x6 0x3C0 0x1
+setmaptile 0x6 0x6 0x3C1 0x1
+setmaptile 0x5 0x7 0x3C2 0x1
+setmaptile 0x6 0x7 0x3C3 0x1
+setmaptile 0x5 0x8 0x3C4 0x1
+setmaptile 0x6 0x8 0x3C5 0x1
+special 0x8E
+checksound
+setflag 0x2A0
+subvar 0x402E 0x1
+release
+end
+
+#org @talk
+= Why, yes, I'm one of Silph's top\nresearchers, thanks for asking.\pWhat are you, our new intern?\pWell, I'll take it black with two\nsugars, please.\p[.]\pWait[.]\c\h08ó What are you trying at?!\nI can defend myself too, you know!
+
+#org @defeatText
+= Look, if you want, I'll let you\ntype up my lab report too!
+
+#org @talk2
+= Hey[.]\c\h08ó you don't even work here, do\nyou? In fact[.]\pYou're one of those juvenile kids\nI saw on TV, aren't yo--\pNo, no!\c\h08ó\nStop it, please..!
+
+#org @swipe
+= [player] swiped the Card Key.

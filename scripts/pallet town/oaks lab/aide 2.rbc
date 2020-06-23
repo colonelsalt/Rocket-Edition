@@ -1,0 +1,17 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+compare 0x4014 0x3
+if 0x1 call @setVar
+release
+end
+
+#org @setVar
+setvar 0x4014 0x4
+return
+
+#org @talk
+= Oh, my!\c\h08ó W-why, no, I'm afraid\nProfessor Oak is not here.\pH-he has pressing research matters\nto attend elsewhere in the region.\p[.]\pP-please don't hurt me!

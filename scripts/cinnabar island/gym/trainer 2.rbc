@@ -1,0 +1,11 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+
+#org @main
+trainerbattle 0x2 0xB1 0x0 0x81997A5 @postBattle EXEC_STEAL
+msgbox 0x81997EA MSG_NORMAL '"Fire, or to be more precise,\ncomb..."
+end
+
+#org @postBattle
+= Me neither!\nLook it up online!

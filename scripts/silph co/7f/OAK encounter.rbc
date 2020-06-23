@@ -1,0 +1,86 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OAK 0x1
+
+#org @main
+lock
+spriteface 0xFF FACE_LEFT
+spriteface _OAK FACE_RIGHT
+sound 0x15 // exclamation
+applymovement _OAK @exclamation
+waitmovement 0x0
+playsong 0x12E 0x0
+pause 0x25
+applymovement _OAK @walkToPlayer
+waitmovement 0x0
+applymovement _OAK @stepR
+waitmovement 0x0
+textcolor 0x0
+msgbox @talk 0x6
+pause 0x15
+applymovement 0xFF @playerMove
+applymovement _OAK @oakLeave
+waitmovement 0x0
+sound 0x27 // warp sound
+applymovement _OAK @oakWarp
+waitmovement 0x0
+hidesprite _OAK
+setflag 0x4E
+fadeout 0x0
+setvar 0x402E 0x8
+pause 0x20
+playsong 0x133 0x0
+release
+end
+
+#org @talk
+= Prof. Oak: ..!\pYou're that young Rocket I spoke\nto in Lavender Town.\pSo it's true your gang has invaded\nthe building, then?\p[.]\pSuch a shame!\pA young and able man like you,\nwasting your energies on black-\lmail, thievery and violence[.]\pWhat's it all for?\pA mighty shame, is what it is.\c\h08ó\nGood day, Rocket.
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @walkToPlayer
+#raw STEP_R
+#raw STEP_R
+#raw STEP_U
+#raw STEP_R
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_D
+#raw FACE_U
+#raw 0xFE
+
+#org @oakLeave
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @oakWarp
+#raw FACE_D
+#raw 0x1B
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

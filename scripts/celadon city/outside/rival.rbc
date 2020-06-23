@@ -1,0 +1,13 @@
+#dynamic 0x800000
+
+#org @start
+lock
+faceplayer
+textcolor 0x0
+msgbox @talk 0x6
+spriteface 0x10 FACE_DOWN
+release
+end
+
+#org @talk
+= Go on, what are you waiting for,\nman?

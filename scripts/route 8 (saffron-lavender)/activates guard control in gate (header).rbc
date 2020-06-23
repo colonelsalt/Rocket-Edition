@@ -1,0 +1,15 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x221
+if 0x1 call @varChecker
+end
+
+#org @varChecker
+compare 0x4028 0x0 // meaning guard not bribed
+if 0x1 call @varSetter
+return
+
+#org @varSetter
+setvar 0x402A 0x1
+return

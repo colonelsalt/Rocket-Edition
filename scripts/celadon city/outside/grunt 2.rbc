@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Heil Giovanni!\nHe will make Kanto great again!\pExterminate the Johtoanean scum!\p[.]\pHeh. I'm only kidding.\nWas that too dark?

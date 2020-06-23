@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @talk1
+= Oh, hello there!\pIt is my hobby to stare at\nTrainers from all around the world\lwhile they sleep!\pWill you humor me by having a\nrest?
+
+#org @talk2
+= What, creepy?\pI assure you, home in Unova,\nstaring at people resting is a\lnational passtime.\pYou Kanto people are just way too\nstuck-up.
+
+#org @talk3
+= Hmm[.] that was quite a delight.\pYour sleeping rhythms are pretty\nfrenetic.\pDo you have a bad conscience?

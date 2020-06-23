@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Why do you think a move like Flash\nwas ever invented?\pTo waste a slot in your Pokémon's\navailable moves, probably!

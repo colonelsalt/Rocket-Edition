@@ -1,0 +1,80 @@
+#dynamic 0x800000
+#define _SABRINA 0x7
+#include stdmoves.rbh
+
+#org @main
+setvar 0x8004 0x7
+setvar 0x8005 0x2
+special 0x174
+trainerbattle 0x1 0x1A4 0x0 0x819B53C 0x819B602 @postBattle
+checkflag 0x29A
+if 0x0 goto @postPostBattle
+msgbox 0x819B7F2 MSG_KEEPOPEN '"TM04 is Calm Mind.\pIt makes the P..."
+release
+end
+
+'---------------
+#org @postBattle
+setvar 0x8004 0x7
+setvar 0x8005 0x2
+special 0x173
+setvar 0x8004 0x7
+setvar 0x8005 0x3
+special 0x173
+clearflag 0xAE
+setflag 0x4B5
+setflag 0x825
+setvar 0x8008 0x6
+call 0x81A6B18
+goto @postPostBattle
+
+'---------------
+#org @postPostBattle
+copyvar 0x8000 0x401F
+call BOSS_STEAL
+textcolor 0x1
+comparevars 0x8000 0x401F
+if _NOT_EQ call @stolen
+comparevars 0x8000 0x401F
+if 0x1 call @notStolen
+checkitemroom 0x124 0x1
+compare LASTRESULT 0x0
+if 0x1 goto 0x816EE7E
+additem 0x124 0x1
+loadpointer 0x0 0x819B7D3 '"[player] received TM04 from\nSabri..."
+giveitem2 0x124 0x1 0x101
+setflag 0x29A
+msgbox @postBattleTalk MSG_KEEPOPEN '"Psychic power isn't something that..."
+release
+end
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _SABRINA @exclamation
+waitmovement 0x0
+bufferpokemon 0x0 0x4084
+msgbox @stolenTalk 0x6
+return
+
+#org @notStolen
+msgbox @notStolenTalk MSG_KEEPOPEN '"My psychic senses tell me give me\..."
+return
+
+#org @stolenTalk
+= My psychic senses[.] they knew you\nwere up to no good!\pI shall offer you my [buffer1]\nas a sacrifice[.]\pThe universe will pay me back\nsomeday[.]\p[.]\pWith violent, negative vibrations\nsuch as yours[.]\pThere is only one TM that can set\nyou straight.
+
+#org @notStolenTalk
+= My psychic senses give me a\nfeeling[.]\pYou have no intention of using the\nMarshbadge to enter the League[.]\pThen why? I will let you keep that\nto yourself, challenger.\pTake this TM with you.
+
+#org @postBattleTalk
+= I urge you!\nUse your psychic energy for good!
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+

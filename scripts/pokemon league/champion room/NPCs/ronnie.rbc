@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+textcolor 0x0
+checkflag 0x2D6
+if 0x1 goto @postScope
+msgbox @talk 0x6
+release
+end
+
+#org @postScope
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Ronnie: O-o-h noooo[.]\c\h08ó\n[player][.]\pY-y-you've\c\h08ó g-g-g-ot that[.]\c\h08ó\nAaaaah!\pTh-that\c\h08ó S-s-silph\c\h08ó S-scope\c\h08ó,\nhaven't you[.]\pH-h-help,\c\h08ó u-us\c\h08ó p-p-please[.]\nU-use it[.]\c\h08ó U-U-USE IT[.]\pNOW!!!\c\h08ó\n[player]!
+
+#org @talk2
+= Ronnie: G-g-good j-j-job,\c\h08ó\n[player][.]\pN-n-now you're\c\h08ó f-f-free, you can\c\h08ó\ng-go\c\h08ó kick some ahhh\c\h08óahhhh-ahh-ass!

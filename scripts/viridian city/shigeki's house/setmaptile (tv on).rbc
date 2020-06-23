@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+compare 0x4016 0xF // if MissingNo released (but not captured)
+if 0x1 call @tvOn
+end
+
+#org @tvOn
+setmaptile 0x5 0x1 0x61 0x1
+return

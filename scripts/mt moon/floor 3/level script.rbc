@@ -1,0 +1,48 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox @grunt1talk 0x6
+applymovement 0x7 @gruntmove1
+applymovement 0xC @gruntmove2
+waitmovement 0x0
+movesprite 0x7 0x1E 0x1B
+movesprite 0xC 0x1D 0x1A
+spriteface 0x7 FACE_UP
+setvar 0x4019 0x2
+release
+end
+
+#org @grunt1talk
+= Have a look at this, guys! Am I\ngonna get promoted now or what?
+
+#org @gruntmove1
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @gruntmove2
+#raw 0x1C
+#raw 0x1C
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE

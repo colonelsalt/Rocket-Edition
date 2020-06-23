@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x103 0x0 0x8184F5D 0x8184F7E POKESTEAL
+special2 LASTRESULT 0x39
+compare LASTRESULT 0x1
+if 0x1 goto 0x81A9CE6
+msgbox 0x8184F8E MSG_NORMAL '"You can't be a coward in the world..."
+end

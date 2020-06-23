@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I concoct a variety of medicine\nfrom Berry Powder.\pIt's too bad you don't have any\nfriends to crush berries with!

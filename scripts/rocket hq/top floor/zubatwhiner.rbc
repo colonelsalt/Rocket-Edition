@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= So did we find any fossils, then?\p[.]\pWhat?\nWe lost them?\pYou telling me I got molested by\nall those random Zubat for\lnothing?\pGee, what a waste.

@@ -1,0 +1,13 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x177 0x0 @challenge 0x8175911 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @challenge
+= Quit messing around, Rocket!\nSilph could never fall!
+
+#org @postBattle
+= I refuse to believe you can ever\nmake the President cave[.]

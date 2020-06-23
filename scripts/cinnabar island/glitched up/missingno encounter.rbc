@@ -1,0 +1,101 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+playsong 0x0 0x0
+pause 0x8
+compare 0x4018 0x6
+if 0x1 goto @2ndTime
+// give player Master Ball and remove fake one
+// if they tossed the fake one, give them a talking-to
+checkitem 0x112 0x1
+compare LASTRESULT 0x0
+if 0x1 call @masterBallTossed
+removeitem 0x112 0x1
+additem 0x1 0x1
+setvar 0x4018 0x6
+goto @battle
+
+#org @battle
+sethealingplace 0x10
+cry 0x198 0x2
+waitcry
+pause 0x14
+waitkeypress
+setvar 0x8006 0x69 // disable runaway
+setwildbattle 0x198 0x32 0x0
+setflag 0x807
+special 0x138
+playsong 0x153 0x0
+waitstate
+special2 LASTRESULT 0xB4
+compare LASTRESULT 0x7
+if _NOT_EQ goto @fainted
+sound 0x0
+setvar 0x4018 0x7
+sethealingplace 0x9 // Cinnabar Island
+setvar 0x4014 0x7 // re-activate level script on return to Cinnabar
+clearflag 0x2E7
+// reset MissingNo script tiles
+setvar 0x4044 0x0
+setvar 0x4045 0x0
+setvar 0x4046 0x0
+setvar 0x4047 0x0
+setvar 0x4048 0x0
+setvar 0x404C 0x0
+setvar 0x404D 0x0
+setvar 0x404F 0x0
+clearflag 0xA8 // Bill ID outside Cinnabar
+pause 0x25
+sound 0xE3
+checksound
+pause 0x10
+sound 0x60
+pause 0x20
+setflag 0xAA
+warpmuted 0x3 0x8 0xFF 0x16 0x8 // to Cinnabar
+waitstate
+end
+
+#org @2ndTime
+checkitem 0x1 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @2ndToss
+goto @battle
+
+#org @masterBallTossed
+setvar 0x4083 0x1
+textcolor 0x2
+msgbox @colonelsalt 0x6
+return
+
+#org @2ndToss
+compare 0x4083 0x1
+if 0x1 goto @exploit
+additem 0x1 0x1
+call @masterBallTossed
+goto @battle
+
+#org @exploit
+additem 0x1 0x1
+textcolor 0x2
+msgbox @colonelsalt2 0x6
+goto @battle
+
+#org @fainted
+pause 0x20
+textcolor 0x2
+msgbox @faintedText 0x6
+goto @battle
+
+
+#org @colonelsalt
+= colonelsalt's note: [.]\c\h08ó\nCongratulations, you bastard.\pYou tossed away your only Master\nBall? Fat lot of good that did!\p[.]\nWell[.]\pIf you thought you could stop the\nplot from moving forward with your\labsurd behavior, think again!\pI'm giving you another one right\nnow, but I've got my eye on you.\pBe a good little player now like\neveryone else. Peace out.
+
+#org @colonelsalt2
+= colonelsalt: [.]\c\h08ó\nYou're really milking this, huh?\pWell, have it your way, chum.\pWhat's a MissingNo. encounter\nwithout an item cloning glitch..?
+
+#org @faintedText
+= The damaged MissingNo. retreated\nunderwater[.]\c\h08ó\c\h08ó\c\h08ó\p[.]But immediately re-emerged in a\nfury, fully recovered..!
+

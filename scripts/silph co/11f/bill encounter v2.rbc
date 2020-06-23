@@ -1,0 +1,139 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _BILL 0x6
+
+#org @main
+lock
+fadeout 0x0
+special 0x113
+applymovement 0x7F @cameraPan
+waitmovement 0x0
+pause 0x30
+playsong 0x11C 0x0
+spriteface _BILL FACE_DOWN
+pause 0x15
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0x7F @approachPlayer
+applymovement _BILL @approachPlayer
+waitmovement 0x0
+applymovement _BILL @paceD
+waitmovement 0x0
+spriteface _BILL FACE_LEFT
+spriteface 0xFF FACE_RIGHT
+special 0x114
+msgbox @talk2 0x6
+pause 0x20
+spriteface _BILL FACE_UP
+pause 0x10
+applymovement _BILL @stepU
+waitmovement 0x0
+msgbox @talk3 0x6
+pause 0x10
+spriteface _BILL FACE_LEFT
+pause 0x10
+fadeout 0x0
+msgbox @talk4 0x6
+pause 0x10
+spriteface _BILL FACE_UP
+pause 0x15
+applymovement _BILL @paceU
+waitmovement 0x0
+pause 0x20
+msgbox @talk5 0x6
+pause 0x30
+msgbox @ellipses 0x6
+pause 0x20
+spriteface _BILL FACE_DOWN
+playsong 0x11B 0x0
+pause 0x25
+applymovement _BILL @paceD
+waitmovement 0x0
+spriteface _BILL FACE_LEFT
+msgbox @talk6 0x6
+trainerbattle 0x3 0x18 0x0 @defeatText
+msgbox @talk7 0x6
+applymovement _BILL @billLeave
+waitmovement 0x0
+sound 0x9
+checksound
+hidesprite _BILL
+setflag 0x53
+setvar 0x402E 0x9
+release
+end
+
+#org @talk
+= Bill: Why, [player]!\nNow isn't this a surprise!\pI was just finishing some business\nnegotiations with my executive\lfriend here.
+
+#org @talk2
+= The Master Ball is practically\nready for market!\pDo you know what this means?\pThe rarest, most powerful Pokémon\nin existence[.]\lMine, without a second thought!\pI've seen enough of that masterly\nengineered device to see it's\ljust what I've been waiting for[.]
+
+#org @talk3
+= I'm picking up a copy of the blue-\nprints and the working prototype.\pOh, I have no trouble influencing\na corrupt old guy like Mr.\lPresident here to do my bidding.
+
+#org @talk4
+= You guys did a cool job invading\nthe place[.] but you're too slow!\pAnd sorry to say I have no loyalty\nto Team Rocket[.]\c\h08ó nor to anyone.\pThe prototype is mine.
+
+#org @talk5
+= I advise you to leave now before\npolice seizes the building back.\pGo! Leave me!\c\h08ó\nYour chance has passed.
+
+#org @ellipses
+= [.]
+
+#org @talk6
+= [player], you blind loyal idiot[.]\pWell, I won't say I didn't see\nthis coming[.]\pCome at me, then!\pI'm getting that Ball, whether\nGiovanni likes it or not!
+
+#org @defeatText
+= No, [player]..!\c\h08ó Don't you see that\nyou're messing it all up now?!
+
+#org @talk7
+= Oh geez.\pI can't believe I didn't prepare\nmyself enough to deal with a\lsituation like this[.]\pSo close..!\c\h08ó\nSo disgustingly close!\p[.]\c\h08ó\nI'll have to reconsider the plan.\p[player][.] you idiot!
+
+#org @cameraPan
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @approachPlayer
+#raw STEP_D
+#raw STEP_D
+#raw STEP_D
+#raw 0xFE
+
+#org @paceU
+#raw STEP_U
+#raw 0xFE
+
+#org @paceD
+#raw STEP_D
+#raw 0xFE
+
+#org @billLeave
+#raw STEP_D
+#raw STEP_D
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE

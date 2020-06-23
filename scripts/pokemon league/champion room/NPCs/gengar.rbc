@@ -1,0 +1,14 @@
+#dynamic 0x800000
+
+#org @main
+lock
+cry 0x5E 0x0
+textcolor 0x2
+msgbox @talk MSG_KEEPOPEN
+waitcry
+closeonkeypress
+release
+end
+
+#org @talk
+= Gengar: Heeeehhhheee!

@@ -1,0 +1,25 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _RONNIE 0xE
+
+#org @main
+setworldmapflag 0x8AC
+checkflag 0x29D
+if 0x1 call @hideGuardsMaybe
+compare 0x4014 0xA // if mission brief given (from Proton/Petrel)
+if 0x4 call @hideRonnie
+end
+
+#org @hideRonnie
+movesprite2 _RONNIE 0x0 0x0
+return
+
+#org @hideGuardsMaybe
+compare 0x402E 0x10
+if _LESS call @hideGuards
+return
+
+#org @hideGuards
+movesprite2 0x2 0x0 0x0
+movesprite2 0x3 0x0 0x0
+return

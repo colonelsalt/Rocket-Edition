@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Smell ya later, you stinker!\p[.]\nHaha[.]\pI'm adopting the new Champion's\ncatchphrases.\pHe'll definitely be a hot trend-\nsetter from now on.

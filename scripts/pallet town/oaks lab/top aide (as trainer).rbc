@@ -1,0 +1,34 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _AIDE 0x6
+
+#org @main
+trainerbattle 0x2 0x27 0x0 @challengeText @defeatText @after
+end
+
+#org @after
+call POKESTEAL
+pause 0x10
+textcolor 0x0
+msgbox @leaveText 0x6
+pause 0x10
+fadescreen 0x1
+pause 0x5
+sound 0x9
+hidesprite _AIDE
+setflag 0x233
+checksound
+fadescreen 0x0
+setvar 0x4016 0x13
+release
+end
+
+#org @challengeText
+= I-I don't know what you could\npossibly want in this Lab, thief!\pWe're hiding nothing!\n[.]we're clean!
+
+#org @defeatText
+= Negative!
+
+#org @leaveText
+= Poke around all you like!\nThere's nothing to see here!\pNothing at all[.]\c\h08ó\n(Damn it, when Oak finds out[.])
+

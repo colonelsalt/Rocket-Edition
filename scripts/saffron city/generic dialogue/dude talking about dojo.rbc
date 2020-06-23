@@ -1,0 +1,22 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+compare 0x402E 0x10
+if _GREATER_EQ goto @postApricorn
+msgbox @talk 0x6
+release
+end
+
+#org @postApricorn
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= The Karate Master was really angry\nwhen he lost his position as the\lSaffron City Gym Leader.\pBut he still takes Pokémon League\nregulations very seriously.
+
+#org @talk2
+= Saffron is back up and running\nagain at last.\p[.]No thanks to you people!

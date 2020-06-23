@@ -1,0 +1,236 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _KOGA 0x7
+
+#org @main
+lock
+faceplayer
+checkflag 0x824 // if Koga already beat, enter battle section of script
+if 0x1 goto @battle 
+checkitem 0x172 0x1 // if Fake Trainer Card already received
+compare LASTRESULT 0x1
+if 0x1 goto @postMission
+checkitem 0x173 0x1 // if Box of HMs already taken
+compare LASTRESULT 0x1
+if 0x1 goto @missionComplete
+checkitem 0x170 0x1 // if Employee Card already received
+compare LASTRESULT 0x1
+if 0x1 goto @missionReceived
+msgbox @talk 0x5
+compare LASTRESULT 0x1
+if 0x0 goto @turnedDown
+msgbox @talk2 0x6
+pause 0x20
+spriteface _KOGA FACE_UP
+pause 0x20
+msgbox @talk3 0x6
+pause 0x20
+faceplayer
+pause 0x15
+msgbox @talk4 0x6
+pause 0x20
+spriteface _KOGA FACE_RIGHT
+pause 0x30
+faceplayer
+pause 0x15
+msgbox @talk5 0x6
+textcolor 0x2
+pause 0x10
+additem 0x170 0x1
+loadpointer 0x0 @cardReceive
+giveitem2 0x170 0x1 0x13E
+closeonkeypress
+pause 0x20
+textcolor 0x0
+msgbox @talk6 0x6
+release
+end
+
+#org @turnedDown
+msgbox @noTalk 0x6
+release
+end
+
+#org @missionReceived
+msgbox @midMissionTalk 0x6
+release
+end
+
+#org @missionComplete
+msgbox @completeTalk 0x6
+pause 0x20
+textcolor 0x3
+fanfare 0x105
+preparemsg @giveBox
+waitmsg
+waitfanfare
+removeitem 0x173 0x1
+closeonkeypress
+pause 0x10
+textcolor 0x0
+msgbox @completeTalk2 0x6
+pause 0x20
+spriteface _KOGA FACE_UP
+pause 0x25
+faceplayer
+pause 0x20
+msgbox @completeTalk3 0x6
+textcolor 0x2
+pause 0x10
+additem 0x172 0x1
+loadpointer 0x0 @card2Receive
+giveitem2 0x172 0x1 0x13E
+closeonkeypress
+pause 0x20
+textcolor 0x0
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @completeTalk4 0x6
+release
+end
+
+#org @postBoss
+msgbox @completeTalkBoss 0x6
+release
+end
+
+#org @postMission
+msgbox @postMissionTalk 0x5
+compare LASTRESULT 0x1
+if 0x1 goto @battle
+msgbox @postMissionTalk2 0x6
+release
+end
+
+#org @battle
+setvar 0x8004 0x6
+setvar 0x8005 0x2
+special 0x174
+trainerbattle 0x1 0x1A2 0x0 @challengeText 0x8198444 @postBattle
+checkflag 0x259
+if 0x0 goto @postPostBattle
+msgbox @postDefeatTalk MSG_KEEPOPEN
+release
+end
+
+#org @postBattle
+setvar 0x8004 0x6
+setvar 0x8005 0x1
+special 0x173
+clearflag 0x9F
+setflag 0x4B4
+setflag 0x824
+setvar 0x8008 0x5
+call 0x81A6B18
+goto @postPostBattle
+
+
+#org @postPostBattle
+copyvar 0x8000 0x401F
+call BOSS_STEAL
+comparevars 0x401F 0x8000
+if _NOT_EQ call @stolen
+textcolor 0x0
+msgbox @rewardTalk MSG_KEEPOPEN '"Now that you have the Soulbadge,\n..."
+checkitemroom 0x126 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+additem 0x126 0x1
+loadpointer 0x0 0x819858F '"[player] received TM06\nfrom Koga."
+giveitem2 0x126 0x1 0x101
+setflag 0x259
+msgbox 0x81985AB MSG_KEEPOPEN '"Sealed within that TM06 lies\nToxi..."
+release
+end
+
+#org @noRoom
+msgbox @makeSpace MSG_KEEPOPEN '"Make space for this, Rocket!"
+release
+end
+
+#org @stolen
+sound 0x15 // exclamation
+applymovement _KOGA @exclamation
+waitmovement 0x0
+textcolor 0x0
+bufferpokemon 0x0 0x4084
+msgbox @stolenTalk 0x6
+return
+
+#org @talk
+= Koga: Fwahahaha! Rocket!\nThe very type I need right now!\pI must request your assistance!\nFor ample compensation, of course.\pWarriors of the darkness, such as\nyou and I-- one in ninja robes and\lone in a jumpsuit of spandex!\pLet us unite our powers to a\ncommon cause; what say you?
+
+#org @talk2
+= Very well!\c\h08ó\nHere is my situation, young one.\pThe Safari Zone Warden runs\na promotion for his Safari Game.\pTrainers come in to play, and if\nthey reach his "Secret House",\lthey win an HM Surf[.]\pThe very move my Badge grants\nthem license to use, mind you!\pSee, the trouble is[.]\c\h08ó\nNobody's winning!\pThat old capitalist hid this House\nout in some obscure corner that\lthese sorry Trainers never stand a\lchance of finding before the\lding-dong sound goes!
+
+#org @talk3
+= And what is the result, you ask?\p[.]\pThat nobody wants to challenge my\nGym anymore!\pIf they can't get that coveted HM\nto Surf the seas, why, they see no\lreason to try for my Badge!\pPreposterous!\pI can hardly defend a Gym when it\nhas no cause for defending!
+
+#org @talk4
+= So, Rocket!\c\h08ó\nFind that Secret House!\pSnatch yourself the largest box\nfull of HMs you can hold and\lbring it here!\pWe will set up our own method of\ndistribution.\pI have many ways to repay you for\nyour efforts, worry not.
+
+#org @talk5
+= Now, as master of concealment and\ndisguise, I have tricks up my\lsleeve!\pTake this with you.
+
+#org @cardReceive
+= [player] received the\nEmployee Card!
+
+#org @talk6
+= Fwahahaha[.]\pUse that to sneak into the Safari\nZone without having to play that\lsilly Ball game.
+
+#org @noTalk
+= Hmph!\nWell, suit yourself!\pIt's not as if a master ninja such\nas I has any trouble handling my\lown affairs! Be gone!
+
+#org @midMissionTalk
+= Koga: How goes it, fellow darkness\nwarrior?\pAre you on your way to getting me\na box of those HMs from the Secret\lHouse in the Safari Zone?\pFwahahaha[.]\nMove with haste, Rocket!
+
+#org @completeTalk
+= Koga: Oh my!\nYou brought it for me, Rocket!
+
+#org @giveBox
+= [player] handed over the\nBox of HMs.
+
+#org @completeTalk2
+= How can I repay you for such an\nact of service, Rocket?
+
+#org @completeTalk3
+= Fwahahaha!\c\h08ó\nWhy, I know just the thing!\pA tough-knuckled criminal like\nyourself[.]\pI can provide you with[.]\c\h08ó\nYour very own secret identity!\pOne that frees you from the judge-\nment and the hatred of the people!\pOne that[.]\c\h08ó could grant you entry\nto any Gym like mine as any other\lofficial Trainer..!\pHow does such an arrangement\nsound?\l[.]\pFwahahaha!\pThe master of concealment and\ndisguise has you covered, friend!\pTake this with you and use it\nwell.
+
+#org @card2Receive
+= [player] received the\nTrainer Card!
+
+#org @completeTalk4
+= Fwahahaha[.]\pWith this masterfully crafted\nTrainer Card of mine, you can\lchallenge any Gym Leader in Kanto!\pWhy[.]\c\h08ó\nEven myself!\pOf course[.]\pPerhaps you should like to wait\nuntil you have the rank and power\lin your underworld to steal a Gym\lLeader's Pokémon?\pFwahahaha[.]\c\h08ó\nThe choice is yours, Rocket!
+
+#org @completeTalkBoss
+= Fwahahaha[.]\pWith this masterfully crafted\nTrainer Card of mine, you can\lchallenge any Gym Leader in Kanto!\pWhy[.]\c\h08ó\nEven myself!\pI would think a tough-looking man\nlike you would have no trouble\lstealing a Pokémon or two from\lthem as well, eh?\pFwahahaha[.]
+
+#org @postMissionTalk
+= Koga: Fwahahaha!\nWelcome back, Rocket!\pDid you come to challenge me to a\nGym battle?
+
+#org @postMissionTalk2
+= Why, indeed!\pYou came simply to stare in awe at\nmy magnificent ninja skills?\pFwahahaha[.]\c\h08ó\nWho could blame you?
+
+#org @challengeText
+= Fwahahaha!\pThe very idea makes me shiver\nwith mirth!\pVery well, I shall show you true\nterror as a ninja master.\pPoison brings steady doom.\nSleep renders foes helpless.\pDespair to the creeping horror of\nPoison-type Pokémon!\c\h0B[Ke]À
+
+#org @rewardTalk
+= Now that you have the Soulbadge,\nthe Defense of your Pokémon rises.\pAh!\nTake this, too!
+
+#org @makeSpace
+= Make space for this, Rocket!
+
+#org @postDefeatTalk
+= Koga: What else is there to say,\nyoung Rocket?\pYou are a shadow warrior truly\nunlike any other!
+
+#org @stolenTalk
+= Wah! A taste of my own medicine!\nYou sneaky thief, you!\p[.]\pWell, I never liked that\n[buffer1] much anyway, to tell\lyou the truth[.]\pAnyway[.]
+
+#org @exclamation 
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+

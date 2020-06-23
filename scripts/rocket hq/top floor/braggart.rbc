@@ -1,0 +1,42 @@
+#dynamic 0x800000
+// person event 0xE (14)
+
+#org @main
+lock
+faceplayer
+checkflag 0x292
+if 0x1 goto @preCinnabar
+checkflag 0x21E
+if 0x1 goto @postPromotion
+checkflag 0x227
+if 0x1 goto @postRed
+msgbox @talk 0x6
+release
+end
+
+#org @postRed
+msgbox @talk3 0x6
+release
+end
+
+#org @postPromotion
+msgbox @talk4 0x6
+release
+end
+
+#org @preCinnabar
+msgbox @talk5 0x6
+release
+end
+
+#org @talk
+= What?\nThere was another kid, too?\pI was just out by the Pokémon\nCenter and I didn't even notice.\pDude, I would have totally whipped\nhim if I was there, though.
+
+#org @talk3
+= Jesus Christ.\pI've never been so thoroughly\nslaughtered in a Pokémon battle in\lmy life[.]\pThat kid[.]\nI've never seen anything like it.
+
+#org @talk4
+= You going out to Viridian City\ntoo, now?\pYeah, I heard some grunts over\nthere were getting frustrated with\lnot getting items that they're\lrobbing the mart over there!\pSounds totally rad!\nWish I'd been stationed there too.
+
+#org @talk5
+= Hey, you keeping up with the\nlatest crime gossip?\pSounds like some funny-sounding\ngangs at Cycling Road west of here\lare causing all sorts of trouble.\pI heard their connected with the\ndodgy guys doing business in the\lUnderground Paths.\pShady stuff, if you ask me!

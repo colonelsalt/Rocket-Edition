@@ -1,0 +1,18 @@
+#dynamic 0x800000
+
+#org @start
+lock
+faceplayer
+checkflag 0x227
+if 0x1 goto @postSail
+msgbox 0x817FA22 0x6
+release
+end
+
+#org @postSail
+msgbox @talk2 0x6
+release
+end
+
+#org @talk2
+= The ship set sail, I'm afraid.\pTrust me, there's nothing at all\nto see out on the harbor now.\pYou'll bore yourself to death back\nthere!

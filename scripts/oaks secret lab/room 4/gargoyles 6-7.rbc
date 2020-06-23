@@ -1,0 +1,20 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OFF_ROBOT_1 0x1
+#define _OFF_ROBOT_2 0x2
+#define _ON_ROBOT_1 0x3
+#define _ON_ROBOT_2 0x4
+
+#org @main
+sound 0xAE
+movesprite _OFF_ROBOT_1 0x1C 0x0
+movesprite2 _OFF_ROBOT_1 0x1C 0x0
+movesprite _OFF_ROBOT_2 0x1C 0x0
+movesprite2 _OFF_ROBOT_2 0x1C 0x0
+setvar 0x4016 0x2A
+end
+
+
+
+
+

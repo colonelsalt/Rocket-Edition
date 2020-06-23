@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xCF 0x0 @challenge 0x8186223 EXEC_STEAL
+msgbox 0x8186239 0x6
+end
+
+#org @challenge
+= You should come out to Cycling\nRoad sometime, Rocket!\pMy brothers over there will show\nyou what real gang life is like!

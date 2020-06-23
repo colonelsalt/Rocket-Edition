@@ -1,0 +1,42 @@
+#dynamic 0x800000
+
+#org @main
+lockall
+checkflag 0x29D // if Saffron mission received
+if 0x1 goto @postRed
+checkflag 0x824
+if 0x1 goto @postBeat
+msgbox @text1 MSG_KEEPOPEN
+releaseall
+end
+
+#org @postBeat
+msgbox @text2 MSG_KEEPOPEN
+releaseall
+end
+
+#org @postRed
+checkflag 0x824
+if 0x1 goto @redAndBeat
+msgbox @text3 MSG_KEEPOPEN
+releaseall
+end
+
+#org @redAndBeat
+msgbox @text4 MSG_KEEPOPEN
+releaseall
+end
+
+
+
+#org @text1
+= Fuchsia Pokémon Gym\nLeader: Koga\pWinning Trainers:
+
+#org @text2
+= Fuchsia Pokémon Gym\nLeader: Koga\pWinning Trainers:\nMohammed Smith
+
+#org @text3
+= Fuchsia Pokémon Gym\nLeader: Koga\pWinning Trainers:\nBlue, Red
+
+#org @text4
+= Fuchsia Pokémon Gym\nLeader: Koga\pWinning Trainers:\nBlue, Red, Mohammed Smith

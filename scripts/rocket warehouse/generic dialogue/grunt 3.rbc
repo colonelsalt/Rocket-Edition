@@ -1,0 +1,33 @@
+#dynamic 0x800000
+// PE 0x15
+
+#org @main
+lock
+checkflag 0x208
+if 0x1 goto @postTV
+compare 0x401D 0x5 // checks if Ronnie police scene finished
+if 0x1 goto @postPolice
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @postPolice
+msgbox @talk2 0x6
+release
+end
+
+#org @postTV
+faceplayer
+msgbox @talk3 0x6
+release
+end
+
+#org @talk
+= Apparently Pokémon eggs are all\nthe rage in Johto and Hoenn.\pYet most people here seem as if\nthey don't even know they exist.\pHa! Which means we can take them\nall for ourselves without trouble.
+
+#org @talk2
+= I need to see, dammit!
+
+#org @talk3
+= Hm[.]\nMaybe I should just catch and\ltrain my own Pokémon like a normal\lTrainer now..?\p[.]\pArgh!\nI don't know what I should do!

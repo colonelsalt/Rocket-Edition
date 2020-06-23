@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+call EXEC_STEAL
+checkflag 0x26B
+if 0x0 call 0x816DB21
+release
+end
+
+#org @postBattle
+= Water beats fire, of course.\pBut fire melts ice, and so[.]\pAgh! You know the drill, man--\nlook it up!

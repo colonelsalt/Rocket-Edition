@@ -1,0 +1,220 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @start
+lock
+faceplayer
+checkflag 0x204
+if 0x1 goto @done
+setflag 0x834
+msgbox @talk 0x6
+trainerbattle 0x1 0x001 0x0 @prebattle @postbattle @afterwards
+end
+
+#org @afterwards
+msgbox @whining 0x6
+fadescreen 0x1
+
+// moves characters and camera to new position
+special 0x113
+setvar 0x8002 0x0C
+setvar 0x8003 0x12
+callasm 0x802305 // movecamera
+special 0x8E
+movesprite 0xFF 0x0C 0x12
+movesprite 0x10 0x0B 0x11
+movesprite 0x4 0x0B 0x12
+movesprite 0x5 0x12 0x15
+spriteface 0xFF FACE_LEFT
+spriteface 0x4 FACE_RIGHT
+special 0x114
+//
+
+fadescreen 0x0
+textcolor 0x0
+applymovement 0x10 @step
+waitmovement 0x0
+msgbox @rivaltalk 0x6
+applymovement 0x10 @step
+waitmovement 0x0
+msgbox @rivaltalk2 0x6
+applymovement 0x10 @amazement
+waitmovement 0x0
+msgbox @rivaltalk3 0x6
+applymovement 0x4 @step2
+waitmovement 0x0
+textcolor 0x1
+msgbox @morewhining 0x6
+textcolor 0x2
+pause 0x10
+call 0x81FDAD // Pokésteal
+textcolor 0x0
+applymovement 0x10 @step
+waitmovement 0x0
+msgbox @rivaltalk4 0x6
+sound 0x80
+checksound
+applymovement 0x10 @pushaway
+sound 0xA
+applymovement 0x4 @jumpaway1
+waitmovement 0x0
+applymovement 0x4 @jumpaway2
+spriteface 0x10 FACE_RIGHT
+msgbox @rivaltalk5 0x6
+applymovement 0x10 @rivalmove
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+msgbox @rivaltalk6 0x6
+applymovement 0x10 @rivalleave
+waitmovement 0x0
+hidesprite 0x10
+setworldmapflag 0x8A2
+setflag 0x204
+sound 0x9
+setvar 0x4011 0x1
+checksound
+release
+end
+
+#org @talk
+= Oh, hello.\nDo you want to play with me?\p[.]\c\h08ó\nYay!\pYou know, this is my most favorite\nplace in all of Celadon to play--\p[.]\pWhat?\c\h08ó\nOh, Pokémon battle?\pO-okay, I can do that.\pI only have these Pokémon that my\nmom gave me for my birthday, but\lokay.\pBattling seems like fun.\nI've seen it on TV.
+
+#org @prebattle
+= Let's do it!
+
+#org @postbattle
+= Wow, you beat me!
+
+#org @whining
+= Well, that was fun.\p[.]\pHuh?\pHey, no please-- what are you\ndoing? Let me go!
+
+#org @step
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @rivaltalk
+= Ronnie: Oh man, oh man, oh man!\nYou did it, [player]!\pNow, for the final step!\nMan, I'm itching with excitement.
+
+#org @rivaltalk2
+= "Step three: Having successfully\ndefeated your chosen target, you\lmay now force him or her to hand\lover one of their Pokémon, as far\las your rank within your\lorganization of choice allows.
+
+#org @amazement
+#raw 0x1C
+#raw 0x3
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x0
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @rivaltalk3
+= God damn it, if being a gangster\nisn't the coolest thing in the\lworld.\pGo ahead, now, [player], I'll hold\nher down!
+
+#org @step2
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @morewhining
+= No, please don't!\nYou guys are meanies!
+
+#org @rivaltalk4
+= Ronnie: Sweet, man.\nI'll take this one, then.
+
+#org @pushaway
+#raw STEP_D
+#raw 0xFE
+
+#org @jumpaway1
+#raw 0x4E
+#raw 0x1
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @jumpaway2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_D2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @rivaltalk5
+= See, that was pretty straight-\nforward, wasn't it?\pAin't no thing, man.\pSo anyway, what do you want to do\nnow?\pI guess we better head on over to\nMt. Moon like that guy Petrel\ltalked about.\pThat Pokémon you snagged can learn\nFly, can't it? Go figure.
+
+#org @rivalmove
+#raw STEP_U
+#raw STEP_R
+#raw 0x0
+#raw 0xFE
+
+#org @rivaltalk6
+= Anyway, no rush.\pI'm gonna head back and show off\nmy new quarry to those noobs back\lat HQ.\pFeel free to join me.\nOr whatever.\pCatch ya later, man.
+
+#org @rivalleave
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_U2
+#raw STEP_U2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw STEP_R2
+#raw 0xFE
+
+#org @done
+msgbox @aftertalk 0x6
+release
+end
+
+#org @aftertalk
+= WHAAH! MOMMY, HELP ME! IT'S THAT\nSCARY GUY WHO TOOK MY POKÉMON!\pPLEASE, NO, DON'T HURT ME!

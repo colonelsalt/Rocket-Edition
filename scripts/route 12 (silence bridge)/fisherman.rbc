@@ -1,0 +1,7 @@
+#dynamic 0x800000
+
+#org @challenge
+= The Fishing Fool versus the\nPokémon Gangster!
+
+#org @after
+= You're a Fishing Fool, see,\nbecause you're only hooking\lMagikarp.

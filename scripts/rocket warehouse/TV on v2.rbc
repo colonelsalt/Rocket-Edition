@@ -1,0 +1,10 @@
+#dynamic 0x800000
+
+#org @main
+checkflag 0x214 // checks if 1st part of level script performed
+if 0x0 call @TVon
+end
+
+#org @TVon
+setmaptile 0x10 0xA 0x61 0x1
+return

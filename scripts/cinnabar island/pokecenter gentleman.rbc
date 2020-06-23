@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= Do you have lots of friends?\pWell then, quit all this Pokémon\nnonsense and go out and play!

@@ -1,0 +1,279 @@
+#dynamic 0x800000
+#define _GRUNT 0xA
+#include stdmoves.rbh
+
+#org @main
+lock
+faceplayer
+msgbox @talk MSG_YESNO
+compare LASTRESULT 0x1
+if 0x1 goto @pkmnSelect
+msgbox @noTalk 0x6
+spriteface _GRUNT FACE_DOWN
+release
+end
+
+#org @pkmnSelect
+countpokemon
+compare LASTRESULT 0x1
+if 0x1 goto @only1Poke
+msgbox @selectTalk 0x6
+special 0x9F // Pkmn select-screen
+waitstate
+copyvar 0x8005 0x8004
+compare 0x8004 0x7
+if 0x1 goto @cancel
+special 0x6 // JPAN's Pkmn-decrypt special
+special2 0x8001 0x18 // JPAN's check-species special
+special 0x6 // re-encrypt Pkmn
+compare 0x8001 0x198
+if 0x1 goto @missingno
+bufferpokemon 0x1 0x8001
+//
+
+//
+showmoney 0x14 0x0 0x0
+
+callasm 0x827981 // GETLEVEL
+copyvar 0x800A 0x8000
+compare 0x8000 0x64
+if 0x1 goto @EQ100
+compare 0x8000 0x5A
+if 0x4 goto @GT90
+compare 0x8000 0x50
+if 0x4 goto @GT80
+compare 0x8000 0x46
+if 0x4 goto @GT70
+compare 0x8000 0x3C
+if 0x4 goto @GT60
+compare 0x8000 0x32
+if 0x4 goto @GT50
+compare 0x8000 0x28
+if 0x4 goto @GT40
+compare 0x8000 0x1E
+if 0x4 goto @GT30
+compare 0x8000 0x14
+if 0x4 goto @GT20 // if lvl >= 20, give $1,500
+compare 0x8000 0xA
+if 0x4 goto @GT10 // if lvl >= 10, give $1,000
+goto @LT10 // else (lvl < 10) give $500
+
+#org @EQ100
+buffernumber 0x0 0x32
+msgbox @moneyOfferEven MSG_YESNO
+goto @handIn
+
+#org @GT90
+buffernumber 0x0 0x5
+msgbox @moneyOfferEven MSG_YESNO
+goto @handIn
+
+#org @GT80
+buffernumber 0x0 0x4
+msgbox @moneyOfferHalf MSG_YESNO
+goto @handIn
+
+#org @GT70
+buffernumber 0x0 0x4
+msgbox @moneyOfferEven MSG_YESNO
+goto @handIn
+
+#org @GT60
+buffernumber 0x0 0x3
+msgbox @moneyOfferHalf MSG_YESNO
+goto @handIn
+
+#org @GT50
+buffernumber 0x0 0x3
+msgbox @moneyOfferEven MSG_YESNO
+goto @handIn
+
+#org @GT40
+buffernumber 0x0 0x2
+msgbox @moneyOfferHalf MSG_YESNO
+goto @handIn
+
+#org @GT30
+buffernumber 0x0 0x2
+msgbox @moneyOfferEven MSG_YESNO
+goto @handIn
+
+#org @GT20
+buffernumber 0x0 0x1
+msgbox @moneyOfferHalf MSG_YESNO
+goto @handIn
+
+#org @GT10
+buffernumber 0x0 0x1
+msgbox @moneyOfferEven MSG_YESNO
+goto @handIn
+
+#org @LT10
+msgbox @moneyOffer500 MSG_YESNO
+goto @handIn
+
+#org @handIn
+compare LASTRESULT 0x1
+if 0x1 goto @saleClosed
+hidemoney 0x0 0x0
+msgbox @noSaleTalk 0x6
+spriteface _GRUNT FACE_DOWN
+release
+end
+
+
+#org @saleClosed
+//
+
+//
+compare 0x800A 0x64
+if 0x1 goto @pay50k
+compare 0x800A 0x5A
+if 0x4 goto @pay5k
+compare 0x800A 0x50
+if 0x4 goto @pay4_5k
+compare 0x800A 0x46
+if 0x4 goto @pay4k
+compare 0x800A 0x3C
+if 0x4 goto @pay3_5k
+compare 0x800A 0x32
+if 0x4 goto @pay3k
+compare 0x800A 0x28
+if 0x4 goto @pay2_5k
+compare 0x800A 0x1E
+if 0x4 goto @pay2k
+compare 0x800A 0x14
+if 0x4 goto @pay1_5k // if lvl >= 20, give $1,500
+compare 0x800A 0xA
+if 0x4 goto @pay1k // if lvl >= 10, give $1,000
+compare 0x800A 0xA
+if _LESS goto @pay500 // else (lvl < 10) give $500
+
+#org @payment
+sound 0x41
+updatemoney 0x0 0x0 0x0
+checksound
+hidemoney 0x0 0x0
+release
+pause 0x8
+
+copyvar 0x8004 0x8005
+special 0x62 // JPAN's delete-Pkmn special (Pkmn selected by 0x8004)
+cry 0x8001 0x0
+waitcry
+fanfare 0x10E
+textcolor 0x2
+msgbox @pkmnDeleted 0x4
+waitfanfare
+closeonkeypress
+textcolor 0x1
+msgbox @postSaleTalk 0x6
+spriteface _GRUNT FACE_DOWN
+release
+end
+
+#org @missingno
+sound 0x15 // exclamation
+applymovement _GRUNT @exclamation
+waitmovement 0x0
+msgbox @missingnoTalk 0x6
+spriteface _GRUNT FACE_DOWN
+release
+end
+
+#org @cancel
+msgbox @noTalk 0x6
+spriteface _GRUNT FACE_DOWN
+release
+end
+
+#org @only1Poke
+msgbox @errorTalk 0x6
+spriteface _GRUNT FACE_DOWN
+release
+end
+
+#org @pay50k
+givemoney 0xC350 0x0
+goto @payment
+
+#org @pay5k
+givemoney 0x1388 0x0
+goto @payment
+
+#org @pay4_5k
+givemoney 0x1194 0x0
+goto @payment
+
+#org @pay4k
+givemoney 0xFA0 0x0
+goto @payment
+
+#org @pay3_5k
+givemoney 0xDAC 0x0
+goto @payment
+
+#org @pay3k
+givemoney 0xBB8 0x0
+goto @payment
+
+#org @pay2_5k
+givemoney 0x9C4 0x0
+goto @payment
+
+#org @pay2k
+givemoney 0x7D0 0x0
+goto @payment
+
+#org @pay1_5k
+givemoney 0x5DC 0x0
+goto @payment
+
+#org @pay1k
+givemoney 0x3E8 0x0
+goto @payment
+
+#org @pay500
+givemoney 0x1F4 0x0
+goto @payment
+
+#org @talk
+= Howdy there, pretty boy. Welcome\nto the Pokémon black market.\pGot any stolen Pokémon you'd like\nto sell?
+
+#org @noTalk
+= Then what you wasting my time for?\nI ain't messing about here!\pCome back with a nice, big juicy\ncreature and we'll talk.
+
+#org @errorTalk
+= What you doing messing with me?!\pYou only got one Pokémon left, you\nugly piece of trash!\pYou want to get big black question\nmarks floating around, or what?!
+
+#org @missingnoTalk
+= What in the googly good heavens\nis that pixelated freak?!\pMy dealers ain't going to want\nnothing to do with that!\pGive me a Pokémon with a face, why\ndon't ya?!
+
+#org @selectTalk
+= Now we're talking.\nLet's see that little sucker.
+
+#org @moneyOfferEven
+= All right, pretty boy, I'll give\nyou [$][buffer1],000 for this [buffer2].
+
+#org @moneyOfferHalf
+= All right, pretty boy, I'll give\nyou [$][buffer1],500 for this [buffer2].
+
+#org @moneyOffer500
+= All right, pretty boy, I'll give\nyou [$]500 for this [buffer2].
+
+#org @pkmnDeleted
+= [player] sold [buffer2] on the\nblack market.
+
+#org @postSaleTalk
+= Hey!\nThat's what I call a deal!
+
+#org @noSaleTalk
+= Oy, you stinking no-good cheater!\nThis is the deal of a lifetime!
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE

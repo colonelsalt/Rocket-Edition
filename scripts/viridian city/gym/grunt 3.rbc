@@ -1,0 +1,22 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+
+#org @talk
+= Yo, a friend of mine just outside\nis planning to rob the Poké Mart!\pIf you think you're bad enough for\nit, come join us!
+
+#org @talk2
+= Well, if this is the end for us[.]\nI guess it's time to become a real\lTrainer, huh?\pI heard the Gym Leader in Fuschia\nmakes perfectly forged Trainer\llicenses.\pThe way things are looking[.]\pI'd rather go that route than keep\nlounging around here without Boss!

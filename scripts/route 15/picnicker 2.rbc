@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x1DE 0x0 0x8186A22 0x8186A40 POKESTEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I'll go play with some nicer, less\nshady Trainers now!

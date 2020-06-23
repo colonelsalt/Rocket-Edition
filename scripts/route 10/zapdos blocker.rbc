@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Stop right there, Rocket!\pAs part of Lance's anti-crime\ninitatives, I've been sent here to\lguard nesting places of certain\lPokémon of national importance!\p[.]\pGuard them from thugs like you,\nthat is! Move right along!

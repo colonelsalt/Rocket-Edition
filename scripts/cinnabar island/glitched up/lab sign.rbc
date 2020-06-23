@@ -1,0 +1,8 @@
+#dynamic 0x800000
+
+#org @main
+msgbox @sign MSG_SIGN
+end
+
+#org @sign
+= pokeyman laboratoriforium

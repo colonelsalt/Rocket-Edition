@@ -1,0 +1,15 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _AGATHA 0x1
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+spriteface _AGATHA FACE_DOWN
+release
+end
+
+#org @talk
+= Do what you must, [player].\nYou've been warned.
+

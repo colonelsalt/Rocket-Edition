@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Silph is the greatest company in\nthe world!\pNobody can beat them, because they\nwork for the good of the people!\pThat's what my dad told me.

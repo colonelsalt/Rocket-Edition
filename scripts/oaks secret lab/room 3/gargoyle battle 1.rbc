@@ -1,0 +1,60 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _OFF_ROBOT 0x1
+#define _ON_ROBOT 0x6
+
+#org @main
+lock
+sound 0xAE
+showsprite _ON_ROBOT
+hidesprite _OFF_ROBOT
+checksound
+fadeout 0x0
+pause 0x35
+sound 0x71
+pause 0x5
+spriteface _ON_ROBOT FACE_RIGHT
+checksound
+pause 0x45
+sound 0xA
+applymovement _ON_ROBOT @jumpRight
+fadescreen 0x3
+waitmovement 0x0
+movesprite _ON_ROBOT 0x3 0x19
+spriteface 0xFF FACE_LEFT
+fadescreen 0x2
+pause 0x10
+sound 0x52
+pause 0x7
+msgbox @talk MSG_KEEPOPEN
+pause 0x10
+sound 0x16
+checksound
+pause 0x10
+trainerbattle 0x3 0x28 0x0 @defeat
+call POKESTEAL
+pause 0x20
+sound 0x3
+showsprite _OFF_ROBOT
+movesprite _OFF_ROBOT 0x3 0x19
+spriteface _OFF_ROBOT FACE_RIGHT
+hidesprite _ON_ROBOT
+movesprite2 _OFF_ROBOT 0x3 0x19
+spritebehave _OFF_ROBOT 0xA
+checksound
+pause 0x10
+setvar 0x4016 0x25
+release
+end
+
+#org @jumpRight
+#raw 0x51
+#raw 0xFE
+
+#org @talk
+= INTRUDER ALERT!\c\h08ó\c\h08ó\nINTRUDER ALERT!
+
+#org @defeat
+= UNHANDLED EXCEPTION!\nTrainer battle exited abnormally.
+
+

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x9E 0x0 @challenge 0x81796B9 POKESTEAL
+msgbox 0x81796CE MSG_NORMAL '"I want to go home!"
+end
+
+#org @challenge
+= Do you know how you can avoid\ngetting lost in the mountains?\pI don't know, but remembering\nwhich way you were going before a\lwild Pokémon jumps at you helps!

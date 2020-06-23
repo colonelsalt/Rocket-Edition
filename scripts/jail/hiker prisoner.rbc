@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= I mean, he used Double Team,\nThunder Wave and Attract in the\lsame match!\pHow the hell was I supposed to\ncontain myself in that situation?!

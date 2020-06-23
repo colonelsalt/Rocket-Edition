@@ -1,0 +1,11 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+msgbox @talk 0x6
+release
+end
+
+#org @talk
+= Damn[.] two all-powerful challengers\nin such short time!\pAnd minors, too!\pMakes me think I should've\naccomplished more in life by now[.]

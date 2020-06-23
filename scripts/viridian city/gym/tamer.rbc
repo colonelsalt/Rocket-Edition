@@ -1,0 +1,21 @@
+#dynamic 0x800000
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AE
+if 0x1 goto @postBoss
+msgbox @talk 0x6
+release
+end
+
+#org @postBoss
+msgbox @talk2 0x6
+release
+end
+
+#org @talk
+= Is this costume supposed to make\nme look like a Tamer, a shopkeeper\lor a whipped boyfriend?\pYou can't tell from this angle,\ncan you?\p[.]\pNeither can I!
+
+#org @talk2
+= Hmph!\pI'm not going to start taking\norders from a punk like you!\pG-give us back Giovanni..!\n(Snivel[.])

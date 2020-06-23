@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0xE6 0x0 0x81885D8 0x81885F8 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= I heard the Fishing brothers\naround Kanto have some well-kept\lsecrets about how to hook fish!\pWhat I wouldn't give to figure out\nthose[.]

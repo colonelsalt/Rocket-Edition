@@ -1,0 +1,211 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _PRESIDENT 0x1
+#define _GIOVANNI 0x3
+
+#org @start
+lock
+spriteface _PRESIDENT FACE_LEFT
+textcolor 0x0
+msgbox @talk 0x6
+applymovement 0xFF @moveToPres
+waitmovement 0x0
+special 0x113
+applymovement 0x7F @paceR
+waitmovement 0x0
+special 0x114
+goto @main
+
+#org @main
+spriteface _PRESIDENT FACE_DOWN
+spriteface 0xFF FACE_UP
+pause 0x15
+msgbox @talk2 0x6
+pause 0x15
+spriteface _PRESIDENT FACE_LEFT
+pause 0x20
+msgbox @talk3 0x6
+pause 0x25
+spriteface _PRESIDENT FACE_DOWN
+pause 0x20
+msgbox @talk4 0x6
+sound 0x9
+fadeout 0x0
+spriteface 0xFF FACE_DOWN
+checksound
+pause 0x20
+msgbox @bossTalk 0x6
+pause 0x20
+clearflag 0x2B
+movesprite _GIOVANNI 0x5 0xF
+movesprite2 _GIOVANNI 0x5 0xF
+showsprite _GIOVANNI
+applymovement _GIOVANNI @bossApproach1
+waitmovement 0x0
+playsong 0x112 0x0
+applymovement _GIOVANNI @bossApproach2
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+spriteface _PRESIDENT FACE_LEFT
+pause 0x20
+msgbox @bossTalk2 0x6
+pause 0x10
+applymovement 0xFF @moveToBoss
+waitmovement 0x0
+special 0x113
+applymovement 0x7F @paceL
+waitmovement 0x0
+special 0x114
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+msgbox @bossTalk3 0x6
+pause 0x10
+applymovement _GIOVANNI @stepR
+waitmovement 0x0
+msgbox @bossTalk4 0x6
+pause 0x15
+applymovement 0xFF @promotionTwirl
+setvar 0x4054 0x91 // change walking OW sprite to index 145
+setvar 0x4055 0x96 // change bike OW sprite to index 150
+setvar 0x4057 0x8F // change VS seeker sprite to index 143
+setvar 0x4062 0x2 // sets backsprite to Executive one
+pause 0x5
+sound 0x85
+pause 0x55
+warpmuted 0x1 0x65 0xFF 0x6 0xA
+waitstate
+end
+
+#org @talk
+= President: Eh?\c\h08ó\nAnother unannounced visitor?\pI guess today is no-appointments\nday, is it?\pLook, kid, time is money.\nLet's cut to the chase!
+
+#org @talk2
+= Say, you're one of those Team\nRocket goonies, aren't you?\pWhy, when I heard reports of the\nbuilding being invaded, I thought\lfor sure it was some big excuse\lfor my managers and engineers to\lslack off from work!\pIn fact, I'll be damned if you're\nnot some entry-level clerk they\lgot to dress up in a funky outfit\ljust to keep the hoax going!
+
+#org @talk3
+= Well, well[.]\c\h08ó\nJoshing aside[.]\pI suppose it's not altogether\nunusual for a shady gang like\lyours to want some friendly\linfluence in big business, is it?
+
+#org @talk4
+= Look, getting involved with you\nlot is bad PR, so how about I just\lhave Susie here write you a check\las a token of my friendship?\pNobody needs to know about it,\nof cou--
+
+#org @bossTalk
+= I'm afraid you can't just pay us\noff like you do your government\lcronies, Mr. President!
+
+#org @bossTalk2
+= Giovanni: [player]!\nWhat a job you've done!\pCome here a moment.
+
+#org @bossTalk3
+= The building is ours, and old fat-\ncat here is left with his company,\lhis employees, and his life at the\lmercy of our demands!\pExcellent work, [player].\nMaster Ball will finally be ours!
+
+#org @bossTalk4
+= I must commend you for your\nskill and your constant loyalty!\pYou've proven to be quite the\ninvaluable part of Team Rocket.\pThere isn't a doubt in my mind,\n[player]. Allow me.
+
+#org @moveToPres
+#raw STEP_R
+#raw STEP_R
+#raw 0xFE
+
+#org @paceR
+#raw STEP_R
+#raw 0xFE
+
+#org @paceL
+#raw STEP_L
+#raw 0xFE
+
+#org @bossApproach1
+#raw STEP_U
+#raw 0xFE
+
+#org @bossApproach2
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw FACE_R
+#raw 0xFE
+
+#org @moveToBoss
+#raw STEP_L
+#raw STEP_L
+#raw STEP_L
+#raw 0xFE
+
+#org @promotionTwirl
+#raw FACE_U
+#raw 0x1B
+#raw FACE_R
+#raw 0x1B
+#raw FACE_D
+#raw 0x1B
+#raw FACE_L
+#raw 0x1A
+#raw FACE_U
+#raw 0x1A
+#raw FACE_R
+#raw 0x1A
+#raw FACE_D
+#raw 0x1A
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw 0x19
+#raw FACE_U
+#raw 0x19
+#raw FACE_R
+#raw 0x19
+#raw FACE_D
+#raw 0x19
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw FACE_L
+#raw FACE_U
+#raw FACE_R
+#raw FACE_D
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE

@@ -1,0 +1,10 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+
+#org @main
+trainerbattle 0x2 0x124 0x0 0x8198629 0x81986B4 EXEC_STEAL
+msgbox @postBattle 0x6
+end
+
+#org @postBattle
+= So, you mix brawn with brains?\nGood strategy!\pRemarkably intelligent for a\nRocket!

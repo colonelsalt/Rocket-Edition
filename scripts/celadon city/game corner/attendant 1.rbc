@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @main
+= Welcome!\n[.]\l(Uh[.] shouldn't you be out on some\lmission right about now?)

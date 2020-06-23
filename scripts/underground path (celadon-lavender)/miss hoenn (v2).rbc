@@ -1,0 +1,135 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _TYLER 0x1
+#define _MISS_HOENN 0x8
+
+#org @main
+lock
+faceplayer
+textcolor 0x1
+msgbox @talk 0x6
+compare 0x4035 0x3
+if 0x1 goto @offerJob
+msgbox @talk2 0x6
+spriteface 0x8 FACE_LEFT
+release
+end
+
+#org @offerJob
+msgbox @jobTalk 0x6
+sound 0x15 // exclamation
+applymovement _TYLER @exclamation
+waitmovement 0x0
+playsong 0x11B 0x0
+textcolor 0x0
+msgbox @tylerTalk 0x6
+applymovement _TYLER @approachPlayer
+waitmovement 0x0
+applymovement _TYLER @playerFace
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x46
+if 0x1 call @fromTop
+compare 0x8000 0x45
+if 0x1 call @fromBottom
+pause 0x10
+msgbox @tylerTalk2 0x6
+trainerbattle 0x3 0x22 0x0 @defeatText
+call EXEC_STEAL
+textcolor 0x0
+msgbox @tylerTalk3 0x6
+pause 0x15
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x46
+if 0x1 call @playerIsRight
+compare 0x8000 0x45
+if 0x1 call @playerIsBottom
+textcolor 0x1
+msgbox @jobTalk2 0x6
+pause 0x10
+fadescreen 0x1
+pause 0x5
+sound 0x9
+checksound
+pause 0x10
+hidesprite _MISS_HOENN
+setflag 0x283
+setvar 0x4035 0x4
+fadescreen 0x0
+setflag 0x2AF
+clearflag 0x36
+release
+end
+
+
+#org @fromTop
+spriteface 0xFF FACE_DOWN
+return
+
+#org @fromBottom
+spriteface 0xFF FACE_RIGHT
+return
+
+#org @playerIsRight
+applymovement _MISS_HOENN @stepR
+waitmovement 0x0
+spriteface 0xFF FACE_LEFT
+return
+
+#org @playerIsBottom
+applymovement _MISS_HOENN @stepD
+waitmovement 0x0
+spriteface 0xFF FACE_UP
+return
+
+
+#org @talk
+= Hi, Rocket.\nI-I'm fine, I think.\pDid you find something for me to\ndo?
+
+#org @talk2
+= [.]\pNo?\nOh, okay. Well, whatever[.]
+
+#org @jobTalk
+= [.]\pWhat, really?\pI can come be a Pokémon Center\nnurse in[.]\c\h08ó Pewter City?\pGosh, that's so far away, but[.]\c\h08ó\nI'd like that very much!\p[.]\pIn fact, Rocket[.]\nI got no reason to wait.\pI'll leave for Pewter right away!
+
+#org @tylerTalk
+= Hang on, you two!
+
+#org @tylerTalk2
+= What are you trying to meddle\nwith, Rocket?\pAnd here I thought you were some-\none I could count on!\pI think Miss Hoenn's quite happy\njust where she is, thanks!\pShe's not going anywhere!\pYou want to challenge my judge-\nment, pal? Well, come at me!
+
+#org @defeatText
+= All is lost!
+
+#org @tylerTalk3
+= [.]\c\h08ó\nSo that's it, huh?\p[.]\c\h08ó\nYou're gonna take her away[.]\pWell[.]\c\h08ó I guess[.]\c\h08ó she was gonna get\nold someday anyway[.]\p(Sigh[.])\c\h08ó\nBusiness is business.
+
+#org @jobTalk2
+= Y-you can't tell me what to do\nanymore, old man!\pI'm off to Pewter City!
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @approachPlayer
+#raw STEP_L2
+#raw 0xFE
+
+#org @playerFace
+#raw 0x4A
+#raw 0xFE
+
+#org @stepR
+#raw 0x1C
+#raw ONSPOT_R
+#raw 0x1C
+#raw 0xFE
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE

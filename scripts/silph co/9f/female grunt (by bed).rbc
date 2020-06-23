@@ -1,0 +1,7 @@
+#dynamic 0x800000
+
+#org @talk1
+= Beds in the office!\nThese guys are mad[.]\pWell, I guess they're all ours\nnow. Want to use them?
+
+#org @talk2
+= Promis I won't tell Boss you're\nnapping on the mission.\pNow go on!

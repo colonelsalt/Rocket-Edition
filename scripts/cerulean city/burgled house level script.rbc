@@ -1,0 +1,148 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define HIKER 0x1
+#define GIRL 0x2
+#define REPORTER 0x4
+#define LITTLEGIRL 0x2
+#define POLICEMAN 0x3
+
+#org @main
+lockall
+applymovement HIKER @stepD
+waitmovement 0x0
+textcolor 0x0
+msgbox @CollectorTalk1 0x6
+pause 0x15
+spriteface HIKER FACE_UP
+pause 0x15
+msgbox @CollectorTalk2 0x6
+pause 0x15
+spriteface HIKER FACE_DOWN
+pause 0x10
+applymovement REPORTER @stepU
+waitmovement 0x0
+msgbox @fordTalk1 0x6
+pause 0x15
+spriteface REPORTER FACE_RIGHT
+pause 0x15
+msgbox @fordTalk2 0x6
+applymovement REPORTER @fordWalk
+waitmovement 0x0
+pause 0x10
+msgbox @fordTalk3 0x6
+applymovement LITTLEGIRL @stepD
+waitmovement 0x0
+textcolor 0x1
+msgbox @galTalk 0x6
+applymovement REPORTER @stepU
+waitmovement 0x0
+textcolor 0x0
+msgbox @fordTalk4 0x6
+applymovement LITTLEGIRL @stepD
+waitmovement 0x0
+textcolor 0x1
+msgbox @galTalk2 0x6
+pause 0x15
+spriteface REPORTER FACE_RIGHT
+pause 0x15
+textcolor 0x0
+msgbox @fordTalk5 0x6
+applymovement POLICEMAN @stepL
+waitmovement 0x0
+msgbox @copTalk1 0x6
+pause 0x20
+spriteface POLICEMAN FACE_UP
+pause 0x25
+spriteface POLICEMAN FACE_LEFT
+pause 0x15
+msgbox @copTalk2 0x6
+pause 0x15
+sound 0x15 // exclamation
+applymovement REPORTER @exclamation
+waitmovement 0x0
+spriteface REPORTER FACE_LEFT
+pause 0x20
+msgbox @fordTalk6 0x6
+pause 0x10
+applymovement REPORTER @fordWalk2
+waitmovement 0x0
+pause 0x10
+msgbox @fordTalk7 0x6
+pause 0x10
+warpmuted 0x3 0xC 0xFF 0xB 0x7
+release
+end
+
+#org @stepD
+#raw 0x1C
+#raw ONSPOT_D
+#raw 0x1C
+#raw 0xFE
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @CollectorTalk1
+= I-I don't even know what happened!\pI was just up on my regular hike\nup on Mt. Moon and I came back\ldown and all my hard-earned TMs\lwere gone!\pAnd here I'd gone and planned all\nyear to teach this here TM Dig to\lsome little Sandshrew or Mankey or\lwhat have you, and now it's all\lgone!
+
+#org @CollectorTalk2
+= And then they dug this giant hole\nright through my wall-- I mean,\lthese crooks are Digging their way\linto no good, I say!
+
+#org @fordTalk1
+= Ford: Truly an unnerving tale from\nthis poor homeowner.
+
+#org @fordTalk2
+= Now, we understand that your\ndaughter here was out playing in\lthe vicinity when this incident\ltook place, and that she in fact\lwas witness to some of the actions\lof the criminals responsible.
+
+#org @fordWalk
+#raw STEP_R
+#raw FACE_U
+#raw 0xFE
+
+#org @fordTalk3
+= Now, Miss: Would you mind\nexplaining to us exactly what you\lsaw?
+
+#org @galTalk
+= Well, you know, I don't know\nexactly if it was the same people,\lbut there was this creepy guy who\ltried to rob me earlier!
+
+#org @fordTalk4
+= Ford: Truly shocking!
+
+#org @galTalk2
+= Yeah, he was a real funny-looking\nguy-- he had green hair and these\lweird black pajamas.\pHe had me fight him in a Pokémon\nbattle, and after he won he tried\lto steal my Pokémon!\pI wouldn't let him have them,\nthough, so then he just told me\lsomething about me being too old\land then ran off!\pI don't know where he went to\nexactly, but I think I saw him\lwith some other guys wearing the\lsame funky outfit after!\pIt was really weird!
+
+#org @fordTalk5
+= Ford: Now, Mr. Officer, I'm led to\nunderstand that, with the aid of\lthis young lady's description, the\lKanto police department has\lgotten rather a good idea of who\lmight be behind this crime?
+
+#org @copTalk1
+= That's correct.\pThe variation in footprints as\nwell as the speed with which the\loperation was carried out make it\lclear that the burglary was\lcarried out by a larger group\lworking together.
+
+#org @copTalk2
+= Furthermore, the uniforms\ndescribed by the witness leave\llittle doubt in our investigators'\lminds--\c\h08ó Team Rocket must be behind\lthis most heinous crime!
+
+#org @exclamation
+#raw 0x62
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0x1C
+#raw 0xFE
+
+#org @fordTalk6
+= Ford: You heard it here first,\nviewers!\pThe Kanto police department\nbelieves, in other words, that\lthis burglary was an act of\lorganized crime by the notorious\lanti-government organization\lTeam Rocket!
+
+#org @fordWalk2
+#raw STEP_L
+#raw 0xFE
+
+#org @fordTalk7
+= Positively nerve-wracking!\pTo think that these wretched\ncriminals are currently on the\lloose, roaming the streets!\pViewers are advised to guard their\nhomes and their Pokémon!

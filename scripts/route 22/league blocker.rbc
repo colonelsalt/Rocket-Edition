@@ -1,0 +1,160 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GUARD 0x1
+
+#org @main
+lock
+applymovement _GUARD @facePlayer
+textcolor 0x0
+compare 0x405F 0x0
+if _GREATER goto @alreadyPassed
+compare 0x4086 0x1 // if card, but no badge shown
+if 0x1 goto @badgeCheck
+msgbox @talk 0x6
+checkitem 0x172 0x1
+compare LASTRESULT 0x1
+if 0x1 goto @hasCard
+// no trainer card:
+call @setFaceDirection
+msgbox @noCardTalk 0x6
+checkflag 0x2AE
+if 0x1 goto @noCard2
+goto @endMove
+
+#org @alreadyPassed
+checkflag 0x820
+if 0x1 goto @passedWithBadge
+msgbox @passedWithoutBadgeTalk 0x6
+release
+end
+
+#org @passedWithBadge
+msgbox @passedWithBadgeTalk 0x6
+release
+end
+
+#org @hasCard
+call @setFaceDirection
+msgbox @hasCardTalk 0x6
+setvar 0x4086 0x1
+goto @badgeCheck
+
+#org @badgeCheck
+checkflag 0x820
+if 0x1 goto @hasBadge
+msgbox @noBadgeTalk 0x6
+checkflag 0x2AE
+if 0x1 goto @battleMaybe
+goto @endMove
+
+#org @hasBadge
+call @setFaceDirection
+msgbox @hasBadgeTalk 0x6
+setvar 0x405F 0x1
+release
+end
+
+#org @noCard2
+pause 0x20
+msgbox @noCardTalk2 0x6
+goto @battle
+
+#org @battleMaybe
+pause 0x20
+call @setFaceDirection
+msgbox @battleQuestion 0x5
+compare LASTRESULT 0x0
+if 0x1 goto @battleAgreed
+msgbox @noBattleTalk 0x6
+goto @endMove
+
+#org @battleAgreed
+pause 0x10
+msgbox @noBadgeTalk2 0x6
+goto @battle
+
+#org @battle
+trainerbattle 0x3 0x2A 0x0 @defeatText 
+call POKESTEAL
+setvar 0x405F 0x1
+release
+end
+
+#org @endMove
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x7 // x-coord
+if 0x1 call @moveBackMaybe
+release
+end
+
+#org @moveBackMaybe
+compare 0x8001 0x2 // y-coord
+if 0x1 call @moveBack
+return
+
+#org @moveBack
+applymovement 0xFF @playerMove
+waitmovement 0x0
+return
+
+#org @setFaceDirection
+getplayerpos 0x8000 0x8001
+compare 0x8000 0x7
+if 0x1 call @faceRightMaybe
+return
+
+#org @faceRightMaybe
+compare 0x8001 0x2
+if 0x1 call @faceRight
+return
+
+#org @faceRight
+spriteface 0xFF FACE_RIGHT
+return
+
+#org @talk
+= Halt! You can pass here only if\nyou have the Boulderbadge!\p[.]\c\h08ó\nWait a minute, you!\pAre you even a real Trainer?\nShow me your license!
+
+#org @noCardTalk
+= [.]\pNo? I thought so! I've dealt with\npeople like you before[.]\pBe gone! We don't allow criminals\nin the Pokémon League.
+
+
+#org @hasCardTalk
+= [.]\pMy, there it is!\c\h08ó\nApologies, Mr. Smith.\pAs I was saying, you can pass here\nonly if you have the Boulderbadge.
+
+#org @noBadgeTalk
+= You don't have the Boulderbadge\nyet.\pYou have to have it to get to\nthe Pokémon League.
+
+#org @hasBadgeTalk
+= Oh! That is the Boulderbadge!\c\h17\c\h0BÀÀ\c\h08[ME]\c\h18\pOkay, then.\nPlease, go right ahead.
+
+#org @noCardTalk2
+= [.]\pH-hey now! I can see you're a bit\ntougher than most thugs[.]\lB-but rules are rules!\pIf you don't leave, I'll see to it\nthat the League is defended myself!
+
+#org @battleQuestion
+= [.]\pH-hey now! I've never seen such an\naggressive challenger[.]\pI thought you did look a little\nintimidating at first[.]\p[.]\c\h08ó\nMr. Smith, I implore you!\pYou will go get the Boulderbadge\nby legitimate means, won't you?
+
+#org @noBattleTalk
+= Oh, thank goodness! I swear I\nnever doubted you one second.\pWell, best of luck against those\nGym Leaders, sir!
+
+#org @noBadgeTalk2
+= ..!\c\h08ó\nW-what do you mean, "no"?\pRules are rules, I'm afraid, and\nif you insist on entering anyway[.]\pI-I'll have to defend them myself!
+
+#org @defeatText
+= This is unheard of!
+
+#org @passedWithBadgeTalk
+= Go right ahead, Mr. Smith.\nThe Pokémon League awaits.
+
+#org @passedWithoutBadgeTalk
+= If I can't keep you out, so be it!\nBut you won't get far!
+
+#org @facePlayer
+#raw 0x4A
+#raw 0xFE
+
+#org @playerMove
+#raw STEP_D
+#raw 0xFE
+
+

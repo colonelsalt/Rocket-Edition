@@ -1,0 +1,129 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define _GUARD1 0x4
+#define _GUARD2 0x5
+#define _GUARD3 0x6
+#define _BOSS 0x7
+
+#org @main
+lock
+faceplayer
+checkflag 0x2AA
+if 0x0 goto @preQuest
+compare 0x4033 0x5
+if 0x4 goto @postBoss
+compare 0x4033 0x4
+if 0x1 goto @fightBoss
+msgbox @guardTalk 0x6
+release
+end
+
+#org @preQuest
+msgbox @preQuestTalk 0x6
+release
+end
+
+#org @fightBoss
+msgbox @guardTalk2 0x6
+pause 0x10
+getplayerpos 0x8000 0x8001
+compare 0x8000 0xB
+if 0x1 call @fromLeft
+compare 0x8000 0xD
+if 0x1 call @fromRight
+compare 0x8000 0xC
+if 0x1 call @fromTop
+goto @fightBoss2
+
+#org @fightBoss2
+applymovement _GUARD2 @moveLeft
+applymovement _GUARD3 @moveRight
+waitmovement 0x0
+pause 0x20
+spriteface _BOSS FACE_UP
+pause 0x25
+applymovement _BOSS @moveUp
+waitmovement 0x0
+pause 0x15
+msgbox @talk 0x6
+trainerbattle 0x3 0xFA 0x0 @defeatText
+call EXEC_STEAL
+textcolor 0x0
+msgbox @talk2 0x6
+setvar 0x4033 0x5
+release
+end
+
+#org @postBoss
+msgbox @postBossTalk 0x6
+release
+end
+
+#org @fromLeft
+applymovement 0xFF @moveFromLeft
+waitmovement 0x0
+pause 0x10
+applymovement _GUARD1 @moveRight
+waitmovement 0x0
+return
+
+#org @fromRight
+applymovement 0xFF @moveFromRight
+waitmovement 0x0
+pause 0x10
+applymovement _GUARD1 @moveLeft
+waitmovement 0x0
+return
+
+#org @fromTop
+applymovement _GUARD1 @moveRight
+waitmovement 0x0
+return
+
+#org @preQuestTalk
+= Quit your glaring, Rocket!\pYou got no business with us\nBottoms, and I damn well don't\lthink you want it!\pStay out of our way!
+
+#org @guardTalk
+= Huh? You came to mess with us\nBottoms?\p[.]\nYou want to see our boss?\pThat's gotta be a joke, you little\ncity gangster wimp!\pLook, we put some of our falcons\nout on duty on Route 17.\pIf you can't even show you got the\nhustle to beat them, our boss\lwon't give you the time of day!
+
+#org @guardTalk2
+= Hmph!\nYou got guts, Rocket!\pYou want to talk to our boss?\nFine.\pWhen he beats you to a pulp for\nwasting his time, it's on you.\p[.]\pI'm keeping my eye on you, pal!
+
+#org @talk
+= Well, well, well!\pSo you're the nervy Rocket who's\nbeen knocking out our falcons from\lRoute 17?\pAll right, all right, you got my\nattention, kid; what do you want?\p[.]\pOh, I shoulda known.\nThe tops sent ya?\pThey sent you down to set things\nstraight, did they?\pWell, all right[.]\pThing you gotta know about the way\nthings work around here, mister\lhigh-brow city criminal[.]\pIs there's only one way we really\nsettle things for good.\p[.]\pCold, hard, muscle-fuelled battle.\c\h08ó\n[.]\c\h08óPokémon Battle.
+
+#org @defeatText
+= You're quite a little rascal,\naren't you?
+
+#org @talk2
+= [.]\nDamn it all[.]\pAll right, Rocket!\pEven with a thug like you, we\nnever violate our code of honor.\pWe'll stay out of the Tops' turf\nand keep our smack-talking to our-\lselves, ya hear?\pYou can run tell that to the Tops\nleader and he'll be real happy.\p[.]\pNow, these accusations about some\nsabotage or other[.]\pHahahaha[.]\pI can't say I know anything about\nit, bud.\pMaybe it'll stop someday, maybe it\nwon't? I don't know.\pI done everything within my power\nhere, so don't you look at me!\p[.]\c\h08ó\nHehehehehe[.]
+
+#org @postBossTalk
+= Well, you fancy Rocket thug[.]\pMaybe you ain't all such a sissy\nafter all.
+
+#org @moveRight
+#raw STEP_R
+#raw FACE_L
+#raw 0xFE
+
+#org @moveLeft
+#raw STEP_L
+#raw FACE_R
+#raw 0xFE
+
+#org @moveUp
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @moveFromLeft
+#raw STEP_U
+#raw STEP_R
+#raw FACE_D
+#raw 0xFE
+
+#org @moveFromRight
+#raw STEP_U
+#raw STEP_L
+#raw FACE_D
+#raw 0xFE

@@ -1,0 +1,85 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define BLUE 0x9
+
+#org @main
+lock
+fadeout 0x1
+pause 0x20
+sound 0x9
+checksound
+pause 0x10
+playsong 0x13B 0x0
+movesprite2 BLUE 0xB 0x18
+showsprite BLUE
+applymovement BLUE @bluApproach
+waitmovement 0x0
+spriteface BLUE FACE_LEFT
+spriteface 0xFF FACE_RIGHT
+textcolor 0x0
+msgbox @bluTalk 0x6
+applymovement BLUE @stepL
+waitmovement 0x0
+msgbox @bluTalk2 0x6
+trainerbattle 0x3 0x5 0x0 @winTalk
+pause 0x15
+msgbox @ellipses 0x6
+pause 0x25
+spriteface BLUE FACE_UP
+pause 0x30
+spriteface BLUE FACE_LEFT
+pause 0x30
+msgbox @bluTalk3 0x6
+pause 0x25
+applymovement BLUE @bluLeave
+waitmovement 0x0
+sound 0x9
+hidesprite BLUE
+checksound
+setflag 0x212
+setvar 0x401D 0x3
+setvar 0x401E 0x1
+release
+end
+
+#org @stepL
+#raw 0x1C
+#raw ONSPOT_L
+#raw 0x1C
+#raw 0xFE
+
+#org @bluApproach
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE
+
+#org @bluTalk
+= Oh my!\nWhat's this? More Rockets?\pI thought I got you all back at\nMt. Moon!\pOh well, I suppose beating a\ncouple of more of you guys\lcouldn't hurt if that's what it\ltakes, am I right?
+
+#org @bluTalk2
+= I say, after knocking out all the\nother wimps on this bridge, I\lcould use a challenge!\pBring it on, Mr. Rocket!
+
+#org @winTalk
+= All right, all right, take it\neasy! You won, okay?
+
+#org @ellipses
+= Blue: [.]
+
+#org @bluTalk3
+= You know what, this is not even[.]\nfair.\p[.]\n\c\h08óWhy, though?\pDo I just not have the right\nPokémon?\pNo, that can't be. I just have to\ntrain harder.\pI-I need to get better, stronger.\nDarn it! Still not good enough[.]
+
+#org @bluLeave
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw STEP_U
+#raw 0xFE

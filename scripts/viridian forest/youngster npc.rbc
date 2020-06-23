@@ -1,0 +1,4 @@
+#dynamic 0x800000
+
+#org @talk
+= I came here with some friends to\ncatch us some Bug Pokémon!\pDon't you wish you had friends\ntoo, Rocket!\pHah! That's the price you pay for\nbeing bad!

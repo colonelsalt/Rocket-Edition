@@ -1,0 +1,12 @@
+#dynamic 0x800000
+#define _JOEY 0x5
+
+#org @main
+lock
+msgbox @talk 0x6
+spriteface _JOEY FACE_DOWN
+release
+end
+
+#org @talk
+= You better believe I'll have my\nKoffing gas you right up if you\ltry anything dodgy, little girl!

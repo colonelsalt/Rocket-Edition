@@ -1,0 +1,30 @@
+#dynamic 0x800000
+#define _MERCHANT 0xB
+
+#org @mart
+lock
+faceplayer
+textcolor 0x0
+preparemsg @what
+waitmsg
+pokemart @martItems
+textcolor 0x0
+msgbox @goodBye MSG_KEEPOPEN
+spriteface _MERCHANT FACE_LEFT
+release
+end
+
+#org @what
+= Well? What do you want, pal?
+
+#org @goodBye
+= Yeah, get outta here, why don't\nya?
+
+#org @martItems
+#raw word 0x20
+#raw word 0x1E
+#raw word 0x1F
+#raw word 0x21
+#raw word 0x53
+#raw word 0x54
+#raw word 0x0

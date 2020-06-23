@@ -1,0 +1,324 @@
+#dynamic 0x800000
+#include stdmoves.rbh
+#define SELLER 0x3
+#define ASSISTANT 0x8
+
+#org @start
+lock
+checkflag 0x208
+if 0x1 goto @blackMarket
+checkflag 0x204
+if 0x1 goto @preTV
+msgbox @dumbTalk 0x6
+release
+end
+
+#org @dumbTalk
+= Aw, shucks!\nI'm gonna get my very own Rattata!\pIf only dad could see me now[.]
+
+#org @preTV
+msgbox @angryTalk 0x6
+release
+end
+
+#org @angryTalk
+= I hear ya.\pThere's got to be something we can\ndo to set things straight again[.]
+
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+
+#org @blackMarket
+faceplayer
+checkflag 0x2B8
+if 0x1 goto @noMoreRewards
+checkflag 0x22F
+if 0x0 goto @intro
+msgbox @regularTalk 0x6
+goto @infamyCheck
+end
+
+#org @intro
+msgbox @introTalk 0x6
+pause 0x8
+msgbox @introTalk2 0x6
+setflag 0x22F
+goto @infamyCheck
+end
+
+#org @infamyCheck
+applymovement SELLER @PCcheck
+waitmovement 0x0
+buffernumber 0x0 0x401F
+compare 0x401F 0xB4 // if stolen >= 60
+if 0x4 goto @GT60
+compare 0x401F 0x78 // if stolen >= 40
+if 0x4 goto @GT40
+compare 0x401F 0x3C // if stolen >= 20
+if 0x4 goto @GT20
+compare 0x401F 0xA // if stolen >= 10
+if 0x4 goto @GT10
+compare 0x401F 0x1 // if stolen >= 1
+if 0x4 goto @notBad
+goto @innocent
+end
+
+#org @GT60
+msgbox @gt60talk 0x6
+checkflag 0x2B8
+if 0x0 goto @lifeOrb
+end
+
+#org @GT40
+msgbox @gt40talk 0x6
+checkflag 0x27A
+if 0x0 goto @shellBell
+release
+end
+
+#org @GT20
+msgbox @gt20talk 0x6
+checkflag 0x27B
+if 0x0 goto @kingsRock
+release
+end
+
+#org @GT10
+msgbox @gt10talk 0x6
+checkflag 0x27C
+if 0x0 goto @quickClaw
+release
+end
+
+#org @notBad
+msgbox @notBadTalk 0x6
+release
+end
+
+#org @innocent
+msgbox @innocentTalk 0x6
+release
+end
+
+#org @lifeOrb
+checkitemroom 0xE4 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+call @itemCollect
+bufferitem 0x1 0xE4
+additem 0xE4 0x1
+setflag 0x2B8
+call @itemGet
+checkflag 0x27A
+if 0x0 call @shellBellExtra
+checkflag 0x27B
+if 0x0 call @kingsRockExtra
+checkflag 0x27C
+if 0x0 call @quickClawExtra
+release
+end
+
+#org @shellBell
+checkitemroom 0xDB 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+call @itemCollect
+bufferitem 0x1 0xDB
+additem 0xDB 0x1
+setflag 0x27A
+call @itemGet
+checkflag 0x27B
+if 0x0 call @kingsRockExtra
+checkflag 0x27C
+if 0x0 call @quickClawExtra
+release
+end
+
+#org @shellBellExtra
+textcolor 0x0
+msgbox @extraTalk3 0x6
+checkitemroom 0xDB 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+bufferitem 0x1 0xDB
+additem 0xDB 0x1
+setflag 0x27A
+call @itemGet
+return
+
+#org @kingsRock
+checkitemroom 0xBB 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+call @itemCollect
+bufferitem 0x1 0xBB
+additem 0xBB 0x1
+setflag 0x27B
+call @itemGet
+checkflag 0x27C
+if 0x0 call @quickClawExtra
+release
+end
+
+#org @kingsRockExtra
+textcolor 0x0
+msgbox @extraTalk1 0x6
+checkitemroom 0xBB 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+bufferitem 0x1 0xBB
+additem 0xBB 0x1
+setflag 0x27B
+call @itemGet
+return
+
+#org @quickClaw
+call @itemCollect
+checkitemroom 0xB7 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+bufferitem 0x1 0xB7
+additem 0xB7 0x1
+setflag 0x27C
+call @itemGet
+release
+end
+
+#org @quickClawExtra
+textcolor 0x0
+msgbox @extraTalk2 0x6
+checkitemroom 0xB7 0x1
+compare LASTRESULT 0x0
+if 0x1 goto @noRoom
+bufferitem 0x1 0xB7
+additem 0xB7 0x1
+setflag 0x27C
+call @itemGet
+release
+end
+
+#org @noRoom
+textcolor 0x0
+msgbox @noRoomTalk 0x6
+release
+end
+
+#org @itemGet
+fanfare 0x101
+textcolor 0x2
+preparemsg @itemMsg
+waitmsg
+waitfanfare
+msgbox @putAway MSG_KEEPOPEN
+return
+
+#org @itemCollect
+pause 0x8
+msgbox @hangOn 0x6
+applymovement SELLER @walk1
+waitmovement 0x0
+pause 0x10
+spriteface ASSISTANT FACE_UP
+applymovement ASSISTANT @stepU
+waitmovement 0x0
+applymovement ASSISTANT @faceBack
+applymovement SELLER @walk2
+waitmovement 0x0
+pause 0x10
+msgbox @itemTalk 0x6
+return
+
+#org @noMoreRewards
+msgbox @noMoreTalk 0x6
+release
+end
+
+#org @introTalk
+= Hey there, man. Listen up!\nYou've come to the right place.\pWe're tired of seeing all of these\nRockets cowering in fear at\lLance's new anti-crime measures,\lgoing all soft and refraining from\lstealing Pokémon just so people on\lthe street won't be mean to them.\pWe say screw that! Let's bring\nTeam Rocket back to its roots!\pThat's why we're setting up shop\nhere-- to reward the biggest and\lbaddest Rockets for keeping our\lname notorious throughout Kanto!\pThe higher the bounty on your\nhead, the greater the reward we'll\lgive you!
+
+#org @introTalk2
+= Well, what's your name?\c\h08ó\n[.][player]?\pWe'll look you up in the police\nregistry to see if you're worthy\lof our respect.
+
+#org @regularTalk
+= Hey, man! Been stealing a lot of\ninnocent Trainers' Pokémon lately?\p[.]\c\h08ó\n[player], is it? Let me see[.]
+
+#org @gt60talk
+= Holy moly!\c\h08ó\n[$][buffer1],000?!\p[.]\c\h08ó\nDude, I'm[.] humbled.\pYou've got to be one of the most\nvaluable Rockets we've got, man[.]\pAs thanks for your bringing so\nmuch notoriety back to Team\lRocket, we'll give you our most\lprized possession.\pI know it couldn't be in better\nhands!
+
+#org @gt40talk
+= Well, I'll be damned!\c\h08ó\n[$][buffer1],000? Wow.\pDude, you've got to be one of the\nmost badass people we've got!\pWoe is the poor Trainer who dares\nmess with you, my man!\pThanks for helping us bring back\nTeam Rocket's reputation.
+
+#org @gt20talk
+= Oh, [$][buffer1],000!\c\h08ó\nI'm impressed.\pYou really don't give a flying\nyou-know-what, do you?\pHaha!\nI like you, bud.\pWe need more tough guys like you\naround here.
+
+#org @gt10talk
+= Hmmm[.] [$][buffer1],000.\c\h08ó\nThat's respectable.\pYou're no crazy renegade, but\nyou're on the right track!\pKeep it up, dude, and don't let\nnobody fool you with childish\ldelusions of morality!\pMight is right in the gangster\ngame, ya hear?
+
+#org @notBadTalk
+= Hmm[.] [$][buffer1],000?\c\h08ó\pWell, that's hardly anything to\nbrag about.\pI say quit being a little wussy\nand get stealing some more, pal!\pWe'll have some goodies for you\nhere if you do.
+
+#org @innocentTalk
+= What?\c\h08ó But there's no bounty on\nyour head at all!\pWhat's the matter, little buddy?\nScared of the cops?\c\h08ó Wah-wah.\pGeez, quit wasting our time and\nget stealing, man! C'mon!
+
+#org @noRoomTalk
+= But you haven't got any room for\nthis! Make some, c'mon!
+
+#org @hangOn
+= Hang on just a mo'.
+
+#org @itemTalk
+= Here. Take this.\nYou've darn well earned it, man.
+
+#org @extraTalk1
+= And take this too, if you would.
+
+#org @extraTalk2
+= Oh, and this too.
+
+#org @extraTalk3
+= We want you to have this too.
+
+#org @itemMsg
+= [player] received the [buffer2]!
+
+#org @putAway
+= [player] put the [buffer2]\nin the Items pocket.
+
+#org @noMoreTalk
+= Haha!\nWhat's good, [player]?\pWe've nothing more to give you in\nreturn for being a badass, sorry!\pBut keep on truckin'!\nFor us! For Giovanni!
+
+#org @stepU
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0xFE
+
+#org @PCcheck
+#raw STEP_U
+#raw 0x1C
+#raw ONSPOT_U
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D
+#raw FACE_R
+#raw 0x1C
+#raw 0xFE
+
+#org @walk1
+#raw 0x1C
+#raw STEP_U
+#raw 0xFE
+
+#org @walk2
+#raw 0x1C
+#raw 0x1C
+#raw STEP_D
+#raw FACE_R
+#raw 0x1C
+#raw 0xFE
+
+#org @faceBack
+#raw FACE_D
+#raw 0x1C
+#raw 0x1C
+#raw FACE_R
+#raw 0xFE
