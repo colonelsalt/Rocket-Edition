@@ -1,6 +1,6 @@
 ## ROM hacking tools
 
-This folder contained the following ROM hacking tools, most of which where used in developing Rocket Edition. Also included is stdmoves.rbh, which defines the XSE constants used in scripts.
+This folder contained the following ROM hacking tools, most of which where used in developing Rocket Edition. Also included is stdmoves.rbh (to be included in the XSE folder), which defines the XSE constants used in scripts.
 
 * Advanced Series
 * AdvanceMap 1.92

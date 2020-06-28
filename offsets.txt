@@ -13,7 +13,6 @@ Sappy song replacements:
 #343 (Deoxys Encounter) -> A Day in the Life final chord
 
 
-
 Pokésteal multichoice boxes:	(all point to 0x0203F4A0 [free RAM space])
 2-choice: #0x36 (@0x083E0660)
 3-choice: #0x37 (@0x083E0668)
@@ -48,7 +47,6 @@ Shiny Pkmn Generator: 0x851560
 Uncatchable toggle: 0x878280 (activated by setting var 0x8004 to 0x69)
 Runaway from wild battle toggle: 0x8782D0 (activated by setting var 0x8006 to 0x69)
 Crowbar: 0x87D400
-Expand-event-objects: 0x8A0000
 Silph Scope: 0x889D6C
 Class-based trainer music: 0x88A3B0
 Class-based victory music: 0x88A53C
@@ -64,7 +62,6 @@ Repointed OW Palette table (pointers): 0x814000
 2nd table frame art data: 0x91B000 - 0x920000
 			  0x9232B0 - 0x92FAB0
 			  0x93B800 - 0x94D190 -
-			  [REMEMBER TO STOP BEFORE 0x950000 -- OTHER DATA THERE!]
 			  
 Dynamic map music table: 0x81B000
 Class-based battle music table: 0x88A340
