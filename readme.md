@@ -10,7 +10,7 @@ The file *offsets.txt* lists the offsets in the ROM where relevant tables and AS
 ## Credits
 * **strange_kid:** Sprites - Player Boss sprites, courtroom, jail cell, gargoyle robot trainer, Lavender ghost OW, Silph Chip, baby Red.
 * **Yanis A. (Brolunite):** Sprites - Dying Agatha, Player Executive OW, Player Admin OW, HGSS Rocket OW revamps, plainclothed Ronnie. [DeviantArt link.](https://www.deviantart.com/thebrawlunit)
-* **Magnus Nyborg Berg:** Composer - Title theme, boss battle, Cinnabar Island glitched, Prof. Oak battle. [Soundcloud link.](https://soundcloud.com/maxxberg)
+* **Magnus Nyborg Berg:** Composer - Title theme, boss battle, Cinnabar Island glitched, Prof. Oak battle. [Spotify link](https://open.spotify.com/artist/1Qk1KVJITNvCx9EleZicC1) | [Soundcloud link.](https://soundcloud.com/maxxberg)
 * **Paul Aamodt Brandal:** Composer - Oak's secret lab.
 * **Bacson Dias Graça:** Sprites - Player Admin backsprite. [DeviantArt link.](https://www.deviantart.com/doragonking)
 * **JPAN:** Hacked FireRed engine
