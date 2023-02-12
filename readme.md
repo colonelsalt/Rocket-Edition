@@ -1,7 +1,32 @@
 # Pokémon FireRed: Rocket Edition
 ![Title banner](http://i.imgur.com/By9waLH.png)
 
+## How to Install
+
 Rocket Edition is a completed ROM hack of Pokémon FireRed, and is available freely to download here: https://bit.ly/pkmfrrocketed
+
+A GBA emulator is required to play this ROM hack.
+* Download the most popular free GBA emulator, VisualBoyAdvance. This can be found on websites like sourceforge.net, or with a simple google search. 
+* Click the green download button, and wait for your download to start.
+* Download and install 7zip or any zipping tool to open the file that we downloaded containing VisualBoyAdvance.
+* Right click the .zip file containing VBA.
+* Extract the files to your selected location.
+* Open the VisualBoyAdvance.exe program.
+* Now, at this point we download ROMs.
+* Download the ROM for Team Rocket edition, using the link above.
+* Select File.
+* Select Open Gameboy.
+* Select the .gba file.
+* Congratulations! You are not able to play Pokemon Team Rocket Edition.
+* Note that you can use this emulator to play other .gba games as well.
+* Some basic controls to use this emulator with would be:
+* Z = A button
+* X = B button
+* A = L button
+* S = R button
+* Enter = Start button
+* Backspace = Select button
+* Space = Speed up
 
 This repository contains all XSE scripts, assembly code, graphics and music used to create the final game.
 
